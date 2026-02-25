@@ -1,0 +1,36 @@
+teller-automation/
+├── tests/                          ← Test suites per module
+│   ├── customers/
+│   │   └── customers.robot         (view list, search, view accounts & transactions)
+│   ├── accounts/
+│   │   └── accounts.robot          (view list, view transactions, create account)
+│   ├── transactions/
+│   │   └── transactions.robot      (view list, deposit, withdrawal, negative test)
+│   ├── products/
+│   │   └── products.robot          (view active/archived, create savings/loan product)
+│   ├── reports/
+│   │   └── reports.robot           (End of Day report, Total Balance report)
+│   └── loans/
+│       └── loans.robot             (view list, create, approve, reject, disburse)
+│
+├── resources/
+│   ├── keywords/                   ← Reusable actions per module
+│   │   ├── common.resource         (login, logout, navigate)
+│   │   ├── customers.resource
+│   │   ├── accounts.resource
+│   │   ├── transactions.resource
+│   │   ├── products.resource
+│   │   ├── reports.resource
+│   │   └── loans.resource
+│   ├── locators/                   ← UI element selectors per module
+│   │   ├── customers_locators.resource
+│   │   ├── accounts_locators.resource
+│   │   ├── transactions_locators.resource
+│   │   ├── products_locators.resource
+│   │   ├── reports_locators.resource
+│   │   └── loans_locators.resource
+│   └── variables/
+│       └── env.yaml                ← URL, credentials, browser config
+│
+├── test_data/                      ← For future Excel/CSV test data
+└── results/                        ← Auto-generated test reports
