@@ -1,13 +1,13 @@
 # ============================================================
-# Environment Configuration
+# Environment Configuration — Banco Abucay
 # ============================================================
 
-BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/rural-bank-san-antonio/login"
+BANK_NAME: "Banco Abucay"
+BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/banco-abucay/login"
 
 # Teller Credentials
-TELLER_EMAIL: "pvillados@agsx.net"
+TELLER_EMAIL: "teller@bancaabucay.com"
 TELLER_PASSWORD: "Password123!"
-
 
 # Invalid Credentials (for negative test cases)
 INVALID_EMAIL: "invalid@email.com"

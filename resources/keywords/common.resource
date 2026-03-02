@@ -1,6 +1,5 @@
 *** Settings ***
 Library     Browser
-Variables   ../variables/env.yaml
 Resource    ../locators/common_locators.resource
 
 
@@ -9,9 +8,9 @@ Open Teller App
     [Documentation]    Opens the teller web app in the browser
     New Browser         ${BROWSER}    headless=${HEADLESS}
     New Context         viewport={'width': 1643, 'height': 830}
+    Set Browser Timeout    ${TIMEOUT}
     New Page            ${BASE_URL}
     Evaluate JavaScript    ${None}    document.body.style.zoom = '80%'
-    Set Browser Timeout    ${TIMEOUT}
 
 
 Login To Teller App

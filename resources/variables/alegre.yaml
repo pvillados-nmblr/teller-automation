@@ -1,0 +1,19 @@
+# ============================================================
+# Environment Configuration — Alegre
+# ============================================================
+
+BANK_NAME: "Alegre"
+BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/alegre/login"
+
+# Teller Credentials
+TELLER_EMAIL: "teller@alegre.com"
+TELLER_PASSWORD: "Password123!"
+
+# Invalid Credentials (for negative test cases)
+INVALID_EMAIL: "invalid@email.com"
+INVALID_PASSWORD: "wrongpassword"
+
+# Browser Settings
+BROWSER: "chromium"
+HEADLESS: False
+TIMEOUT: "30s"
