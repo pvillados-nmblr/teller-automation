@@ -1,0 +1,188 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 0 * * *"   # Nightly at 00:00 UTC
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Robot tags to include (e.g. smoke, regression)"
+        required: false
+        default: "smoke"
+
+jobs:
+  test-banco-abucay:
+    name: "banco-abucay"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Init Playwright browsers
+        run: rfbrowser init
+
+      - name: Run smoke tests
+        run: |
+          robot \
+            -V resources/variables/banco-abucay.yaml \
+            --variable HEADLESS:True \
+            --variable TELLER_EMAIL:${{ secrets.BANCO_ABUCAY_EMAIL }} \
+            --variable TELLER_PASSWORD:${{ secrets.BANCO_ABUCAY_PASSWORD }} \
+            --variable IMAP_USERNAME:${{ secrets.BANCO_ABUCAY_IMAP_USERNAME }} \
+            --variable IMAP_PASSWORD:${{ secrets.BANCO_ABUCAY_IMAP_PASSWORD }} \
+            --include ${{ github.event.inputs.tags || 'smoke' }} \
+            -d results \
+            tests/
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-results-banco-abucay
+          path: results/
+
+  test-rural-bank-san-antonio:
+    name: "rural-bank-san-antonio"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Init Playwright browsers
+        run: rfbrowser init
+
+      - name: Run smoke tests
+        run: |
+          robot \
+            -V resources/variables/rural-bank-san-antonio.yaml \
+            --variable HEADLESS:True \
+            --variable TELLER_EMAIL:${{ secrets.RURAL_BANK_SAN_ANTONIO_EMAIL }} \
+            --variable TELLER_PASSWORD:${{ secrets.RURAL_BANK_SAN_ANTONIO_PASSWORD }} \
+            --variable IMAP_USERNAME:${{ secrets.RURAL_BANK_SAN_ANTONIO_IMAP_USERNAME }} \
+            --variable IMAP_PASSWORD:${{ secrets.RURAL_BANK_SAN_ANTONIO_IMAP_PASSWORD }} \
+            --include ${{ github.event.inputs.tags || 'smoke' }} \
+            -d results \
+            tests/
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-results-rural-bank-san-antonio
+          path: results/
+
+  test-rural-bank-hermosa:
+    name: "rural-bank-hermosa"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Init Playwright browsers
+        run: rfbrowser init
+
+      - name: Run smoke tests
+        run: |
+          robot \
+            -V resources/variables/rural-bank-hermosa.yaml \
+            --variable HEADLESS:True \
+            --variable TELLER_EMAIL:${{ secrets.RURAL_BANK_HERMOSA_EMAIL }} \
+            --variable TELLER_PASSWORD:${{ secrets.RURAL_BANK_HERMOSA_PASSWORD }} \
+            --variable IMAP_USERNAME:${{ secrets.RURAL_BANK_HERMOSA_IMAP_USERNAME }} \
+            --variable IMAP_PASSWORD:${{ secrets.RURAL_BANK_HERMOSA_IMAP_PASSWORD }} \
+            --include ${{ github.event.inputs.tags || 'smoke' }} \
+            -d results \
+            tests/
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-results-rural-bank-hermosa
+          path: results/
+
+  test-alegre:
+    name: "alegre"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Init Playwright browsers
+        run: rfbrowser init
+
+      - name: Run smoke tests
+        run: |
+          robot \
+            -V resources/variables/alegre.yaml \
+            --variable HEADLESS:True \
+            --variable TELLER_EMAIL:${{ secrets.ALEGRE_EMAIL }} \
+            --variable TELLER_PASSWORD:${{ secrets.ALEGRE_PASSWORD }} \
+            --variable IMAP_USERNAME:${{ secrets.ALEGRE_IMAP_USERNAME }} \
+            --variable IMAP_PASSWORD:${{ secrets.ALEGRE_IMAP_PASSWORD }} \
+            --include ${{ github.event.inputs.tags || 'smoke' }} \
+            -d results \
+            tests/
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-results-alegre
+          path: results/
