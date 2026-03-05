@@ -4,20 +4,21 @@
 # ============================================================
 
 # Navigation - Sidebar
-${CUSTOMERS_MENU}                     xpath=//span[contains(@class, 'ant-menu-title-content') and text()='Customers']
+${CUSTOMERS_MENU}                     css=[data-testid="nav-sidebar-customers"]
+
 
 # Customer List Page
-${CUSTOMER_SEARCH_FIELD}              css=input[placeholder="Search customers..."]
-${CUSTOMER_SEARCH_BUTTON}             text=Search
-${CUSTOMER_SEARCH_CLEAR}              css=input[placeholder="Search customers..."] >> xpath=following-sibling::*[1]
+${CUSTOMER_SEARCH_FIELD}              css=[data-testid="search-customers-input"]
+${CUSTOMER_SEARCH_BUTTON}             css=[data-testid="search-customers-btn"]
+${CUSTOMER_SEARCH_CLEAR}              css=span.ant-input-clear-icon
 
 # Customer List Table
 ${CUSTOMER_TABLE}                     css=table
 ${CUSTOMER_TABLE_ROWS}                css=table tbody tr
 
 # Customer List Actions (per row)
-${VIEW_PROFILE_LINK}        css=a[href$="/profile"]
-${VIEW_ACCOUNTS_LINK}       css=a[href$="/accounts"]
+${VIEW_PROFILE_LINK}        css=[data-testid="btn-customers-view-profile"]
+${VIEW_ACCOUNTS_LINK}       css=[data-testid="btn-customers-view-accounts"]
 
 
 # Pagination

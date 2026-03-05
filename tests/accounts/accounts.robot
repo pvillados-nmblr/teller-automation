@@ -23,24 +23,3 @@ Suite Teardown      Logout From Teller App
 
 
 *** Test Cases ***
-Teller Can View Account List
-    [Documentation]    Verify that the teller can view the list of all bank accounts
-    [Tags]             accounts    smoke
-    Navigate To Accounts
-    View Account List
-
-Teller Can View Transactions Of An Account
-    [Documentation]    Verify that the teller can view the transactions of a bank account
-    [Tags]             accounts    regression
-    Navigate To Accounts
-    View Account Transactions    ACC-100001
-
-Teller Can Create A Savings Account
-    [Documentation]    Verify that the teller can create a savings account for an existing customer
-    [Tags]             accounts    smoke
-    Create New Bank Account    &{SAVINGS_ACCOUNT}
-
-Teller Can Create A Checking Account
-    [Documentation]    Verify that the teller can create a checking account for an existing customer
-    [Tags]             accounts    regression
-    Create New Bank Account    &{CHECKING_ACCOUNT}

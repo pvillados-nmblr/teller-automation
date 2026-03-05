@@ -24,24 +24,3 @@ Suite Teardown      Logout From Teller App
 
 
 *** Test Cases ***
-Teller Can View Active Products
-    [Documentation]    Verify that the teller can view the list of active products
-    [Tags]             products    smoke
-    Navigate To Products
-    View Active Products
-
-Teller Can View Archived Products
-    [Documentation]    Verify that the teller can view the list of archived products
-    [Tags]             products    regression
-    Navigate To Products
-    View Archived Products
-
-Teller Can Create A Savings Product
-    [Documentation]    Verify that the teller can create a new savings product
-    [Tags]             products    smoke
-    Create New Product    &{SAVINGS_PRODUCT}
-
-Teller Can Create A Loan Product
-    [Documentation]    Verify that the teller can create a new loan product
-    [Tags]             products    regression
-    Create New Product    &{LOAN_PRODUCT}

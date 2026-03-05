@@ -13,8 +13,11 @@ Suite Teardown      Close Browser
 *** Variables ***
 ${VALID_CUSTOMER_ID}        89055149d8e64865958c489651b59015
 ${VALID_CUSTOMER_NAME}      Peach Villados
-${CUSTOMER_DATE_OF_BIRTH}      01 Dec 1999
+${CUSTOMER_DATE_OF_BIRTH}   01 Dec 1999
+${CUSTOMER_CREATED_ON}      25 Jun 2025
+${CUSTOMER_STATUS}          Active
 ${NON_EXISTING_CUSTOMER}    NONEXISTENT99999
+${CUSTOMER_ROW}             css=table tbody tr:has-text("${VALID_CUSTOMER_ID}")
 
 
 *** Test Cases ***
@@ -66,32 +69,44 @@ t2.1.3 Search for Valid Customer ID
     Wait For Elements State    text=Customer Status         visible
     Wait For Elements State    css=table td:has-text("${VALID_CUSTOMER_NAME}")       visible
     Wait For Elements State    css=table td:has-text("${CUSTOMER_DATE_OF_BIRTH}")    visible
-    # Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
-    # Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
+    Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
+    Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
     # Clear search and verify list reloads
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}     ${EMPTY}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
     Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}     visible
 
 t2.1.4 Search for Valid Customer Name
-    [Documentation]    Verify that searching by a valid Customer Name returns matching records
-    ...                and all required columns are visible in the results.
+    [Documentation]    Verify that searching by a valid Customer Name returns matching records.
+    ...                Multiple customers may match - verify a specific row contains all expected
+    ...                column values: Customer ID, Name, Date of Birth, Created on, Last Updated,
+    ...                Customer Status, and Action links.
     [Tags]             customers    smoke
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${VALID_CUSTOMER_NAME}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
-    Wait For Elements State    css=table tbody tr           visible
-    Wait For Elements State    text=${VALID_CUSTOMER_NAME}  visible
+    # Verify at least one result row is visible
+    Wait For Elements State    ${CUSTOMER_ROW}             visible
+    # Verify column headers are visible
     Wait For Elements State    text=Customer ID             visible
     Wait For Elements State    text=Customer Name           visible
     Wait For Elements State    text=Date of Birth           visible
     Wait For Elements State    text=Created on              visible
     Wait For Elements State    text=Last Updated            visible
     Wait For Elements State    text=Customer Status         visible
-    Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
-    Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
+    Wait For Elements State    text="Action"                visible
+    # Verify all column values in the matching row
+    Wait For Elements State    ${CUSTOMER_ROW} >> text=${VALID_CUSTOMER_ID}          visible
+    Wait For Elements State    ${CUSTOMER_ROW} >> text=${VALID_CUSTOMER_NAME}        visible
+    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_DATE_OF_BIRTH}     visible
+    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_CREATED_ON}        visible
+    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_STATUS}            visible
+    # Verify Action links in the matching row
+    Wait For Elements State    ${CUSTOMER_ROW} >> ${VIEW_PROFILE_LINK}               visible
+    Wait For Elements State    ${CUSTOMER_ROW} >> ${VIEW_ACCOUNTS_LINK}              visible
     # Clear search and verify list reloads
-    Click                      ${CUSTOMER_SEARCH_CLEAR}
+    Fill Text                  ${CUSTOMER_SEARCH_FIELD}     ${EMPTY}
+    Click                      ${CUSTOMER_SEARCH_BUTTON}
     Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}     visible
 
 t2.1.5 Search for Non-Existing Customer
@@ -183,7 +198,7 @@ t2.1.12 Customer Profile View - Details Verification
     # Verify Banking Details fields
     Wait For Elements State    text=DFSP Institution ID              visible
     Wait For Elements State    text=Customer ID                      visible
-    Wait For Elements State    text=Identity                         visible
+    Wait For Elements State    p:has-text("Identity")               visible
     # Verify Customer Details fields
     Wait For Elements State    text=Email Address                    visible
     Wait For Elements State    text=Gender                           visible
@@ -199,8 +214,8 @@ t2.1.12 Customer Profile View - Details Verification
     Wait For Elements State    text=ID Number                        visible
     Wait For Elements State    text=Expiry Date                      visible
     # Verify Employment History fields
-    Wait For Elements State    text=Employer                         visible
-    Wait For Elements State    text=Employer Industry                visible
+    Wait For Elements State    text="Employer"                       visible
+    Wait For Elements State    text="Employer Industry"              visible
     Wait For Elements State    text=Job Title                        visible
     Wait For Elements State    text=Monthly Income                   visible
     # Scroll down and verify Identity Verification Details section

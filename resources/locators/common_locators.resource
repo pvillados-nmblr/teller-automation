@@ -28,7 +28,7 @@ ${FP_SEND_CODE_BTN}                 css=[data-testid="btn-forgot-password-send-c
 # Note: OTP is a single input field (not 6 separate boxes)
 # ============================================================
 
-${FP_OTP_INPUT}                     css=[data-testid="input-forgot-password-otp"]
+${FP_OTP_INPUT}                     css=input[aria-label="Please enter OTP character 1"]
 ${FP_CONTINUE_BTN}                  css=[data-testid="btn-forgot-password-otp-continue"]
 ${FP_RESEND_BTN}                    css=[data-testid="btn-forgot-password-otp-resend"]
 
