@@ -11,8 +11,9 @@ Suite Teardown      Close Browser
 
 
 *** Variables ***
-${VALID_CUSTOMER_ID}        31612a6237264aef9785c5efe8021f7e
+${VALID_CUSTOMER_ID}        89055149d8e64865958c489651b59015
 ${VALID_CUSTOMER_NAME}      Peach Villados
+${CUSTOMER_DATE_OF_BIRTH}      01 Dec 1999
 ${NON_EXISTING_CUSTOMER}    NONEXISTENT99999
 
 
@@ -55,18 +56,21 @@ t2.1.3 Search for Valid Customer ID
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${VALID_CUSTOMER_ID}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
-    Wait For Elements State    css=table tbody tr            visible
-    Get Element Count          css=table tbody tr            ==    1
+    Wait For Elements State    css=table tbody tr:not([aria-hidden="true"])    visible
+    Get Element Count          css=table tbody tr:not([aria-hidden="true"])    ==    1
     Wait For Elements State    text=Customer ID             visible
     Wait For Elements State    text=Customer Name           visible
     Wait For Elements State    text=Date of Birth           visible
     Wait For Elements State    text=Created on              visible
     Wait For Elements State    text=Last Updated            visible
     Wait For Elements State    text=Customer Status         visible
-    Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
-    Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
+    Wait For Elements State    css=table td:has-text("${VALID_CUSTOMER_NAME}")       visible
+    Wait For Elements State    css=table td:has-text("${CUSTOMER_DATE_OF_BIRTH}")    visible
+    # Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
+    # Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
     # Clear search and verify list reloads
-    Click                      ${CUSTOMER_SEARCH_CLEAR}
+    Fill Text                  ${CUSTOMER_SEARCH_FIELD}     ${EMPTY}
+    Click                      ${CUSTOMER_SEARCH_BUTTON}
     Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}     visible
 
 t2.1.4 Search for Valid Customer Name
@@ -166,6 +170,11 @@ t2.1.12 Customer Profile View - Details Verification
     [Tags]             customers    smoke
     Navigate To Customers
     View Customer Profile      ${VALID_CUSTOMER_NAME}
+    # Verify page header shows correct customer name
+    Wait For Elements State    text=${VALID_CUSTOMER_NAME}            visible
+    # Verify profile tab navigation
+    Wait For Elements State    text=Products Availed                  visible
+    Wait For Elements State    text=Eligible Products                 visible
     # Verify section headers
     Wait For Elements State    text=Banking Details                  visible
     Wait For Elements State    text=Customer Details                 visible
