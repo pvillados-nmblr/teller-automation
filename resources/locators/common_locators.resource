@@ -55,9 +55,27 @@ ${RTP_TEMP_PASSWORD_FIELD}          css=[data-testid="input-reset-temp-password-
 ${RTP_NEW_PASSWORD_FIELD}           css=[data-testid="input-reset-temp-password-new"]
 ${RTP_CONFIRM_PASSWORD_FIELD}       css=[data-testid="input-reset-temp-password-confirm"]
 ${RTP_SUBMIT_BTN}                   css=[data-testid="btn-reset-temp-password-submit"]
-${RTP_OTP_INPUT}                    css=[data-testid="input-reset-temp-password-otp"]
+${RTP_OTP_INPUT}                    css=[data-testid="input-reset-temp-password-otp"] input[aria-label="Please enter OTP character 1"]
 ${RTP_OTP_CONTINUE_BTN}             css=[data-testid="btn-reset-temp-password-otp-continue"]
 ${RTP_OTP_RESEND_BTN}               css=[data-testid="btn-reset-temp-password-otp-resend"]
+
+
+# ============================================================
+# CHANGE PASSWORD FLOW
+# No data-testid attributes yet — selectors will be updated once added by dev.
+# ============================================================
+
+${CP_PROFILE_DROPDOWN}              css=svg[data-icon="chevron-down"]
+${CP_CHANGE_PASSWORD_LINK}          css=[data-testid="menu-item-user-change-password"]
+${CP_PAGE}                          css=h3.text-2xl:has-text("Change Password")
+${CP_CURRENT_PWD_FIELD}             css=input[name="currentPassword"]
+${CP_NEW_PWD_FIELD}                 css=input[name="newPassword"]
+${CP_CONFIRM_PWD_FIELD}             css=input[name="confirmNewPassword"]
+${CP_CONTINUE_BTN}                  css=button[type="submit"]
+${CP_OTP_INPUT}                     css=input[aria-label="Please enter OTP character 1"]
+${CP_OTP_CONTINUE_BTN}              text=CONTINUE
+${CP_OTP_RESEND_BTN}                text=Resend code
+${CP_SUCCESS_MESSAGE}               text=Password has been changed succesfully.
 
 
 # ============================================================
