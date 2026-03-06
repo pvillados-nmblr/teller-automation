@@ -55,7 +55,7 @@ ${RTP_TEMP_PASSWORD_FIELD}          css=[data-testid="input-reset-temp-password-
 ${RTP_NEW_PASSWORD_FIELD}           css=[data-testid="input-reset-temp-password-new"]
 ${RTP_CONFIRM_PASSWORD_FIELD}       css=[data-testid="input-reset-temp-password-confirm"]
 ${RTP_SUBMIT_BTN}                   css=[data-testid="btn-reset-temp-password-submit"]
-${RTP_OTP_INPUT}                    css=[data-testid="input-reset-temp-password-otp"]
+${RTP_OTP_INPUT}                    css=[data-testid="input-reset-temp-password-otp"] input[aria-label="Please enter OTP character 1"]
 ${RTP_OTP_CONTINUE_BTN}             css=[data-testid="btn-reset-temp-password-otp-continue"]
 ${RTP_OTP_RESEND_BTN}               css=[data-testid="btn-reset-temp-password-otp-resend"]
 

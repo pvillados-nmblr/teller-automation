@@ -26,7 +26,7 @@ ${HIDE_TAB_JS}                      Object.defineProperty(document, 'visibilityS
 ${SHOW_TAB_JS}                      Object.defineProperty(document, 'visibilityState', {get: () => 'visible', configurable: true}); document.dispatchEvent(new Event('visibilitychange'));
 ${LOCKOUT_EMAIL_SUBJECT}            Security Alert: Your Account Has Been Temporarily Locked
 ${LOCKOUT_EMAIL_BODY}               Your account has been locked after several incorrect password entries. This is a standard security measure to protect your credentials and the bank's systems. If this activity was not done by you, please report it immediately to support@higala.ph.
-${OTP}                              ${EMPTY}    # Pass at runtime: --variable OTP:123456
+${OTP}                              123456
 
 
 *** Test Cases ***
