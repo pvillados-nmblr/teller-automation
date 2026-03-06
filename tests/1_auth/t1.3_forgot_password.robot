@@ -19,7 +19,7 @@ ${ERR_UNREGISTERED_EMAIL}           Email address is invalid, please try again.
 ${ERR_EMAIL_REQUIRED}               Email is required.
 ${ERR_INVALID_EMAIL_FORMAT}         Invalid email format.
 ${ERR_PASSWORD_MISMATCH}            Passwords do not match
-${OTP}                              ${EMPTY}    # Pass at runtime: --variable OTP:123456
+${OTP}                              123456
 # --- Password Validation Errors ---
 ${ERR_PWD_MIN_LENGTH}               Password must contain a minimum of 8 characters.
 ${ERR_PWD_UPPERCASE}                Password must include at least one uppercase letter.
