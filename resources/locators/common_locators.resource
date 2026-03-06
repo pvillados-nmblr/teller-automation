@@ -61,6 +61,24 @@ ${RTP_OTP_RESEND_BTN}               css=[data-testid="btn-reset-temp-password-ot
 
 
 # ============================================================
+# CHANGE PASSWORD FLOW
+# No data-testid attributes yet — selectors will be updated once added by dev.
+# ============================================================
+
+${CP_PROFILE_DROPDOWN}              css=svg[data-icon="chevron-down"]
+${CP_CHANGE_PASSWORD_LINK}          css=[data-testid="menu-item-user-change-password"]
+${CP_PAGE}                          css=h3.text-2xl:has-text("Change Password")
+${CP_CURRENT_PWD_FIELD}             css=input[name="currentPassword"]
+${CP_NEW_PWD_FIELD}                 css=input[name="newPassword"]
+${CP_CONFIRM_PWD_FIELD}             css=input[name="confirmNewPassword"]
+${CP_CONTINUE_BTN}                  css=button[type="submit"]
+${CP_OTP_INPUT}                     css=input[aria-label="Please enter OTP character 1"]
+${CP_OTP_CONTINUE_BTN}              text=CONTINUE
+${CP_OTP_RESEND_BTN}                text=Resend code
+${CP_SUCCESS_MESSAGE}               text=Password has been changed succesfully.
+
+
+# ============================================================
 # NAVIGATION / SIDEBAR
 # No testids provided — AntD class selectors remain.
 # ============================================================
