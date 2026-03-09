@@ -143,6 +143,8 @@ ${VIEW_PROFILE_LINK}                css=[data-testid="btn-customers-view-profile
 ${VIEW_ACCOUNTS_LINK}               css=[data-testid="btn-customers-view-accounts"]
 
 
+
+
 # ============================================================
 # CUSTOMERS MODULE — Enroll Customer
 # data-testid attributes — CUSTOMER_TEST_IDS.enroll
