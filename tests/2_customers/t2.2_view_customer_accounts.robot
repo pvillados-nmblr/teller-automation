@@ -1,0 +1,211 @@
+*** Settings ***
+Documentation       t2.2 View the List of Bank Accounts under a Customer
+...                 Covers initial load, pagination, search, account status filtering,
+...                 and navigation back to the customer list.
+
+Resource            ../../resources/keywords/common.resource
+Resource            ../../resources/keywords/customers.resource
+
+Suite Setup         Login To Teller App
+Suite Teardown      Close Browser
+Test Setup          Navigate To Customer Accounts Page    ${CUSTOMER_NAME}
+
+
+*** Variables ***
+${CUSTOMER_ID}              89055149d8e64865958c489651b59015
+${CUSTOMER_NAME}            Peach Villados
+${VALID_ACCOUNT_ID}         7710458152114857
+${VALID_ACCOUNT_NAME}       Peach Villados
+${ACCOUNT_STATUS}           Active
+${ACCOUNT_CREATED_ON}       03 Jul 2025
+${ACCOUNT_ROW}              css=[data-testid="table-customers-accounts"] tbody tr:has-text("${VALID_ACCOUNT_ID}")
+${NON_EXISTING_ACCOUNT}     NonExistentAcc
+
+
+*** Test Cases ***
+t2.2.1 Customer Accounts List View
+    [Documentation]    Verify that the accounts list for a customer is loaded and displayed
+    ...                with all required columns and the View Account Transactions action link.
+    [Tags]             customers    accounts    smoke
+    Get Url                    contains    /accounts
+    Wait For Elements State    text=Account No                                  visible
+    Wait For Elements State    text=Account Name                                visible
+    Wait For Elements State    text=Balance                                     visible
+    Wait For Elements State    text=Account Status                              visible
+    Wait For Elements State    text=Created on                                  visible
+    Wait For Elements State    text="Action"                                    visible
+    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0      visible
+
+t2.2.2 Account List Pagination and Navigation
+    [Documentation]    Verify that pagination controls work correctly:
+    ...                Next loads page 2, clicking page 3 loads page 3,
+    ...                and Back returns to page 2. Skips if only one page exists.
+    [Tags]             customers    accounts    regression
+    # Check if pagination has more than one page (next button not disabled)
+    ${has_multiple_pages}=    Run Keyword And Return Status
+    ...    Wait For Elements State    css=.ant-pagination-next:not(.ant-pagination-disabled)    visible    timeout=3s
+    IF    ${has_multiple_pages}
+        # Click Next arrow to go to page 2
+        Click                      ${PAGINATION_NEXT}
+        Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
+        # Click page number 3 if it exists
+        ${page3_exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State    css=li.ant-pagination-item:has-text("3")    visible    timeout=2s
+        IF    ${page3_exists}
+            Click                      css=li.ant-pagination-item:has-text("3")
+            Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
+            # Click Back arrow to return to page 2
+            Click                      ${PAGINATION_PREV}
+            Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
+        ELSE
+            # Only 2 pages - click Back to return to page 1
+            Click                      ${PAGINATION_PREV}
+            Wait For Elements State    css=li.ant-pagination-item-active:has-text("1")    visible
+        END
+    ELSE
+        Log    Only one page of accounts - pagination navigation skipped
+        Wait For Elements State    css=.ant-pagination-next.ant-pagination-disabled    visible
+    END
+
+t2.2.3 Search for Valid Account ID
+    [Documentation]    Verify that searching by a valid Account ID returns exactly one record
+    ...                and the result row contains all expected column values.
+    [Tags]             customers    accounts    smoke
+    Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${VALID_ACCOUNT_ID}
+    Click                      ${ACCOUNT_SEARCH_BUTTON}
+    Wait For Elements State    ${ACCOUNT_ROW}    visible
+    Get Element Count          css=[data-testid="table-customers-accounts"] tbody tr:not([aria-hidden="true"])    ==    1
+    # Verify column headers
+    Wait For Elements State    text=Account No        visible
+    Wait For Elements State    text=Account Name      visible
+    Wait For Elements State    text=Balance           visible
+    Wait For Elements State    text=Account Status    visible
+    Wait For Elements State    text=Created on        visible
+    Wait For Elements State    text="Action"          visible
+    # Verify all column values in the matching row
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${VALID_ACCOUNT_ID}                  visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${VALID_ACCOUNT_NAME}                visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${ACCOUNT_STATUS}                    visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${ACCOUNT_CREATED_ON}                visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> ${VIEW_ACCOUNT_TRANSACTIONS_LINK}         visible
+
+t2.2.4 Search for Valid Account Name
+    [Documentation]    Verify that searching by Account Name returns all matching records.
+    ...                The system displays records where the name matches or partially matches,
+    ...                all required columns remain visible, and the target row contains the correct data.
+    [Tags]             customers    accounts    smoke
+    Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${VALID_ACCOUNT_NAME}
+    Click                      ${ACCOUNT_SEARCH_BUTTON}
+    Wait For Elements State    ${ACCOUNT_TABLE}        visible
+    Wait For Elements State    css=[data-testid="table-customers-accounts"] tbody tr:not([aria-hidden="true"]) >> nth=0    visible
+    # Verify column headers
+    Wait For Elements State    text=Account No        visible
+    Wait For Elements State    text=Account Name      visible
+    Wait For Elements State    text=Balance           visible
+    Wait For Elements State    text=Account Status    visible
+    Wait For Elements State    text=Created on        visible
+    Wait For Elements State    text="Action"          visible
+    # Verify all column values in the target account row
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${VALID_ACCOUNT_ID}                  visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${VALID_ACCOUNT_NAME}                visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${ACCOUNT_STATUS}                    visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> text=${ACCOUNT_CREATED_ON}                visible
+    Wait For Elements State    ${ACCOUNT_ROW} >> ${VIEW_ACCOUNT_TRANSACTIONS_LINK}         visible
+
+t2.2.5 Search for Non-Existing Account
+    [Documentation]    Verify that searching for a non-existing account shows a "No Data" message
+    ...                with an empty table and no application errors.
+    [Tags]             customers    accounts    negative
+    Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${NON_EXISTING_ACCOUNT}
+    Click                      ${ACCOUNT_SEARCH_BUTTON}
+    Wait For Elements State    css=.ant-empty-description:has-text("No data")    visible
+    Wait For Elements State    ${ACCOUNT_TABLE}                                  visible
+
+t2.2.6 Filter Account List by Status - Active
+    [Documentation]    Verify that filtering by Active status shows only Active accounts.
+    ...                If no Active accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_ACTIVE}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Active
+
+t2.2.7 Filter Account List by Status - Inactive
+    [Documentation]    Verify that filtering by Inactive status shows only Inactive accounts.
+    ...                If no Inactive accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_INACTIVE}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Inactive
+
+t2.2.8 Filter Account List by Status - Dormant
+    [Documentation]    Verify that filtering by Dormant status shows only Dormant accounts.
+    ...                If no Dormant accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_DORMANT}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Dormant
+
+t2.2.9 Filter Account List by Status - Frozen
+    [Documentation]    Verify that filtering by Frozen status shows only Frozen accounts.
+    ...                If no Frozen accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_FROZEN}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Frozen
+
+t2.2.10 Filter Account List by Status - Closed
+    [Documentation]    Verify that filtering by Closed status shows only Closed accounts.
+    ...                If no Closed accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_CLOSED}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Closed
+
+t2.2.11 Filter Account List by Status - Overdrawn
+    [Documentation]    Verify that filtering by Overdrawn status shows only Overdrawn accounts.
+    ...                If no Overdrawn accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_OVERDRAWN}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Overdrawn
+
+t2.2.12 Filter Account List by Status - Blocked
+    [Documentation]    Verify that filtering by Blocked status shows only Blocked accounts.
+    ...                If no Blocked accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_BLOCKED}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Blocked
+
+t2.2.13 Filter Account List by Status - Suspended
+    [Documentation]    Verify that filtering by Suspended status shows only Suspended accounts.
+    ...                If no Suspended accounts exist, a "No Data" message is shown.
+    [Tags]             customers    accounts    regression
+    Click                      ${ACCOUNT_STATUS_FILTER}
+    Click                      ${FILTER_OPTION_SUSPENDED}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${ACCOUNT_TABLE}    visible
+    Filter Account Results Should Contain Only Status    Suspended
+
+t2.2.14 Navigate Back to Customers List
+    [Documentation]    Verify that clicking the 'Customers' breadcrumb link returns the user
+    ...                to the main Customer List view with the customer table visible.
+    [Tags]             customers    accounts    regression
+    Click                      ${CUSTOMERS_BREADCRUMB_LINK}
+    Wait For Elements State    ${CUSTOMER_TABLE}          visible
+    Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}   visible
+    Get Url                    contains    /dashboard/customers

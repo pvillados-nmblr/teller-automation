@@ -50,3 +50,15 @@ ${FILTER_OPTION_BLOCKED}            css=[data-menu-id$="-blocked"]
 ${FILTER_OPTION_SUSPENDED}          css=[data-menu-id$="-suspended"]
 ${FILTER_APPLY_BTN}                 css=button.ant-btn-primary.ant-btn-sm:has-text("OK")
 ${FILTER_RESET_BTN}                 css=.ant-table-filter-dropdown-btns .ant-btn-link
+${FILTER_OPTION_FROZEN}             css=[data-menu-id$="-frozen"]
+${FILTER_OPTION_OVERDRAWN}          css=[data-menu-id$="-overdrawn"]
+
+# Customer Accounts Page — Table
+${ACCOUNT_TABLE}                    css=[data-testid="table-customers-accounts"]
+${ACCOUNT_TABLE_ROWS}               css=[data-testid="table-customers-accounts"] tbody tr
+
+# Account Status Filter — AntD column filter dropdown (accounts page)
+${ACCOUNT_STATUS_FILTER}            css=th:has-text("Account Status") span.ant-table-filter-trigger
+
+# Breadcrumb Navigation
+${CUSTOMERS_BREADCRUMB_LINK}        css=a[href$="/dashboard/customers"]
