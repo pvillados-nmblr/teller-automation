@@ -34,7 +34,7 @@ ${ACCOUNT_SEARCH_FIELD}               css=input[placeholder="Search accounts..."
 ${ACCOUNT_SEARCH_BUTTON}              text=Search
 
 # Customer Account Actions
-${VIEW_ACCOUNT_TRANSACTIONS_LINK}     text=View Account Transactions
+${VIEW_ACCOUNT_TRANSACTIONS_LINK}     css=[data-testid="btn-customers-accounts-view-transactions"]
 
 # No Data
 ${NO_DATA_MESSAGE}                    text=No Data
@@ -62,3 +62,44 @@ ${ACCOUNT_STATUS_FILTER}            css=th:has-text("Account Status") span.ant-t
 
 # Breadcrumb Navigation
 ${CUSTOMERS_BREADCRUMB_LINK}        css=a[href$="/dashboard/customers"]
+${VIEW_ACCOUNTS_BREADCRUMB_LINK}    css=a:has-text("View Accounts")
+
+# ============================================================
+# CUSTOMER ACCOUNT TRANSACTIONS PAGE
+# ============================================================
+
+# Search
+${TRANSACTION_SEARCH_FIELD}         css=input[placeholder="Search transactions..."]
+${TRANSACTION_SEARCH_BUTTON}        text=Search
+
+# Transaction Table
+${TRANSACTION_TABLE}                css=[data-testid="table-customers-account-transactions"]
+${TRANSACTION_TABLE_ROWS}           css=[data-testid="table-customers-account-transactions"] tbody tr
+
+# Transaction Action Buttons
+${VIEW_TXN_BTN}                     css=button:has([data-icon="eye"])
+${DOWNLOAD_TXN_BTN}                 css=button:has([data-icon="download"])
+
+# Transaction Type Filter — AntD column filter dropdown
+${TXN_TYPE_FILTER}                  css=th:has-text("Transaction Type") span.ant-table-filter-trigger
+${TXN_TYPE_SEND_MONEY}              css=[data-menu-id$="-fund_transfer_external"]
+${TXN_TYPE_CASH_IN}                 css=[data-menu-id$="-cash_in_external"]
+${TXN_TYPE_FUND_TRANSFER}           css=[data-menu-id$="-fund_transfer_internal"]
+
+# Date & Time Column Filter — AntD custom date range filter
+${DATE_TIME_FILTER}                 css=th:has-text("Date & Time") span.ant-table-filter-trigger
+${DATE_START_INPUT}                 css=input[placeholder="Start date"]
+${DATE_END_INPUT}                   css=input[placeholder="End date"]
+${DATE_FILTER_SEARCH_BTN}           css=.ant-table-filter-dropdown button:has-text("Search")
+${DATE_FILTER_RESET_BTN}            css=.ant-table-filter-dropdown button:has-text("Reset")
+
+# Transaction Status Filter — AntD column filter dropdown
+${TXN_STATUS_FILTER}                css=th:has-text("Status") span.ant-table-filter-trigger
+${TXN_STATUS_PENDING}               css=[data-menu-id$="-pending"]
+${TXN_STATUS_SUCCESS}               css=[data-menu-id$="-success"]
+${TXN_STATUS_FAILED}                css=[data-menu-id$="-failed"]
+
+# Transaction Detail Modal
+${TXN_DETAIL_MODAL}                 css=[data-testid="modal-customers-transaction-details"] .ant-modal-content
+${TXN_DETAIL_CLOSE_BTN}             css=.ant-modal-close
+${TXN_DETAIL_BACK_BTN}              css=[data-testid="modal-customers-transaction-details-btn-back"]
