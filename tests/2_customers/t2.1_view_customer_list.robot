@@ -8,6 +8,7 @@ Resource            ../../resources/keywords/customers.resource
 
 Suite Setup         Login To Teller App
 Suite Teardown      Close Browser
+Test Setup          Reload
 
 
 *** Variables ***
@@ -116,8 +117,8 @@ t2.1.5 Search for Non-Existing Customer
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${NON_EXISTING_CUSTOMER}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
-    Wait For Elements State    text=No Data                visible
-    Get Element Count          css=table tbody tr          ==    0
+    Wait For Elements State    css=.ant-empty-description:has-text("No data")    visible
+    Wait For Elements State    ${CUSTOMER_TABLE}    visible
 
 t2.1.6 Filter Customer List by Status - Active
     [Documentation]    Verify that filtering by Active status shows only Active customers.
@@ -125,8 +126,9 @@ t2.1.6 Filter Customer List by Status - Active
     [Tags]             customers    regression
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
-    Click                      text=Active
-    Wait For Elements State    css=table                   visible
+    Click                      ${FILTER_OPTION_ACTIVE}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${CUSTOMER_TABLE}           visible
     Filter Results Should Contain Only Status              Active
 
 t2.1.7 Filter Customer List by Status - Inactive
@@ -135,8 +137,9 @@ t2.1.7 Filter Customer List by Status - Inactive
     [Tags]             customers    regression
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
-    Click                      text=Inactive
-    Wait For Elements State    css=table                   visible
+    Click                      ${FILTER_OPTION_INACTIVE}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${CUSTOMER_TABLE}           visible
     Filter Results Should Contain Only Status              Inactive
 
 t2.1.8 Filter Customer List by Status - Dormant
@@ -145,8 +148,9 @@ t2.1.8 Filter Customer List by Status - Dormant
     [Tags]             customers    regression
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
-    Click                      text=Dormant
-    Wait For Elements State    css=table                   visible
+    Click                      ${FILTER_OPTION_DORMANT}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${CUSTOMER_TABLE}           visible
     Filter Results Should Contain Only Status              Dormant
 
 t2.1.9 Filter Customer List by Status - Closed
@@ -155,8 +159,9 @@ t2.1.9 Filter Customer List by Status - Closed
     [Tags]             customers    regression
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
-    Click                      text=Closed
-    Wait For Elements State    css=table                   visible
+    Click                      ${FILTER_OPTION_CLOSED}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${CUSTOMER_TABLE}           visible
     Filter Results Should Contain Only Status              Closed
 
 t2.1.10 Filter Customer List by Status - Blocked
@@ -165,8 +170,9 @@ t2.1.10 Filter Customer List by Status - Blocked
     [Tags]             customers    regression
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
-    Click                      text=Blocked
-    Wait For Elements State    css=table                   visible
+    Click                      ${FILTER_OPTION_BLOCKED}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${CUSTOMER_TABLE}           visible
     Filter Results Should Contain Only Status              Blocked
 
 t2.1.11 Filter Customer List by Status - Suspended
@@ -175,8 +181,9 @@ t2.1.11 Filter Customer List by Status - Suspended
     [Tags]             customers    regression
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
-    Click                      text=Suspended
-    Wait For Elements State    css=table                   visible
+    Click                      ${FILTER_OPTION_SUSPENDED}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${CUSTOMER_TABLE}           visible
     Filter Results Should Contain Only Status              Suspended
 
 t2.1.12 Customer Profile View - Details Verification
@@ -186,7 +193,7 @@ t2.1.12 Customer Profile View - Details Verification
     Navigate To Customers
     View Customer Profile      ${VALID_CUSTOMER_NAME}
     # Verify page header shows correct customer name
-    Wait For Elements State    text=${VALID_CUSTOMER_NAME}            visible
+    Wait For Elements State    css=h3:has-text("${VALID_CUSTOMER_NAME}")    visible
     # Verify profile tab navigation
     Wait For Elements State    text=Products Availed                  visible
     Wait For Elements State    text=Eligible Products                 visible
