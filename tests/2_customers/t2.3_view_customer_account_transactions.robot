@@ -8,8 +8,16 @@ Resource            ../../resources/keywords/customers.resource
 
 Suite Setup         Login To Teller App
 Suite Teardown      Close Browser
-Test Setup          Navigate To Customer Account Transactions Page    ${CUSTOMER_NAME}    ${VALID_ACCOUNT_ID}
+Test Setup          Setup Transaction Page
 Test Teardown       Close Modal If Open
+
+
+*** Keywords ***
+Setup Transaction Page
+    [Documentation]    Navigates to transaction page and ensures clean state by reloading
+    Navigate To Customer Account Transactions Page    ${CUSTOMER_NAME}    ${VALID_ACCOUNT_ID}
+    Reload
+    Wait For Load Spinner To Disappear
 
 
 *** Variables ***
