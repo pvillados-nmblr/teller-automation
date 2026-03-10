@@ -11,7 +11,6 @@ Open Teller App
     New Context         viewport={'width': 1643, 'height': 830}
     Set Browser Timeout    ${TIMEOUT}
     New Page            ${BASE_URL}
-    Evaluate JavaScript    ${None}    document.body.style.zoom = '80%'
 
 
 Login To Teller App

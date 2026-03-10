@@ -1,44 +1,258 @@
 *** Settings ***
 Library     Browser
 Resource    common.resource
+Resource    ../locators/accounts_locators.resource
 
 
 *** Keywords ***
 Navigate To Accounts
-    [Documentation]    Navigates to the Accounts module
-    Navigate To Module    accounts
+    [Documentation]    Navigates to the Accounts module via the sidebar and ensures clean state
+    Click                      ${ACCOUNTS_MENU}
+    Wait For Elements State    ${ACCOUNTS_SEARCH_FIELD}    visible
+    Get Url                    contains    /accounts
+    Reload
+    Wait For Elements State    ${ACCOUNTS_SEARCH_FIELD}    visible
 
-View Account List
-    [Documentation]    Verifies the full account list is visible
-    Wait For Elements State    css=.account-list    visible
-
-View Account Transactions
-    [Documentation]    Opens an account and views its transaction list
+Navigate To Account Transactions
+    [Documentation]    Navigates to the Transaction History page for a specific account
+    ...                by searching for it in the Accounts module and clicking View Transactions.
     [Arguments]        ${account_number}
-    Click              css=.account-list tr:has-text("${account_number}")
-    Wait For Elements State    css=.transaction-list    visible
-
-Fill New Account Form
-    [Documentation]    Fills in the new bank account creation form
-    [Arguments]        &{account}
-    Fill Text          id=customer-id        ${account.customer_id}
-    Select Options By  id=account-type       value    ${account.account_type}
-    Fill Text          id=initial-deposit    ${account.initial_deposit}
-
-Submit New Account Form
-    [Documentation]    Submits the new account creation form
-    Click              id=create-account-button
-    Wait For Elements State    css=.success-message    visible
-
-Verify Account Is Created
-    [Documentation]    Verifies that the account was successfully created
-    [Arguments]        ${customer_id}
-    Get Text           css=.success-message    contains    ${customer_id}
-
-Create New Bank Account
-    [Documentation]    End-to-end keyword to create a new bank account
-    [Arguments]        &{account}
     Navigate To Accounts
-    Fill New Account Form    &{account}
-    Submit New Account Form
-    Verify Account Is Created    ${account.customer_id}
+    Fill Text                  ${ACCOUNTS_SEARCH_FIELD}    ${account_number}
+    Click                      ${ACCOUNTS_SEARCH_BUTTON}
+    Wait For Load Spinner To Disappear
+    Click                      css=tr:has-text("${account_number}") >> ${VIEW_ACCOUNT_TRANSACTIONS_LINK}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    ${ACCT_TXN_SEARCH_FIELD}    visible
+
+Wait For Load Spinner To Disappear
+    [Documentation]    Waits for any loading spinner to disappear before proceeding
+    ${spinner_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
+    IF    ${spinner_visible}
+        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
+    END
+
+Close Modal If Open
+    [Documentation]    Closes any open modal dialog to prevent blocking subsequent tests.
+    ...                Uses Escape key as primary method for reliability.
+    ${modal_open}=    Run Keyword And Return Status
+    ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
+    IF    ${modal_open}
+        Keyboard Key    press    Escape
+        Sleep    0.5s
+        ${still_open}=    Run Keyword And Return Status
+        ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
+        IF    ${still_open}
+            Click    css=.ant-modal-close
+        END
+    END
+
+Filter Accounts Results Should Contain Only Status
+    [Documentation]    Verifies that all visible rows in the accounts table match the expected status,
+    ...                or that a "No Data" message is shown if no matching records exist.
+    ...                Iterates through all pagination pages to verify each page.
+    [Arguments]        ${expected_status}
+    Sleep    1s    # Wait for filter to apply
+    ${no_data_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    ${NO_DATA_MESSAGE}    visible    timeout=3s
+    IF    ${no_data_visible}
+        Log    No data found for status: ${expected_status}
+    ELSE
+        ${page}=    Set Variable    1
+        WHILE    ${page} <= 100    # Safety limit to prevent infinite loop
+            ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+            ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
+            Should Be Equal    ${total_rows}    ${matching_rows}
+            ...    Page ${page}: Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
+            Log    Page ${page}: All ${total_rows} rows contain status "${expected_status}"
+            ${next_disabled}=    Run Keyword And Return Status
+            ...                  Wait For Elements State    css=.ant-pagination-next.ant-pagination-disabled    visible    timeout=1s
+            IF    ${next_disabled}
+                Log    Reached last page (page ${page})
+                BREAK
+            END
+            Click    css=.ant-pagination-next button
+            Sleep    0.5s    # Wait for page to load
+            ${page}=    Evaluate    ${page} + 1
+        END
+    END
+
+Filter Acct Txn Results Should Contain Only Type
+    [Documentation]    Verifies that all visible transaction rows match the expected type.
+    ...                If data exists, clicks the first row's Eye icon and verifies the detail modal,
+    ...                then closes it. If no data, verifies the "No Data" message.
+    [Arguments]        ${expected_type}
+    Wait For Load Spinner To Disappear
+    Sleep    1s    # Wait for filter to apply
+    ${no_data_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    ${NO_DATA_MESSAGE}    visible    timeout=3s
+    IF    ${no_data_visible}
+        Log    No data found for type: ${expected_type}
+    ELSE
+        ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+        ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_type}")
+        Should Be Equal    ${total_rows}    ${matching_rows}
+        ...    Expected all ${total_rows} rows to have type "${expected_type}", but only ${matching_rows} matched
+        Log    All ${total_rows} rows contain type "${expected_type}"
+        Wait For Load Spinner To Disappear
+        Click    ${VIEW_TXN_BTN} >> nth=0
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}                                    visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction ID             visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Type           visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Amount         visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Service Fee               visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Remarks                   visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Status         visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Name        visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Name       visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Number      visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Number     visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Created on                visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Updated on                visible
+        Click    ${ACCT_TXN_DETAIL_BACK_BTN}
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}    hidden
+    END
+
+Filter Acct Txn Results Should Contain Only Status
+    [Documentation]    Verifies that all visible transaction rows match the expected status.
+    ...                If data exists, clicks the first row's Eye icon and verifies the detail modal,
+    ...                then closes it. If no data, verifies the "No Data" message.
+    [Arguments]        ${expected_status}
+    Wait For Load Spinner To Disappear
+    Sleep    1s    # Wait for filter to apply
+    ${no_data_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    ${NO_DATA_MESSAGE}    visible    timeout=3s
+    IF    ${no_data_visible}
+        Log    No data found for status: ${expected_status}
+    ELSE
+        ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+        ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
+        Should Be Equal    ${total_rows}    ${matching_rows}
+        ...    Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
+        Log    All ${total_rows} rows contain status "${expected_status}"
+        Wait For Load Spinner To Disappear
+        Click    ${VIEW_TXN_BTN} >> nth=0
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}                                    visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction ID             visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Type           visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Amount         visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Service Fee               visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Remarks                   visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Status         visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Name        visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Name       visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Number      visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Number     visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Created on                visible
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Updated on                visible
+        Click    ${ACCT_TXN_DETAIL_BACK_BTN}
+        Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}    hidden
+    END
+
+Verify Acct Txn Dates Within Range
+    [Documentation]    Verifies that all visible transaction dates in the Date & Time column
+    ...                fall within the specified date range.
+    ...                Handles the "DD Mon YYYY\nHH:MM:SS" format displayed in the table.
+    [Arguments]        ${date_from}    ${date_to}
+    ${result}=    Evaluate JavaScript    ${None}
+    ...    () => {
+    ...        const months = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+    ...        const parseBoundaryDate = (str) => {
+    ...            const p = str.split('-');
+    ...            return new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
+    ...        };
+    ...        const parseTableDate = (str) => {
+    ...            const parts = str.split(' ');
+    ...            if (parts.length < 3) return new Date(NaN);
+    ...            const day = parseInt(parts[0]);
+    ...            const mon = parts[1];
+    ...            const yearPart = parts[2].split(String.fromCharCode(10))[0];
+    ...            const year = parseInt(yearPart);
+    ...            if (isNaN(day) || isNaN(year) || !months.hasOwnProperty(mon)) return new Date(NaN);
+    ...            return new Date(year, months[mon], day);
+    ...        };
+    ...        const dateFrom = parseBoundaryDate('${date_from}');
+    ...        const dateTo = parseBoundaryDate('${date_to}');
+    ...        dateTo.setHours(23, 59, 59, 999);
+    ...        const rows = document.querySelectorAll('.ant-table-body table tbody tr:not([aria-hidden="true"])');
+    ...        let total = 0;
+    ...        let withinRange = 0;
+    ...        let outOfRange = [];
+    ...        rows.forEach(row => {
+    ...            const cells = row.querySelectorAll('td');
+    ...            if (cells.length >= 3) {
+    ...                const dateText = cells[2].innerText.trim();
+    ...                if (dateText) {
+    ...                    total++;
+    ...                    const rowDate = parseTableDate(dateText);
+    ...                    if (rowDate >= dateFrom && rowDate <= dateTo) {
+    ...                        withinRange++;
+    ...                    } else {
+    ...                        outOfRange.push(dateText);
+    ...                    }
+    ...                }
+    ...            }
+    ...        });
+    ...        return { total, withinRange, outOfRange };
+    ...    }
+    Should Be Equal    ${result}[total]    ${result}[withinRange]
+    ...    msg=Expected all ${result}[total] transactions to be within date range ${date_from} to ${date_to}, but found ${result}[outOfRange] outside range
+
+Select Date Range From AntD Picker
+    [Documentation]    Selects a date range from the AntD dual-panel RangePicker.
+    ...                Opens the picker ONCE via the Start Date input and clicks both start
+    ...                and end dates without reopening. Expects dates in YYYY-MM-DD format.
+    ...                Reads .ant-picker-month-btn and .ant-picker-year-btn separately to
+    ...                avoid Get Text concatenating them without a space (e.g. "Feb2026").
+    [Arguments]    ${date_from}    ${date_to}
+    ${day_from}=      Evaluate    str(int('${date_from}'.split('-')[2]))
+    ${day_to}=        Evaluate    str(int('${date_to}'.split('-')[2]))
+    ${month_from}=    Evaluate    __import__('datetime').datetime(int('${date_from}'.split('-')[0]), int('${date_from}'.split('-')[1]), 1).strftime('%b %Y')
+    ${month_to}=      Evaluate    __import__('datetime').datetime(int('${date_to}'.split('-')[0]), int('${date_to}'.split('-')[1]), 1).strftime('%b %Y')
+    # Open the range picker by clicking Start Date input only once
+    Click    ${DATE_START_INPUT}
+    Sleep    0.5s
+    Wait For Elements State    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden)    visible
+    # Navigate forward until start month is visible in either panel
+    FOR    ${i}    IN RANGE    24
+        ${left_month}=     Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-month-btn
+        ${left_year}=      Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-year-btn
+        ${right_month}=    Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:last-of-type .ant-picker-month-btn
+        ${right_year}=     Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:last-of-type .ant-picker-year-btn
+        ${found}=    Evaluate    '${month_from}' in '${left_month} ${left_year}' or '${month_from}' in '${right_month} ${right_year}'
+        IF    ${found}    BREAK
+        Click    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-header-super-next-btn >> nth=0
+        Sleep    0.3s
+    END
+    # Click start date in the correct panel
+    ${left_month}=    Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-month-btn
+    ${left_year}=     Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-year-btn
+    ${in_left}=    Evaluate    '${month_from}' in '${left_month} ${left_year}'
+    IF    ${in_left}
+        Click    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-cell-in-view:not(.ant-picker-cell-disabled) .ant-picker-cell-inner:text-is("${day_from}")
+    ELSE
+        Click    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:last-of-type .ant-picker-cell-in-view:not(.ant-picker-cell-disabled) .ant-picker-cell-inner:text-is("${day_from}")
+    END
+    Sleep    0.3s
+    # Navigate forward if end month not yet visible (picker stays open after start date click)
+    FOR    ${i}    IN RANGE    24
+        ${left_month}=     Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-month-btn
+        ${left_year}=      Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-year-btn
+        ${right_month}=    Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:last-of-type .ant-picker-month-btn
+        ${right_year}=     Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:last-of-type .ant-picker-year-btn
+        ${found}=    Evaluate    '${month_to}' in '${left_month} ${left_year}' or '${month_to}' in '${right_month} ${right_year}'
+        IF    ${found}    BREAK
+        Click    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-header-super-next-btn >> nth=0
+        Sleep    0.3s
+    END
+    # Click end date in the correct panel (picker is still open)
+    ${left_month}=    Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-month-btn
+    ${left_year}=     Get Text    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-year-btn
+    ${in_left}=    Evaluate    '${month_to}' in '${left_month} ${left_year}'
+    IF    ${in_left}
+        Click    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:first-of-type .ant-picker-cell-in-view:not(.ant-picker-cell-disabled) .ant-picker-cell-inner:text-is("${day_to}")
+    ELSE
+        Click    css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-panel:last-of-type .ant-picker-cell-in-view:not(.ant-picker-cell-disabled) .ant-picker-cell-inner:text-is("${day_to}")
+    END
+    Sleep    0.3s
