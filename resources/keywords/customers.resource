@@ -6,10 +6,12 @@ Resource    ../locators/customers_locators.resource
 
 *** Keywords ***
 Navigate To Customers
-    [Documentation]    Navigates to the Customers module via the sidebar
+    [Documentation]    Navigates to the Customers module via the sidebar and ensures clean state
     Click                      ${CUSTOMERS_MENU}
     Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}    visible
     Get Url                    contains    /customers
+    Reload
+    Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}    visible
 
 View Customer List
     [Documentation]    Verifies the customer list page is loaded and visible
@@ -22,16 +24,37 @@ Search For Customer
     Click              ${CUSTOMER_SEARCH_BUTTON}
     Wait For Elements State    ${CUSTOMER_TABLE}    visible
 
+Clear Customer Search
+    [Documentation]    Clears the customer search field and reloads the full list
+    Fill Text          ${CUSTOMER_SEARCH_FIELD}    ${EMPTY}
+    Click              ${CUSTOMER_SEARCH_BUTTON}
+    Wait For Elements State    ${CUSTOMER_TABLE}    visible
+
+Reset Customer Status Filter
+    [Documentation]    Resets any applied customer status filter
+    ${filter_active}=    Run Keyword And Return Status
+    ...                  Wait For Elements State    css=span.ant-table-filter-trigger.active    visible    timeout=1s
+    IF    ${filter_active}
+        Click                      ${CUSTOMER_STATUS_FILTER}
+        Wait For Elements State    ${FILTER_RESET_BTN}    visible
+        Click                      ${FILTER_RESET_BTN}
+        Sleep    0.5s
+    END
+
 View Customer Profile
-    [Documentation]    Clicks View Profile for a specific customer row matching the given name
+    [Documentation]    Clicks View Profile for a specific customer row matching the given name.
+    ...                Searches for the customer first to ensure visibility regardless of filter state.
     [Arguments]        ${customer_name}
-    Click              css=tr:has-text("${customer_name}") >> ${VIEW_PROFILE_LINK}
+    Search For Customer    ${customer_name}
+    Click              css=tr:has-text("${customer_name}") >> ${VIEW_PROFILE_LINK} >> nth=0
     Wait For Elements State    text=Banking Details    visible
 
 View Customer Accounts
-    [Documentation]    Clicks View Accounts for a specific customer row matching the given name
+    [Documentation]    Clicks View Accounts for a specific customer row matching the given name.
+    ...                Searches for the customer first to ensure visibility regardless of filter state.
     [Arguments]        ${customer_name}
-    Click              css=tr:has-text("${customer_name}") >> ${VIEW_ACCOUNTS_LINK}
+    Search For Customer    ${customer_name}
+    Click              css=tr:has-text("${customer_name}") >> ${VIEW_ACCOUNTS_LINK} >> nth=0
     Wait For Elements State    ${ACCOUNT_SEARCH_FIELD}    visible
 
 View Customer Account Transactions
@@ -47,6 +70,15 @@ Navigate To Customer Account Transactions Page
     Navigate To Customers
     View Customer Accounts              ${customer_name}
     View Customer Account Transactions  ${account_number}
+    Wait For Load Spinner To Disappear
+
+Wait For Load Spinner To Disappear
+    [Documentation]    Waits for any loading spinner to disappear before proceeding
+    ${spinner_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
+    IF    ${spinner_visible}
+        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
+    END
 
 Filter Account Results Should Contain Only Status
     [Documentation]    Verifies that all visible rows in the customer accounts table match the expected
@@ -124,6 +156,7 @@ Filter Txn Results Should Contain Only Type
     ...                the detail modal contains all required field labels, then closes it.
     ...                If no data, verifies the "No Data" message.
     [Arguments]        ${expected_type}
+    Wait For Load Spinner To Disappear
     Sleep    1s    # Wait for filter to apply
     ${no_data_visible}=    Run Keyword And Return Status
     ...                    Wait For Elements State    css=.ant-empty-description    visible    timeout=3s
@@ -135,7 +168,8 @@ Filter Txn Results Should Contain Only Type
         Should Be Equal    ${total_rows}    ${matching_rows}
         ...    Expected all ${total_rows} rows to have type "${expected_type}", but only ${matching_rows} matched
         Log    All ${total_rows} rows contain type "${expected_type}"
-        # Open first row detail modal and verify field labels
+        # Wait for spinner and open first row detail modal
+        Wait For Load Spinner To Disappear
         Click    ${VIEW_TXN_BTN} >> nth=0
         Wait For Elements State    ${TXN_DETAIL_MODAL}              visible
         Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=Transaction ID         visible
@@ -160,6 +194,7 @@ Filter Txn Results Should Contain Only Status
     ...                the detail modal contains all required field labels, then closes it.
     ...                If no data, verifies the "No Data" message.
     [Arguments]        ${expected_status}
+    Wait For Load Spinner To Disappear
     Sleep    1s    # Wait for filter to apply
     ${no_data_visible}=    Run Keyword And Return Status
     ...                    Wait For Elements State    css=.ant-empty-description    visible    timeout=3s
@@ -171,7 +206,8 @@ Filter Txn Results Should Contain Only Status
         Should Be Equal    ${total_rows}    ${matching_rows}
         ...    Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
         Log    All ${total_rows} rows contain status "${expected_status}"
-        # Open first row detail modal and verify field labels
+        # Wait for spinner and open first row detail modal
+        Wait For Load Spinner To Disappear
         Click    ${VIEW_TXN_BTN} >> nth=0
         Wait For Elements State    ${TXN_DETAIL_MODAL}              visible
         Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=Transaction ID         visible
