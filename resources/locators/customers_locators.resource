@@ -93,6 +93,13 @@ ${DATE_END_INPUT}                   css=input[placeholder="End date"]
 ${DATE_FILTER_SEARCH_BTN}           css=.ant-table-filter-dropdown button:has-text("Search")
 ${DATE_FILTER_RESET_BTN}            css=.ant-table-filter-dropdown button:has-text("Reset")
 
+# AntD Date Picker Calendar Elements
+${DATE_PICKER_PANEL}                css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden)
+${DATE_PICKER_PREV_MONTH}           css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) button.ant-picker-header-prev-btn
+${DATE_PICKER_NEXT_MONTH}           css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) button.ant-picker-header-next-btn
+${DATE_PICKER_MONTH_SELECT}         css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-month-btn
+${DATE_PICKER_YEAR_SELECT}          css=.ant-picker-dropdown:not(.ant-picker-dropdown-hidden) .ant-picker-year-btn
+
 # Transaction Status Filter — AntD column filter dropdown
 ${TXN_STATUS_FILTER}                css=th:has-text("Status") span.ant-table-filter-trigger
 ${TXN_STATUS_PENDING}               css=[data-menu-id$="-pending"]

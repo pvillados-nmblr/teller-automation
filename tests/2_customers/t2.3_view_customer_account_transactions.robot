@@ -42,8 +42,8 @@ ${TXN_ROW}                  css=[data-testid="table-customers-account-transactio
 ${NON_EXISTING_TXN_ID}      NONEXISTENT99999
 
 # Date range variables for t2.3.5
-${DATE_FROM}                2025-09-26
-${DATE_TO}                  2025-10-01
+${DATE_FROM}                2026-03-01
+${DATE_TO}                  2026-03-06
 
 
 *** Test Cases ***
@@ -146,12 +146,13 @@ t2.3.6 Search Transactions Using Date Range
     [Tags]             customers    accounts    transactions    regression
     Click                      ${DATE_TIME_FILTER}
     Wait For Elements State    ${DATE_START_INPUT}              visible
-    Fill Text                  ${DATE_START_INPUT}    ${DATE_FROM}
-    Keyboard Key               press    Tab
-    Fill Text                  ${DATE_END_INPUT}      ${DATE_TO}
-    Keyboard Key               press    Tab
+    Select Date Range From AntD Picker    ${DATE_FROM}    ${DATE_TO}
     Click                      ${DATE_FILTER_SEARCH_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}             visible
+    # Verify at least one result row is visible
+    Wait For Elements State    css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"]) >> nth=0    visible
+    # Verify all transaction dates are within the specified range
+    Verify Txn Dates Within Range    ${DATE_FROM}    ${DATE_TO}
     # Verify all required columns are still present after filtering
     Wait For Elements State    text=Transaction ID              visible
     Wait For Elements State    text=Transaction Type            visible
