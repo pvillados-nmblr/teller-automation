@@ -1,44 +1,52 @@
 *** Settings ***
 Library     Browser
 Resource    common.resource
+Resource    ../locators/accounts_locators.resource
 
 
 *** Keywords ***
 Navigate To Accounts
-    [Documentation]    Navigates to the Accounts module
-    Navigate To Module    accounts
+    [Documentation]    Navigates to the Accounts module via the sidebar and ensures clean state
+    Click                      ${ACCOUNTS_MENU}
+    Wait For Elements State    ${ACCOUNTS_SEARCH_FIELD}    visible
+    Get Url                    contains    /accounts
+    Reload
+    Wait For Elements State    ${ACCOUNTS_SEARCH_FIELD}    visible
 
-View Account List
-    [Documentation]    Verifies the full account list is visible
-    Wait For Elements State    css=.account-list    visible
+Wait For Load Spinner To Disappear
+    [Documentation]    Waits for any loading spinner to disappear before proceeding
+    ${spinner_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
+    IF    ${spinner_visible}
+        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
+    END
 
-View Account Transactions
-    [Documentation]    Opens an account and views its transaction list
-    [Arguments]        ${account_number}
-    Click              css=.account-list tr:has-text("${account_number}")
-    Wait For Elements State    css=.transaction-list    visible
-
-Fill New Account Form
-    [Documentation]    Fills in the new bank account creation form
-    [Arguments]        &{account}
-    Fill Text          id=customer-id        ${account.customer_id}
-    Select Options By  id=account-type       value    ${account.account_type}
-    Fill Text          id=initial-deposit    ${account.initial_deposit}
-
-Submit New Account Form
-    [Documentation]    Submits the new account creation form
-    Click              id=create-account-button
-    Wait For Elements State    css=.success-message    visible
-
-Verify Account Is Created
-    [Documentation]    Verifies that the account was successfully created
-    [Arguments]        ${customer_id}
-    Get Text           css=.success-message    contains    ${customer_id}
-
-Create New Bank Account
-    [Documentation]    End-to-end keyword to create a new bank account
-    [Arguments]        &{account}
-    Navigate To Accounts
-    Fill New Account Form    &{account}
-    Submit New Account Form
-    Verify Account Is Created    ${account.customer_id}
+Filter Accounts Results Should Contain Only Status
+    [Documentation]    Verifies that all visible rows in the accounts table match the expected status,
+    ...                or that a "No Data" message is shown if no matching records exist.
+    ...                Iterates through all pagination pages to verify each page.
+    [Arguments]        ${expected_status}
+    Sleep    1s    # Wait for filter to apply
+    ${no_data_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    ${NO_DATA_MESSAGE}    visible    timeout=3s
+    IF    ${no_data_visible}
+        Log    No data found for status: ${expected_status}
+    ELSE
+        ${page}=    Set Variable    1
+        WHILE    ${page} <= 100    # Safety limit to prevent infinite loop
+            ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+            ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
+            Should Be Equal    ${total_rows}    ${matching_rows}
+            ...    Page ${page}: Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
+            Log    Page ${page}: All ${total_rows} rows contain status "${expected_status}"
+            ${next_disabled}=    Run Keyword And Return Status
+            ...                  Wait For Elements State    css=.ant-pagination-next.ant-pagination-disabled    visible    timeout=1s
+            IF    ${next_disabled}
+                Log    Reached last page (page ${page})
+                BREAK
+            END
+            Click    css=.ant-pagination-next button
+            Sleep    0.5s    # Wait for page to load
+            ${page}=    Evaluate    ${page} + 1
+        END
+    END
