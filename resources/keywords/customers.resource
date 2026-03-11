@@ -93,8 +93,8 @@ Filter Account Results Should Contain Only Status
     ELSE
         ${page}=    Set Variable    1
         WHILE    ${page} <= 100    # Safety limit to prevent infinite loop
-            ${total_rows}=      Get Element Count    css=[data-testid="table-customers-accounts"] tbody tr:not([aria-hidden="true"]):not(:empty)
-            ${matching_rows}=   Get Element Count    css=[data-testid="table-customers-accounts"] tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
+            ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+            ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
             Should Be Equal    ${total_rows}    ${matching_rows}
             ...    Page ${page}: Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
             Log    Page ${page}: All ${total_rows} rows contain status "${expected_status}"
@@ -130,8 +130,8 @@ Filter Results Should Contain Only Status
         ${page}=    Set Variable    1
         WHILE    ${page} <= 100    # Safety limit to prevent infinite loop
             # Count total visible rows (exclude hidden/empty rows) and rows with expected status
-            ${total_rows}=      Get Element Count    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]):not(:empty)
-            ${matching_rows}=   Get Element Count    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
+            ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+            ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
             # Verify all rows match the expected status
             Should Be Equal    ${total_rows}    ${matching_rows}
             ...    Page ${page}: Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
@@ -163,8 +163,8 @@ Filter Txn Results Should Contain Only Type
     IF    ${no_data_visible}
         Log    No data found for type: ${expected_type}
     ELSE
-        ${total_rows}=      Get Element Count    css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"]):not(:empty)
-        ${matching_rows}=   Get Element Count    css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"]):has-text("${expected_type}")
+        ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+        ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_type}")
         Should Be Equal    ${total_rows}    ${matching_rows}
         ...    Expected all ${total_rows} rows to have type "${expected_type}", but only ${matching_rows} matched
         Log    All ${total_rows} rows contain type "${expected_type}"
@@ -201,8 +201,8 @@ Filter Txn Results Should Contain Only Status
     IF    ${no_data_visible}
         Log    No data found for status: ${expected_status}
     ELSE
-        ${total_rows}=      Get Element Count    css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"]):not(:empty)
-        ${matching_rows}=   Get Element Count    css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
+        ${total_rows}=      Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):not(:empty)
+        ${matching_rows}=   Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${expected_status}")
         Should Be Equal    ${total_rows}    ${matching_rows}
         ...    Expected all ${total_rows} rows to have status "${expected_status}", but only ${matching_rows} matched
         Log    All ${total_rows} rows contain status "${expected_status}"
@@ -246,7 +246,7 @@ Verify Txn Dates Within Range
     [Documentation]    Verifies that all visible transaction dates in the Date & Time column
     ...                fall within the specified date range.
     ...                Handles the "DD Mon YYYY\nHH:MM:SS" format displayed in the table.
-    [Arguments]        ${date_from}    ${date_to}    ${table_selector}=[data-testid="table-customers-account-transactions"]
+    [Arguments]        ${date_from}    ${date_to}    ${table_selector}=.ant-table-body table
     ${result}=    Evaluate JavaScript    ${None}
     ...    () => {
     ...        const months = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};

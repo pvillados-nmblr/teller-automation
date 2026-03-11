@@ -3,10 +3,10 @@
 # ============================================================
 
 BANK_NAME: "Rural Bank of San Antonio"
-BASE_URL: "https://alegre-dashboard.int.dev.higala.ph/rural-bank-san-antonio/login"
+BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/rural-bank-san-antonio/login"
 
 # Teller Credentials
-TELLER_EMAIL: "pvillados@agsx.net"
+TELLER_EMAIL: "pvillados+u1@agsx.net"
 TELLER_PASSWORD: "Password123!"
 
 # Invalid Credentials (for negative test cases)
@@ -18,10 +18,4 @@ BROWSER: "chromium"
 HEADLESS: False
 TIMEOUT: "30s"
 
-# Mail Testing (Gmail / Google Workspace IMAP)
-# IMAP_USERNAME must be the primary address (not the +alias)
-# IMAP_PASSWORD must be a Google App Password (16 chars, no spaces)
-IMAP_HOST: "imap.gmail.com"
-IMAP_PORT: 993
-IMAP_USERNAME: "pvillados@agsx.net"
-IMAP_PASSWORD: "eaawjlkgbdwrrnnw"
+
