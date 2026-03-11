@@ -1,6 +1,5 @@
 *** Settings ***
 Library     Browser
-Library     ImapLibrary2
 Resource    ../locators/common_locators.resource
 
 

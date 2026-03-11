@@ -4,7 +4,8 @@
 # ============================================================
 
 # Navigation - Sidebar
-${ACCOUNTS_MENU}                    css=[data-testid="nav-sidebar-accounts"]
+# ${ACCOUNTS_MENU}                    css=[data-testid="nav-sidebar-accounts"]    # TODO: restore when data-testid is available
+${ACCOUNTS_MENU}                    css=.ant-menu-title-content >> text=Accounts
 
 # Accounts List Page - Search
 ${ACCOUNTS_SEARCH_FIELD}            css=input[placeholder="Search accounts..."]
@@ -15,7 +16,8 @@ ${ACCOUNTS_TABLE}                   css=.ant-table-body table
 ${ACCOUNTS_TABLE_ROWS}              css=.ant-table-body table tbody tr
 
 # Account Actions (per row)
-${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=[data-testid="btn-customers-accounts-view-transactions"]
+# ${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=[data-testid="btn-customers-accounts-view-transactions"]    # TODO: restore when data-testid is available
+${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=button:has([data-icon="eye"])
 
 # Pagination (shared across Accounts list and Transaction History)
 ${PAGINATION_NEXT}                  css=button.ant-pagination-item-link:has(svg[data-icon="right"])
