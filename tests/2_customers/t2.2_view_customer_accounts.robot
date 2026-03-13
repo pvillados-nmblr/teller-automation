@@ -18,7 +18,7 @@ ${VALID_ACCOUNT_ID}         7710458152114857
 ${VALID_ACCOUNT_NAME}       Peach Villados
 ${ACCOUNT_STATUS}           Active
 ${ACCOUNT_CREATED_ON}       03 Jul 2025
-${ACCOUNT_ROW}              css=[data-testid="table-customers-accounts"] tbody tr:has-text("${VALID_ACCOUNT_ID}")
+${ACCOUNT_ROW}              css=.ant-table-body table tbody tr.ant-table-row:has-text("${VALID_ACCOUNT_ID}")
 ${NON_EXISTING_ACCOUNT}     NonExistentAcc
 
 
@@ -74,7 +74,7 @@ t2.2.3 Search for Valid Account ID
     Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${VALID_ACCOUNT_ID}
     Click                      ${ACCOUNT_SEARCH_BUTTON}
     Wait For Elements State    ${ACCOUNT_ROW}    visible
-    Get Element Count          css=[data-testid="table-customers-accounts"] tbody tr:not([aria-hidden="true"])    ==    1
+    Get Element Count          ${ACCOUNT_TABLE_VISIBLE_ROWS}    ==    1
     # Verify column headers
     Wait For Elements State    text=Account No        visible
     Wait For Elements State    text=Account Name      visible
@@ -97,7 +97,7 @@ t2.2.4 Search for Valid Account Name
     Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${VALID_ACCOUNT_NAME}
     Click                      ${ACCOUNT_SEARCH_BUTTON}
     Wait For Elements State    ${ACCOUNT_TABLE}        visible
-    Wait For Elements State    css=[data-testid="table-customers-accounts"] tbody tr:not([aria-hidden="true"]) >> nth=0    visible
+    Wait For Elements State    ${ACCOUNT_TABLE_VISIBLE_ROWS} >> nth=0    visible
     # Verify column headers
     Wait For Elements State    text=Account No        visible
     Wait For Elements State    text=Account Name      visible

@@ -23,9 +23,9 @@ ${CUSTOMER_TABLE_ROWS}                css=.ant-table-body table tbody tr
 
 # Customer List Actions (per row)
 # ${VIEW_PROFILE_LINK}        css=[data-testid="btn-customers-view-profile"]                  # TODO: restore when data-testid is available
-${VIEW_PROFILE_LINK}          css=button >> nth=0
+${VIEW_PROFILE_LINK}          css=a.table-link:has-text("View Profile")
 # ${VIEW_ACCOUNTS_LINK}       css=[data-testid="btn-customers-view-accounts"]                 # TODO: restore when data-testid is available
-${VIEW_ACCOUNTS_LINK}         css=button >> nth=1
+${VIEW_ACCOUNTS_LINK}         css=a.table-link:has-text("View Accounts")
 
 
 # Pagination
@@ -42,7 +42,7 @@ ${ACCOUNT_SEARCH_BUTTON}              text=Search
 
 # Customer Account Actions
 # ${VIEW_ACCOUNT_TRANSACTIONS_LINK}     css=[data-testid="btn-customers-accounts-view-transactions"]    # TODO: restore when data-testid is available
-${VIEW_ACCOUNT_TRANSACTIONS_LINK}     css=button:has([data-icon="eye"])
+${VIEW_ACCOUNT_TRANSACTIONS_LINK}     css=a.table-link:has-text("View Account Transactions")
 
 # No Data
 ${NO_DATA_MESSAGE}                    text=No Data
@@ -65,7 +65,8 @@ ${FILTER_OPTION_OVERDRAWN}          css=[data-menu-id$="-overdrawn"]
 # ${ACCOUNT_TABLE}                    css=[data-testid="table-customers-accounts"]             # TODO: restore when data-testid is available
 ${ACCOUNT_TABLE}                    css=.ant-table-body table
 # ${ACCOUNT_TABLE_ROWS}               css=[data-testid="table-customers-accounts"] tbody tr   # TODO: restore when data-testid is available
-${ACCOUNT_TABLE_ROWS}               css=.ant-table-body table tbody tr
+${ACCOUNT_TABLE_ROWS}               css=.ant-table-body table tbody tr.ant-table-row
+${ACCOUNT_TABLE_VISIBLE_ROWS}       css=.ant-table-body table tbody tr:not([aria-hidden="true"])
 
 # Account Status Filter — AntD column filter dropdown (accounts page)
 ${ACCOUNT_STATUS_FILTER}            css=th:has-text("Account Status") span.ant-table-filter-trigger
@@ -86,7 +87,8 @@ ${TRANSACTION_SEARCH_BUTTON}        text=Search
 # ${TRANSACTION_TABLE}                css=[data-testid="table-customers-account-transactions"]             # TODO: restore when data-testid is available
 ${TRANSACTION_TABLE}                css=.ant-table-body table
 # ${TRANSACTION_TABLE_ROWS}           css=[data-testid="table-customers-account-transactions"] tbody tr   # TODO: restore when data-testid is available
-${TRANSACTION_TABLE_ROWS}           css=.ant-table-body table tbody tr
+${TRANSACTION_TABLE_ROWS}           css=.ant-table-body table tbody tr.ant-table-row
+${TRANSACTION_TABLE_VISIBLE_ROWS}   css=.ant-table-body table tbody tr:not([aria-hidden="true"])
 
 # Transaction Action Buttons
 ${VIEW_TXN_BTN}                     css=button:has([data-icon="eye"])

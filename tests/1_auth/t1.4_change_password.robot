@@ -14,7 +14,7 @@ Test Teardown       Close Browser
 
 *** Variables ***
 ${CP_USER_EMAIL}                    pvillados+dfspop2@nmblr.ai
-${CP_USER_PASSWORD}                 Password123!!
+${CP_USER_PASSWORD}                 Password123!! 
 ${CP_NEW_PASSWORD}                  Password123!
 ${CP_WRONG_CONFIRM_PASSWORD}        WrongPassword999!
 ${OTP}                              123456

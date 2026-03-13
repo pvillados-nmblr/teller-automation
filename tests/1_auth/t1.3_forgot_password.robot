@@ -12,6 +12,7 @@ Test Teardown       Close Browser
 
 
 *** Variables ***
+${NEW_PASSWORD}              Password123!
 ${FP_MIXED_CASE_EMAIL}              Pvillados+U1@Agsx.Net
 ${FP_INVALID_FORMAT_EMAIL}          notanemail
 ${FP_WRONG_CONFIRM_PASSWORD}        WrongPassword999!
@@ -64,8 +65,8 @@ t1.3.1 Reset Password via Forgot Password
     Complete OTP Verification
 
     # Create new password
-    Fill Text                   ${NEW_PASSWORD_FIELD}           ${TELLER_PASSWORD}
-    Fill Text                   ${CONFIRM_NEW_PASSWORD_FIELD}   ${TELLER_PASSWORD}
+    Fill Text                   ${NEW_PASSWORD_FIELD}           ${NEW_PASSWORD}
+    Fill Text                   ${CONFIRM_NEW_PASSWORD_FIELD}   ${NEW_PASSWORD}
     Click                       ${RESET_PASSWORD_BTN}
 
     # Assert success screen
@@ -84,8 +85,8 @@ t1.3.2 Verify System Treats Email as Case-Insensitive During Forgot Password
     Complete OTP Verification    email=${FP_MIXED_CASE_EMAIL}
 
     # Create new password
-    Fill Text                   ${NEW_PASSWORD_FIELD}           ${TELLER_PASSWORD}
-    Fill Text                   ${CONFIRM_NEW_PASSWORD_FIELD}   ${TELLER_PASSWORD}
+    Fill Text                   ${NEW_PASSWORD_FIELD}           ${NEW_PASSWORD}
+    Fill Text                   ${CONFIRM_NEW_PASSWORD_FIELD}   ${NEW_PASSWORD}
     Click                       ${RESET_PASSWORD_BTN}
 
     # Assert success screen

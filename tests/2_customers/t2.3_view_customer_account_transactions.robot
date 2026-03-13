@@ -38,7 +38,7 @@ ${TXN_DEBIT_ACCT_NO}        7710455410784261
 ${TXN_CREDIT_ACCT_NO}       7710458152114857
 ${TXN_CREATED_ON}           01 Oct 2025 15:06:28
 ${TXN_UPDATED_ON}           01 Oct 2025 15:06:28
-${TXN_ROW}                  css=[data-testid="table-customers-account-transactions"] tbody tr:has-text("${VALID_TXN_ID}")
+${TXN_ROW}                  css=.ant-table-body table tbody tr.ant-table-row:has-text("${VALID_TXN_ID}")
 ${NON_EXISTING_TXN_ID}      NONEXISTENT99999
 
 # Date range variables for t2.3.5
@@ -109,7 +109,7 @@ t2.3.4 Search by Transaction ID
     Fill Text                  ${TRANSACTION_SEARCH_FIELD}    ${VALID_TXN_ID}
     Click                      ${TRANSACTION_SEARCH_BUTTON}
     Wait For Elements State    ${TXN_ROW}    visible
-    Get Element Count          css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"])    ==    1
+    Get Element Count          ${TRANSACTION_TABLE_VISIBLE_ROWS}    ==    1
     # Open transaction detail modal
     Click                      ${TXN_ROW} >> ${VIEW_TXN_BTN}
     Wait For Elements State    ${TXN_DETAIL_MODAL}              visible
@@ -150,7 +150,7 @@ t2.3.6 Search Transactions Using Date Range
     Click                      ${DATE_FILTER_SEARCH_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}             visible
     # Verify at least one result row is visible
-    Wait For Elements State    css=[data-testid="table-customers-account-transactions"] tbody tr:not([aria-hidden="true"]) >> nth=0    visible
+    Wait For Elements State    ${TRANSACTION_TABLE_VISIBLE_ROWS} >> nth=0    visible
     # Verify all transaction dates are within the specified range
     Verify Txn Dates Within Range    ${DATE_FROM}    ${DATE_TO}
     # Verify all required columns are still present after filtering

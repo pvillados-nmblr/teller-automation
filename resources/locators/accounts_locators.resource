@@ -17,7 +17,7 @@ ${ACCOUNTS_TABLE_ROWS}              css=.ant-table-body table tbody tr
 
 # Account Actions (per row)
 # ${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=[data-testid="btn-customers-accounts-view-transactions"]    # TODO: restore when data-testid is available
-${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=button:has([data-icon="eye"])
+${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=a.table-link:has-text("View Account Transactions")
 
 # Pagination (shared across Accounts list and Transaction History)
 ${PAGINATION_NEXT}                  css=button.ant-pagination-item-link:has(svg[data-icon="right"])
@@ -49,7 +49,7 @@ ${NO_DATA_MESSAGE}                  css=.ant-empty-description
 
 # Search
 ${ACCT_TXN_SEARCH_FIELD}            css=input[placeholder="Search transactions..."]
-${ACCT_TXN_SEARCH_BUTTON}           text=Search
+${ACCT_TXN_SEARCH_BUTTON}           css=#btnSearch:has-text("Search")
 
 # Transaction Table
 ${ACCT_TXN_TABLE}                   css=.ant-table-body table
