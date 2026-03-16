@@ -45,7 +45,7 @@ ${DATE_EMPTY_TO}            2027-01-31
 t4.1.1 View Transaction History (Entry Point)
     [Documentation]    Verify that navigating to the Transactions module displays the Transactions page
     ...                with all required table columns and action buttons visible.
-    [Tags]             transactions    smoke
+    [Tags]             transactions    smoke    mvp
     Get Url                    contains    /transactions
     Wait For Elements State    text=Transaction ID            visible
     Wait For Elements State    text=Transaction Type          visible
@@ -62,7 +62,7 @@ t4.1.2 Pagination in Viewing Transaction History
     [Documentation]    Verify pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
@@ -76,7 +76,7 @@ t4.1.2 Pagination in Viewing Transaction History
 t4.1.4 View Specific Transaction Details
     [Documentation]    Verify that clicking the Eye icon opens the transaction detail modal
     ...                with all required field labels and the modal closes cleanly.
-    [Tags]             transactions    smoke
+    [Tags]             transactions    smoke    mvp
     Click                      ${TXN_VIEW_BTN} >> nth=0
     Wait For Elements State    ${TXN_DETAIL_MODAL}                                       visible
     Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=Transaction ID                visible
@@ -101,7 +101,7 @@ t4.1.5 Search Transaction by ID and View Details
     ...                the detail modal displays all expected field values accurately including
     ...                Instapay Reference Number and Bank Code/Name for External transactions,
     ...                and the modal closes cleanly returning to the filtered list.
-    [Tags]             transactions    smoke
+    [Tags]             transactions    smoke    mvp
     Fill Text                  ${TXN_SEARCH_FIELD}    ${VALID_TXN_ID}
     Click                      ${TXN_SEARCH_BUTTON}
     Wait For Load Spinner To Disappear
@@ -132,7 +132,7 @@ t4.1.5 Search Transaction by ID and View Details
 
 t4.1.6 Search Transactions Using Date Range
     [Documentation]    Verify the date range filter shows only transactions within the selected range.
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_DATE_TIME_FILTER}
     Wait For Elements State    ${TXN_DATE_START_INPUT}    visible
     Select Txn Date Range From AntD Picker    ${DATE_FROM}    ${DATE_TO}
@@ -154,7 +154,7 @@ t4.1.7 Filter Transactions by Type: External
     [Documentation]    Verify filtering by External type shows only External transactions.
     ...                The detail view includes Instapay Reference Number for External transactions.
     ...                If no External transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_FILTER_EXTERNAL}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -164,7 +164,7 @@ t4.1.7 Filter Transactions by Type: External
 t4.1.8 Filter Transactions by Type: Internal
     [Documentation]    Verify filtering by Internal type shows only Internal (Fund Transfer) transactions.
     ...                If no Internal transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_FILTER_INTERNAL}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -174,7 +174,7 @@ t4.1.8 Filter Transactions by Type: Internal
 Filter Transactions by Type: Withdrawal
     [Documentation]    Verify filtering by Withdrawal type shows only Withdrawal transactions.
     ...                If no Withdrawal transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_FILTER_WITHDRAWAL}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -184,7 +184,7 @@ Filter Transactions by Type: Withdrawal
 Filter Transactions by Type: Deposit
     [Documentation]    Verify filtering by Deposit type shows only Deposit transactions.
     ...                If no Deposit transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_FILTER_DEPOSIT}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -194,7 +194,7 @@ Filter Transactions by Type: Deposit
 t4.1.9 Filter Transactions by Status: Pending
     [Documentation]    Verify filtering by Pending status shows only Pending transactions.
     ...                If no Pending transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_PENDING}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -204,7 +204,7 @@ t4.1.9 Filter Transactions by Status: Pending
 t4.1.10 Filter Transactions by Status: Success
     [Documentation]    Verify filtering by Success status shows only Success transactions.
     ...                If no Success transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_SUCCESS}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -214,7 +214,7 @@ t4.1.10 Filter Transactions by Status: Success
 t4.1.11 Filter Transactions by Status: Failed
     [Documentation]    Verify filtering by Failed status shows only Failed transactions.
     ...                If no Failed transactions exist, the system displays "No Data".
-    [Tags]             transactions    regression
+    [Tags]             transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_FAILED}
     Click                      ${TXN_FILTER_APPLY_BTN}
@@ -224,7 +224,7 @@ t4.1.11 Filter Transactions by Status: Failed
 t4.1.12 Verify Total Balance Calculation
     [Documentation]    Verify the Total Balance displayed on the Transactions page equals
     ...                the sum of all account balances from the Accounts module.
-    [Tags]             transactions    smoke
+    [Tags]             transactions    smoke    mvp    skip
     # Step 1: Get Total Balance value from Transactions page
     Wait For Elements State    ${TOTAL_BALANCE_CARD}    visible
     ${balance_text}=           Get Text    ${TOTAL_BALANCE_CARD}

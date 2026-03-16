@@ -139,7 +139,7 @@ t1.2.8 Session Timeout - Backgrounded Tab/Minimized Window
 t1.2.9 Verify account is not blocked when user has Incorrect attempts but under threshold
     [Documentation]    Verify that the account is not blocked for fewer than 5 failed login attempts.
     ...                4 incorrect attempts followed by valid credentials must result in successful login.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     Open Teller App
     # Attempts 1-4 — incorrect credentials
     FOR    ${index}    IN RANGE    1    5
@@ -158,7 +158,7 @@ t1.2.9 Verify account is not blocked when user has Incorrect attempts but under 
 t1.2.10 Verify account is blocked after 5 consecutive failed login attempts
     [Documentation]    Verify that the account is blocked after 5 consecutive failed login attempts,
     ...                the lockout message is displayed, and a security alert email is sent to the teller.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
 
     Open Teller App
     FOR    ${index}    IN RANGE    1    6
@@ -187,7 +187,7 @@ t1.2.10 Verify account is blocked after 5 consecutive failed login attempts
 t1.2.11 Verify blocked account cannot log in during 5-minute cooldown
     [Documentation]    Verify that a blocked account cannot log in with correct credentials
     ...                during the 5-minute cooldown period.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
 
     Open Teller App
     FOR    ${index}    IN RANGE    1    6
@@ -218,7 +218,7 @@ t1.2.12 Verify account automatically unlocks after cooldown
     [Documentation]    Verify that the account automatically unlocks after the 5-minute cooldown,
     ...                allowing successful login.
     ...                Pre-condition: Account must be blocked — run t1.2.10 first, then wait 5 minutes.
-    [Tags]             login    security    slow
+    [Tags]             login    security    slow    mvp
     Open Teller App
     FOR    ${index}    IN RANGE    1    6
         Fill Text    ${EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -246,7 +246,7 @@ t1.2.13 Verify failed attempt counter persists across sessions/devices
     [Documentation]    Verify that the failed attempt counter is server-side and persists across
     ...                different browser sessions (simulating different devices).
     ...                3 failed attempts in Session A + 2 in Session B must trigger account lockout.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     # Session A — 3 failed attempts
     Open Teller App
     FOR    ${index}    IN RANGE    1    4
@@ -275,7 +275,7 @@ t1.2.14 Verify blocking applies per account (not per device/IP)
     [Documentation]    Verify that account blocking is applied at the account level, not per device or IP.
     ...                A blocked account must be denied login from a different browser session.
     ...                Pre-condition: Account must be blocked — run t1.2.10 or t1.2.13 first.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     Open Teller App
     Fill Text    ${EMAIL_FIELD}    ${TELLER_EMAIL}
     Fill Text    ${PASSWORD_FIELD}    ${TELLER_PASSWORD}
@@ -289,7 +289,7 @@ t1.2.15 Verify password reset during block period lifts block
     ...                lifts the block and allows immediate login with the new credentials.
     ...                Pre-condition: Account must be blocked — run t1.2.10 first.
     ...                Pass the 6-digit OTP at runtime: --variable OTP:123456
-    [Tags]             login    security    password-reset
+    [Tags]             login    security    password-reset    mvp
 
     # Step 1 — Navigate to Forgot Password
     Open Teller App
@@ -324,7 +324,7 @@ t1.2.15 Verify password reset during block period lifts block
 t1.2.16 Verify counter resets to zero after successful login
     [Documentation]    Verify that a successful login resets the failed attempt counter to zero,
     ...                granting the user a fresh set of 5 attempts before being blocked again.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     Open Teller App
     # Attempts 1-4 — incorrect credentials
     FOR    ${index}    IN RANGE    1    5
@@ -358,7 +358,7 @@ t1.2.16 Verify counter resets to zero after successful login
 t1.2.17 Verify failed login with incorrect email address
     [Documentation]    Verify that 5 consecutive failed login attempts with an unregistered email
     ...                triggers the lockout mechanism.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     Open Teller App
     FOR    ${index}    IN RANGE    1    6
         Fill Text    ${EMAIL_FIELD}    ${INVALID_EMAIL}
@@ -377,7 +377,7 @@ t1.2.18 Verify failed login with incorrect temporary password
     [Documentation]    Verify that 5 consecutive failed login attempts with an incorrect temporary
     ...                password (during a password reset flow) triggers the lockout mechanism.
     ...                Pre-condition: Account is in password reset flow with a temporary password issued.
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     Open Teller App
     FOR    ${index}    IN RANGE    1    6
         Fill Text    ${EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -397,7 +397,7 @@ t1.2.19 Verify account is still blocked on the 6th attempt and so on
     ...                subsequent attempts continue to display the updated lockout message.
     ...                5th attempt: "${LOCKOUT_MESSAGE1}"
     ...                6th+ attempts: "${SUBSEQUENT_LOCKOUT_MESSAGE1}"
-    [Tags]             login    security    negative
+    [Tags]             login    security    negative    mvp
     Open Teller App
     FOR    ${index}    IN RANGE    1    7
         Fill Text    ${EMAIL_FIELD}    ${TELLER_EMAIL}

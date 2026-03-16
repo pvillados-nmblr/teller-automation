@@ -26,7 +26,7 @@ ${NON_EXISTING_ACCOUNT}     NonExistentAcc
 t2.2.1 Customer Accounts List View
     [Documentation]    Verify that the accounts list for a customer is loaded and displayed
     ...                with all required columns and the View Account Transactions action link.
-    [Tags]             customers    accounts    smoke
+    [Tags]             customers    accounts    smoke    mvp
     Get Url                    contains    /accounts
     Wait For Elements State    text=Account No                                  visible
     Wait For Elements State    text=Account Name                                visible
@@ -40,7 +40,7 @@ t2.2.2 Account List Pagination and Navigation
     [Documentation]    Verify that pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2. Skips if only one page exists.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     # Check if pagination has more than one page (next button not disabled)
     ${has_multiple_pages}=    Run Keyword And Return Status
     ...    Wait For Elements State    css=.ant-pagination-next:not(.ant-pagination-disabled)    visible    timeout=3s
@@ -70,7 +70,7 @@ t2.2.2 Account List Pagination and Navigation
 t2.2.3 Search for Valid Account ID
     [Documentation]    Verify that searching by a valid Account ID returns exactly one record
     ...                and the result row contains all expected column values.
-    [Tags]             customers    accounts    smoke
+    [Tags]             customers    accounts    smoke    mvp
     Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${VALID_ACCOUNT_ID}
     Click                      ${ACCOUNT_SEARCH_BUTTON}
     Wait For Elements State    ${ACCOUNT_ROW}    visible
@@ -93,7 +93,7 @@ t2.2.4 Search for Valid Account Name
     [Documentation]    Verify that searching by Account Name returns all matching records.
     ...                The system displays records where the name matches or partially matches,
     ...                all required columns remain visible, and the target row contains the correct data.
-    [Tags]             customers    accounts    smoke
+    [Tags]             customers    accounts    smoke    mvp
     Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${VALID_ACCOUNT_NAME}
     Click                      ${ACCOUNT_SEARCH_BUTTON}
     Wait For Elements State    ${ACCOUNT_TABLE}        visible
@@ -115,7 +115,7 @@ t2.2.4 Search for Valid Account Name
 t2.2.5 Search for Non-Existing Account
     [Documentation]    Verify that searching for a non-existing account shows a "No Data" message
     ...                with an empty table and no application errors.
-    [Tags]             customers    accounts    negative
+    [Tags]             customers    accounts    negative    mvp
     Fill Text                  ${ACCOUNT_SEARCH_FIELD}    ${NON_EXISTING_ACCOUNT}
     Click                      ${ACCOUNT_SEARCH_BUTTON}
     Wait For Elements State    css=.ant-empty-description:has-text("No data")    visible
@@ -124,7 +124,7 @@ t2.2.5 Search for Non-Existing Account
 t2.2.6 Filter Account List by Status - Active
     [Documentation]    Verify that filtering by Active status shows only Active accounts.
     ...                If no Active accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_ACTIVE}
     Click                      ${FILTER_APPLY_BTN}
@@ -134,7 +134,7 @@ t2.2.6 Filter Account List by Status - Active
 t2.2.7 Filter Account List by Status - Inactive
     [Documentation]    Verify that filtering by Inactive status shows only Inactive accounts.
     ...                If no Inactive accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_INACTIVE}
     Click                      ${FILTER_APPLY_BTN}
@@ -144,7 +144,7 @@ t2.2.7 Filter Account List by Status - Inactive
 t2.2.8 Filter Account List by Status - Dormant
     [Documentation]    Verify that filtering by Dormant status shows only Dormant accounts.
     ...                If no Dormant accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_DORMANT}
     Click                      ${FILTER_APPLY_BTN}
@@ -154,7 +154,7 @@ t2.2.8 Filter Account List by Status - Dormant
 t2.2.9 Filter Account List by Status - Frozen
     [Documentation]    Verify that filtering by Frozen status shows only Frozen accounts.
     ...                If no Frozen accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_FROZEN}
     Click                      ${FILTER_APPLY_BTN}
@@ -164,7 +164,7 @@ t2.2.9 Filter Account List by Status - Frozen
 t2.2.10 Filter Account List by Status - Closed
     [Documentation]    Verify that filtering by Closed status shows only Closed accounts.
     ...                If no Closed accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_CLOSED}
     Click                      ${FILTER_APPLY_BTN}
@@ -174,7 +174,7 @@ t2.2.10 Filter Account List by Status - Closed
 t2.2.11 Filter Account List by Status - Overdrawn
     [Documentation]    Verify that filtering by Overdrawn status shows only Overdrawn accounts.
     ...                If no Overdrawn accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_OVERDRAWN}
     Click                      ${FILTER_APPLY_BTN}
@@ -184,7 +184,7 @@ t2.2.11 Filter Account List by Status - Overdrawn
 t2.2.12 Filter Account List by Status - Blocked
     [Documentation]    Verify that filtering by Blocked status shows only Blocked accounts.
     ...                If no Blocked accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_BLOCKED}
     Click                      ${FILTER_APPLY_BTN}
@@ -194,7 +194,7 @@ t2.2.12 Filter Account List by Status - Blocked
 t2.2.13 Filter Account List by Status - Suspended
     [Documentation]    Verify that filtering by Suspended status shows only Suspended accounts.
     ...                If no Suspended accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_SUSPENDED}
     Click                      ${FILTER_APPLY_BTN}
@@ -204,7 +204,7 @@ t2.2.13 Filter Account List by Status - Suspended
 t2.2.14 Navigate Back to Customers List
     [Documentation]    Verify that clicking the 'Customers' breadcrumb link returns the user
     ...                to the main Customer List view with the customer table visible.
-    [Tags]             customers    accounts    regression
+    [Tags]             customers    accounts    regression    mvp
     Click                      ${CUSTOMERS_BREADCRUMB_LINK}
     Wait For Elements State    ${CUSTOMER_TABLE}          visible
     Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}   visible

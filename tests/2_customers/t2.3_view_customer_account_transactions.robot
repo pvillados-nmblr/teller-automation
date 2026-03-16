@@ -50,7 +50,7 @@ ${DATE_TO}                  2026-03-06
 t2.3.1 View Account Transaction History
     [Documentation]    Verify the transaction history page loads successfully with all required
     ...                column headers and action buttons (Eye/View and Download) visible.
-    [Tags]             customers    accounts    transactions    smoke
+    [Tags]             customers    accounts    transactions    smoke    mvp
     Get Url                    contains    /transactions
     Wait For Elements State    text=Transaction ID                                       visible
     Wait For Elements State    text=Transaction Type                                     visible
@@ -67,7 +67,7 @@ t2.3.2 Pagination in Viewing Transaction History
     [Documentation]    Verify pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
@@ -81,7 +81,7 @@ t2.3.2 Pagination in Viewing Transaction History
 t2.3.3 View Specific Transaction Details
     [Documentation]    Verify that clicking the Eye icon on the first row opens the transaction
     ...                detail modal with all required field labels, and the modal closes cleanly.
-    [Tags]             customers    accounts    transactions    smoke
+    [Tags]             customers    accounts    transactions    smoke    mvp
     Click                      ${VIEW_TXN_BTN} >> nth=0
     Wait For Elements State    ${TXN_DETAIL_MODAL}              visible
     # Verify all required field labels are present in the modal
@@ -105,7 +105,7 @@ t2.3.3 View Specific Transaction Details
 t2.3.4 Search by Transaction ID
     [Documentation]    Verify that searching by a valid Transaction ID returns exactly one record,
     ...                and the detail modal displays all expected field values accurately.
-    [Tags]             customers    accounts    transactions    smoke
+    [Tags]             customers    accounts    transactions    smoke    mvp
     Fill Text                  ${TRANSACTION_SEARCH_FIELD}    ${VALID_TXN_ID}
     Click                      ${TRANSACTION_SEARCH_BUTTON}
     Wait For Elements State    ${TXN_ROW}    visible
@@ -134,7 +134,7 @@ t2.3.4 Search by Transaction ID
 t2.3.5 Search for Non-Existing Transaction ID
     [Documentation]    Verify that searching for a non-existing transaction ID shows a "No Data" message
     ...                with an empty table and no application errors.
-    [Tags]             customers    accounts    transactions    negative
+    [Tags]             customers    accounts    transactions    negative    mvp
     Fill Text                  ${TRANSACTION_SEARCH_FIELD}    ${NON_EXISTING_TXN_ID}
     Click                      ${TRANSACTION_SEARCH_BUTTON}
     Wait For Elements State    css=.ant-empty-description:has-text("No data")    visible
@@ -143,7 +143,7 @@ t2.3.5 Search for Non-Existing Transaction ID
 t2.3.6 Search Transactions Using Date Range
     [Documentation]    Verify that the date range filter shows transactions within
     ...                the selected range with all required columns visible.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${DATE_TIME_FILTER}
     Wait For Elements State    ${DATE_START_INPUT}              visible
     Select Date Range From AntD Picker    ${DATE_FROM}    ${DATE_TO}
@@ -167,7 +167,7 @@ t2.3.7 Filter Transactions by Type - Send Money
     [Documentation]    Verify filtering by Send Money shows only Send Money transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_SEND_MONEY}
     Click                      ${FILTER_APPLY_BTN}
@@ -178,7 +178,7 @@ t2.3.8 Filter Transactions by Type - Cash In
     [Documentation]    Verify filtering by Cash In shows only Cash In transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_CASH_IN}
     Click                      ${FILTER_APPLY_BTN}
@@ -189,7 +189,7 @@ t2.3.9 Filter Transactions by Type - Fund Transfer
     [Documentation]    Verify filtering by Fund Transfer shows only Fund Transfer transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_FUND_TRANSFER}
     Click                      ${FILTER_APPLY_BTN}
@@ -200,7 +200,7 @@ t2.3.10 Filter Transactions by Status - Pending
     [Documentation]    Verify filtering by Pending status shows only Pending transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_PENDING}
     Click                      ${FILTER_APPLY_BTN}
@@ -211,7 +211,7 @@ t2.3.11 Filter Transactions by Status - Success
     [Documentation]    Verify filtering by Success status shows only Success transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_SUCCESS}
     Click                      ${FILTER_APPLY_BTN}
@@ -222,7 +222,7 @@ t2.3.12 Filter Transactions by Status - Failed
     [Documentation]    Verify filtering by Failed status shows only Failed transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression
+    [Tags]             customers    accounts    transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_FAILED}
     Click                      ${FILTER_APPLY_BTN}

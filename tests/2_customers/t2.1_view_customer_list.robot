@@ -25,7 +25,7 @@ ${CUSTOMER_ROW}             css=table tbody tr:has-text("${VALID_CUSTOMER_ID}")
 t2.1.1 Initial Load and View of Customer List
     [Documentation]    Verify that navigating to the Customers module displays the customer list
     ...                with all required columns and action buttons visible.
-    [Tags]             customers    smoke
+    [Tags]             customers    smoke    mvp
     Navigate To Customers
     Wait For Elements State    text=Customer ID           visible
     Wait For Elements State    text=Customer Name         visible
@@ -41,7 +41,7 @@ t2.1.2 Pagination and Navigation
     [Documentation]    Verify that pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
@@ -56,7 +56,7 @@ t2.1.2 Pagination and Navigation
 t2.1.3 Search for Valid Customer ID
     [Documentation]    Verify that searching by a valid Customer ID returns exactly one record
     ...                and all required columns are visible in the results.
-    [Tags]             customers    smoke
+    [Tags]             customers    smoke    mvp
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${VALID_CUSTOMER_ID}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -82,7 +82,7 @@ t2.1.4 Search for Valid Customer Name
     ...                Multiple customers may match - verify a specific row contains all expected
     ...                column values: Customer ID, Name, Date of Birth, Created on, Last Updated,
     ...                Customer Status, and Action links.
-    [Tags]             customers    smoke
+    [Tags]             customers    smoke    mvp
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${VALID_CUSTOMER_NAME}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -113,7 +113,7 @@ t2.1.4 Search for Valid Customer Name
 t2.1.5 Search for Non-Existing Customer
     [Documentation]    Verify that searching for a non-existing customer shows a "No Data" message
     ...                with an empty table and no application errors.
-    [Tags]             customers    negative
+    [Tags]             customers    negative    mvp
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${NON_EXISTING_CUSTOMER}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -123,7 +123,7 @@ t2.1.5 Search for Non-Existing Customer
 t2.1.6 Filter Customer List by Status - Active
     [Documentation]    Verify that filtering by Active status shows only Active customers.
     ...                If no Active customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_ACTIVE}
@@ -134,7 +134,7 @@ t2.1.6 Filter Customer List by Status - Active
 t2.1.7 Filter Customer List by Status - Inactive
     [Documentation]    Verify that filtering by Inactive status shows only Inactive customers.
     ...                If no Inactive customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_INACTIVE}
@@ -145,7 +145,7 @@ t2.1.7 Filter Customer List by Status - Inactive
 t2.1.8 Filter Customer List by Status - Dormant
     [Documentation]    Verify that filtering by Dormant status shows only Dormant customers.
     ...                If no Dormant customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_DORMANT}
@@ -156,7 +156,7 @@ t2.1.8 Filter Customer List by Status - Dormant
 t2.1.9 Filter Customer List by Status - Closed
     [Documentation]    Verify that filtering by Closed status shows only Closed customers.
     ...                If no Closed customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_CLOSED}
@@ -167,7 +167,7 @@ t2.1.9 Filter Customer List by Status - Closed
 t2.1.10 Filter Customer List by Status - Blocked
     [Documentation]    Verify that filtering by Blocked status shows only Blocked customers.
     ...                If no Blocked customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_BLOCKED}
@@ -178,7 +178,7 @@ t2.1.10 Filter Customer List by Status - Blocked
 t2.1.11 Filter Customer List by Status - Suspended
     [Documentation]    Verify that filtering by Suspended status shows only Suspended customers.
     ...                If no Suspended customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression
+    [Tags]             customers    regression    mvp
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_SUSPENDED}
@@ -189,7 +189,7 @@ t2.1.11 Filter Customer List by Status - Suspended
 t2.1.12 Customer Profile View - Details Verification
     [Documentation]    Verify that clicking View Profile displays the customer's full profile
     ...                with all required section headers and fields correctly visible.
-    [Tags]             customers    smoke
+    [Tags]             customers    smoke    mvp
     Navigate To Customers
     View Customer Profile      ${VALID_CUSTOMER_NAME}
     # Verify page header shows correct customer name
