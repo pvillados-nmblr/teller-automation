@@ -14,8 +14,8 @@ Test Teardown       Close Browser
 
 *** Variables ***
 ${CP_USER_EMAIL}                    pvillados+dfspop2@nmblr.ai
-${CP_USER_PASSWORD}                 Password123!!
-${CP_NEW_PASSWORD}                  Password123!
+${CP_USER_PASSWORD}                 Password123!
+${CP_NEW_PASSWORD}                  Password123!!
 ${CP_WRONG_CONFIRM_PASSWORD}        WrongPassword999!
 ${OTP}                              123456
 
@@ -80,9 +80,7 @@ t1.4.1 Reset Password via Change Password
     Enter CP OTP And Continue
 
     Wait For Elements State     ${CP_SUCCESS_MESSAGE}    visible
-    # Dismiss success modal, then verify new password works by logging in with it
-    Click                       ${MODAL_CLOSE_BTN}
-    Click                       ${CP_PROFILE_DROPDOWN}
+    # Verify new password works by logging in with it
     Wait For Elements State     ${LOGOUT_BUTTON}         visible
     Click                       ${LOGOUT_BUTTON}
     Wait For Elements State     ${LOGIN_PAGE}            visible
