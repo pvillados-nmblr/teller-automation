@@ -1,0 +1,158 @@
+# ============================================================
+# run_config.yaml — Test Execution Reference
+# Single source of truth for run_all.sh execution strategy.
+# ============================================================
+
+
+# ----- Banks -----
+# Each bank maps to its own variable file under resources/variables/
+banks:
+  - id: rural-bank-san-antonio
+    var_file: resources/variables/rural-bank-san-antonio.yaml
+  - id: banco-abucay
+    var_file: resources/variables/banco-abucay.yaml
+  - id: rural-bank-hermosa
+    var_file: resources/variables/rural-bank-hermosa.yaml
+  - id: alegre
+    var_file: resources/variables/alegre.yaml
+
+
+# ----- Module execution order -----
+# Non-auth modules run first (no rate-limiting risk).
+# Auth runs last — it shares the IP blocking window with all auth API calls.
+modules:
+  - name: reports
+    path: tests/6_reports
+    rate_limited: false
+    notes: >
+      CSV download tests. No auth API calls. Lowest risk — run first.
+
+  - name: customers
+    path: tests/2_customers
+    rate_limited: false
+    notes: >
+      Read-only: list, profile, accounts, transactions views.
+
+  - name: accounts
+    path: tests/3_accounts
+    rate_limited: false
+
+  - name: transactions
+    path: tests/4_transactions
+    rate_limited: false
+
+  - name: products
+    path: tests/5_products
+    rate_limited: false
+
+  - name: loans
+    path: tests/7_loans
+    rate_limited: false
+
+  - name: auth
+    path: tests/1_auth
+    rate_limited: true
+    notes: >
+      Highest risk. Auth endpoints share a 10-attempt/15-min IP blocking window.
+      Smoke-only: ~5 total auth API calls — safe without sleep.
+      Regression: includes negative tests (wrong credentials, wrong OTP) —
+      run suites one-by-one with a 60s gap.
+    inter_suite_sleep:
+      smoke: 0        # happy-path only → no rate limit risk
+      regression: 60  # negative tests → wait 60s between suites
+    suite_order:
+      # Login first (lowest OTP risk), reset-temp-password last (most sensitive)
+      - t1.2_login.robot
+      - t1.3_forgot_password.robot
+      - t1.4_change_password.robot
+      - t1.1_reset_password.robot
+
+
+# ----- Rate limit reference -----
+rate_limits:
+  auth_endpoints:
+    attempts_per_window: 10
+    window_minutes: 15
+    consequence: IP blocked for the remainder of the 15-min window
+    applies_to:
+      - /login
+      - /forgot-password
+      - /verify-otp
+      - /change-password
+      - /reset-temporary-password
+
+  general_api:
+    requests_per_minute: 60
+    consequence: Throttled (slowed responses, possible timeouts)
+
+
+# ----- Tag strategy -----
+tags:
+  smoke:
+    description: Happy-path tests only. Fast, safe to run daily or pre-deploy.
+    auth_risk: Low (~5 auth API calls total across all auth suites)
+    estimated_duration_per_bank: 10–15 min
+    recommended_schedule: Before each deployment
+
+  regression:
+    description: >
+      Includes negative tests, edge cases, boundary conditions.
+      Auth regression makes multiple invalid-credential attempts — high risk.
+    auth_risk: High — each invalid login or wrong OTP counts toward the 10/15-min limit
+    estimated_duration_per_bank: 30–45 min
+    recommended_schedule: Weekly or on-demand, not in continuous CI
+
+  all:
+    description: No tag filter — runs everything (smoke + regression combined).
+    auth_risk: Very high — likely to hit the rate limit without inter-suite delays
+    recommended_schedule: Local dev only, with manual monitoring
+
+
+# ----- Recommended run commands -----
+# All commands use run_all.sh. See usage:  bash run_all.sh --help
+recommended_commands:
+
+  # DAILY / CI
+  daily_smoke_all_banks:
+    description: All smoke tests across all banks (recommended for CI)
+    command: bash run_all.sh --tag smoke
+
+  daily_smoke_single_bank:
+    description: Smoke tests for one bank (fastest dev feedback loop)
+    command: bash run_all.sh --bank rural-bank-san-antonio --tag smoke
+
+  # PRE-DEPLOY SANITY (fastest — skips OTP-heavy reset-password)
+  pre_deploy_smoke_no_reset:
+    description: Smoke excluding reset-password (skip OTP flow for speed)
+    command: bash run_all.sh --tag smoke --exclude reset-password
+
+  # SINGLE MODULE
+  single_module_smoke:
+    description: Run one module (all banks) — useful when working on a feature
+    command: bash run_all.sh --module reports --tag smoke
+
+  single_module_single_bank:
+    description: Run one module for one bank — fastest targeted test
+    command: bash run_all.sh --bank rural-bank-san-antonio --module reports --tag smoke
+
+  # REGRESSION
+  regression_all_banks:
+    description: Full regression across all banks (60s gaps between auth suites)
+    command: bash run_all.sh --tag regression
+
+  regression_single_bank:
+    description: Regression for one bank only
+    command: bash run_all.sh --bank rural-bank-san-antonio --tag regression
+
+  auth_regression_only:
+    description: Auth regression only — run after a wait window if rate-limited
+    command: bash run_all.sh --module auth --tag regression
+
+  auth_smoke_no_reset:
+    description: Auth smoke excluding reset-password (safe for daily runs)
+    command: bash run_all.sh --module auth --tag smoke --exclude reset-password
+
+  # ALL TESTS (use with caution)
+  all_tests_single_bank:
+    description: All tests (smoke + regression) for one bank — local dev only
+    command: bash run_all.sh --bank rural-bank-san-antonio

@@ -3,10 +3,10 @@
 # ============================================================
 
 BANK_NAME: "Banco Abucay"
-BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/banco-abucay/login"
+BASE_URL: "https://alegre-dashboard.pub.sbx.higala.ph/banco-abucay/login"
 
 # Teller Credentials
-TELLER_EMAIL: "teller@bancaabucay.com"
+TELLER_EMAIL: "pvillados+abucayop1@nmblr.ai"
 TELLER_PASSWORD: "Password123!"
 
 # Invalid Credentials (for negative test cases)

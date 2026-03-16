@@ -50,7 +50,7 @@ ${DATE_TO}                  2026-03-06
 t3.2.1 View Account Transaction History (Entry Point)
     [Documentation]    Verify that clicking View Transactions from the Accounts module navigates
     ...                to the Transaction History page with all required columns and action buttons.
-    [Tags]             accounts    transactions    smoke
+    [Tags]             accounts    transactions    smoke    mvp
     Get Url                    contains    /transactions
     Wait For Elements State    text=Transaction ID                                       visible
     Wait For Elements State    text=Transaction Type                                     visible
@@ -67,7 +67,7 @@ t3.2.2 Pagination in Viewing Transaction History
     [Documentation]    Verify pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
@@ -81,7 +81,7 @@ t3.2.2 Pagination in Viewing Transaction History
 t3.2.3 View Specific Transaction Details (via Accounts)
     [Documentation]    Verify that clicking the Eye icon opens the transaction detail modal
     ...                with all required field labels, and the modal closes cleanly.
-    [Tags]             accounts    transactions    smoke
+    [Tags]             accounts    transactions    smoke    mvp
     Click                      ${VIEW_TXN_BTN} >> nth=0
     Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}                                    visible
     # Verify all required field labels are present in the modal
@@ -105,7 +105,7 @@ t3.2.3 View Specific Transaction Details (via Accounts)
 t3.2.4 Search Transaction by ID and View Details (via Accounts)
     [Documentation]    Verify that searching by a valid Transaction ID returns exactly one record,
     ...                and the detail modal displays all expected field values accurately.
-    [Tags]             accounts    transactions    smoke
+    [Tags]             accounts    transactions    smoke    mvp
     Fill Text                  ${ACCT_TXN_SEARCH_FIELD}    ${VALID_TXN_ID}
     Click                      ${ACCT_TXN_SEARCH_BUTTON}
     Wait For Load Spinner To Disappear
@@ -133,7 +133,7 @@ t3.2.4 Search Transaction by ID and View Details (via Accounts)
 
 t3.2.5 Search Transactions Using Date Range (via Accounts)
     [Documentation]    Verify the date range filter shows only transactions within the selected range.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     # Apply a date range with known results
     Click                      ${DATE_TIME_FILTER}
     Wait For Elements State    ${DATE_START_INPUT}    visible
@@ -158,7 +158,7 @@ t3.2.6 Filter Transactions by Type: Send Money (via Accounts)
     [Documentation]    Verify filtering by Send Money shows only Send Money transactions.
     ...                If data exists, verifies the detail modal contains all required fields.
     ...                If no data, verifies the "No Data" message.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_SEND_MONEY}
     Click                      ${FILTER_APPLY_BTN}
@@ -169,7 +169,7 @@ t3.2.7 Filter Transactions by Type: Cash In (via Accounts)
     [Documentation]    Verify filtering by Cash In shows only Cash In transactions.
     ...                If data exists, verifies the detail modal contains all required fields.
     ...                If no data, verifies the "No Data" message.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_CASH_IN}
     Click                      ${FILTER_APPLY_BTN}
@@ -180,7 +180,7 @@ t3.2.8 Filter Transactions by Type: Fund Transfer (via Accounts)
     [Documentation]    Verify filtering by Fund Transfer shows only Fund Transfer transactions.
     ...                If data exists, verifies the detail modal contains all required fields.
     ...                If no data, verifies the "No Data" message.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_FUND_TRANSFER}
     Click                      ${FILTER_APPLY_BTN}
@@ -191,7 +191,7 @@ t3.2.9 Filter Transactions by Status: Pending (via Accounts)
     [Documentation]    Verify filtering by Pending status shows only Pending transactions.
     ...                If data exists, verifies the detail modal contains all required fields.
     ...                If no data, verifies the "No Data" message.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_PENDING}
     Click                      ${FILTER_APPLY_BTN}
@@ -202,7 +202,7 @@ t3.2.10 Filter Transactions by Status: Success (via Accounts)
     [Documentation]    Verify filtering by Success status shows only Success transactions.
     ...                If data exists, verifies the detail modal contains all required fields.
     ...                If no data, verifies the "No Data" message.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_SUCCESS}
     Click                      ${FILTER_APPLY_BTN}
@@ -213,7 +213,7 @@ t3.2.11 Filter Transactions by Status: Failed (via Accounts)
     [Documentation]    Verify filtering by Failed status shows only Failed transactions.
     ...                If data exists, verifies the detail modal contains all required fields.
     ...                If no data, verifies the "No Data" message.
-    [Tags]             accounts    transactions    regression
+    [Tags]             accounts    transactions    regression    mvp
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_FAILED}
     Click                      ${FILTER_APPLY_BTN}
@@ -223,7 +223,7 @@ t3.2.11 Filter Transactions by Status: Failed (via Accounts)
 t3.2.12 Navigate Back to Accounts List (from View Transactions)
     [Documentation]    Verify that clicking the Accounts breadcrumb link returns the user
     ...                to the main Accounts List View.
-    [Tags]             accounts    transactions    smoke
+    [Tags]             accounts    transactions    smoke    mvp
     Wait For Elements State    ${ACCOUNTS_BREADCRUMB_LINK}    visible
     Click                      ${ACCOUNTS_BREADCRUMB_LINK}
     Wait For Elements State    ${ACCOUNTS_SEARCH_FIELD}       visible

@@ -2,17 +2,20 @@
 # ============================================================
 # Reports Module Locators
 # ============================================================
-# Update these to match your actual teller app HTML
 
 # Navigation
-${REPORTS_MENU}                css=[data-menu="reports"]
+${REPORTS_MENU}                     css=.ant-menu-title-content >> text=Reports
 
-# Report Form
-${REPORT_TYPE_DROPDOWN}        id=report-type
-${CLOSING_DATE_FIELD}          id=closing-date
-${DATE_FROM_FIELD}             id=date-from
-${DATE_TO_FIELD}               id=date-to
-${GENERATE_REPORT_BUTTON}      id=generate-report-button
+# Report Type Buttons (sidebar list)
+${EOD_BALANCE_BTN}                  css=div.cursor-pointer:has-text("End of Day Balance")
+${TOTAL_BALANCE_BTN}                css=div.cursor-pointer:has-text("Total Balance")
 
-# Report Output
-${REPORT_RESULT}               css=.report-result
+# End of Day — Single Closing Date Picker
+${CLOSING_DATE_INPUT}               css=input[placeholder="DD MMM YYYY"]
+
+# Total Balance — Date Range Picker
+${DATE_RANGE_START_INPUT}           css=input[placeholder="Start date"][date-range="start"]
+${DATE_RANGE_END_INPUT}             css=input[placeholder="End date"][date-range="end"]
+
+# Download
+${DOWNLOAD_CSV_BTN}                 css=button:has-text("Download CSV")

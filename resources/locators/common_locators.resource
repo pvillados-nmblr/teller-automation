@@ -14,7 +14,7 @@ ${PASSWORD_FIELD}                   css=input[name="password"]
 # ${LOGIN_BUTTON}                     css=[data-testid="btn-login-submit"]                    # TODO: restore when data-testid is available
 ${LOGIN_BUTTON}                     css=#btn:has-text("LOG IN")
 # ${FORGOT_PASSWORD_LINK}             css=[data-testid="link-login-forgot-password"]          # TODO: restore when data-testid is available
-${FORGOT_PASSWORD_LINK}             css=a:has-text("Forgot Password")
+${FORGOT_PASSWORD_LINK}             css=h2:has-text("Forgot password?")
 # ${LOGIN_ERROR_MODAL}                css=[data-testid="modal-login-error"]                   # TODO: restore when data-testid is available
 ${LOGIN_ERROR_MODAL}                css=.ant-modal-content
 
@@ -25,11 +25,11 @@ ${LOGIN_ERROR_MODAL}                css=.ant-modal-content
 # ============================================================
 
 # ${FP_PAGE}                          css=[data-testid="page-forgot-password"]                # TODO: restore when data-testid is available
-${FP_PAGE}                          xpath=/html/body/div/div/div[2]/form/div[4]/a/h2
+${FP_PAGE}                          css=h2:has-text("Reset your password")
 # ${FP_EMAIL_FIELD}                   css=[data-testid="input-forgot-password-email"]         # TODO: restore when data-testid is available
-${FP_EMAIL_FIELD}                   xpath=//*[@id="root"]/div/div[2]/form/div[3]/div/input
+${FP_EMAIL_FIELD}                   css=input[name="email"]
 # ${FP_SEND_CODE_BTN}                 css=[data-testid="btn-forgot-password-send-code"]       # TODO: restore when data-testid is available
-${FP_SEND_CODE_BTN}                 css=button[type="submit"]
+${FP_SEND_CODE_BTN}                 css=button:has-text("Send Verification Code")
 
 
 # ============================================================
@@ -174,9 +174,9 @@ ${TABLE_ROWS}                       css=.ant-table-body table tbody tr
 
 # Row-level action buttons
 # ${VIEW_PROFILE_LINK}                css=[data-testid="btn-customers-view-profile"]           # TODO: restore when data-testid is available
-${VIEW_PROFILE_LINK}                css=button >> nth=0
+${VIEW_PROFILE_LINK}                css=a.table-link:has-text("View Profile")
 # ${VIEW_ACCOUNTS_LINK}               css=[data-testid="btn-customers-view-accounts"]          # TODO: restore when data-testid is available
-${VIEW_ACCOUNTS_LINK}               css=button >> nth=1
+${VIEW_ACCOUNTS_LINK}               css=a.table-link:has-text("View Accounts")
 
 
 

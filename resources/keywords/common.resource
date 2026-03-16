@@ -7,7 +7,7 @@ Resource    ../locators/common_locators.resource
 Open Teller App
     [Documentation]    Opens the teller web app in the browser
     New Browser         ${BROWSER}    headless=${HEADLESS}
-    New Context         viewport={'width': 1643, 'height': 830}
+    New Context         viewport={'width': 1643, 'height': 830}    acceptDownloads=${TRUE}
     Set Browser Timeout    ${TIMEOUT}
     New Page            ${BASE_URL}
 
