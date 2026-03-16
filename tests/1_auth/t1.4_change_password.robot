@@ -80,6 +80,16 @@ t1.4.1 Reset Password via Change Password
     Enter CP OTP And Continue
 
     Wait For Elements State     ${CP_SUCCESS_MESSAGE}    visible
+    # Dismiss success modal, then verify new password works by logging in with it
+    Click                       ${MODAL_CLOSE_BTN}
+    Click                       ${CP_PROFILE_DROPDOWN}
+    Wait For Elements State     ${LOGOUT_BUTTON}         visible
+    Click                       ${LOGOUT_BUTTON}
+    Wait For Elements State     ${LOGIN_PAGE}            visible
+    Fill Text                   ${EMAIL_FIELD}           ${CP_USER_EMAIL}
+    Fill Text                   ${PASSWORD_FIELD}        ${CP_NEW_PASSWORD}
+    Click                       ${LOGIN_BUTTON}
+    Wait For Elements State     css=h3.text-2xl          visible
 
 
 # ====================================================================

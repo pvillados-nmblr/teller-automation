@@ -75,6 +75,11 @@ t1.3.1 Reset Password via Forgot Password
     Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
     Click                       ${BACK_TO_LOGIN_BTN}
     Wait For Elements State     ${LOGIN_PAGE}               visible
+    # Verify new password works by logging in with it
+    Fill Text                   ${EMAIL_FIELD}              ${TELLER_EMAIL}
+    Fill Text                   ${PASSWORD_FIELD}           ${NEW_PASSWORD}
+    Click                       ${LOGIN_BUTTON}
+    Wait For Elements State     css=h3.text-2xl             visible
 
 t1.3.2 Verify System Treats Email as Case-Insensitive During Forgot Password
     [Documentation]    Verify that the system recognises a mixed-case email address during the
@@ -95,6 +100,11 @@ t1.3.2 Verify System Treats Email as Case-Insensitive During Forgot Password
     Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
     Click                       ${BACK_TO_LOGIN_BTN}
     Wait For Elements State     ${LOGIN_PAGE}               visible
+    # Verify new password works by logging in with it
+    Fill Text                   ${EMAIL_FIELD}              ${FP_MIXED_CASE_EMAIL}
+    Fill Text                   ${PASSWORD_FIELD}           ${NEW_PASSWORD}
+    Click                       ${LOGIN_BUTTON}
+    Wait For Elements State     css=h3.text-2xl             visible
 
 t1.3.3 Forgot Password with Unregistered Email
     [Documentation]    Verify that entering an unregistered email on the Reset your password
