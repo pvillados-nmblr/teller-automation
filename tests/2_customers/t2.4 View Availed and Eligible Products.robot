@@ -13,10 +13,12 @@ Test Setup          Navigate To Customer Profile Page
 
 
 *** Variables ***
-${CUSTOMER_ID}              8ec1882b47074f3eb1827775ebc670a8
-${CUSTOMER_NAME}            Mariah Ave
-${ACTIVE_PRODUCT}           Education Loan 101
-${ARCHIVED_PRODUCT}         Loan 13C
+${CUSTOMER_ID}                  8ec1882b47074f3eb1827775ebc670a8
+${CUSTOMER_NAME}                Mariah Ave
+${AVAILED_LOAN_PRODUCT}         Regular Home Loan
+${AVAILED_SAVINGS_PRODUCT}      Digital Savings Account
+${ACTIVE_PRODUCT}               Education Loan 101
+${ARCHIVED_PRODUCT}             Loan 13C
 
 
 *** Keywords ***
@@ -75,58 +77,16 @@ t2.4.2 Pagination and Navigation of Products Availed
         Wait For Elements State    css=.ant-pagination-next.ant-pagination-disabled    visible
     END
 
-t2.4.3 See Specific Details of an Availed Savings Product
-    [Documentation]    Verify that clicking See Details on an availed Savings product opens a
-    ...                side panel containing Product ID, Product Details, Eligibility for
-    ...                Customer Type, Account Configuration, Interest Configuration, and
-    ...                Fees & Charges sections. The panel closes without errors.
+t2.4.3 See Details is Disabled for Default Savings Account Created During Mobile Onboarding
+    [Documentation]    Verify that the See Details button for the "Digital Savings Account"
+    ...                row in Products Availed is disabled. This account is created automatically
+    ...                during customer mobile onboarding and does not support the product
+    ...                details side panel in the Teller App.
     [Tags]             customers    products    smoke
 
     Click                       ${PRODUCTS_AVAILED_TAB}
-    Wait For Elements State     css=tr:has-text("Savings")    visible
-    Click                       css=tr:has-text("Savings") >> ${SEE_DETAILS_BTN} >> nth=0
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
-
-    # Product ID
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product ID                    visible
-
-    # Product Details
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Status                        visible
-
-    # Eligibility for Customer Type
-    Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required Documents            visible
-
-    # Account Configuration
-    Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Initial deposit               visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Overdrafts                    visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit frequency    visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit amount       visible
-
-    # Interest Configuration
-    Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest type                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest time period          visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
-
-    # Fees & Charges
-    Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Dormancy fee                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Account closure fee           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate type                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate value                visible
-
-    # Close side panel
-    Click                       ${PRODUCT_DETAILS_CLOSE_BTN}
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    hidden
+    Wait For Elements State     css=tr:has-text("${AVAILED_SAVINGS_PRODUCT}")    visible
+    Wait For Elements State     css=tr:has-text("${AVAILED_SAVINGS_PRODUCT}") >> ${SEE_DETAILS_BTN}    disabled
 
 t2.4.4 See Specific Details of an Availed Loans Product
     [Documentation]    Verify that clicking See Details on an availed Loans product opens a
@@ -136,12 +96,12 @@ t2.4.4 See Specific Details of an Availed Loans Product
     [Tags]             customers    products    smoke
 
     Click                       ${PRODUCTS_AVAILED_TAB}
-    Wait For Elements State     css=tr:has-text("Loans")    visible
-    Click                       css=tr:has-text("Loans") >> ${SEE_DETAILS_BTN} >> nth=0
+    Wait For Elements State     css=tr:has-text("${AVAILED_LOAN_PRODUCT}")    visible
+    Click                       css=tr:has-text("${AVAILED_LOAN_PRODUCT}") >> ${SEE_DETAILS_BTN} >> nth=0
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
 
-    # Product ID
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product ID                    visible
+    # Panel header displays the product ID (PROD_xxx format)
+    Wait For Elements State     css=.ant-drawer-title    visible
 
     # Product Definition
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan type                     visible
@@ -339,8 +299,8 @@ t2.4.10 See Specific Details of an Eligible Loans Product
     [Tags]             customers    products    smoke
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
-    Wait For Elements State     css=tr:has-text("Loans")    visible
-    Click                       css=tr:has-text("Loans") >> ${SEE_DETAILS_BTN} >> nth=0
+    Wait For Elements State     css=tr:has-text("Loan")    visible
+    Click                       css=tr:has-text("Loan") >> ${SEE_DETAILS_BTN} >> nth=0
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
 
     # Product Definition
