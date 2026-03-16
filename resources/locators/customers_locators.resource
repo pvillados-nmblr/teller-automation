@@ -120,6 +120,22 @@ ${TXN_STATUS_PENDING}               css=[data-menu-id$="-pending"]
 ${TXN_STATUS_SUCCESS}               css=[data-menu-id$="-success"]
 ${TXN_STATUS_FAILED}                css=[data-menu-id$="-failed"]
 
+# ============================================================
+# CUSTOMER PROFILE — Products Availed & Eligible Products
+# ============================================================
+
+${PRODUCTS_AVAILED_TAB}             css=button:has-text("Products Availed")
+${ELIGIBLE_PRODUCTS_TAB}            css=button:has-text("Eligible Products")
+${PRODUCT_TABLE}                    css=table
+${PRODUCT_TABLE_ROWS}               css=table tbody tr:not([aria-hidden="true"])
+${SEE_DETAILS_BTN}                  css=button#btn:has-text("See Details")
+${AVAIL_PRODUCT_BTN}                css=button#btn:has-text("Avail Product")
+${PRODUCT_SEARCH_INPUT}             css=input[placeholder="Search Products..."]
+${PRODUCT_SEARCH_BTN}               css=button#btnSearch
+${PRODUCT_DETAILS_DRAWER}           css=.ant-drawer-body
+${PRODUCT_DETAILS_CLOSE_BTN}        css=.ant-drawer-close
+
+
 # Transaction Detail Modal
 # ${TXN_DETAIL_MODAL}                 css=[data-testid="modal-customers-transaction-details"] .ant-modal-content    # TODO: restore when data-testid is available
 ${TXN_DETAIL_MODAL}                 css=.ant-modal-content
