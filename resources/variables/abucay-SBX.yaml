@@ -1,0 +1,133 @@
+# ============================================================
+# Environment Configuration — Abucay Rural Bank
+# ============================================================
+
+BANK_NAME: "Banco Abucay"
+BASE_URL: "https://alegre-dashboard.pub.sbx.higala.ph/banco-abucay/login"  # Replace with the bank's teller app URL
+
+# Teller Credentials
+TELLER_EMAIL: "pvillados+abucays01@agsx.net"       # Replace with teller email for this bank
+TELLER_PASSWORD: "Password123!"    # Replace with teller password for this bank
+
+# Invalid Credentials (for negative test cases)
+INVALID_EMAIL: "invalid@email.com"
+INVALID_PASSWORD: "wrongpassword"
+
+# Browser Settings
+BROWSER: "chromium"
+HEADLESS: False
+TIMEOUT: "30s"
+
+
+# ============================================================
+# Auth — Reset Password via Temp Password (t1.1)
+# ============================================================
+
+RTP_NEW_USER_EMAIL: "pvillados+abucay02@agsx.net"
+RTP_MIXED_CASE_EMAIL: "pViLlAdOs+AbUcAy02@agsx.net"
+RTP_MIXED_CASE_EMAIL_PASSWORD: "9rk3pRTx8ZUD"
+RTP_EXPIRED_USER_EMAIL: "TODO"     # Replace with expired temp password user email
+TELLER_TEMP_PASSWORD: "TODO"       # Replace with teller's current temporary password
+EXPIRED_TEMP_PASSWORD: "TODO"      # Replace with an already-expired temporary password
+
+
+# ============================================================
+# Auth — Test Suite Specific (t1.2, t1.3, t1.4)
+# ============================================================
+
+MIXED_CASE_EMAIL: "PvIlLaDoS+AbUcAyS01@agsx.net"
+FP_MIXED_CASE_EMAIL: "PvIlLaDoS+AbUcAyS01@agsx.net"
+CP_USER_EMAIL: "PvIlLaDoS+AbUcAyOp1@nmblr.ai"
+CP_USER_PASSWORD: "Password123!"
+
+
+# ============================================================
+# Customer Data (t2.1, t2.2, t2.3)
+# ============================================================
+
+VALID_CUSTOMER_ID: "6176dc74e8fa46fa9fb67c11b2bd679c"
+VALID_CUSTOMER_NAME: "Peach Marie Villados"
+CUSTOMER_DATE_OF_BIRTH: "02 Sep 2003"
+CUSTOMER_CREATED_ON: "02 Sep 2025"
+
+# Aliases used in t2.2 and t2.3
+CUSTOMER_ID: "6176dc74e8fa46fa9fb67c11b2bd679c"
+CUSTOMER_NAME: "Peach Marie Villados"
+
+
+# ============================================================
+# Account Data (t2.2, t3.1)
+# ============================================================
+
+VALID_ACCOUNT_ID: "7710589946921181"
+VALID_ACCOUNT_NAME: "Peach Marie Villados"
+ACCOUNT_CREATED_ON: "02 Sep 2025"
+
+VALID_ACCOUNT_NUMBER: "7710589946921181"
+EXPECTED_ACCOUNT_NAME: "Peach Marie Villados"
+EXPECTED_BALANCE: "237720"
+EXPECTED_CREATED_ON: "02 Sep 2025"
+
+
+# ============================================================
+# Transaction Data — Customers & Accounts modules (t2.3, t3.2)
+# ============================================================
+
+VALID_TXN_ID: "f4c283ea4b0c4d848c3018144e79f85b"
+TXN_TYPE: "Send Money"
+TXN_AMOUNT: "15.00"
+TXN_SERVICE_FEE: "0.00"
+TXN_REMARKS: "Payment"
+TXN_STATUS: "Success"
+TXN_DEBIT_ACCT_NAME: "Peach Marie Villados"
+TXN_CREDIT_ACCT_NAME: "John Doe"
+TXN_DEBIT_ACCT_NO: "7710589946921181"
+TXN_CREDIT_ACCT_NO: "013450161525"
+TXN_CREATED_ON: "21 Jan 2026 14:50:20"
+TXN_UPDATED_ON: "21 Jan 2026 14:50:24"
+DATE_FROM: "22 Jan 2026"
+DATE_TO: "31 Jan 2026"
+
+
+# ============================================================
+# Transaction Data — Transactions module (t4.1)
+# Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
+# ============================================================
+
+T4_VALID_TXN_ID: "f4c283ea4b0c4d848c3018144e79f85b"
+T4_TXN_TYPE: "Send Money"
+T4_TXN_AMOUNT: "15.00"
+T4_TXN_SERVICE_FEE: "0.00"
+T4_TXN_REMARKS: "Payment"
+T4_TXN_STATUS: "Success"
+T4_TXN_INSTAPAY_REF: "831585"
+T4_TXN_DEBIT_ACCT_NAME: "Peach Marie Villados"
+T4_TXN_CREDIT_ACCT_NAME: "John Doe"
+T4_TXN_DEBIT_ACCT_NO: "7710589946921181"
+T4_TXN_CREDIT_ACCT_NO: "013450161525"
+T4_TXN_DEBIT_BANK_CODE: "BNORPHMMXXX"
+T4_TXN_DEBIT_BANK_NAME: "BDO Unibank, Inc."
+T4_TXN_CREATED_ON: "21 Jan 2026 14:50:20"
+T4_DATE_FROM: "22 Jan 2026"
+T4_DATE_TO: "31 Jan 2026"
+
+
+# ============================================================
+# Products Data (t2.4)
+# ============================================================
+
+T24_CUSTOMER_ID: "TODO"
+T24_CUSTOMER_NAME: "TODO"
+T24_AVAILED_LOAN_PRODUCT: "TODO"
+T24_AVAILED_SAVINGS_PRODUCT: "TODO"
+T24_ACTIVE_PRODUCT: "TODO"
+T24_ARCHIVED_PRODUCT: "TODO"
+
+
+# ============================================================
+# Reports Data (t6.1)
+# ============================================================
+
+VALID_CLOSING_DATE: "March 2, 2026"
+VALID_DATE_FROM: "March 1,2026"
+VALID_DATE_TO: "March 2,2026"

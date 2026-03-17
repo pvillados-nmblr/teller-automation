@@ -9,7 +9,6 @@ Suite Teardown      Close Browser
 
 
 *** Variables ***
-${MIXED_CASE_EMAIL}                 Pvillados@Agsx.Net
 ${LOGIN_ERROR_TEXT1}                      Incorrect email or password,
 ${LOGIN_ERROR_TEXT2}                      please try again.
 ${LOCKOUT_MESSAGE1}                 Incorrect email or password. Too many

@@ -13,21 +13,12 @@ Test Setup          Navigate To Customer Profile Page
 Test Teardown       Close Drawer If Open
 
 
-*** Variables ***
-${CUSTOMER_ID}                  8ec1882b47074f3eb1827775ebc670a8
-${CUSTOMER_NAME}                Mariah Ave
-${AVAILED_LOAN_PRODUCT}         Regular Home Loan
-${AVAILED_SAVINGS_PRODUCT}      Student Savings
-${ACTIVE_PRODUCT}               Education Loan 101
-${ARCHIVED_PRODUCT}             Loan 13C
-
-
 *** Keywords ***
 Navigate To Customer Profile Page
     [Documentation]    Navigates to the Customer List, searches for the target customer,
     ...                and opens their profile page.
     Navigate To Customers
-    View Customer Profile    ${CUSTOMER_NAME}
+    View Customer Profile    ${T24_CUSTOMER_NAME}
 
 Close Drawer If Open
     [Documentation]    Closes any open drawer by clicking the close button if it exists.
@@ -101,8 +92,8 @@ t2.4.3 See Specific Details of an Availed Savings Product
     [Tags]             customers    products    smoke
 
     Click                       ${PRODUCTS_AVAILED_TAB}
-    Wait For Elements State     css=.ant-table-body tr:has-text("${AVAILED_SAVINGS_PRODUCT}") >> nth=0    visible
-    Click                       css=.ant-table-body tr:has-text("${AVAILED_SAVINGS_PRODUCT}") >> nth=0 >> ${SEE_DETAILS_BTN}
+    Wait For Elements State     css=.ant-table-body tr:has-text("${T24_AVAILED_SAVINGS_PRODUCT}") >> nth=0    visible
+    Click                       css=.ant-table-body tr:has-text("${T24_AVAILED_SAVINGS_PRODUCT}") >> nth=0 >> ${SEE_DETAILS_BTN}
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
 
     # Panel header displays the product ID (PROD_xxx format)
@@ -154,8 +145,8 @@ t2.4.4 See Specific Details of an Availed Loans Product
     [Tags]             customers    products    smoke
 
     Click                       ${PRODUCTS_AVAILED_TAB}
-    Wait For Elements State     css=.ant-table-body tr:has-text("${AVAILED_LOAN_PRODUCT}") >> nth=0    visible
-    Click                       css=.ant-table-body tr:has-text("${AVAILED_LOAN_PRODUCT}") >> nth=0 >> ${SEE_DETAILS_BTN}
+    Wait For Elements State     css=.ant-table-body tr:has-text("${T24_AVAILED_LOAN_PRODUCT}") >> nth=0    visible
+    Click                       css=.ant-table-body tr:has-text("${T24_AVAILED_LOAN_PRODUCT}") >> nth=0 >> ${SEE_DETAILS_BTN}
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
 
     # Panel header displays the product ID (PROD_xxx format)
@@ -239,10 +230,10 @@ t2.4.6 Search Eligible Products
     Wait For Elements State     ${PRODUCT_TABLE}    visible
 
     # Search for an active product
-    Fill Text                   ${PRODUCT_SEARCH_INPUT}    ${ACTIVE_PRODUCT}
+    Fill Text                   ${PRODUCT_SEARCH_INPUT}    ${T24_ACTIVE_PRODUCT}
     Click                       ${PRODUCT_SEARCH_BTN}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
-    Wait For Elements State     css=.ant-table-body table tbody tr:has-text("${ACTIVE_PRODUCT}")    visible
+    Wait For Elements State     css=.ant-table-body table tbody tr:has-text("${T24_ACTIVE_PRODUCT}")    visible
 
     # Clear search and verify the full list is restored
     Fill Text                   ${PRODUCT_SEARCH_INPUT}    ${EMPTY}
@@ -260,7 +251,7 @@ t2.4.7 Search Archived Products in Eligible Products
     Wait For Elements State     ${PRODUCT_TABLE}    visible
 
     # Search for an archived product — should yield no results
-    Fill Text                   ${PRODUCT_SEARCH_INPUT}    ${ARCHIVED_PRODUCT}
+    Fill Text                   ${PRODUCT_SEARCH_INPUT}    ${T24_ARCHIVED_PRODUCT}
     Click                       ${PRODUCT_SEARCH_BTN}
     Wait For Elements State     css=.ant-empty-description    visible
 

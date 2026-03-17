@@ -12,10 +12,6 @@ Test Setup          Reload
 
 
 *** Variables ***
-${VALID_CUSTOMER_ID}        89055149d8e64865958c489651b59015
-${VALID_CUSTOMER_NAME}      Peach Villados
-${CUSTOMER_DATE_OF_BIRTH}   01 Dec 1999
-${CUSTOMER_CREATED_ON}      25 Jun 2025
 ${CUSTOMER_STATUS}          Active
 ${NON_EXISTING_CUSTOMER}    NONEXISTENT99999
 ${CUSTOMER_ROW}             css=table tbody tr:has-text("${VALID_CUSTOMER_ID}")

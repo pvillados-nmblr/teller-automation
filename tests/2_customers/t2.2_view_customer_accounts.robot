@@ -12,12 +12,7 @@ Test Setup          Navigate To Customer Accounts Page    ${CUSTOMER_NAME}
 
 
 *** Variables ***
-${CUSTOMER_ID}              89055149d8e64865958c489651b59015
-${CUSTOMER_NAME}            Peach Villados
-${VALID_ACCOUNT_ID}         7710458152114857
-${VALID_ACCOUNT_NAME}       Peach Villados
 ${ACCOUNT_STATUS}           Active
-${ACCOUNT_CREATED_ON}       03 Jul 2025
 ${ACCOUNT_ROW}              css=.ant-table-body table tbody tr.ant-table-row:has-text("${VALID_ACCOUNT_ID}")
 ${NON_EXISTING_ACCOUNT}     NonExistentAcc
 

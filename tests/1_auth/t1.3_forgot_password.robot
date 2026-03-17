@@ -13,7 +13,6 @@ Test Teardown       Close Browser
 
 *** Variables ***
 ${NEW_PASSWORD}              Password123!
-${FP_MIXED_CASE_EMAIL}              Pvillados+U1@Agsx.Net
 ${FP_INVALID_FORMAT_EMAIL}          notanemail
 ${FP_WRONG_CONFIRM_PASSWORD}        WrongPassword999!
 ${ERR_UNREGISTERED_EMAIL}           Email address is invalid, please try again.

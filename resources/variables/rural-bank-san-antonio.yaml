@@ -6,7 +6,7 @@ BANK_NAME: "Rural Bank of San Antonio"
 BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/rural-bank-san-antonio/login"
 
 # Teller Credentials
-TELLER_EMAIL: "pvillados+u1@agsx.net"
+TELLER_EMAIL: "pvillados@agsx.net"
 TELLER_PASSWORD: "Password123!"
 
 # Invalid Credentials (for negative test cases)
@@ -19,3 +19,115 @@ HEADLESS: False
 TIMEOUT: "30s"
 
 
+# ============================================================
+# Auth — Reset Password via Temp Password (t1.1)
+# ============================================================
+
+RTP_NEW_USER_EMAIL: "pvillados+mar62@agsx.net"
+RTP_MIXED_CASE_EMAIL: "Pvillados+MaR62@Agsx.Net"
+RTP_MIXED_CASE_EMAIL_PASSWORD: "UP7qem43HIP9"
+RTP_EXPIRED_USER_EMAIL: "pvillados+mar61@agsx.net"
+TELLER_TEMP_PASSWORD: "UP7qem43HIP9"
+EXPIRED_TEMP_PASSWORD: "CMH2keqfSdZR"
+
+
+# ============================================================
+# Auth — Test Suite Specific (t1.2, t1.3, t1.4)
+# ============================================================
+
+MIXED_CASE_EMAIL: "Pvillados@Agsx.Net"
+FP_MIXED_CASE_EMAIL: "Pvillados+U1@Agsx.Net"
+CP_USER_EMAIL: "pvillados+dfspop2@nmblr.ai"
+CP_USER_PASSWORD: "Password123!"
+
+
+# ============================================================
+# Customer Data (t2.1, t2.2, t2.3)
+# ============================================================
+
+VALID_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
+VALID_CUSTOMER_NAME: "Peach Villados"
+CUSTOMER_DATE_OF_BIRTH: "01 Dec 1999"
+CUSTOMER_CREATED_ON: "25 Jun 2025"
+
+# Aliases used in t2.2 and t2.3
+CUSTOMER_ID: "89055149d8e64865958c489651b59015"
+CUSTOMER_NAME: "Peach Villados"
+
+
+# ============================================================
+# Account Data (t2.2, t3.1)
+# ============================================================
+
+VALID_ACCOUNT_ID: "7710458152114857"
+VALID_ACCOUNT_NAME: "Peach Villados"
+ACCOUNT_CREATED_ON: "03 Jul 2025"
+
+VALID_ACCOUNT_NUMBER: "7710458152114857"
+EXPECTED_ACCOUNT_NAME: "Peach Villados"
+EXPECTED_BALANCE: "₱700,970.73"
+EXPECTED_CREATED_ON: "03 Jul 2025"
+
+
+# ============================================================
+# Transaction Data — Customers & Accounts modules (t2.3, t3.2)
+# ============================================================
+
+VALID_TXN_ID: "0fbb394edde64d9d83bf945291919df0"
+TXN_TYPE: "Fund Transfer"
+TXN_AMOUNT: "50,000.00"
+TXN_SERVICE_FEE: "0.00"
+TXN_REMARKS: "N/A"
+TXN_STATUS: "Success"
+TXN_DEBIT_ACCT_NAME: "Chai Villados"
+TXN_CREDIT_ACCT_NAME: "Peach Villados"
+TXN_DEBIT_ACCT_NO: "7710455410784261"
+TXN_CREDIT_ACCT_NO: "7710458152114857"
+TXN_CREATED_ON: "01 Oct 2025 15:06:28"
+TXN_UPDATED_ON: "01 Oct 2025 15:06:28"
+DATE_FROM: "2026-03-01"
+DATE_TO: "2026-03-06"
+
+
+# ============================================================
+# Transaction Data — Transactions module (t4.1)
+# Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
+# ============================================================
+
+T4_VALID_TXN_ID: "431bd41cd7144d6395fd7f07bd3053a5"
+T4_TXN_TYPE: "Cash In"
+T4_TXN_AMOUNT: "550.50"
+T4_TXN_SERVICE_FEE: "0.00"
+T4_TXN_REMARKS: "Online Transfer"
+T4_TXN_STATUS: "Success"
+T4_TXN_INSTAPAY_REF: "813742"
+T4_TXN_DEBIT_ACCT_NAME: "jooo Abucay"
+T4_TXN_CREDIT_ACCT_NAME: "Camille Reyes Mendoza"
+T4_TXN_DEBIT_ACCT_NO: "7710501333354703"
+T4_TXN_CREDIT_ACCT_NO: "7710332470539251"
+T4_TXN_DEBIT_BANK_CODE: "RCBCPHMMXXX"
+T4_TXN_DEBIT_BANK_NAME: "Banco Abucay"
+T4_TXN_CREATED_ON: "10 Mar 2026 09:24:18"
+T4_DATE_FROM: "2026-03-10"
+T4_DATE_TO: "2026-03-11"
+
+
+# ============================================================
+# Products Data (t2.4)
+# ============================================================
+
+T24_CUSTOMER_ID: "8ec1882b47074f3eb1827775ebc670a8"
+T24_CUSTOMER_NAME: "Mariah Ave"
+T24_AVAILED_LOAN_PRODUCT: "Regular Home Loan"
+T24_AVAILED_SAVINGS_PRODUCT: "Student Savings"
+T24_ACTIVE_PRODUCT: "Education Loan 101"
+T24_ARCHIVED_PRODUCT: "Loan 13C"
+
+
+# ============================================================
+# Reports Data (t6.1)
+# ============================================================
+
+VALID_CLOSING_DATE: "2026-03-10"
+VALID_DATE_FROM: "2026-03-10"
+VALID_DATE_TO: "2026-03-13"
