@@ -11,15 +11,6 @@ Suite Teardown      Close Browser
 Test Setup          Setup Reports Page
 
 
-*** Variables ***
-# Target closing date for t6.1.2 — must be a past date
-${VALID_CLOSING_DATE}       2026-03-10
-
-# Target date range for t6.1.3 — must be a past range with data
-${VALID_DATE_FROM}          2026-03-10
-${VALID_DATE_TO}            2026-03-13
-
-
 *** Test Cases ***
 t6.1.1 Verify Reports Module Loads Successfully
     [Documentation]    Verify that clicking the Reports sidebar option navigates to the Reports page

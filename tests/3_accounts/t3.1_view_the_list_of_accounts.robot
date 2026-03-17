@@ -12,13 +12,8 @@ Test Setup          Reload
 
 
 *** Variables ***
-${VALID_ACCOUNT_NUMBER}     7710458152114857
-${VALID_ACCOUNT_NAME}       Peach Villados
 ${NON_EXISTING_ACCOUNT}     NONEXISTENTACC
-${EXPECTED_ACCOUNT_NAME}    Peach Villados
-${EXPECTED_BALANCE}         ₱700,970.73
 ${EXPECTED_STATUS}          Active
-${EXPECTED_CREATED_ON}      03 Jul 2025
 ${ACCOUNT_ROW}              css=table tbody tr:has-text("${VALID_ACCOUNT_NUMBER}")
 
 

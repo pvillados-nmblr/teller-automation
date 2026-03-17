@@ -3,8 +3,7 @@ Documentation       Test suite for Reset Password via Temporary Password flow.
 ...                 Covers happy path reset, case-insensitive email, expired temporary password,
 ...                 password policy validation, OTP validation, cooldown, and session expiry.
 ...
-...                 Update TELLER_TEMP_PASSWORD and OTP in the Variables section before running
-...                 tests tagged [password-reset] or [temp-password].
+...                 Pass TELLER_TEMP_PASSWORD at runtime via --variablefile <bank>.yaml
 
 Resource            ../../resources/keywords/common.resource
 
@@ -12,12 +11,6 @@ Test Teardown       Close Browser
 
 
 *** Variables ***
-${RTP_NEW_USER_EMAIL}               pvillados+mar62@agsx.net
-${RTP_MIXED_CASE_EMAIL}             Pvillados+MaR62@Agsx.Net
-${RTP_MIXED_CASE_EMAIL_PASSWORD}    UP7qem43HIP9
-${RTP_EXPIRED_USER_EMAIL}           pvillados+mar61@agsx.net
-${TELLER_TEMP_PASSWORD}             UP7qem43HIP9
-${EXPIRED_TEMP_PASSWORD}            CMH2keqfSdZR    
 ${RTP_WRONG_CONFIRM_PASSWORD}       WrongPassword999!
 ${OTP}                              123456
 

@@ -23,27 +23,8 @@ Setup Account Transaction Page
 
 
 *** Variables ***
-${VALID_ACCOUNT_NUMBER}     7710458152114857
-${VALID_ACCOUNT_NAME}       Peach Villados
-
-# Target transaction for search and detail verification
-${VALID_TXN_ID}             0fbb394edde64d9d83bf945291919df0
-${TXN_TYPE}                 Fund Transfer
-${TXN_AMOUNT}               50,000.00
-${TXN_SERVICE_FEE}          0.00
-${TXN_REMARKS}              N/A
-${TXN_STATUS}               Success
-${TXN_DEBIT_ACCT_NAME}      Chai Villados
-${TXN_CREDIT_ACCT_NAME}     Peach Villados
-${TXN_DEBIT_ACCT_NO}        7710455410784261
-${TXN_CREDIT_ACCT_NO}       7710458152114857
-${TXN_CREATED_ON}           01 Oct 2025 15:06:28
 ${TXN_ROW}                  css=.ant-table-body table tbody tr:has-text("${VALID_TXN_ID}")
 ${NON_EXISTING_TXN_ID}      NONEXISTENT99999
-
-# Date range for t3.2.5
-${DATE_FROM}                2026-03-01
-${DATE_TO}                  2026-03-06
 
 
 *** Test Cases ***

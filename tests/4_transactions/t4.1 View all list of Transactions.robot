@@ -14,27 +14,8 @@ Test Teardown       Close Modal If Open
 
 
 *** Variables ***
-# Target transaction for t4.1.5 search and detail verification (External/Cash In)
-${VALID_TXN_ID}             431bd41cd7144d6395fd7f07bd3053a5
-${TXN_TYPE}                 Cash In
-${TXN_AMOUNT}               550.50
-${TXN_SERVICE_FEE}          0.00
-${TXN_REMARKS}              Online Transfer
-${TXN_STATUS}               Success
-${TXN_INSTAPAY_REF}         813742
-${TXN_DEBIT_ACCT_NAME}      jooo Abucay
-${TXN_CREDIT_ACCT_NAME}     Camille Reyes Mendoza
-${TXN_DEBIT_ACCT_NO}        7710501333354703
-${TXN_CREDIT_ACCT_NO}       7710332470539251
-${TXN_DEBIT_BANK_CODE}      RCBCPHMMXXX
-${TXN_DEBIT_BANK_NAME}      Banco Abucay
-${TXN_CREATED_ON}           10 Mar 2026 09:24:18
-${TXN_ROW}                  css=.ant-table-body table tbody tr:has-text("${VALID_TXN_ID}")
+${TXN_ROW}                  css=.ant-table-body table tbody tr:has-text("${T4_VALID_TXN_ID}")
 ${NON_EXISTING_TXN_ID}      NONEXISTENT99999
-
-# Date range for t4.1.6 — positive test (data exists on this date)
-${DATE_FROM}                2026-03-10
-${DATE_TO}                  2026-03-11
 
 # Date range for t4.1.6 — negative test (future date with no expected data)
 ${DATE_EMPTY_FROM}          2027-01-01
@@ -102,7 +83,7 @@ t4.1.5 Search Transaction by ID and View Details
     ...                Instapay Reference Number and Bank Code/Name for External transactions,
     ...                and the modal closes cleanly returning to the filtered list.
     [Tags]             transactions    smoke    mvp
-    Fill Text                  ${TXN_SEARCH_FIELD}    ${VALID_TXN_ID}
+    Fill Text                  ${TXN_SEARCH_FIELD}    ${T4_VALID_TXN_ID}
     Click                      ${TXN_SEARCH_BUTTON}
     Wait For Load Spinner To Disappear
     Wait For Elements State    ${TXN_ROW}    visible
@@ -111,20 +92,20 @@ t4.1.5 Search Transaction by ID and View Details
     Click                      ${TXN_ROW} >> ${TXN_VIEW_BTN}
     Wait For Elements State    ${TXN_DETAIL_MODAL}                                           visible
     # Verify field values match the expected External/Cash In transaction data
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${VALID_TXN_ID}                  visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_TYPE}                      visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_AMOUNT}                    visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text="${TXN_SERVICE_FEE}"             visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_REMARKS}                   visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_STATUS}                    visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_INSTAPAY_REF}              visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_DEBIT_ACCT_NAME}           visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_CREDIT_ACCT_NAME}          visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_DEBIT_ACCT_NO}             visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_CREDIT_ACCT_NO}            visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_DEBIT_BANK_CODE}           visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_DEBIT_BANK_NAME}           visible
-    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${TXN_CREATED_ON} >> nth=0       visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_VALID_TXN_ID}               visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_TYPE}                   visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_AMOUNT}                 visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text="${T4_TXN_SERVICE_FEE}"          visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_REMARKS}                visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_STATUS}                 visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_INSTAPAY_REF}           visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_DEBIT_ACCT_NAME}        visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_CREDIT_ACCT_NAME}       visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_DEBIT_ACCT_NO}          visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_CREDIT_ACCT_NO}         visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_DEBIT_BANK_CODE}        visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_DEBIT_BANK_NAME}        visible
+    Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=${T4_TXN_CREATED_ON} >> nth=0    visible
     # Close modal and verify return to the filtered list
     Click                      ${TXN_DETAIL_BACK_BTN}
     Wait For Elements State    ${TXN_DETAIL_MODAL}    hidden
@@ -135,11 +116,11 @@ t4.1.6 Search Transactions Using Date Range
     [Tags]             transactions    regression    mvp
     Click                      ${TXN_DATE_TIME_FILTER}
     Wait For Elements State    ${TXN_DATE_START_INPUT}    visible
-    Select Txn Date Range From AntD Picker    ${DATE_FROM}    ${DATE_TO}
+    Select Txn Date Range From AntD Picker    ${T4_DATE_FROM}    ${T4_DATE_TO}
     Click                      ${TXN_DATE_FILTER_SEARCH_BTN}
     Wait For Elements State    ${TXN_TABLE}    visible
     Wait For Elements State    css=.ant-table-body table tbody tr:not([aria-hidden="true"]) >> nth=0    visible
-    Verify Txn Dates Within Range    ${DATE_FROM}    ${DATE_TO}
+    Verify Txn Dates Within Range    ${T4_DATE_FROM}    ${T4_DATE_TO}
     # Verify all required columns are still present after filtering
     Wait For Elements State    text=Transaction ID           visible
     Wait For Elements State    text=Transaction Type         visible
