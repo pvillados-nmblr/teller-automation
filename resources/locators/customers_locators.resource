@@ -126,8 +126,8 @@ ${TXN_STATUS_FAILED}                css=[data-menu-id$="-failed"]
 
 ${PRODUCTS_AVAILED_TAB}             css=button:has-text("Products Availed")
 ${ELIGIBLE_PRODUCTS_TAB}            css=button:has-text("Eligible Products")
-${PRODUCT_TABLE}                    css=table
-${PRODUCT_TABLE_ROWS}               css=table tbody tr:not([aria-hidden="true"])
+${PRODUCT_TABLE}                    css=.ant-table-body table
+${PRODUCT_TABLE_ROWS}               css=.ant-table-body table tbody tr:not([aria-hidden="true"])
 ${SEE_DETAILS_BTN}                  css=button#btn:has-text("See Details")
 ${AVAIL_PRODUCT_BTN}                css=button#btn:has-text("Avail Product")
 ${PRODUCT_SEARCH_INPUT}             css=input[placeholder="Search Products..."]
