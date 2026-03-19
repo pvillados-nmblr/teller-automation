@@ -12,10 +12,11 @@ Navigate To Transactions
     Get Url                    contains    /transactions
 
 Setup Transactions Page
-    [Documentation]    Navigates to the Transactions module and ensures a clean state
-    Navigate To Transactions
+    [Documentation]    Navigates to the Transactions module and ensures a clean state.
+    ...                Uses Reload first to clear any modal state before navigating.
     Reload
     Wait For Load Spinner To Disappear
+    Navigate To Transactions
 
 Wait For Load Spinner To Disappear
     [Documentation]    Waits for any loading spinner to disappear before proceeding
@@ -26,17 +27,22 @@ Wait For Load Spinner To Disappear
     END
 
 Close Modal If Open
-    [Documentation]    Closes any open modal dialog using Escape key as primary method.
+    [Documentation]    Closes any open modal dialog by clicking the close button.
+    ...                Falls back to Escape key if close button fails.
     ${modal_open}=    Run Keyword And Return Status
     ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
     IF    ${modal_open}
-        Keyboard Key    press    Escape
-        Sleep    0.5s
-        ${still_open}=    Run Keyword And Return Status
-        ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
-        IF    ${still_open}
+        # Try clicking the close button first (more reliable than Escape)
+        ${close_btn_exists}=    Run Keyword And Return Status
+        ...                     Wait For Elements State    css=.ant-modal-close    visible    timeout=1s
+        IF    ${close_btn_exists}
             Click    css=.ant-modal-close
+        ELSE
+            Keyboard Key    press    Escape
         END
+        # Wait briefly for close animation
+        Run Keyword And Ignore Error
+        ...    Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    hidden    timeout=3s
     END
 
 Filter Txn Results Should Contain Only Type
@@ -230,6 +236,95 @@ Verify Txn Dates Within Range
     ...    }
     Should Be Equal    ${result}[total]    ${result}[withinRange]
     ...    msg=Expected all ${result}[total] transactions to be within date range ${date_from} to ${date_to}, but found ${result}[outOfRange] outside range
+
+Open New Transaction Modal
+    [Documentation]    Opens the New Transaction modal from the Transactions page
+    ...                and waits for the Customer Information search step to be visible.
+    Wait For Elements State    ${NEW_TXN_BTN}               visible
+    Click                      ${NEW_TXN_BTN}
+    Wait For Elements State    ${CREATE_TXN_MODAL}          visible
+    Wait For Elements State    ${CREATE_TXN_SEARCH_INPUT}   visible
+
+Search Account In Create Transaction Modal
+    [Documentation]    Types a search term (account number or name) into the Create Transaction
+    ...                modal search input and clicks the Search button.
+    [Arguments]        ${search_term}
+    Fill Text                  ${CREATE_TXN_SEARCH_INPUT}    ${search_term}
+    Click                      ${CREATE_TXN_SEARCH_BTN}
+    Wait For Load Spinner To Disappear
+
+Select Account From Create Transaction Results
+    [Documentation]    Clicks the search result item that contains the given account number,
+    ...                then waits for the modal to advance to the Transaction step.
+    [Arguments]        ${account_number}
+    Wait For Elements State    css=.ant-modal-content [role="button"]:has-text("${account_number}")    visible
+    Click                      css=.ant-modal-content [role="button"]:has-text("${account_number}") >> nth=0
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    ${CREATE_TXN_DEPOSIT_BTN}    visible
+
+Navigate To Deposit Step
+    [Documentation]    Navigates from the Transactions page through the New Transaction modal
+    ...                all the way to the Deposit form (Step 2 with deposit fields visible).
+    ...                Opens modal → searches by account number → selects account → clicks Deposit.
+    [Arguments]        ${account_number}=${T43_ACCOUNT_NUMBER}
+    Open New Transaction Modal
+    Search Account In Create Transaction Modal    ${account_number}
+    Select Account From Create Transaction Results    ${account_number}
+    Click                      ${CREATE_TXN_DEPOSIT_BTN}
+    Wait For Elements State    ${CREATE_TXN_TYPE_SELECT}    visible
+    Wait For Elements State    ${CREATE_TXN_AMOUNT_INPUT}    visible
+
+Navigate To Withdrawal Step
+    [Documentation]    Navigates from the Transactions page through the New Transaction modal
+    ...                all the way to the Withdrawal form (Transaction step with withdrawal fields visible).
+    ...                Opens modal → searches by account number → selects account → clicks Withdraw.
+    [Arguments]        ${account_number}=${T42_ACCOUNT_NUMBER}
+    Open New Transaction Modal
+    Search Account In Create Transaction Modal    ${account_number}
+    Select Account From Create Transaction Results    ${account_number}
+    Click                      ${CREATE_TXN_WITHDRAWAL_BTN}
+    Wait For Elements State    ${CREATE_TXN_TYPE_SELECT}    visible
+    Wait For Elements State    ${CREATE_TXN_AMOUNT_INPUT}    visible
+
+
+Get Transaction Summary Field Value
+    [Documentation]    Reads a numeric value from the Transaction Summary panel (or receipt screen)
+    ...                by its exact label text (e.g. "Current Balance", "New Balance", "Previous Balance").
+    ...                Uses JavaScript to locate the leaf text node matching the label, then reads
+    ...                the adjacent value element. Returns a clean numeric string with commas and
+    ...                currency symbols stripped (e.g. "8685.00"). Fails if the label is not found.
+    [Arguments]        ${label}
+    ${value}=    Evaluate JavaScript    ${None}
+    ...    () => {
+    ...        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    ...        let node;
+    ...        while ((node = walker.nextNode())) {
+    ...            const text = node.textContent.trim();
+    ...            if (text === '${label}' || text === '${label}:') {
+    ...                const el = node.parentElement;
+    ...                // Strategy 1: next element sibling of the label element itself
+    ...                const nextSib = el.nextElementSibling;
+    ...                if (nextSib) {
+    ...                    const txt = nextSib.textContent.trim().replace(/[,₱\s]/g, '');
+    ...                    if (txt !== '' && !isNaN(parseFloat(txt.replace(/^-/, '')))) return txt;
+    ...                }
+    ...                // Strategy 2: next sibling of the label's parent (row-level sibling)
+    ...                const parent = el.parentElement;
+    ...                if (parent && parent.parentElement) {
+    ...                    const siblings = Array.from(parent.parentElement.children);
+    ...                    const idx = siblings.indexOf(parent);
+    ...                    for (let i = idx + 1; i < Math.min(idx + 3, siblings.length); i++) {
+    ...                        const txt = siblings[i].textContent.trim().replace(/[,₱\s]/g, '');
+    ...                        if (txt !== '' && !isNaN(parseFloat(txt.replace(/^-/, '')))) return txt;
+    ...                    }
+    ...                }
+    ...            }
+    ...        }
+    ...        return null;
+    ...    }
+    Should Not Be Equal    ${value}    ${None}
+    ...    msg=Could not find Transaction Summary value for label: "${label}"
+    RETURN    ${value}
 
 Sum All Account Balances
     [Documentation]    Sums all account Balance column values across all pages of the Accounts table.
