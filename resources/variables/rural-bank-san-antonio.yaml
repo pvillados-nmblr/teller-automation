@@ -131,3 +131,18 @@ T24_ARCHIVED_PRODUCT: "Loan 13C"
 VALID_CLOSING_DATE: "2026-03-10"
 VALID_DATE_FROM: "2026-03-10"
 VALID_DATE_TO: "2026-03-13"
+
+
+# ============================================================
+# Create Transaction Data — Withdrawal (t4.2)
+# Prefixed T42_ to avoid conflicts with other txn variables
+# ============================================================
+
+T42_ACCOUNT_NUMBER: "7710330422627914"
+T42_ACCOUNT_NAME: "Peach Villados"
+T42_ACCOUNT_TYPE: "Savings"
+T42_ACCOUNT_STATUS: "Active"
+T42_CUSTOMER_NAME: "Peach Villados"
+T42_WITHDRAWAL_TYPE: "Cash Withdrawal"
+T42_WITHDRAWAL_AMOUNT: "10.00"
+T42_WITHDRAWAL_NOTES: "payment"
