@@ -33,16 +33,27 @@ t3.2.1 View Account Transaction History (Entry Point)
     ...                to the Transaction History page with all required columns and action buttons.
     [Tags]             accounts    transactions    smoke    mvp
     Get Url                    contains    /transactions
-    Wait For Elements State    text=Transaction ID                                       visible
-    Wait For Elements State    text=Transaction Type                                     visible
-    Wait For Elements State    text=Date & Time                                          visible
-    Wait For Elements State    text=Debit Amount                                         visible
-    Wait For Elements State    text=Credit Amount                                        visible
-    Wait For Elements State    text=Status                                               visible
-    Wait For Elements State    text=Last Updated                                         visible
-    Wait For Elements State    text="Action"                                             visible
-    Wait For Elements State    ${VIEW_TXN_BTN} >> nth=0                                 visible
-    Wait For Elements State    ${DOWNLOAD_TXN_BTN} >> nth=0                             visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Transaction ID                                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Transaction Type                                     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date & Time                                          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Debit Amount                                         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Credit Amount                                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Status                                               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated                                         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"                                             visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_TXN_BTN} >> nth=0                                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${DOWNLOAD_TXN_BTN} >> nth=0                             visible
 
 t3.2.2 Pagination in Viewing Transaction History
     [Documentation]    Verify pagination controls work correctly:
@@ -65,19 +76,32 @@ t3.2.3 View Specific Transaction Details (via Accounts)
     [Tags]             accounts    transactions    smoke    mvp
     Click                      ${VIEW_TXN_BTN} >> nth=0
     Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}                                    visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Verify all required field labels are present in the modal
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction ID             visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Type           visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Amount         visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Service Fee               visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Remarks                   visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Status         visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Name        visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Name       visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Number      visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Number     visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Created on                visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Updated on                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction ID             visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Type           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Amount         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Service Fee               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Remarks                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Transaction Status         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Name        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Name       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Debit Account Number      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Credit Account Number     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Created on                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=Updated on                visible
     # Close modal and verify return to transaction list
     Click                      ${ACCT_TXN_DETAIL_BACK_BTN}
     Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}    hidden
@@ -95,18 +119,51 @@ t3.2.4 Search Transaction by ID and View Details (via Accounts)
     # Open transaction detail modal
     Click                      ${TXN_ROW} >> ${VIEW_TXN_BTN}
     Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}                                        visible
-    # Verify all field values match the expected transaction data
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${VALID_TXN_ID}               visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_TYPE}                   visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_AMOUNT}                 visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text="${TXN_SERVICE_FEE}"          visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_REMARKS}                visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_STATUS}                 visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_DEBIT_ACCT_NAME}        visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_CREDIT_ACCT_NAME}       visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_DEBIT_ACCT_NO}          visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_CREDIT_ACCT_NO}         visible
-    Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL} >> text=${TXN_CREATED_ON} >> nth=0    visible
+    # Verify all field values using exact text matching (:text-is)
+    ${_txn_id}=        Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${VALID_TXN_ID}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_txn_id}    ${VALID_TXN_ID}
+    ...    msg=Transaction ID mismatch: expected '${VALID_TXN_ID}' but got '${_txn_id}'
+    ${_txn_type}=      Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_TYPE}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_txn_type}    ${TXN_TYPE}
+    ...    msg=Transaction Type mismatch: expected '${TXN_TYPE}' but got '${_txn_type}'
+    ${_txn_amount}=    Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_AMOUNT}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_txn_amount}    ${TXN_AMOUNT}
+    ...    msg=Transaction Amount mismatch: expected '${TXN_AMOUNT}' but got '${_txn_amount}'
+    ${_svc_fee}=       Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_SERVICE_FEE}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_svc_fee}    ${TXN_SERVICE_FEE}
+    ...    msg=Service Fee mismatch: expected '${TXN_SERVICE_FEE}' but got '${_svc_fee}'
+    ${_remarks}=       Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_REMARKS}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_remarks}    ${TXN_REMARKS}
+    ...    msg=Remarks mismatch: expected '${TXN_REMARKS}' but got '${_remarks}'
+    ${_status}=        Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_STATUS}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_status}    ${TXN_STATUS}
+    ...    msg=Transaction Status mismatch: expected '${TXN_STATUS}' but got '${_status}'
+    ${_debit_name}=    Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_DEBIT_ACCT_NAME}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_debit_name}    ${TXN_DEBIT_ACCT_NAME}
+    ...    msg=Debit Account Name mismatch: expected '${TXN_DEBIT_ACCT_NAME}' but got '${_debit_name}'
+    ${_credit_name}=   Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_CREDIT_ACCT_NAME}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_credit_name}    ${TXN_CREDIT_ACCT_NAME}
+    ...    msg=Credit Account Name mismatch: expected '${TXN_CREDIT_ACCT_NAME}' but got '${_credit_name}'
+    ${_debit_no}=      Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_DEBIT_ACCT_NO}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_debit_no}    ${TXN_DEBIT_ACCT_NO}
+    ...    msg=Debit Account Number mismatch: expected '${TXN_DEBIT_ACCT_NO}' but got '${_debit_no}'
+    ${_credit_no}=     Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_CREDIT_ACCT_NO}")
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_credit_no}    ${TXN_CREDIT_ACCT_NO}
+    ...    msg=Credit Account Number mismatch: expected '${TXN_CREDIT_ACCT_NO}' but got '${_credit_no}'
+    ${_created_on}=    Get Text    ${ACCT_TXN_DETAIL_MODAL} >> :text-is("${TXN_CREATED_ON}") >> nth=0
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Strings    ${_created_on}    ${TXN_CREATED_ON}
+    ...    msg=Created On mismatch: expected '${TXN_CREATED_ON}' but got '${_created_on}'
     # Close modal and verify return to filtered list
     Click                      ${ACCT_TXN_DETAIL_BACK_BTN}
     Wait For Elements State    ${ACCT_TXN_DETAIL_MODAL}    hidden
@@ -126,14 +183,23 @@ t3.2.5 Search Transactions Using Date Range (via Accounts)
     # Verify all transaction dates are within the specified range
     Verify Acct Txn Dates Within Range    ${DATE_FROM}    ${DATE_TO}
     # Verify all required columns are still present after filtering
-    Wait For Elements State    text=Transaction ID       visible
-    Wait For Elements State    text=Transaction Type     visible
-    Wait For Elements State    text=Date & Time          visible
-    Wait For Elements State    text=Debit Amount         visible
-    Wait For Elements State    text=Credit Amount        visible
-    Wait For Elements State    text=Status               visible
-    Wait For Elements State    text=Last Updated         visible
-    Wait For Elements State    text="Action"             visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Transaction ID       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Transaction Type     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date & Time          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Debit Amount         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Credit Amount        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Status               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"             visible
 
 t3.2.6 Filter Transactions by Type: Send Money (via Accounts)
     [Documentation]    Verify filtering by Send Money shows only Send Money transactions.
