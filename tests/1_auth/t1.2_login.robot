@@ -35,14 +35,23 @@ t1.2.1 Normal Login with Valid Existing Credentials
     ...                and is redirected to the Customers module dashboard.
     [Tags]             login    smoke    mvp
     Login To Teller App
-    Wait For Elements State    ${SIDEBAR_CUSTOMERS}                      visible
-    Wait For Elements State    text=Customer ID                          visible
-    Wait For Elements State    text=Customer Name                        visible
-    Wait For Elements State    text=Date of Birth                        visible
-    Wait For Elements State    text=Created on                           visible
-    Wait For Elements State    text=Last Updated                         visible
-    Wait For Elements State    text=Customer Status                      visible
-    Wait For Elements State    text="Action"              visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${SIDEBAR_CUSTOMERS}                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID                          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Name                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on                           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated                         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Status                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"              visible
     Close Browser
 
 t1.2.2 Verify System Treats Email As Case-Insensitive During Login
@@ -53,14 +62,23 @@ t1.2.2 Verify System Treats Email As Case-Insensitive During Login
     Fill Text          ${EMAIL_FIELD}       ${MIXED_CASE_EMAIL}
     Fill Text          ${PASSWORD_FIELD}    ${TELLER_PASSWORD}
     Click              ${LOGIN_BUTTON}
-    Wait For Elements State    ${SIDEBAR_CUSTOMERS}                      visible
-    Wait For Elements State    text=Customer ID                          visible
-    Wait For Elements State    text=Customer Name                        visible
-    Wait For Elements State    text=Date of Birth                        visible
-    Wait For Elements State    text=Created on                           visible
-    Wait For Elements State    text=Last Updated                         visible
-    Wait For Elements State    text=Customer Status                      visible
-    Wait For Elements State    text="Action"              visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${SIDEBAR_CUSTOMERS}                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID                          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Name                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on                           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated                         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Status                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"              visible
     Close Browser
 
 t1.2.3 Login with Invalid Email
@@ -168,10 +186,15 @@ t1.2.10 Verify account is blocked after 5 consecutive failed login attempts
         IF    ${index} < 5
             Wait For Elements State    text=${LOGIN_ERROR_TEXT1}    visible
         ELSE
-            Wait For Elements State    text=${LOCKOUT_MESSAGE1}    visible
-            Wait For Elements State    text=${LOCKOUT_MESSAGE2}    visible
-            Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
-            Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
+            # Verify all fields — continue on failure so ALL mismatches are reported
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${LOCKOUT_MESSAGE1}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${LOCKOUT_MESSAGE2}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
         END
     END
 
@@ -197,10 +220,15 @@ t1.2.11 Verify blocked account cannot log in during 5-minute cooldown
         IF    ${index} < 5
             Wait For Elements State    text=${LOGIN_ERROR_TEXT1}    visible
         ELSE
-            Wait For Elements State    text=${LOCKOUT_MESSAGE1}    visible
-            Wait For Elements State    text=${LOCKOUT_MESSAGE2}    visible
-            Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
-            Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
+            # Verify all fields — continue on failure so ALL mismatches are reported
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${LOCKOUT_MESSAGE1}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${LOCKOUT_MESSAGE2}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
         END
     END
     # Now try to log in with correct credentials — should still be blocked
@@ -209,8 +237,11 @@ t1.2.11 Verify blocked account cannot log in during 5-minute cooldown
     Fill Text    ${PASSWORD_FIELD}    ${TELLER_PASSWORD}
     Click    ${LOGIN_BUTTON}
 
-    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
-    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
     Close Browser
 
 t1.2.12 Verify account automatically unlocks after cooldown
@@ -227,10 +258,15 @@ t1.2.12 Verify account automatically unlocks after cooldown
         IF    ${index} < 5
             Wait For Elements State    text=${LOGIN_ERROR_TEXT1}    visible
         ELSE
-            Wait For Elements State    text=${LOCKOUT_MESSAGE1}    visible
-            Wait For Elements State    text=${LOCKOUT_MESSAGE2}    visible
-            Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
-            Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
+            # Verify all fields — continue on failure so ALL mismatches are reported
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${LOCKOUT_MESSAGE1}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${LOCKOUT_MESSAGE2}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE1}    visible
+            Run Keyword And Continue On Failure
+            ...    Wait For Elements State    text=${SUBSEQUENT_LOCKOUT_MESSAGE2}    visible
         END
     END
     Click    ${MODAL_CONFIRM_BTN}
@@ -308,16 +344,22 @@ t1.2.15 Verify password reset during block period lifts block
     Click    ${RESET_PASSWORD_BTN}
 
     # Step 5 — Assert success screen
-    Wait For Elements State    ${RESET_SUCCESS_HEADING}    visible
-    Wait For Elements State    ${RESET_SUCCESS_MESSAGE}    visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${RESET_SUCCESS_HEADING}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${RESET_SUCCESS_MESSAGE}    visible
     Click    ${BACK_TO_LOGIN_BTN}
 
     # Step 6 — Verify block is lifted: login must now succeed
     Fill Text    ${EMAIL_FIELD}       ${TELLER_EMAIL}
     Fill Text    ${PASSWORD_FIELD}    ${TELLER_PASSWORD}
     Click    ${LOGIN_BUTTON}
-    Wait For Elements State    ${SIDEBAR_CUSTOMERS}    visible
-    Wait For Elements State    text=Customer ID        visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${SIDEBAR_CUSTOMERS}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID        visible
     Close Browser
 
 t1.2.16 Verify counter resets to zero after successful login

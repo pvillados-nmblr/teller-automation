@@ -23,15 +23,25 @@ t2.1.1 Initial Load and View of Customer List
     ...                with all required columns and action buttons visible.
     [Tags]             customers    smoke    mvp
     Navigate To Customers
-    Wait For Elements State    text=Customer ID           visible
-    Wait For Elements State    text=Customer Name         visible
-    Wait For Elements State    text=Date of Birth         visible
-    Wait For Elements State    text=Created on            visible
-    Wait For Elements State    text=Last Updated          visible
-    Wait For Elements State    text=Customer Status       visible
-    Wait For Elements State    text="Action"              visible
-    Wait For Elements State    ${VIEW_PROFILE_LINK} >> nth=0       visible
-    Wait For Elements State    ${VIEW_ACCOUNTS_LINK} >> nth=0      visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Name         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Status       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_PROFILE_LINK} >> nth=0       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_ACCOUNTS_LINK} >> nth=0      visible
 
 t2.1.2 Pagination and Navigation
     [Documentation]    Verify that pagination controls work correctly:
@@ -58,16 +68,27 @@ t2.1.3 Search for Valid Customer ID
     Click                      ${CUSTOMER_SEARCH_BUTTON}
     Wait For Elements State    css=table tbody tr:not([aria-hidden="true"])    visible
     Get Element Count          css=table tbody tr:not([aria-hidden="true"])    ==    1
-    Wait For Elements State    text=Customer ID             visible
-    Wait For Elements State    text=Customer Name           visible
-    Wait For Elements State    text=Date of Birth           visible
-    Wait For Elements State    text=Created on              visible
-    Wait For Elements State    text=Last Updated            visible
-    Wait For Elements State    text=Customer Status         visible
-    Wait For Elements State    css=table td:has-text("${VALID_CUSTOMER_NAME}")       visible
-    Wait For Elements State    css=table td:has-text("${CUSTOMER_DATE_OF_BIRTH}")    visible
-    Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
-    Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID             visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Name           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Status         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=table td:has-text("${VALID_CUSTOMER_NAME}")       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=table td:has-text("${CUSTOMER_DATE_OF_BIRTH}")    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_PROFILE_LINK}         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_ACCOUNTS_LINK}        visible
     # Clear search and verify list reloads
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}     ${EMPTY}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -84,23 +105,38 @@ t2.1.4 Search for Valid Customer Name
     Click                      ${CUSTOMER_SEARCH_BUTTON}
     # Verify at least one result row is visible
     Wait For Elements State    ${CUSTOMER_ROW}             visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Verify column headers are visible
-    Wait For Elements State    text=Customer ID             visible
-    Wait For Elements State    text=Customer Name           visible
-    Wait For Elements State    text=Date of Birth           visible
-    Wait For Elements State    text=Created on              visible
-    Wait For Elements State    text=Last Updated            visible
-    Wait For Elements State    text=Customer Status         visible
-    Wait For Elements State    text="Action"                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID             visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Name           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Last Updated            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Status         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"                visible
     # Verify all column values in the matching row
-    Wait For Elements State    ${CUSTOMER_ROW} >> text=${VALID_CUSTOMER_ID}          visible
-    Wait For Elements State    ${CUSTOMER_ROW} >> text=${VALID_CUSTOMER_NAME}        visible
-    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_DATE_OF_BIRTH}     visible
-    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_CREATED_ON}        visible
-    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_STATUS}            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${VALID_CUSTOMER_ID}          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${VALID_CUSTOMER_NAME}        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_DATE_OF_BIRTH}     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_CREATED_ON}        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_STATUS}            visible
     # Verify Action links in the matching row
-    Wait For Elements State    ${CUSTOMER_ROW} >> ${VIEW_PROFILE_LINK}               visible
-    Wait For Elements State    ${CUSTOMER_ROW} >> ${VIEW_ACCOUNTS_LINK}              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> ${VIEW_PROFILE_LINK}               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> ${VIEW_ACCOUNTS_LINK}              visible
     # Clear search and verify list reloads
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}     ${EMPTY}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -188,42 +224,73 @@ t2.1.12 Customer Profile View - Details Verification
     [Tags]             customers    smoke    mvp
     Navigate To Customers
     View Customer Profile      ${VALID_CUSTOMER_NAME}
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Verify page header shows correct customer name
-    Wait For Elements State    css=h3:has-text("${VALID_CUSTOMER_NAME}")    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=h3:has-text("${VALID_CUSTOMER_NAME}")    visible
     # Verify profile tab navigation
-    Wait For Elements State    text=Products Availed                  visible
-    Wait For Elements State    text=Eligible Products                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Products Availed                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Eligible Products                 visible
     # Verify section headers
-    Wait For Elements State    text=Banking Details                  visible
-    Wait For Elements State    text=Customer Details                 visible
-    Wait For Elements State    text=Identification                   visible
-    Wait For Elements State    text=Employment History               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Banking Details                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Details                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Identification                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Employment History               visible
     # Verify Banking Details fields
-    Wait For Elements State    text=DFSP Institution ID              visible
-    Wait For Elements State    text=Customer ID                      visible
-    Wait For Elements State    p:has-text("Identity")               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=DFSP Institution ID              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    p:has-text("Identity")               visible
     # Verify Customer Details fields
-    Wait For Elements State    text=Email Address                    visible
-    Wait For Elements State    text=Gender                           visible
-    Wait For Elements State    text=Date of Birth                    visible
-    Wait For Elements State    text=Nationality                      visible
-    Wait For Elements State    text=Complete Address                 visible
-    Wait For Elements State    text=Mobile Number                    visible
-    Wait For Elements State    text=Civil Status                     visible
-    Wait For Elements State    text=Country of Birth                 visible
-    Wait For Elements State    text=TIN                              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Email Address                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Gender                           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Nationality                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Complete Address                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Mobile Number                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Civil Status                     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Country of Birth                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=TIN                              visible
     # Verify Identification fields
-    Wait For Elements State    text=ID Type                          visible
-    Wait For Elements State    text=ID Number                        visible
-    Wait For Elements State    text=Expiry Date                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID Type                          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID Number                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Expiry Date                      visible
     # Verify Employment History fields
-    Wait For Elements State    text="Employer"                       visible
-    Wait For Elements State    text="Employer Industry"              visible
-    Wait For Elements State    text=Job Title                        visible
-    Wait For Elements State    text=Monthly Income                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Employer"                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Employer Industry"              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Job Title                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Monthly Income                   visible
     # Scroll down and verify Identity Verification Details section
     Scroll To Element          text=Identity Verification Details
-    Wait For Elements State    text=Identity Verification Details    visible
-    Wait For Elements State    text=Selfie                           visible
-    Wait For Elements State    text=ID (Front)                       visible
-    Wait For Elements State    text=ID (Back)                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Identity Verification Details    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Selfie                           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID (Front)                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID (Back)                        visible

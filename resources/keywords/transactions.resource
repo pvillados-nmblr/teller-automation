@@ -18,33 +18,6 @@ Setup Transactions Page
     Wait For Load Spinner To Disappear
     Navigate To Transactions
 
-Wait For Load Spinner To Disappear
-    [Documentation]    Waits for any loading spinner to disappear before proceeding
-    ${spinner_visible}=    Run Keyword And Return Status
-    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
-    IF    ${spinner_visible}
-        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
-    END
-
-Close Modal If Open
-    [Documentation]    Closes any open modal dialog by clicking the close button.
-    ...                Falls back to Escape key if close button fails.
-    ${modal_open}=    Run Keyword And Return Status
-    ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
-    IF    ${modal_open}
-        # Try clicking the close button first (more reliable than Escape)
-        ${close_btn_exists}=    Run Keyword And Return Status
-        ...                     Wait For Elements State    css=.ant-modal-close    visible    timeout=1s
-        IF    ${close_btn_exists}
-            Click    css=.ant-modal-close
-        ELSE
-            Keyboard Key    press    Escape
-        END
-        # Wait briefly for close animation
-        Run Keyword And Ignore Error
-        ...    Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    hidden    timeout=3s
-    END
-
 Filter Txn Results Should Contain Only Type
     [Documentation]    Verifies all visible transaction rows match the expected type display text.
     ...                If data exists, opens the first row's detail modal and verifies required fields.

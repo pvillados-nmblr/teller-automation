@@ -23,13 +23,21 @@ t3.1.1 Initial Load and View of All Accounts List
     ...                with all required columns and the View Account Transactions action link visible.
     [Tags]             accounts    smoke    mvp
     Navigate To Accounts
-    Wait For Elements State    text=Account No                                    visible
-    Wait For Elements State    text=Account Name                                  visible
-    Wait For Elements State    text=Balance                                       visible
-    Wait For Elements State    text=Account Status                                visible
-    Wait For Elements State    text=Created on                                    visible
-    Wait For Elements State    text="Action"                                      visible
-    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0         visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account No                                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account Name                                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Balance                                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account Status                                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on                                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"                                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0         visible
 
 t3.1.2 Pagination and Navigation on Accounts List
     [Documentation]    Verify that pagination controls work correctly:
@@ -57,20 +65,33 @@ t3.1.3 Search for Account by Number (Valid)
     Wait For Load Spinner To Disappear
     Wait For Elements State    css=table tbody tr:not([aria-hidden="true"])    visible
     Get Element Count          css=table tbody tr:not([aria-hidden="true"])    ==    1
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Verify required columns are visible
-    Wait For Elements State    text=Account No                                    visible
-    Wait For Elements State    text=Account Name                                  visible
-    Wait For Elements State    text=Balance                                       visible
-    Wait For Elements State    text=Account Status                                visible
-    Wait For Elements State    text=Created on                                    visible
-    Wait For Elements State    text="Action"                                      visible
-    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK}                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account No                                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account Name                                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Balance                                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account Status                                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on                                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"                                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK}                  visible
     # Verify the specific account row values
-    Wait For Elements State    ${ACCOUNT_ROW} >> text=${VALID_ACCOUNT_NUMBER}     visible
-    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_ACCOUNT_NAME}    visible
-    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_BALANCE}         visible
-    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_STATUS}          visible
-    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_CREATED_ON}      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCOUNT_ROW} >> text=${VALID_ACCOUNT_NUMBER}     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_ACCOUNT_NAME}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_BALANCE}         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_STATUS}          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${ACCOUNT_ROW} >> text=${EXPECTED_CREATED_ON}      visible
     # Clear search and verify list reloads
     Fill Text                  ${ACCOUNTS_SEARCH_FIELD}    ${EMPTY}
     Click                      ${ACCOUNTS_SEARCH_BUTTON}
@@ -91,14 +112,22 @@ t3.1.4 Search for Account by Name (Valid)
     ${matching_rows}=          Get Element Count    css=.ant-table-body table tbody tr:not([aria-hidden="true"]):has-text("${VALID_ACCOUNT_NAME}")
     Should Be Equal            ${total_rows}    ${matching_rows}
     ...    msg=Expected all ${total_rows} rows to contain "${VALID_ACCOUNT_NAME}", but only ${matching_rows} matched
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Verify required column headers are visible
-    Wait For Elements State    text=Account No                                    visible
-    Wait For Elements State    text=Account Name                                  visible
-    Wait For Elements State    text=Balance                                       visible
-    Wait For Elements State    text=Account Status                                visible
-    Wait For Elements State    text=Created on                                    visible
-    Wait For Elements State    text="Action"                                      visible
-    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account No                                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account Name                                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Balance                                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Account Status                                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Created on                                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Action"                                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0         visible
     # Clear search and verify list reloads
     Fill Text                  ${ACCOUNTS_SEARCH_FIELD}    ${EMPTY}
     Click                      ${ACCOUNTS_SEARCH_BUTTON}

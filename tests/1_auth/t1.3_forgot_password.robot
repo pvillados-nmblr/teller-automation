@@ -69,9 +69,13 @@ t1.3.1 Reset Password via Forgot Password
     Click                       ${RESET_PASSWORD_BTN}
 
     # Assert success screen
-    Wait For Elements State     ${RESET_SUCCESS_HEADING}    visible
-    Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
-    Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${RESET_SUCCESS_HEADING}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
     Click                       ${BACK_TO_LOGIN_BTN}
     Wait For Elements State     ${LOGIN_PAGE}               visible
     # Verify new password works by logging in with it
@@ -94,9 +98,13 @@ t1.3.2 Verify System Treats Email as Case-Insensitive During Forgot Password
     Click                       ${RESET_PASSWORD_BTN}
 
     # Assert success screen
-    Wait For Elements State     ${RESET_SUCCESS_HEADING}    visible
-    Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
-    Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${RESET_SUCCESS_HEADING}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
     Click                       ${BACK_TO_LOGIN_BTN}
     Wait For Elements State     ${LOGIN_PAGE}               visible
     # Verify new password works by logging in with it

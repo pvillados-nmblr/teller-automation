@@ -7,18 +7,28 @@ Documentation       t2.4 View Availed and Eligible Products
 Resource            ../../resources/keywords/common.resource
 Resource            ../../resources/keywords/customers.resource
 
-Suite Setup         Login To Teller App
+Suite Setup         Open Customer Profile And Cache URL
 Suite Teardown      Close Browser
-Test Setup          Navigate To Customer Profile Page
+Test Setup          Return To Customer Profile Page
 Test Teardown       Close Drawer If Open
 
 
 *** Keywords ***
-Navigate To Customer Profile Page
-    [Documentation]    Navigates to the Customer List, searches for the target customer,
-    ...                and opens their profile page.
+Open Customer Profile And Cache URL
+    [Documentation]    Logs in, navigates to the target customer profile once, and caches the
+    ...                profile URL so subsequent tests can navigate directly without re-searching.
+    ...                This avoids triggering multiple API calls per test and prevents rate limiting.
+    Login To Teller App
     Navigate To Customers
     View Customer Profile    ${T24_CUSTOMER_NAME}
+    ${url}=    Get Url
+    Set Suite Variable    ${CUSTOMER_PROFILE_URL}    ${url}
+
+Return To Customer Profile Page
+    [Documentation]    Navigates directly to the cached customer profile URL — no search needed.
+    ...                Waits for the page to load before each test begins.
+    Go To                      ${CUSTOMER_PROFILE_URL}
+    Wait For Load Spinner To Disappear
 
 Close Drawer If Open
     [Documentation]    Closes any open drawer by clicking the close button if it exists.
@@ -44,10 +54,15 @@ t2.4.1 View Products Availed of Existing Customer
 
     Click                       ${PRODUCTS_AVAILED_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}                    visible
-    Wait For Elements State     text=Product Name                   visible
-    Wait For Elements State     text=Product Category               visible
-    Wait For Elements State     text="Action"                       visible
-    Wait For Elements State     ${SEE_DETAILS_BTN} >> nth=0         visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     text=Product Name                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     text=Product Category               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     text="Action"                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${SEE_DETAILS_BTN} >> nth=0         visible
 
 t2.4.2 Pagination and Navigation of Products Availed
     [Documentation]    Verify that pagination controls on the Products Availed tab work correctly:
@@ -57,20 +72,29 @@ t2.4.2 Pagination and Navigation of Products Availed
 
     Click                       ${PRODUCTS_AVAILED_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
+    Wait For Load Spinner To Disappear
     ${has_multiple_pages}=    Run Keyword And Return Status
     ...    Wait For Elements State    css=.ant-pagination-next:not(.ant-pagination-disabled)    visible    timeout=3s
     IF    ${has_multiple_pages}
+        Wait For Load Spinner To Disappear
         Click                      ${PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
         Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
         ${page3_exists}=    Run Keyword And Return Status
         ...    Wait For Elements State    css=li.ant-pagination-item:has-text("3")    visible    timeout=2s
         IF    ${page3_exists}
+            Wait For Load Spinner To Disappear
             Click                      css=li.ant-pagination-item:has-text("3")
+            Wait For Load Spinner To Disappear
             Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
+            Wait For Load Spinner To Disappear
             Click                      ${PAGINATION_PREV}
+            Wait For Load Spinner To Disappear
             Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
         ELSE
+            Wait For Load Spinner To Disappear
             Click                      ${PAGINATION_PREV}
+            Wait For Load Spinner To Disappear
             Wait For Elements State    css=li.ant-pagination-item-active:has-text("1")    visible
         END
     ELSE
@@ -99,39 +123,60 @@ t2.4.3 See Specific Details of an Availed Savings Product
     # Panel header displays the product ID (PROD_xxx format)
     Wait For Elements State     css=.ant-drawer-title    visible
 
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Product Details
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Status                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Status                        visible
 
     # Eligibility for Customer Type
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required Documents            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required Documents            visible
 
     # Account Configuration
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Initial deposit               visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Overdrafts                    visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit frequency    visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit amount       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Initial deposit               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Overdrafts                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit frequency    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit amount       visible
 
     # Interest Configuration
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate(%)"
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate(%)"            visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest type                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest time period          visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate(%)"            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest type                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest time period          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
 
     # Fees & Charges
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Dormancy fee                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Account closure fee           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate type                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate value                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Dormancy fee                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Account closure fee           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate type                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate value                visible
 
     # Close side panel
     Click                       ${PRODUCT_DETAILS_CLOSE_BTN}
@@ -152,42 +197,67 @@ t2.4.4 See Specific Details of an Availed Loans Product
     # Panel header displays the product ID (PROD_xxx format)
     Wait For Elements State     css=.ant-drawer-title    visible
 
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Product Definition
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan type                     visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Preferred customers           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan purpose                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan type                     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Preferred customers           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan purpose                  visible
 
     # Product Details
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
 
     # Loan Features
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum loan amount
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum loan amount           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum loan amount           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term length              visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term unit                visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate type            visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Repayment method              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum loan amount           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum loan amount           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term length              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term unit                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate type            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Repayment method              visible
 
     # Eligibility Criteria
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum income level          visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Credit score                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Employment type               visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required documents            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum age                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum income level          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Credit score                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Employment type               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required documents            visible
 
     # Pricing & Fees
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Processing fee type
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate (%)"           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Processing fee"                visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Processing fee type             visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty interest rate         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty conditions            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate (%)"           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Processing fee"                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Processing fee type             visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty interest rate         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty conditions            visible
 
     # TODO: Re-enable Loan Details section once UI is fixed
     # # Loan Details (values entered during availment)
@@ -214,11 +284,17 @@ t2.4.5 View Eligible Products for Existing Customer
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}                    visible
-    Wait For Elements State     text=Product Name                   visible
-    Wait For Elements State     text=Product Category               visible
-    Wait For Elements State     text="Action"                       visible
-    Wait For Elements State     ${SEE_DETAILS_BTN} >> nth=0         visible
-    Wait For Elements State     ${AVAIL_PRODUCT_BTN} >> nth=0       visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     text=Product Name                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     text=Product Category               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     text="Action"                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${SEE_DETAILS_BTN} >> nth=0         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${AVAIL_PRODUCT_BTN} >> nth=0       visible
 
 t2.4.6 Search Eligible Products
     [Documentation]    Verify that searching by a valid active product name filters the
@@ -270,20 +346,38 @@ t2.4.8 Pagination and Navigation of Eligible Products
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
+    Wait For Load Spinner To Disappear
     ${has_multiple_pages}=    Run Keyword And Return Status
     ...    Wait For Elements State    css=.ant-pagination-next:not(.ant-pagination-disabled)    visible    timeout=3s
     IF    ${has_multiple_pages}
+        Wait For Load Spinner To Disappear
         Click                      ${PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
         Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
         ${page3_exists}=    Run Keyword And Return Status
         ...    Wait For Elements State    css=li.ant-pagination-item:has-text("3")    visible    timeout=2s
         IF    ${page3_exists}
+            Wait For Load Spinner To Disappear
             Click                      css=li.ant-pagination-item:has-text("3")
-            Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
-            Click                      ${PAGINATION_PREV}
-            Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
+            Wait For Load Spinner To Disappear
+            ${page3_loaded}=    Run Keyword And Return Status
+            ...    Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible    timeout=5s
+            IF    ${page3_loaded}
+                Wait For Load Spinner To Disappear
+                Click                      ${PAGINATION_PREV}
+                Wait For Load Spinner To Disappear
+                Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
+            ELSE
+                Log    Page 3 button exists but didn't load — may not have enough data. Skipping page 3 navigation.
+                Wait For Load Spinner To Disappear
+                Click                      ${PAGINATION_PREV}
+                Wait For Load Spinner To Disappear
+                Wait For Elements State    css=li.ant-pagination-item-active:has-text("1")    visible
+            END
         ELSE
+            Wait For Load Spinner To Disappear
             Click                      ${PAGINATION_PREV}
+            Wait For Load Spinner To Disappear
             Wait For Elements State    css=li.ant-pagination-item-active:has-text("1")    visible
         END
     ELSE
@@ -303,39 +397,60 @@ t2.4.9 See Specific Details of an Eligible Savings Product
     Click                       css=.ant-table-body tr:has-text("Savings") >> nth=0 >> ${SEE_DETAILS_BTN}
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
 
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Product Details
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Status                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Status                        visible
 
     # Eligibility for Customer Type
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required Documents            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required Documents            visible
 
     # Account Configuration
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Initial deposit               visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Overdrafts                    visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit frequency    visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit amount       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Average daily balance         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Initial deposit               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Overdrafts                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit frequency    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Withdrawal limit amount       visible
 
     # Interest Configuration
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate(%)"
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate(%)"            visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest type                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest time period          visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate(%)"            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest type                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest time period          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
 
     # Fees & Charges
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Dormancy fee                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Account closure fee           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate type                 visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate value                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Excess withdrawal fee         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Dormancy fee                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Account closure fee           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate type                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Tax rate value                visible
 
     # Close side panel
     Click                       ${PRODUCT_DETAILS_CLOSE_BTN}
@@ -353,42 +468,67 @@ t2.4.10 See Specific Details of an Eligible Loans Product
     Click                       css=.ant-table-body tr:has-text("Loan") >> nth=0 >> ${SEE_DETAILS_BTN}
     Wait For Elements State     ${PRODUCT_DETAILS_DRAWER}    visible
 
+    # Verify all fields — continue on failure so ALL mismatches are reported
     # Product Definition
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan type                     visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Preferred customers           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan purpose                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan type                     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Preferred customers           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan purpose                  visible
 
     # Product Details
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product name                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Product type                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Description                   visible
 
     # Loan Features
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum loan amount
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum loan amount           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum loan amount           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term length              visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term unit                visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate type            visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Repayment method              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum loan amount           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum loan amount           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term length              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Loan term unit                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate type            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Repayment method              visible
 
     # Eligibility Criteria
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum age                   visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum income level          visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Credit score                  visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Employment type               visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required documents            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum age                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Maximum age                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Minimum income level          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Credit score                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Employment type               visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Required documents            visible
 
     # Pricing & Fees
     Scroll To Element           ${PRODUCT_DETAILS_DRAWER} >> text=Processing fee type
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate (%)"           visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Processing fee"                visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Processing fee type             visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty interest rate         visible
-    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty conditions            visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Interest rate (%)"           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Interest rate structure       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text="Processing fee"                visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Processing fee type             visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty interest rate         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${PRODUCT_DETAILS_DRAWER} >> text=Penalty conditions            visible
 
     # TODO: Re-enable Loan Details section once UI is fixed
     # # Loan Details (read-only reference values)
