@@ -77,9 +77,12 @@ t1.4.1 Reset Password via Change Password
     Complete Change Password Form
     Enter CP OTP And Continue
 
-    Wait For Elements State     ${CP_SUCCESS_MESSAGE}    visible
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${CP_SUCCESS_MESSAGE}    visible
     # Verify new password works by logging in with it
-    Wait For Elements State     ${LOGOUT_BUTTON}         visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State     ${LOGOUT_BUTTON}         visible
     Click                       ${LOGOUT_BUTTON}
     Wait For Elements State     ${LOGIN_PAGE}            visible
     Fill Text                   ${EMAIL_FIELD}           ${CP_USER_EMAIL}

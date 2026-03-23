@@ -41,6 +41,23 @@ Navigate To Module
     Click              css=.ant-menu-title-content >> text=${module_name}
     Wait For Elements State    css=table >> nth=0    visible
 
+Wait For Load Spinner To Disappear
+    [Documentation]    Waits for any loading spinner to disappear before proceeding
+    ${spinner_visible}=    Run Keyword And Return Status
+    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
+    IF    ${spinner_visible}
+        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
+    END
+
+Close Modal If Open
+    [Documentation]    Closes any open modal dialog to prevent blocking subsequent tests.
+    ${modal_open}=    Run Keyword And Return Status
+    ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
+    IF    ${modal_open}
+        Click    css=.ant-modal-close
+        Sleep    0.5s
+    END
+
 Verify Security Email Sent
     [Documentation]    Connects to Gmail via IMAP and verifies a security alert email was delivered.
     ...                Waits up to 60 s for the email to arrive, then asserts subject and optional body.

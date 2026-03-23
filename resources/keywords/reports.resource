@@ -13,14 +13,6 @@ Navigate To Reports
     Get Url                    contains    /reports
     Wait For Elements State    ${EOD_BALANCE_BTN}    visible
 
-Wait For Load Spinner To Disappear
-    [Documentation]    Waits for any loading spinner to disappear before proceeding
-    ${spinner_visible}=    Run Keyword And Return Status
-    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
-    IF    ${spinner_visible}
-        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
-    END
-
 Setup Reports Page
     [Documentation]    Navigates to the Reports module and ensures a clean state
     Navigate To Reports

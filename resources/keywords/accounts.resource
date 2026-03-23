@@ -25,29 +25,6 @@ Navigate To Account Transactions
     Wait For Load Spinner To Disappear
     Wait For Elements State    ${ACCT_TXN_SEARCH_FIELD}    visible
 
-Wait For Load Spinner To Disappear
-    [Documentation]    Waits for any loading spinner to disappear before proceeding
-    ${spinner_visible}=    Run Keyword And Return Status
-    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
-    IF    ${spinner_visible}
-        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
-    END
-
-Close Modal If Open
-    [Documentation]    Closes any open modal dialog to prevent blocking subsequent tests.
-    ...                Uses Escape key as primary method for reliability.
-    ${modal_open}=    Run Keyword And Return Status
-    ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
-    IF    ${modal_open}
-        Keyboard Key    press    Escape
-        Sleep    0.5s
-        ${still_open}=    Run Keyword And Return Status
-        ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
-        IF    ${still_open}
-            Click    css=.ant-modal-close
-        END
-    END
-
 Filter Accounts Results Should Contain Only Status
     [Documentation]    Verifies that all visible rows in the accounts table match the expected status,
     ...                or that a "No Data" message is shown if no matching records exist.

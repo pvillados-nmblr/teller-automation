@@ -53,3 +53,46 @@ ${TXN_DETAIL_DOWNLOAD_CSV_BTN}      css=.ant-modal-content button:has-text("Down
 
 # No Data
 ${TXN_NO_DATA_MESSAGE}              css=.ant-empty-description
+
+
+# ============================================================
+# Create Transaction — Validation / Error States
+# ============================================================
+
+# Empty search results in the New Transaction modal
+${CREATE_TXN_NO_RESULTS_MSG}        css=.ant-modal-content .ant-empty-description
+
+# Inline form validation error messages (ant-design form error)
+${CREATE_TXN_FORM_ERROR}            css=.ant-modal-content .ant-form-item-explain-error
+
+
+# ============================================================
+# Create Transaction — New Transaction Modal (t4.2, t4.3)
+# ============================================================
+
+# Trigger Button (on Transactions page)
+${NEW_TXN_BTN}                          css=button:has-text("New Transaction")
+
+# Modal Container
+${CREATE_TXN_MODAL}                     css=.ant-modal-content
+
+# Step 1 — Customer Information (Account Search)
+${CREATE_TXN_SEARCH_INPUT}              css=input[type="search"][placeholder*="Account number"]
+${CREATE_TXN_SEARCH_BTN}                css=.ant-modal-content #btnSearch
+${CREATE_TXN_SEARCH_RESULT_ITEM}        css=.ant-modal-content [role="button"]
+
+# Step 2 — Transaction Type Selection Buttons
+${CREATE_TXN_DEPOSIT_BTN}               css=button.btn-primary:has-text("Deposit")
+${CREATE_TXN_WITHDRAWAL_BTN}            css=button.btn-outline:has-text("Withdraw")
+
+# Step 2 — Transaction Form Fields (shared by Deposit and Withdrawal)
+${CREATE_TXN_TYPE_SELECT}               css=.ant-select-selector
+${CREATE_TXN_AMOUNT_INPUT}              css=.ant-input-number-input
+${CREATE_TXN_NOTES_INPUT}               css=textarea[name="transactionNotes"]
+${CREATE_TXN_CANCEL_BTN}                css=button:has-text("Cancel")
+${CREATE_TXN_PROCESS_DEPOSIT_BTN}       css=button:has-text("Process Deposit")
+${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    css=button:has-text("Process Withdrawal")
+
+# Step 3 — Confirmation / Receipt
+${CREATE_TXN_PRINT_RECEIPT_BTN}         css=button:has-text("Print Receipt")
+${CREATE_TXN_NEW_TXN_BTN_CONFIRM}       css=button.btn-primary:has-text("New Transaction")

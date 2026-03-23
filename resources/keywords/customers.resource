@@ -22,6 +22,7 @@ Search For Customer
     [Arguments]        ${search_value}
     Fill Text          ${CUSTOMER_SEARCH_FIELD}    ${search_value}
     Click              ${CUSTOMER_SEARCH_BUTTON}
+    Wait For Load Spinner To Disappear
     Wait For Elements State    ${CUSTOMER_TABLE}    visible
 
 Clear Customer Search
@@ -71,14 +72,6 @@ Navigate To Customer Account Transactions Page
     View Customer Accounts              ${customer_name}
     View Customer Account Transactions  ${account_number}
     Wait For Load Spinner To Disappear
-
-Wait For Load Spinner To Disappear
-    [Documentation]    Waits for any loading spinner to disappear before proceeding
-    ${spinner_visible}=    Run Keyword And Return Status
-    ...                    Wait For Elements State    css=.ant-spin-spinning    visible    timeout=2s
-    IF    ${spinner_visible}
-        Wait For Elements State    css=.ant-spin-spinning    hidden    timeout=30s
-    END
 
 Filter Account Results Should Contain Only Status
     [Documentation]    Verifies that all visible rows in the customer accounts table match the expected
@@ -224,22 +217,6 @@ Filter Txn Results Should Contain Only Status
         Wait For Elements State    ${TXN_DETAIL_MODAL} >> text=Updated on             visible
         Click    ${TXN_DETAIL_BACK_BTN}
         Wait For Elements State    ${TXN_DETAIL_MODAL}              hidden
-    END
-
-Close Modal If Open
-    [Documentation]    Closes any open modal dialog to prevent blocking subsequent tests.
-    ...                Uses Escape key as primary method for reliability.
-    ${modal_open}=    Run Keyword And Return Status
-    ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
-    IF    ${modal_open}
-        Keyboard Key    press    Escape
-        Sleep    0.5s
-        # Verify modal is closed, try clicking close button if Escape didn't work
-        ${still_open}=    Run Keyword And Return Status
-        ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
-        IF    ${still_open}
-            Click    css=.ant-modal-close
-        END
     END
 
 Verify Txn Dates Within Range

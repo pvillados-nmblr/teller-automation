@@ -17,10 +17,15 @@ t6.1.1 Verify Reports Module Loads Successfully
     ...                and both report type buttons are visible and clickable.
     [Tags]             reports    smoke    mvp
     Get Url                    contains    /reports
-    Wait For Elements State    ${EOD_BALANCE_BTN}       visible
-    Wait For Elements State    ${TOTAL_BALANCE_BTN}     visible
-    Wait For Elements State    ${EOD_BALANCE_BTN}       enabled
-    Wait For Elements State    ${TOTAL_BALANCE_BTN}     enabled
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${EOD_BALANCE_BTN}       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${TOTAL_BALANCE_BTN}     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${EOD_BALANCE_BTN}       enabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${TOTAL_BALANCE_BTN}     enabled
 
 t6.1.2 Generate End of Day Report (Valid Closing Date)
     [Documentation]    Verify that selecting a valid closing date enables the Download CSV button,
