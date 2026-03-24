@@ -29,7 +29,7 @@ t2.2.1 Customer Accounts List View
     Wait For Elements State    text=Account Status                              visible
     Wait For Elements State    text=Created on                                  visible
     Wait For Elements State    text="Action"                                    visible
-    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0      visible
+    Wait For Elements State    ${VIEW_ACCOUNT_TRANSACTIONS_LINK} >> nth=0    visible
 
 t2.2.2 Account List Pagination and Navigation
     [Documentation]    Verify that pagination controls work correctly:

@@ -1,23 +1,25 @@
 *** Variables ***
 # ============================================================
 # Accounts Module Locators
+# data-testid: accounts.*
 # ============================================================
 
 # Navigation - Sidebar
-# ${ACCOUNTS_MENU}                    css=[data-testid="nav-sidebar-accounts"]    # TODO: restore when data-testid is available
-${ACCOUNTS_MENU}                    css=.ant-menu-title-content >> text=Accounts
+${ACCOUNTS_MENU}                    css=[data-testid="nav-sidebar-accounts"]
+
+# Accounts List Page
+${ACCOUNTS_LIST_PAGE}               css=[data-testid="page-accounts-list"]
 
 # Accounts List Page - Search
-${ACCOUNTS_SEARCH_FIELD}            css=input[placeholder="Search accounts..."]
-${ACCOUNTS_SEARCH_BUTTON}           css=#btnSearch:has-text("Search")
+${ACCOUNTS_SEARCH_FIELD}            css=[data-testid="search-accounts"] input
+${ACCOUNTS_SEARCH_BUTTON}           css=[data-testid="search-accounts"] button
 
 # Accounts List Table
-${ACCOUNTS_TABLE}                   css=.ant-table-body table
-${ACCOUNTS_TABLE_ROWS}              css=.ant-table-body table tbody tr
+${ACCOUNTS_TABLE}                   css=[data-testid="table-accounts"]
+${ACCOUNTS_TABLE_ROWS}              css=[data-testid="table-accounts"] tbody tr
 
 # Account Actions (per row)
-# ${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=[data-testid="btn-customers-accounts-view-transactions"]    # TODO: restore when data-testid is available
-${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=a.table-link:has-text("View Account Transactions")
+${VIEW_ACCOUNT_TRANSACTIONS_LINK}   css=[data-testid="btn-accounts-view-transactions"]
 
 # Pagination (shared across Accounts list and Transaction History)
 ${PAGINATION_NEXT}                  css=button.ant-pagination-item-link:has(svg[data-icon="right"])
@@ -45,7 +47,11 @@ ${NO_DATA_MESSAGE}                  css=.ant-empty-description
 
 # ============================================================
 # ACCOUNTS — TRANSACTION HISTORY PAGE
+# data-testid: accounts.transactions
 # ============================================================
+
+# Page
+${ACCOUNTS_TXN_PAGE}                css=[data-testid="page-accounts-transactions"]
 
 # Search
 ${ACCT_TXN_SEARCH_FIELD}            css=input[placeholder="Search transactions..."]

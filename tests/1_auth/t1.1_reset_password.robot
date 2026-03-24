@@ -37,7 +37,7 @@ ${ERR_OTP_EXPIRED_SESSION}          Your one-time password has expired. Request 
 *** Keywords ***
 Navigate To Reset Password Page
     [Documentation]    Logs in with temporary password and lands on the Reset Password page.
-    [Arguments]        ${email}=${RTP_NEW_USER_EMAIL}    ${temp_password}=${TELLER_TEMP_PASSWORD}
+    [Arguments]        ${email}=${RTP_NEW_USER_EMAIL}    ${temp_password}=${RTP_TEMP_PASSWORD}
     Open Teller App
     Fill Text                   ${EMAIL_FIELD}       ${email}
     Fill Text                   ${PASSWORD_FIELD}    ${temp_password}
@@ -47,7 +47,7 @@ Navigate To Reset Password Page
 Complete Reset Password Form
     [Documentation]    Fills the Reset Password form with the temporary and new passwords, then
     ...                submits it. Leaves the user on the OTP entry screen.
-    [Arguments]        ${temp_password}=${TELLER_TEMP_PASSWORD}    ${new_password}=${TELLER_PASSWORD}
+    [Arguments]        ${temp_password}=${RTP_TEMP_PASSWORD}    ${new_password}=${TELLER_PASSWORD}
     Fill Text                   ${RTP_TEMP_PASSWORD_FIELD}       ${temp_password}
     Fill Text                   ${RTP_NEW_PASSWORD_FIELD}        ${new_password}
     Fill Text                   ${RTP_CONFIRM_PASSWORD_FIELD}    ${new_password}

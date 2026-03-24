@@ -687,14 +687,25 @@ t4.2.28 Validate Negative or Zero Withdrawal Amount
     Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
 
 t4.2.29 Validate Non-Numeric Withdrawal Amount
-    [Documentation]    Verify that the Amount field rejects non-numeric input — characters
-    ...                other than digits should not be accepted by the ant-input-number field.
+    [Documentation]    Verify that entering non-numeric input in the Amount field causes the
+    ...                field to reset to its initial state, and the Process Withdrawal button
+    ...                remains disabled.
     [Tags]             transactions    withdrawal    validation    negative    regression
     Navigate To Withdrawal Step
+    Click                      ${CREATE_TXN_TYPE_SELECT}
+    Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
+    Click
+    ...    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden) .ant-select-item-option-content:has-text("${T42_WITHDRAWAL_TYPE}")
+    Wait For Load Spinner To Disappear
     Fill Text                  ${CREATE_TXN_AMOUNT_INPUT}    five hundred
+    Keyboard Key               press    Enter
+    Wait For Load Spinner To Disappear
+    # Verify field resets (value should be empty or not contain the non-numeric text)
     ${entered_value}=    Get Property    ${CREATE_TXN_AMOUNT_INPUT}    value
     Should Not Contain    ${entered_value}    five
-    ...    msg=Amount field should not accept non-numeric input, but got: '${entered_value}'
+    ...    msg=Amount field should reset after non-numeric input, but got: '${entered_value}'
+    # Verify Process Withdrawal button remains disabled
+    Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
 
 t4.2.30 Validate Withdrawal Notes Character Limit
     [Documentation]    Verify that the Transaction Notes field enforces a 300-character maximum.
