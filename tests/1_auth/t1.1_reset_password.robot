@@ -68,6 +68,18 @@ Enter RTP OTP And Continue
 # HAPPY PATH TESTS
 # ====================================================================
 
+t1.1.3 Verify System Treats Email as Case-Insensitive During Reset Password
+    [Documentation]    Verify the system accepts a mixed-case email when logging in with a
+    ...                temporary password and allows the user to complete the Reset Password flow.
+    [Tags]             reset-password    smoke    password-reset    temp-password    mvp
+
+    Navigate To Reset Password Page    email=${RTP_MIXED_CASE_EMAIL}
+    Complete Reset Password Form
+    # Enter RTP OTP And Continue
+
+    # Wait For Elements State     ${RESET_SUCCESS_HEADING}    visible
+    # Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
+    # Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
 t1.1.2 Reset Password via Logging in Using Temporary Password
     [Documentation]    Verify a new user can log in with their temporary password, complete the
     ...                Reset Password form, verify their OTP, and see the success confirmation modal.
@@ -81,18 +93,6 @@ t1.1.2 Reset Password via Logging in Using Temporary Password
     Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
     Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
 
-t1.1.3 Verify System Treats Email as Case-Insensitive During Reset Password
-    [Documentation]    Verify the system accepts a mixed-case email when logging in with a
-    ...                temporary password and allows the user to complete the Reset Password flow.
-    [Tags]             reset-password    smoke    password-reset    temp-password    mvp
-
-    Navigate To Reset Password Page    email=${RTP_MIXED_CASE_EMAIL}
-    Complete Reset Password Form
-    # Enter RTP OTP And Continue
-
-    # Wait For Elements State     ${RESET_SUCCESS_HEADING}    visible
-    # Wait For Elements State     ${RESET_SUCCESS_MESSAGE}    visible
-    # Wait For Elements State     ${BACK_TO_LOGIN_BTN}        visible
 
 
 # ====================================================================
