@@ -171,3 +171,23 @@ T42_OVER_BALANCE_AMOUNT: "500000"          # amount > current account balance
 T42_OVER_LIMIT_AMOUNT: "460000"          # amount > daily limit remaining after two OTC withdrawals
 T42_MAX_ALLOWED_AMOUNT: "500000"         # maximum single-transaction daily limit
 T42_EXCEED_MAX_AMOUNT: "500001"          # one above the max allowed amount
+
+# ---------------------------------------------------------------
+# t4.3 — Create a Deposit Transaction via Teller
+# ---------------------------------------------------------------
+T43_ACCOUNT_NUMBER: "7710487972758371"
+T43_ACCOUNT_NAME: "Niki Zefanya"
+T43_ACCOUNT_TYPE: "Savings"
+T43_ACCOUNT_STATUS: "Active"
+T43_CUSTOMER_NAME: "Niki Zefanya"
+T43_DEPOSIT_TYPE: "Cash Deposit"
+T43_DEPOSIT_AMOUNT: "1000"
+T43_DEPOSIT_AMOUNT_FORMATTED: "1,000.00"
+T43_DEPOSIT_NOTES: "Deposit"
+
+# Validation test data (t4.3.10–t4.3.19)
+T43_INVALID_ACCOUNT_NUMBER: "0000000000"
+T43_INVALID_ACCOUNT_NAME: "XXXXXXXXXXX"
+T43_HIGH_DEPOSIT_AMOUNT_1: "500000"
+T43_HIGH_DEPOSIT_AMOUNT_2: "500001"
+T43_HIGH_DEPOSIT_AMOUNT_3: "1000000"
