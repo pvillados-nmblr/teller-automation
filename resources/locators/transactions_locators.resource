@@ -1,11 +1,14 @@
 *** Variables ***
 # ============================================================
 # Transactions Module Locators
+# data-testid: transactions.*
 # ============================================================
 
 # Navigation - Sidebar
-# ${TRANSACTIONS_MENU}                css=[data-testid="nav-sidebar-transactions"]    # TODO: restore when data-testid is available
-${TRANSACTIONS_MENU}                css=.ant-menu-title-content >> text=Transactions
+${TRANSACTIONS_MENU}                css=[data-testid="nav-sidebar-transactions"]
+
+# Transactions List Page
+${TXN_LIST_PAGE}                    css=[data-testid="page-transactions-list"]
 
 # Transactions List Page - Total Balance
 ${TOTAL_BALANCE_CARD}               css=section:has-text("Total Balance:")
@@ -15,12 +18,15 @@ ${TXN_SEARCH_FIELD}                 css=input[placeholder="Search transactions..
 ${TXN_SEARCH_BUTTON}                css=#btnSearch:has-text("Search")
 
 # Transaction Table
-${TXN_TABLE}                        css=.ant-table-body table
-${TXN_TABLE_ROWS}                   css=.ant-table-body table tbody tr
+${TXN_TABLE}                        css=[data-testid="table-transactions"]
+${TXN_TABLE_ROWS}                   css=[data-testid="table-transactions"] tbody tr
 
 # Transaction Action Buttons (per row)
-${TXN_VIEW_BTN}                     css=button:has([data-icon="eye"])
-${TXN_DOWNLOAD_BTN}                 css=button:has([data-icon="download"])
+${TXN_VIEW_BTN}                     css=[data-testid="btn-transactions-view"]
+${TXN_DOWNLOAD_BTN}                 css=[data-testid="btn-transactions-download"]
+
+# New Transaction Button
+${NEW_TXN_BTN}                      css=[data-testid="btn-transactions-new"]
 
 # Transaction Type Filter (column header filter icon)
 ${TXN_TYPE_FILTER}                  css=th:has-text("Transaction Type") .ant-table-filter-trigger
@@ -56,6 +62,15 @@ ${TXN_NO_DATA_MESSAGE}              css=.ant-empty-description
 
 
 # ============================================================
+# Create Transaction — New Transaction Page
+# data-testid: transactions.new
+# ============================================================
+
+${NEW_TXN_PAGE}                         css=[data-testid="page-transactions-new"]
+${NEW_TXN_STEPS}                        css=[data-testid="steps-transactions-new"]
+
+
+# ============================================================
 # Create Transaction — Validation / Error States
 # ============================================================
 
@@ -69,9 +84,6 @@ ${CREATE_TXN_FORM_ERROR}            css=.ant-modal-content .ant-form-item-explai
 # ============================================================
 # Create Transaction — New Transaction Modal (t4.2, t4.3)
 # ============================================================
-
-# Trigger Button (on Transactions page)
-${NEW_TXN_BTN}                          css=button:has-text("New Transaction")
 
 # Modal Container
 ${CREATE_TXN_MODAL}                     css=.ant-modal-content

@@ -1,26 +1,40 @@
 *** Variables ***
 # ============================================================
 # Products Module Locators
+# data-testid: products.*
 # ============================================================
-# Update these to match your actual teller app HTML
 
 # Navigation
-${PRODUCTS_MENU}               css=[data-menu="products"]
+${PRODUCTS_MENU}                    css=[data-testid="nav-sidebar-products"]
 
-# Tabs
-${ACTIVE_TAB}                  id=active-tab
-${ARCHIVED_TAB}                id=archived-tab
+# Products List Page
+${PRODUCTS_LIST_PAGE}               css=[data-testid="page-products-list"]
+${CREATE_PRODUCT_BTN}               css=[data-testid="btn-products-create"]
 
-# Product Lists
-${ACTIVE_PRODUCTS_LIST}        css=.active-products-list
-${ARCHIVED_PRODUCTS_LIST}      css=.archived-products-list
+# Active Products Table
+${ACTIVE_PRODUCTS_TABLE}            css=[data-testid="table-products-active"]
 
-# New Product Form
-${PRODUCT_TYPE_DROPDOWN}       id=product-type
-${PRODUCT_NAME_FIELD}          id=product-name
-${INTEREST_RATE_FIELD}         id=interest-rate
-${DESCRIPTION_FIELD}           id=description
-${CREATE_PRODUCT_BUTTON}       id=create-product-button
+# Archived Products Table
+${ARCHIVED_PRODUCTS_TABLE}          css=[data-testid="table-products-archived"]
 
-# Messages
-${SUCCESS_MESSAGE}             css=.success-message
+# Row-level Action Buttons
+${VIEW_PRODUCT_BTN}                 css=[data-testid="btn-products-view"]
+${EDIT_PRODUCT_BTN}                 css=[data-testid="btn-products-edit"]
+${ARCHIVE_PRODUCT_BTN}              css=[data-testid="btn-products-archive"]
+${RESTORE_PRODUCT_BTN}              css=[data-testid="btn-products-restore"]
+
+# Create Product Page
+${CREATE_PRODUCT_PAGE}              css=[data-testid="page-products-create"]
+${CREATE_PRODUCT_STEPS}             css=[data-testid="steps-products-create"]
+
+# Edit Product Page
+${EDIT_PRODUCT_PAGE}                css=[data-testid="page-products-edit"]
+
+# Product Details Modal
+${PRODUCT_DETAILS_MODAL}            css=[data-testid="modal-product-details"]
+
+# Update Status Modal
+${PRODUCT_UPDATE_STATUS_MODAL}      css=[data-testid="modal-product-update-status"]
+
+# Product Details Drawer
+${PRODUCT_DETAILS_DRAWER}           css=[data-testid="drawer-product-details"]

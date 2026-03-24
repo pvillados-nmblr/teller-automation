@@ -23,11 +23,11 @@ TIMEOUT: "30s"
 # Auth — Reset Password via Temp Password (t1.1)
 # ============================================================
 
-RTP_NEW_USER_EMAIL: "pvillados+mar62@agsx.net"
-RTP_MIXED_CASE_EMAIL: "Pvillados+MaR62@Agsx.Net"
-RTP_MIXED_CASE_EMAIL_PASSWORD: "UP7qem43HIP9"
+RTP_NEW_USER_EMAIL: "pvillados+mar24@agsx.net"
+RTP_TEMP_PASSWORD: "hpWgTJBzBsbT"
+RTP_MIXED_CASE_EMAIL: "Pvillados+MaR242@Agsx.Net"
+RTP_MIXED_CASE_EMAIL_PASSWORD: "NCwpigDZscwJ"
 RTP_EXPIRED_USER_EMAIL: "pvillados+mar61@agsx.net"
-TELLER_TEMP_PASSWORD: "UP7qem43HIP9"
 EXPIRED_TEMP_PASSWORD: "CMH2keqfSdZR"
 
 
@@ -154,8 +154,10 @@ T42_WITHDRAWAL_NOTES: "payment"
 # T42_OTC_CUSTOMER_NAME: "Yuki Hadjar"
 # T42_OTC_ACCOUNT_NUMBER: "7710357755282456"
 # T42_OTC_CUSTOMER_NAME: "Ave Maria"
-T42_OTC_ACCOUNT_NUMBER: "7710455410784261"
-T42_OTC_CUSTOMER_NAME: "Chai Villados"
+# T42_OTC_ACCOUNT_NUMBER: "7710455410784261"
+# T42_OTC_CUSTOMER_NAME: "Chai Villados"
+T42_OTC_ACCOUNT_NUMBER: "7710487972758371"
+T42_OTC_CUSTOMER_NAME: "Niki Zefanya"
 T42_DAILY_LIMIT_INITIAL: "500,000"              # Daily Limit Remaining at start of day (before any OTC withdrawals)
 T42_DAILY_LIMIT_AFTER_FIRST_OTC: "480,000"      # Daily Limit Remaining after first OTC withdrawal (INITIAL - FIRST_OTC_AMOUNT)
 T42_DAILY_LIMIT_AFTER_SECOND_OTC: "450,000"     # Daily Limit Remaining after second OTC withdrawal (AFTER_FIRST - SECOND_OTC_AMOUNT)
