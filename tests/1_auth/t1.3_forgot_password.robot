@@ -44,7 +44,7 @@ Navigate To Forgot Password Page
 Complete OTP Verification
     [Documentation]    Fills in email, requests OTP, enters OTP, and clicks CONTINUE.
     ...                Leaves the user on the Create new password screen.
-    [Arguments]        ${email}=${TELLER_EMAIL}
+    [Arguments]        ${email}=${CP_USER_EMAIL}
     Fill Text                   ${FP_EMAIL_FIELD}    ${email}
     Click                       ${FP_SEND_CODE_BTN}
     Wait For Elements State     ${FP_OTP_INPUT}      visible
