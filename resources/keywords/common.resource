@@ -51,10 +51,28 @@ Wait For Load Spinner To Disappear
 
 Close Modal If Open
     [Documentation]    Closes any open modal dialog to prevent blocking subsequent tests.
+    ...                Handles both regular modals and confirmation modals.
     ${modal_open}=    Run Keyword And Return Status
     ...               Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"])    visible    timeout=1s
     IF    ${modal_open}
-        Click    css=.ant-modal-close
+        # Try closing confirmation modal first (has buttons but no X)
+        ${confirm_modal}=    Run Keyword And Return Status
+        ...    Wait For Elements State    css=.ant-modal-confirm-btns    visible    timeout=0.5s
+        IF    ${confirm_modal}
+            Click    css=.ant-modal-confirm-btns .ant-btn-default
+            Sleep    0.5s
+            RETURN
+        END
+        # Try regular modal close button
+        ${has_close_btn}=    Run Keyword And Return Status
+        ...    Wait For Elements State    css=.ant-modal-close    visible    timeout=0.5s
+        IF    ${has_close_btn}
+            Click    css=.ant-modal-close
+            Sleep    0.5s
+            RETURN
+        END
+        # Fallback: press Escape key
+        Keyboard Key    press    Escape
         Sleep    0.5s
     END
 
