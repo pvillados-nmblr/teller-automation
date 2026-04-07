@@ -22,6 +22,8 @@ ${ACTIVE_PRODUCTS_TABLE_ROWS}       css=[data-testid="table-products-active"] tb
 
 # Archived Products Table
 ${ARCHIVED_PRODUCTS_TABLE}          css=[data-testid="table-products-archived"]
+${ARCHIVED_PRODUCTS_TABLE_ROWS}     css=[data-testid="table-products-archived"] tbody tr:not([aria-hidden="true"])
+${ARCHIVED_PRODUCTS_TAB_BTN}        css=[data-testid="tab-inactive"]
 
 # Row-level Action Buttons
 ${VIEW_PRODUCT_BTN}                 css=[data-testid="btn-products-view"]
@@ -29,10 +31,23 @@ ${EDIT_PRODUCT_BTN}                 css=[data-testid="btn-products-edit"]
 ${ARCHIVE_PRODUCT_BTN}              css=[data-testid="btn-products-archive"]
 ${RESTORE_PRODUCT_BTN}              css=[data-testid="btn-products-restore"]
 
-# Pagination
-${PRODUCTS_PAGINATION_NEXT}         css=.ant-pagination-next button
-${PRODUCTS_PAGINATION_NEXT_DISABLED}    css=.ant-pagination-next.ant-pagination-disabled
-${PRODUCTS_PAGINATION_FIRST}        css=.ant-pagination-item-1
+# Pagination - General (visible on current tab)
+${PRODUCTS_PAGINATION_NEXT}             css=.ant-pagination-next:visible button
+${PRODUCTS_PAGINATION_NEXT_DISABLED}    css=.ant-pagination-next.ant-pagination-disabled:visible
+${PRODUCTS_PAGINATION_PREV}             css=.ant-pagination-prev:visible button
+${PRODUCTS_PAGINATION_PREV_DISABLED}    css=.ant-pagination-prev.ant-pagination-disabled:visible
+${PRODUCTS_PAGINATION_FIRST}            css=.ant-pagination-item-1:visible
+${PRODUCTS_PAGINATION_PAGE_2}           css=.ant-pagination-item-2:visible
+${PRODUCTS_PAGINATION_PAGE_3}           css=.ant-pagination-item-3:visible
+
+# Pagination - Archived Products (alias to general pagination since only one is visible at a time)
+${ARCHIVED_PAGINATION_NEXT}             css=.ant-pagination-next:visible button
+${ARCHIVED_PAGINATION_NEXT_DISABLED}    css=.ant-pagination-next.ant-pagination-disabled:visible
+${ARCHIVED_PAGINATION_PREV}             css=.ant-pagination-prev:visible button
+${ARCHIVED_PAGINATION_PREV_DISABLED}    css=.ant-pagination-prev.ant-pagination-disabled:visible
+${ARCHIVED_PAGINATION_FIRST}            css=.ant-pagination-item-1:visible
+${ARCHIVED_PAGINATION_PAGE_2}           css=.ant-pagination-item-2:visible
+${ARCHIVED_PAGINATION_PAGE_3}           css=.ant-pagination-item-3:visible
 
 # Create Product Page
 ${CREATE_PRODUCT_PAGE}              css=[data-testid="page-products-create"]
@@ -52,10 +67,12 @@ ${LEAVE_PAGE_CANCEL_BTN}            css=[data-testid="btn-navigation-blocker-can
 # Product Details Modal
 ${PRODUCT_DETAILS_MODAL}            css=[data-testid="modal-product-details"] .ant-modal-content
 
-# Update Status Modal (Archive / Restore)
+# Update Status Modal (Archive / Restore) — shares same data-testid for both actions
 ${PRODUCT_UPDATE_STATUS_MODAL}      css=[data-testid="modal-product-update-status"] .ant-modal-content
 ${ARCHIVE_PRODUCT_CONFIRM_BTN}      css=[data-testid="modal-product-update-status-btn-ok"]
 ${ARCHIVE_PRODUCT_CANCEL_BTN}       css=[data-testid="modal-product-update-status-btn-cancel"]
+${RESTORE_PRODUCT_CONFIRM_BTN}      css=[data-testid="modal-product-update-status-btn-ok"]
+${RESTORE_PRODUCT_CANCEL_BTN}       css=[data-testid="modal-product-update-status-btn-cancel"]
 
 # Product Details Drawer
 ${PRODUCT_DETAILS_DRAWER}           css=[data-testid="drawer-product-details"]
