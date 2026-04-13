@@ -135,7 +135,7 @@ ${PRODUCT_SEARCH_BTN}               css=[data-testid="search-customers-eligible-
 
 # Product Drawers
 ${AVAILED_PRODUCT_DRAWER}           css=[data-testid="drawer-customers-availed-product"]
-${PRODUCT_DETAILS_DRAWER}           css=[data-testid="drawer-customers-eligible-product"]
+${ELIGIBLE_PRODUCT_DETAILS_DRAWER}  css=[data-testid="drawer-customers-eligible-product"]
 ${PRODUCT_DETAILS_CLOSE_BTN}        css=.ant-drawer-close
 
 

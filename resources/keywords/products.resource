@@ -48,3 +48,22 @@ Count All Active Product Rows
         Wait For Load Spinner To Disappear
     END
     RETURN    ${total}
+
+Find Active Product Row
+    [Documentation]    Navigates through all pages of the Active Products table until a row
+    ...                matching the given product name is found. Fails if not found on any page.
+    [Arguments]        ${product_name}
+    WHILE    True
+        ${found}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_name}") >> nth=0
+        ...    visible    timeout=3s
+        IF    ${found}    RETURN
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}
+            Fail    Product "${product_name}" not found in Active Products table
+        END
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
