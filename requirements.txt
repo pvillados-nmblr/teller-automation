@@ -1,3 +1,4 @@
 robotframework==7.4.1
-robotframework-browser==19.12.5
+robotframework-browser==19.9.0
 robotframework-imaplibrary2
+pyyaml

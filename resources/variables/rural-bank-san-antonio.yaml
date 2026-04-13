@@ -191,3 +191,41 @@ T43_INVALID_ACCOUNT_NAME: "XXXXXXXXXXX"
 T43_HIGH_DEPOSIT_AMOUNT_1: "500000"
 T43_HIGH_DEPOSIT_AMOUNT_2: "500001"
 T43_HIGH_DEPOSIT_AMOUNT_3: "1000000"
+
+# ---------------------------------------------------------------
+# t5.3 — Create New Savings Product
+# ---------------------------------------------------------------
+T53_DESCRIPTION: "Created via teller app!"
+T53_MIN_AGE: "18"
+T53_REQUIRED_DOCUMENT: "governmentId"
+T53_AVG_DAILY_BALANCE: "1000"
+T53_INITIAL_DEPOSIT: "500"
+T53_WITHDRAWAL_AMOUNT: "5000"
+T53_INTEREST_RATE: "2.5"
+T53_EXCESS_WITHDRAWAL_FEE: "25"
+T53_DORMANCY_FEE: "10"
+T53_ACCOUNT_CLOSURE_FEE: "50"
+T53_TRANSACTION_CHARGE: "2"
+T53_TAX_RATE: "20"
+T53_SECTION_NAME: "Personal Information"
+T53_FIELD_NAME: "Full Name"
+T53_FIELD_PLACEHOLDER: "Enter full name"
+
+# ---------------------------------------------------------------
+# t5.3 — Create New Loans Product
+# ---------------------------------------------------------------
+T53_LOANS_LOAN_PURPOSE: "For personal and home improvement expenses"
+T53_LOANS_MIN_AMOUNT: "10000"
+T53_LOANS_MAX_AMOUNT: "500000"
+T53_LOANS_TERM_LENGTH: "12"
+T53_LOANS_REPAYMENT_METHOD: "Monthly amortization"
+T53_LOANS_MIN_AGE: "21"
+T53_LOANS_MAX_AGE: "65"
+T53_LOANS_MIN_INCOME: "15000"
+T53_LOANS_CREDIT_SCORE: "650"
+T53_LOANS_PROCESSING_FEE: "1500"
+T53_LOANS_PENALTY_RATE: "3.5"
+T53_LOANS_PENALTY_CONDITIONS: "Applied after 30 days overdue"
+T53_LOANS_SECTION_NAME: "Employment Information"
+T53_LOANS_FIELD_NAME: "Employer Name"
+T53_LOANS_FIELD_PLACEHOLDER: "Enter employer name"
