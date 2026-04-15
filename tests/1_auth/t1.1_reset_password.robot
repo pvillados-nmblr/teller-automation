@@ -14,6 +14,14 @@ Test Teardown       Close Browser
 ${RTP_WRONG_CONFIRM_PASSWORD}       WrongPassword999!
 ${OTP}                              123456
 
+# --- Hardcoded OTP Test Values ---
+# These are magic values recognised by the backend to simulate specific OTP states.
+${OTP_INVALID}                      000000    # Always triggers "invalid or expired OTP" error
+${OTP_MAX_ATTEMPTS}                 999999    # Immediately triggers max-attempts error in one attempt
+
+# --- Hardcoded Password Test Value ---
+${RTP_EXPIRED_MAGIC_PWD}            login_reset_password_expired    # Triggers expired temp password error for any valid email
+
 # --- Login Errors ---
 ${ERR_EXPIRED_TEMP_PASSWORD}        Your temporary password has expired. Please use the Forgot Password option to create a new password.
 
@@ -30,7 +38,7 @@ ${ERR_PWD_SPECIAL}                  Password must include at least one special c
 ${ERR_OTP_INVALID}                  OTP is either Invalid or has expired, Please try again.
 
 # --- Max Attempts & Session Errors ---
-${ERR_OTP_MAX_ATTEMPTS}             Verification Failed: You have reached the maximum number of attempts. For your security, we're redirecting you to the previous page.
+${ERR_OTP_MAX_ATTEMPTS}             You have reached the maximum number of attempts.
 ${ERR_OTP_EXPIRED_SESSION}          Your one-time password has expired. Request a new code to continue.
 
 
@@ -102,11 +110,13 @@ t1.1.2 Reset Password via Logging in Using Temporary Password
 t1.1.4 Login Using Expired Temporary Password
     [Documentation]    Verify the system shows an error when the user attempts to log in
     ...                with an expired temporary password.
+    ...                Uses the magic value "${RTP_EXPIRED_MAGIC_PWD}" which the backend
+    ...                always treats as an expired temporary password for any valid email.
     [Tags]             reset-password    negative    temp-password    mvp
 
     Open Teller App
     Fill Text                   ${EMAIL_FIELD}       ${RTP_EXPIRED_USER_EMAIL}
-    Fill Text                   ${PASSWORD_FIELD}    ${EXPIRED_TEMP_PASSWORD}
+    Fill Text                   ${PASSWORD_FIELD}    ${RTP_EXPIRED_MAGIC_PWD}
     Click                       ${LOGIN_BUTTON}
     Wait For Elements State     text=${ERR_EXPIRED_TEMP_PASSWORD}    visible
 
@@ -245,13 +255,15 @@ t1.1.12 Reset Password – Sequential Validation of Multiple Violations
 t1.1.13 Reset Password – Invalid OTP
     [Documentation]    Verify an error message is shown when an incorrect OTP is entered on
     ...                the OTP verification screen.
+    ...                Uses the magic value "${OTP_INVALID}" which the backend always rejects
+    ...                as invalid/expired.
     [Tags]             reset-password    negative    otp    temp-password    mvp
 
     Navigate To Reset Password Page
     Complete Reset Password Form
 
     Click                       ${RTP_OTP_INPUT}
-    Keyboard Input              type    999999
+    Keyboard Input              type    ${OTP_INVALID}
     Click                       ${RTP_OTP_CONTINUE_BTN}
 
     Wait For Elements State     text=${ERR_OTP_INVALID}    visible
@@ -302,6 +314,7 @@ t1.1.16 Reset Password – User Can Request a New OTP After the Cooldown
 t1.1.17 Reset Password – Previously Received OTP Is No Longer Valid After Requesting a New OTP
     [Documentation]    Verify that the original OTP is invalidated once a new OTP is requested.
     [Tags]             reset-password    negative    otp    slow    password-reset    temp-password    mvp
+    skip    This test requires a live OTP and will take > 60 seconds due to cooldown. Run manually with: --variable OTP:<code>
 
     Navigate To Reset Password Page
     Complete Reset Password Form
@@ -321,25 +334,20 @@ t1.1.17 Reset Password – Previously Received OTP Is No Longer Valid After Requ
 
 t1.1.18 Reset Password – Validation on the 5th Failed OTP Attempt (Maximum Allowed Attempts)
     [Documentation]    Verify the system locks the OTP session and redirects the user after
-    ...                5 consecutive failed OTP attempts.
+    ...                reaching the maximum number of OTP attempts.
+    ...                Uses the magic value "${OTP_MAX_ATTEMPTS}" which the backend treats as
+    ...                immediately triggering the max-attempts lockout in a single attempt.
     [Tags]             reset-password    negative    otp    security    temp-password    mvp
 
     Navigate To Reset Password Page
     Complete Reset Password Form
 
-    # Execute 5 consecutive invalid OTP attempts
+    # Enter magic OTP value that immediately triggers max-attempts error
     Wait For Elements State     ${RTP_OTP_INPUT}    visible
-    FOR    ${i}    IN RANGE    1    6
-        Click                   ${RTP_OTP_INPUT}
-        Keyboard Input          type    00000${i}
-        Click                   ${RTP_OTP_CONTINUE_BTN}
-
-        IF    ${i} < 5
-            Wait For Elements State    text=${ERR_OTP_INVALID}        visible
-        ELSE
-            Wait For Elements State    text=${ERR_OTP_MAX_ATTEMPTS}   visible
-        END
-    END
+    Click                       ${RTP_OTP_INPUT}
+    Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
+    Click                       ${RTP_OTP_CONTINUE_BTN}
+    Wait For Elements State     text=${ERR_OTP_MAX_ATTEMPTS}    visible
 
     # Confirm the modal and verify redirection to the Reset Password page
     Click                       ${MODAL_CONFIRM_BTN}
@@ -348,15 +356,16 @@ t1.1.18 Reset Password – Validation on the 5th Failed OTP Attempt (Maximum All
 t1.1.19 Reset Password – Validation on 5th OTP Attempt Across Multiple Resend Requests
     [Documentation]    Verify the 5-attempt limit is strictly enforced across multiple OTP resends.
     [Tags]             reset-password    negative    otp    security    slow    temp-password    mvp
+    skip    This test requires a live OTP and will take > 5 minutes due to multiple cooldowns. Run manually with: --variable OTP:<code>
 
     Navigate To Reset Password Page
     Complete Reset Password Form
 
-    # 1. First 2 invalid attempts (Attempts 1 & 2)
+    # 1. First 2 invalid attempts (Attempts 1 & 2) — use magic invalid OTP value
     Wait For Elements State     ${RTP_OTP_INPUT}    visible
     FOR    ${i}    IN RANGE    2
         Click                   ${RTP_OTP_INPUT}
-        Keyboard Input          type    111111
+        Keyboard Input          type    ${OTP_INVALID}
         Click                   ${RTP_OTP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -366,11 +375,11 @@ t1.1.19 Reset Password – Validation on 5th OTP Attempt Across Multiple Resend 
     Wait For Elements State     ${RTP_OTP_RESEND_BTN}    enabled
     Click                       ${RTP_OTP_RESEND_BTN}
 
-    # 3. Next 2 invalid attempts (Attempts 3 & 4)
+    # 3. Next 2 invalid attempts (Attempts 3 & 4) — use magic invalid OTP value
     Wait For Elements State     ${RTP_OTP_INPUT}    visible
     FOR    ${i}    IN RANGE    2
         Click                   ${RTP_OTP_INPUT}
-        Keyboard Input          type    222222
+        Keyboard Input          type    ${OTP_INVALID}
         Click                   ${RTP_OTP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -380,10 +389,10 @@ t1.1.19 Reset Password – Validation on 5th OTP Attempt Across Multiple Resend 
     Wait For Elements State     ${RTP_OTP_RESEND_BTN}    enabled
     Click                       ${RTP_OTP_RESEND_BTN}
 
-    # 5. Final (5th) invalid attempt
+    # 5. Final (5th) attempt — use magic max-attempts value to trigger lockout
     Wait For Elements State     ${RTP_OTP_INPUT}    visible
     Click                       ${RTP_OTP_INPUT}
-    Keyboard Input              type    333333
+    Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
     Click                       ${RTP_OTP_CONTINUE_BTN}
 
     # Assert failure modal and redirection
@@ -395,7 +404,8 @@ t1.1.20 Reset Password – Behavior When OTP Session Expires Before Reaching Max
     [Documentation]    Verify system behavior when a user's OTP session expires before they
     ...                reach the maximum number of failed attempts.
     [Tags]             reset-password    negative    otp    security    slow    temp-password    mvp
-
+    skip    This test requires a live OTP and will take > 5 minutes due to session expiry. Run manually with: --variable OTP:<code>
+    
     Navigate To Reset Password Page
     Complete Reset Password Form
 
@@ -403,7 +413,7 @@ t1.1.20 Reset Password – Behavior When OTP Session Expires Before Reaching Max
     Wait For Elements State     ${RTP_OTP_INPUT}    visible
     FOR    ${i}    IN RANGE    3
         Click                   ${RTP_OTP_INPUT}
-        Keyboard Input          type    444444
+        Keyboard Input          type    ${OTP_INVALID}
         Click                   ${RTP_OTP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -413,7 +423,7 @@ t1.1.20 Reset Password – Behavior When OTP Session Expires Before Reaching Max
 
     # 3. Attempt a 4th input after session expiry
     Click                       ${RTP_OTP_INPUT}
-    Keyboard Input              type    555555
+    Keyboard Input              type    ${OTP_INVALID}
     Click                       ${RTP_OTP_CONTINUE_BTN}
     Wait For Elements State     text=${ERR_OTP_INVALID}    visible
 

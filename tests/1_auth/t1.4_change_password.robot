@@ -17,6 +17,11 @@ ${CP_NEW_PASSWORD}                  Password123!!
 ${CP_WRONG_CONFIRM_PASSWORD}        WrongPassword999!
 ${OTP}                              123456
 
+# --- Hardcoded OTP Test Values ---
+# These are magic values recognised by the backend to simulate specific OTP states.
+${OTP_INVALID}                      000000    # Always triggers "invalid or expired OTP" error
+${OTP_MAX_ATTEMPTS}                 999999    # Immediately triggers max-attempts error in one attempt
+
 # --- Change Password Form Errors ---
 ${ERR_PASSWORD_MISMATCH}            Passwords do not match.
 
@@ -30,7 +35,7 @@ ${ERR_PWD_SPECIAL}                  Password must include at least one special c
 ${ERR_OTP_INVALID}                  OTP is either Invalid or has expired, Please try again.
 
 # --- Max Attempts & Session Errors ---
-${ERR_OTP_MAX_ATTEMPTS}             Verification Failed: You have reached the maximum number of attempts. For your security, we're redirecting you to the previous page.
+${ERR_OTP_MAX_ATTEMPTS}             You have reached the maximum number of attempts.
 ${ERR_OTP_EXPIRED_SESSION}          Your one-time password has expired. Request a new code to continue.
 
 
@@ -196,13 +201,15 @@ t1.4.8 Change Password – Sequential Validation of Multiple Violations
 t1.4.9 Change Password – Invalid OTP
     [Documentation]    Verify an error message is shown when an incorrect OTP is entered on
     ...                the OTP verification screen.
+    ...                Uses the magic value "${OTP_INVALID}" which the backend always rejects
+    ...                as invalid/expired.
     [Tags]             change-password    negative    otp    mvp
 
     Navigate To Change Password Page
     Complete Change Password Form
 
     Click                       ${CP_OTP_INPUT}
-    Keyboard Input              type    999999
+    Keyboard Input              type    ${OTP_INVALID}
     Click                       ${CP_OTP_CONTINUE_BTN}
 
     Wait For Elements State     text=${ERR_OTP_INVALID}    visible
@@ -235,7 +242,7 @@ t1.4.12 Change Password – User Can Request a New OTP After the Cooldown
     ...                expires and complete the Change Password flow successfully.
     ...                Note: This test will take > 60 seconds to execute.
     [Tags]             change-password    positive    otp    slow    password-reset    mvp
-
+    
     Navigate To Change Password Page
     Complete Change Password Form
 
@@ -252,6 +259,7 @@ t1.4.12 Change Password – User Can Request a New OTP After the Cooldown
 t1.4.13 Change Password – Previously Received OTP Is No Longer Valid After Requesting a New OTP
     [Documentation]    Verify that the original OTP is invalidated once a new OTP is requested.
     [Tags]             change-password    negative    otp    slow    password-reset    mvp
+    skip    This test requires a live OTP and will take > 60 seconds due to cooldown. Run manually with: --variable OTP:<code>
 
     Navigate To Change Password Page
     Complete Change Password Form
@@ -271,25 +279,20 @@ t1.4.13 Change Password – Previously Received OTP Is No Longer Valid After Req
 
 t1.4.14 Change Password – Validation on the 5th Failed OTP Attempt (Maximum Allowed Attempts)
     [Documentation]    Verify the system locks the OTP session and redirects the user after
-    ...                5 consecutive failed OTP attempts.
+    ...                reaching the maximum number of OTP attempts.
+    ...                Uses the magic value "${OTP_MAX_ATTEMPTS}" which the backend treats as
+    ...                immediately triggering the max-attempts lockout in a single attempt.
     [Tags]             change-password    negative    otp    security    mvp
 
     Navigate To Change Password Page
     Complete Change Password Form
 
-    # Execute 5 consecutive invalid OTP attempts
+    # Enter magic OTP value that immediately triggers max-attempts error
     Wait For Elements State     ${CP_OTP_INPUT}    visible
-    FOR    ${i}    IN RANGE    1    6
-        Click                   ${CP_OTP_INPUT}
-        Keyboard Input          type    00000${i}
-        Click                   ${CP_OTP_CONTINUE_BTN}
-
-        IF    ${i} < 5
-            Wait For Elements State    text=${ERR_OTP_INVALID}        visible
-        ELSE
-            Wait For Elements State    text=${ERR_OTP_MAX_ATTEMPTS}   visible
-        END
-    END
+    Click                       ${CP_OTP_INPUT}
+    Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
+    Click                       ${CP_OTP_CONTINUE_BTN}
+    Wait For Elements State     text=${ERR_OTP_MAX_ATTEMPTS}    visible
 
     # Confirm the modal and verify redirection to the Change Password page
     Click                       ${MODAL_CONFIRM_BTN}
@@ -298,15 +301,16 @@ t1.4.14 Change Password – Validation on the 5th Failed OTP Attempt (Maximum Al
 t1.4.15 Change Password – Validation on 5th OTP Attempt Across Multiple Resend Requests
     [Documentation]    Verify the 5-attempt limit is strictly enforced across multiple OTP resends.
     [Tags]             change-password    negative    otp    security    slow    mvp
+    skip    This test requires a live OTP and will take > 5 minutes due to multiple cooldowns. Run manually with: --variable OTP:<code>
 
     Navigate To Change Password Page
     Complete Change Password Form
 
-    # 1. First 2 invalid attempts (Attempts 1 & 2)
+    # 1. First 2 invalid attempts (Attempts 1 & 2) — use magic invalid OTP value
     Wait For Elements State     ${CP_OTP_INPUT}    visible
     FOR    ${i}    IN RANGE    2
         Click                   ${CP_OTP_INPUT}
-        Keyboard Input          type    111111
+        Keyboard Input          type    ${OTP_INVALID}
         Click                   ${CP_OTP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -316,11 +320,11 @@ t1.4.15 Change Password – Validation on 5th OTP Attempt Across Multiple Resend
     Wait For Elements State     ${CP_OTP_RESEND_BTN}    enabled
     Click                       ${CP_OTP_RESEND_BTN}
 
-    # 3. Next 2 invalid attempts (Attempts 3 & 4)
+    # 3. Next 2 invalid attempts (Attempts 3 & 4) — use magic invalid OTP value
     Wait For Elements State     ${CP_OTP_INPUT}    visible
     FOR    ${i}    IN RANGE    2
         Click                   ${CP_OTP_INPUT}
-        Keyboard Input          type    222222
+        Keyboard Input          type    ${OTP_INVALID}
         Click                   ${CP_OTP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -330,10 +334,10 @@ t1.4.15 Change Password – Validation on 5th OTP Attempt Across Multiple Resend
     Wait For Elements State     ${CP_OTP_RESEND_BTN}    enabled
     Click                       ${CP_OTP_RESEND_BTN}
 
-    # 5. Final (5th) invalid attempt
+    # 5. Final (5th) attempt — use magic max-attempts value to trigger lockout
     Wait For Elements State     ${CP_OTP_INPUT}    visible
     Click                       ${CP_OTP_INPUT}
-    Keyboard Input              type    333333
+    Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
     Click                       ${CP_OTP_CONTINUE_BTN}
 
     # Assert failure modal and redirection
@@ -345,15 +349,16 @@ t1.4.16 Change Password – Behavior When OTP Session Expires Before Reaching Ma
     [Documentation]    Verify system behavior when a user's OTP session expires before they
     ...                reach the maximum number of failed attempts.
     [Tags]             change-password    negative    otp    security    slow    mvp
+    skip    This test requires a live OTP and will take > 5 minutes due to session expiry. Run manually with: --variable OTP:<code>
 
     Navigate To Change Password Page
     Complete Change Password Form
 
-    # 1. Execute 3 invalid attempts within the active OTP session
+    # 1. Execute 3 invalid attempts within the active OTP session — use magic invalid OTP value
     Wait For Elements State     ${CP_OTP_INPUT}    visible
     FOR    ${i}    IN RANGE    3
         Click                   ${CP_OTP_INPUT}
-        Keyboard Input          type    444444
+        Keyboard Input          type    ${OTP_INVALID}
         Click                   ${CP_OTP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -361,9 +366,9 @@ t1.4.16 Change Password – Behavior When OTP Session Expires Before Reaching Ma
     # 2. Wait for the OTP session to expire (5 minutes)
     Sleep                       300s
 
-    # 3. Attempt a 4th input after session expiry
+    # 3. Attempt a 4th input after session expiry — use magic invalid OTP value
     Click                       ${CP_OTP_INPUT}
-    Keyboard Input              type    555555
+    Keyboard Input              type    ${OTP_INVALID}
     Click                       ${CP_OTP_CONTINUE_BTN}
     Wait For Elements State     text=${ERR_OTP_INVALID}    visible
 

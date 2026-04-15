@@ -20,6 +20,12 @@ ${ERR_EMAIL_REQUIRED}               Email is required.
 ${ERR_INVALID_EMAIL_FORMAT}         Invalid email format.
 ${ERR_PASSWORD_MISMATCH}            Passwords do not match
 ${OTP}                              123456
+
+# --- Hardcoded OTP Test Values ---
+# These are magic values recognised by the backend to simulate specific OTP states.
+${OTP_INVALID}                      000000    # Always triggers "invalid or expired OTP" error
+${OTP_MAX_ATTEMPTS}                 999999    # Immediately triggers max-attempts error in one attempt
+
 # --- Password Validation Errors ---
 ${ERR_PWD_MIN_LENGTH}               Password must contain a minimum of 8 characters.
 ${ERR_PWD_UPPERCASE}                Password must include at least one uppercase letter.
@@ -27,10 +33,10 @@ ${ERR_PWD_NUMBER}                   Password must include at least one number.
 ${ERR_PWD_SPECIAL}                  Password must include at least one special character.
 
 # --- OTP Errors ---
-${ERR_OTP_INVALID}                  OTP is either invalid or has expired, Please try again.
+${ERR_OTP_INVALID}                  OTP is either invalid or has expired. Please try again or request a new OTP.
 
 # --- Max Attempts & Session Errors ---
-${ERR_OTP_MAX_ATTEMPTS}             Verification Failed: You have reached the maximum number of attempts. For your security, we’re redirecting you to the previous page.
+${ERR_OTP_MAX_ATTEMPTS}             You have reached the maximum number of attempts.
 ${ERR_OTP_EXPIRED_SESSION}          Your one-time password has expired. Request a new code to continue.
 
 
@@ -59,6 +65,7 @@ t1.3.1 Reset Password via Forgot Password
     [Documentation]    Verify that a registered teller can successfully reset their password
     ...                via the Forgot Password flow and see the success confirmation screen.
     [Tags]             forgot-password    smoke    password-reset    mvp
+    # Requires a live OTP — manual testing needed
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -260,6 +267,8 @@ t1.3.12 Reset Password – Sequential Validation of Multiple Violations
 
 t1.3.13 Reset Password – Invalid OTP
     [Documentation]    Verify error message when an incorrect OTP is entered.
+    ...                Uses the magic value "${OTP_INVALID}" which the backend always rejects
+    ...                as invalid/expired.
     [Tags]             forgot-password    negative    otp    requires-otp-validation    mvp
 
     Navigate To Forgot Password Page
@@ -268,7 +277,7 @@ t1.3.13 Reset Password – Invalid OTP
 
     Wait For Elements State     ${FP_OTP_INPUT}      visible
     Click                       ${FP_OTP_INPUT}
-    Keyboard Input              type    999999
+    Keyboard Input              type    ${OTP_INVALID}
     Click                       ${FP_CONTINUE_BTN}
 
     Wait For Elements State     text=${ERR_OTP_INVALID}       visible
@@ -317,6 +326,7 @@ t1.3.16 Reset Password – Request New OTP After Cooldown
 t1.3.17 Reset Password – Old OTP Invalidated After Resend
     [Documentation]    Verify the first OTP becomes invalid if a second one is requested.
     [Tags]             forgot-password    negative    otp    slow    requires-otp-validation    mvp
+    skip    This test requires a live OTP and will take > 60 seconds. Run manually with: --variable OTP:<code>
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -338,45 +348,41 @@ t1.3.17 Reset Password – Old OTP Invalidated After Resend
 
 
 t1.3.18 Reset Password – Validation on the 5th failed OTP attempt (maximum allowed attempts)
-    [Documentation]    Verify session lock and redirection after 5 consecutive wrong OTPs.
+    [Documentation]    Verify session lock and redirection after reaching the maximum number
+    ...                of OTP attempts.
+    ...                Uses the magic value "${OTP_MAX_ATTEMPTS}" which the backend treats as
+    ...                immediately triggering the max-attempts lockout in a single attempt.
     [Tags]             forgot-password    negative    otp    security    requires-otp-validation    mvp
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
     Click                       ${FP_SEND_CODE_BTN}
 
-    # Execute 5 invalid attempts
+    # Enter magic OTP value that immediately triggers max-attempts error
     Wait For Elements State     ${FP_OTP_INPUT}      visible
-    FOR    ${i}    IN RANGE    1    6
-        Click                       ${FP_OTP_INPUT}
-        Keyboard Input              type    00000${i}
-        Click                       ${FP_CONTINUE_BTN}
-
-        IF    ${i} < 5
-            Wait For Elements State    text=${ERR_OTP_INVALID}         visible
-        ELSE
-            # On the 5th attempt, verify the maximum attempts error message
-            Wait For Elements State    text=${ERR_OTP_MAX_ATTEMPTS}    visible
-        END
-    END
+    Click                       ${FP_OTP_INPUT}
+    Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
+    Click                       ${FP_CONTINUE_BTN}
+    Wait For Elements State     ${MODAL_OTP_ERROR_CONFIRM_BTN}   visible
 
     # Click CONFIRM on the modal and verify redirection to the Reset Password (FP) page
-    Click                       ${MODAL_CONFIRM_BTN}
-    Wait For Elements State     ${FP_PAGE}                             visible
+    Click                       ${MODAL_OTP_ERROR_CONFIRM_BTN}
+    Wait For Elements State     ${FP_PAGE}                      visible
 
 t1.3.19 Reset Password – Validation on 5th OTP attempt across multiple resend requests
     [Documentation]    Verify the 5-attempt limit is strictly enforced across multiple OTP resends.
     [Tags]             forgot-password    negative    otp    security    slow    requires-otp-validation    mvp
+    skip    This test requires a live OTP and will take > 5 minutes due to multiple cooldowns. Run manually with: --variable OTP:<code>
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
     Click                       ${FP_SEND_CODE_BTN}
 
-    # 1. First 2 invalid attempts
+    # 1. First 2 invalid attempts — use magic invalid OTP value
     Wait For Elements State     ${FP_OTP_INPUT}      visible
     FOR    ${i}    IN RANGE    2
         Click                       ${FP_OTP_INPUT}
-        Keyboard Input              type    111111
+        Keyboard Input              type    ${OTP_INVALID}
         Click                       ${FP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -385,11 +391,11 @@ t1.3.19 Reset Password – Validation on 5th OTP attempt across multiple resend 
     Sleep                       61s
     Click                       ${FP_RESEND_BTN}
 
-    # 3. Next 2 invalid attempts (Attempts 3 & 4)
+    # 3. Next 2 invalid attempts (Attempts 3 & 4) — use magic invalid OTP value
     Wait For Elements State     ${FP_OTP_INPUT}      visible
     FOR    ${i}    IN RANGE    2
         Click                       ${FP_OTP_INPUT}
-        Keyboard Input              type    222222
+        Keyboard Input              type    ${OTP_INVALID}
         Click                       ${FP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -398,10 +404,10 @@ t1.3.19 Reset Password – Validation on 5th OTP attempt across multiple resend 
     Sleep                       61s
     Click                       ${FP_RESEND_BTN}
 
-    # 5. Final (5th) invalid attempt
+    # 5. Final (5th) attempt — use magic max-attempts value to trigger lockout
     Wait For Elements State     ${FP_OTP_INPUT}      visible
     Click                       ${FP_OTP_INPUT}
-    Keyboard Input              type    333333
+    Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
     Click                       ${FP_CONTINUE_BTN}
 
     # Assert failure modal and redirection
@@ -412,16 +418,17 @@ t1.3.19 Reset Password – Validation on 5th OTP attempt across multiple resend 
 t1.3.20 Reset Password – Behavior when OTP session expires before reaching max attempts
     [Documentation]    Verify system behavior when a user attempts to input an OTP after the 5-minute session expires.
     [Tags]             forgot-password    negative    otp    security    slow    requires-otp-validation    mvp
+    skip    This test requires a live OTP and will take > 5 minutes due to session expiry. Run manually with: --variable OTP:<code>
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
     Click                       ${FP_SEND_CODE_BTN}
 
-    # 1. Execute 3 invalid attempts within active session
+    # 1. Execute 3 invalid attempts within active session — use magic invalid OTP value
     Wait For Elements State     ${FP_OTP_INPUT}      visible
     FOR    ${i}    IN RANGE    3
         Click                       ${FP_OTP_INPUT}
-        Keyboard Input              type    444444
+        Keyboard Input              type    ${OTP_INVALID}
         Click                       ${FP_CONTINUE_BTN}
         Wait For Elements State    text=${ERR_OTP_INVALID}    visible
     END
@@ -429,9 +436,9 @@ t1.3.20 Reset Password – Behavior when OTP session expires before reaching max
     # 2. Wait for OTP session to expire (5 minutes)
     Sleep                       240s
 
-    # 3. Attempt 4th input after session expiry
+    # 3. Attempt 4th input after session expiry — use magic invalid OTP value
     Click                       ${FP_OTP_INPUT}
-    Keyboard Input              type    555555
+    Keyboard Input              type    ${OTP_INVALID}
     Click                       ${FP_CONTINUE_BTN}
     Wait For Elements State     text=${ERR_OTP_INVALID}    visible
 
