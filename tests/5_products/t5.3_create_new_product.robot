@@ -1129,3 +1129,471 @@ t5.3.17 New Loans Product Visibility in Customer Eligible Products Tab
     # Close side panel
     Click    ${PRODUCT_DETAILS_CLOSE_BTN}
     Wait For Elements State    ${ELIGIBLE_PRODUCT_DETAILS_DRAWER}    hidden
+
+t5.3.18 Cancel Product Creation – Discard Unsaved Data
+    [Documentation]    Verify that clicking 'Back' on the Product Configuration step while fields
+    ...                are partially filled shows the leave-page confirmation modal, and clicking
+    ...                'Confirm' redirects the user to the Products Module with all unsaved data
+    ...                discarded and no partial product created.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Create Product page (Savings) with fields partially filled.
+    [Tags]    products    create    savings    smoke    mvp
+    Navigate To Create Savings Product
+    # Partially fill Product Name to simulate unsaved in-progress data
+    Fill Text    ${CP_PRODUCT_NAME_INPUT}    t5.3.18 Partial Savings
+    # Click Back — verify leave-page confirmation modal appears with both buttons
+    Click    ${CP_BACK_BTN}
+    Wait For Elements State    ${LEAVE_PAGE_CONFIRM_MODAL}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${LEAVE_PAGE_CONFIRM_BTN}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${LEAVE_PAGE_CANCEL_BTN}    visible
+    # Click Confirm — verify redirect to Products Module (unsaved data discarded)
+    Click    ${LEAVE_PAGE_CONFIRM_BTN}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    ${PRODUCTS_LIST_PAGE}    visible
+
+t5.3.19 Session Timeout During Product Creation Flow
+    [Documentation]    Verify that when a teller remains inactive for 5 minutes and 1 second
+    ...                during the Create Product flow, the session is automatically terminated,
+    ...                the user is redirected to the Login page, and a 'Session Expired' modal
+    ...                is displayed with unsaved product data lost.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on any step of the Create Product flow.
+    ...                3. User remains inactive beyond session timeout (5 minutes).
+    [Tags]    products    create    regression
+    Skip    msg=Requires 5+ minutes of idle time — not suitable for automated CI runs. Execute manually: navigate to Create Product, leave idle for 5m 1s, verify Session Expired modal appears and user is redirected to Login.
+
+t5.3.20 Back Navigation from Review Step Preserves All Entered Data
+    [Documentation]    Verify that clicking 'Back' from the Review Product step (Step 3) returns
+    ...                to Step 2 with all Customer Form data intact, and that clicking 'Back' again
+    ...                from Step 2 returns to Step 1 with all Product Configuration data intact.
+    ...                No data loss occurs when navigating backwards through the flow.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 3 – Review Product for a Savings product.
+    [Tags]    products    create    savings    regression    mvp
+    ${timestamp}=    Evaluate    __import__('datetime').datetime.now().strftime('%m%d%H%M%S')
+    ${product_name}=    Set Variable    t5.3.20 Savings ${timestamp}
+    # Navigate through full flow: Step 1 → Step 2 with a section and field
+    Navigate To Savings Customer Form    ${product_name}
+    Add Section To Customer Form    ${T53_SECTION_NAME}
+    Add Text Input Field To Section    ${T53_FIELD_NAME}    ${T53_FIELD_PLACEHOLDER}
+    # Advance to Step 3 – Review Product
+    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    enabled    timeout=5s
+    Click    ${CREATE_PRODUCT_CONTINUE_BTN}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    css=.ant-steps-item-process:has-text("Review Product")    visible
+    # Click Back from Step 3 — verify return to Step 2 with Customer Form data preserved
+    Click    ${CP_BACK_BTN}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    css=.ant-steps-item-process:has-text("Customer Form")    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_PAGE} >> text=${T53_SECTION_NAME}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_PAGE} >> text=${T53_FIELD_NAME}    visible
+    # Click Back from Step 2 — verify return to Step 1 with Product Configuration data preserved
+    Click    ${CP_BACK_BTN}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    css=.ant-steps-item-process:has-text("Product Configuration")    visible
+    ${name_value}=    Get Property    ${CP_PRODUCT_NAME_INPUT}    value
+    Run Keyword And Continue On Failure
+    ...    Should Contain    ${name_value}    t5.3.20
+    ...    msg=Expected product name to be preserved on Step 1 after back navigation, but got: ${name_value}
+    # Verify Continue is still enabled (all Step 1 fields still populated)
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    enabled    timeout=5s
+
+t5.3.21 Mandatory Field Validation – Product Details Section (Savings)
+    [Documentation]    Verify that leaving mandatory Product Details fields blank (Product Name,
+    ...                Description) and interacting with them triggers field-level validation errors,
+    ...                and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Savings.
+    [Tags]    products    create    savings    validation
+    Navigate To Create Savings Product
+    # Fill then clear Product Name to trigger required field validation
+    Fill Text    ${CP_PRODUCT_NAME_INPUT}    x
+    Fill Text    ${CP_PRODUCT_NAME_INPUT}    ${EMPTY}
+    # Fill then clear Description to trigger required field validation
+    Fill Text    ${CP_DESCRIPTION_TEXTAREA}    x
+    Fill Text    ${CP_DESCRIPTION_TEXTAREA}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Product Details
+    # Verify each field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="product.name"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="product.description"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.22 Mandatory Field Validation – Account Configuration Section (Savings)
+    [Documentation]    Verify that leaving mandatory Account Configuration fields blank (Average
+    ...                Daily Balance, Initial Deposit Required) and interacting with them triggers
+    ...                validation errors, and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Savings.
+    [Tags]    products    create    savings    validation
+    Navigate To Create Savings Product
+    # Scroll to Account Configuration and fill then clear each mandatory field
+    Scroll To Element    ${CP_AVG_DAILY_BALANCE_INPUT}
+    Fill Text    ${CP_AVG_DAILY_BALANCE_INPUT}    1
+    Fill Text    ${CP_AVG_DAILY_BALANCE_INPUT}    ${EMPTY}
+    Fill Text    ${CP_INITIAL_DEPOSIT_INPUT}    1
+    Fill Text    ${CP_INITIAL_DEPOSIT_INPUT}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Account Configuration
+    # Verify each field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="accountConfig.avgDailyBalance"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="accountConfig.initialDeposit"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.23 Mandatory Field Validation – Interest Configuration Section (Savings)
+    [Documentation]    Verify that leaving the Interest Rate (%) field blank and interacting with
+    ...                it triggers a validation error, and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Savings.
+    [Tags]    products    create    savings    validation
+    Navigate To Create Savings Product
+    # Scroll to Interest Configuration and fill then clear Interest Rate to trigger validation
+    Scroll To Element    ${CP_INTEREST_RATE_INPUT}
+    Fill Text    ${CP_INTEREST_RATE_INPUT}    1
+    Fill Text    ${CP_INTEREST_RATE_INPUT}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Interest Configuration
+    # Verify the Interest Rate field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="interest.rate"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.24 Add New Section Without Entering a Section Name (Savings)
+    [Documentation]    Verify that clicking 'Add new section' on the Savings Customer Form opens
+    ...                a modal where the 'Add section' button remains disabled until a section
+    ...                name is entered, preventing creation of a blank-named section.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for Savings.
+    [Tags]    products    create    savings    smoke    mvp
+    Navigate To Savings Customer Form    t5.3.24 Savings
+    # Open Add new section modal
+    Click    ${CP_ADD_SECTION_BTN}
+    Wait For Elements State    ${CP_MODAL}    visible
+    # Verify Section Name input is present and Add section button is disabled (name is blank)
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CP_SECTION_NAME_INPUT}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CP_ADD_SECTION_CONFIRM_BTN}    disabled
+    # Dismiss modal without creating a section
+    Click    ${CP_MODAL_BACK_BTN}
+    Wait For Elements State    ${CP_MODAL}    hidden    timeout=5s
+
+t5.3.25 Add Customer Input Field with All Mandatory Fields Blank (Savings)
+    [Documentation]    Verify that opening the 'Add customer input field' modal for Savings and
+    ...                leaving Field Name and Placeholder blank triggers validation errors and
+    ...                prevents the field from being added to the section.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for Savings.
+    ...                3. A section exists.
+    [Tags]    products    create    savings    validation
+    Navigate To Savings Customer Form    t5.3.25 Savings
+    Add Section To Customer Form    ${T53_SECTION_NAME}
+    # Open Add customer input field modal
+    Click    css=[data-testid="page-products-create"] button:has-text("Add customer input field")
+    Wait For Elements State    ${CP_MODAL}    visible
+    # Verify Add field button is disabled when all mandatory fields are blank
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CP_ADD_FIELD_CONFIRM_BTN}    disabled
+    # Fill then clear Field Name and Placeholder to trigger validation errors
+    Fill Text    ${CP_FIELD_NAME_INPUT}    x
+    Fill Text    ${CP_FIELD_NAME_INPUT}    ${EMPTY}
+    Fill Text    ${CP_FIELD_PLACEHOLDER_INPUT}    x
+    Fill Text    ${CP_FIELD_PLACEHOLDER_INPUT}    ${EMPTY}
+    Click    css=.ant-modal-wrap:not([style*="display: none"]) .ant-modal-header
+    # Verify each modal field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"]) [data-field="label"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"]) [data-field="placeholder"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Dismiss modal — field should NOT be added to the section
+    Click    ${CP_MODAL_BACK_BTN}
+    Wait For Elements State    ${CP_MODAL}    hidden    timeout=5s
+    ${field_visible}=    Run Keyword And Return Status
+    ...    Wait For Elements State    ${CREATE_PRODUCT_PAGE} >> text=${T53_FIELD_NAME}    visible    timeout=3s
+    Run Keyword And Continue On Failure
+    ...    Should Not Be True    ${field_visible}
+    ...    msg=Field "${T53_FIELD_NAME}" should not have been added when modal was dismissed without confirming
+
+t5.3.26 Continue Button Disabled When Section Has No Fields (Savings)
+    [Documentation]    Verify that when a custom section exists in the Savings Customer Form but
+    ...                contains no fields, the Continue button remains disabled and the user
+    ...                cannot proceed to Step 3.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for Savings.
+    ...                3. A section exists but contains zero custom fields.
+    [Tags]    products    create    savings    smoke    mvp
+    Navigate To Savings Customer Form    t5.3.26 Savings
+    # Add a section without adding any fields
+    Add Section To Customer Form    ${T53_SECTION_NAME}
+    # Verify Continue remains disabled when the section is empty
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.27 Mandatory Field Validation – Product Definition Section (Loans)
+    [Documentation]    Verify that leaving mandatory Product Definition fields blank (Loan Type,
+    ...                Preferred Customers, Loan Purpose) and interacting with them triggers
+    ...                validation errors, and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Loans.
+    [Tags]    products    create    loans    validation
+    Navigate To Create Loans Product
+    # Fill then clear Loan Purpose textarea to trigger required field validation
+    Fill Text    ${CLP_LOAN_PURPOSE_TEXTAREA}    x
+    Fill Text    ${CLP_LOAN_PURPOSE_TEXTAREA}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Product Definition
+    # Verify the Loan Purpose field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="definition.purpose"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.28 Mandatory Field Validation – Product Details Section (Loans)
+    [Documentation]    Verify that leaving mandatory Product Details fields blank (Product Name,
+    ...                Description) for a Loans product and interacting with them triggers
+    ...                validation errors, and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Loans.
+    [Tags]    products    create    loans    validation
+    Navigate To Create Loans Product
+    # Fill then clear Product Name and Description to trigger required field validation
+    Fill Text    ${CLP_PRODUCT_NAME_INPUT}    x
+    Fill Text    ${CLP_PRODUCT_NAME_INPUT}    ${EMPTY}
+    Fill Text    ${CLP_DESCRIPTION_TEXTAREA}    x
+    Fill Text    ${CLP_DESCRIPTION_TEXTAREA}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Product Details
+    # Verify each field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="details.name"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="details.description"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.29 Mandatory Field Validation – Loan Features Section (Loans)
+    [Documentation]    Verify that leaving mandatory Loan Features fields blank (Min/Max Loan
+    ...                Amount, Loan Term Length, Loan Term Unit, Interest Rate Type, Repayment
+    ...                Method) and interacting with them triggers validation errors, and the
+    ...                Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Loans.
+    [Tags]    products    create    loans    validation
+    Navigate To Create Loans Product
+    # Scroll to Loan Features and fill then clear mandatory numeric inputs
+    Scroll To Element    ${CLP_MIN_AMOUNT_INPUT}
+    Fill Text    ${CLP_MIN_AMOUNT_INPUT}    1
+    Fill Text    ${CLP_MIN_AMOUNT_INPUT}    ${EMPTY}
+    Fill Text    ${CLP_MAX_AMOUNT_INPUT}    1
+    Fill Text    ${CLP_MAX_AMOUNT_INPUT}    ${EMPTY}
+    Fill Text    ${CLP_TERM_LENGTH_INPUT}    1
+    Fill Text    ${CLP_TERM_LENGTH_INPUT}    ${EMPTY}
+    # Repayment Method is a dropdown — click to open then close without selecting
+    Click    ${CLP_REPAYMENT_METHOD_INPUT}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Loan Features
+    # Verify each field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="features.minAmount"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="features.maxAmount"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="features.termLength"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="features.repaymentMethod"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.30 Mandatory Field Validation – Eligibility Criteria Section (Loans)
+    [Documentation]    Verify that leaving mandatory Eligibility Criteria fields blank (Minimum
+    ...                Age, Maximum Age) and interacting with them triggers validation errors,
+    ...                and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Loans.
+    [Tags]    products    create    loans    validation
+    Navigate To Create Loans Product
+    # Scroll to Eligibility Criteria and fill then clear age fields
+    Scroll To Element    ${CLP_MIN_AGE_INPUT}
+    Fill Text    ${CLP_MIN_AGE_INPUT}    1
+    Fill Text    ${CLP_MIN_AGE_INPUT}    ${EMPTY}
+    Fill Text    ${CLP_MAX_AGE_INPUT}    1
+    Fill Text    ${CLP_MAX_AGE_INPUT}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Eligibility Criteria
+    # Verify each field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="eligibility.minAge"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="eligibility.maxAge"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.31 Mandatory Field Validation – Pricing & Fees Section (Loans)
+    [Documentation]    Verify that leaving mandatory Pricing & Fees fields blank (Interest Rate %,
+    ...                Interest Rate Structure, Processing Fee) and interacting with them triggers
+    ...                validation errors, and the Continue button remains disabled.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 1 – Product Configuration for Loans.
+    [Tags]    products    create    loans    validation
+    Navigate To Create Loans Product
+    # Scroll to Pricing & Fees and fill then clear mandatory inputs
+    Scroll To Element    ${CLP_PRICING_RATE_INPUT}
+    Fill Text    ${CLP_PRICING_RATE_INPUT}    1
+    Fill Text    ${CLP_PRICING_RATE_INPUT}    ${EMPTY}
+    Fill Text    ${CLP_PROCESSING_FEE_INPUT}    1
+    Fill Text    ${CLP_PROCESSING_FEE_INPUT}    ${EMPTY}
+    Click    ${CREATE_PRODUCT_PAGE} >> text=Pricing & Fees
+    # Verify each field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="pricingFees.rate"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=[data-field="pricingFees.processingFee"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Verify Continue button remains disabled
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled
+
+t5.3.32 Loan Details Fields Are Disabled and Non-Editable During Product Creation
+    [Documentation]    Verify that all pre-built Loan Details fields in the Loans Customer Form
+    ...                (Loan Amount, Interest Rate %, Loan Term Length, Loan Term Unit, Mode of
+    ...                Disbursement) are disabled and non-interactable during product creation.
+    ...                Fields appear greyed out/read-only, accept no input, and trigger no
+    ...                validation errors. They are only editable during the Product Availment flow.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for a Loans product.
+    ...                3. The pre-built Loan Details section is visible.
+    [Tags]    products    create    loans    smoke    mvp
+    Navigate To Loans Customer Form    t5.3.32 Loans
+    # Verify the pre-built Loan Details section header is visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CLP_LOAN_DETAILS_SECTION_HEADER}    visible
+    # Verify disabled numeric input fields are present (Loan Amount, Interest Rate, Term Length)
+    ${disabled_input_count}=    Get Element Count    ${CLP_DISABLED_FIELDS}
+    Run Keyword And Continue On Failure
+    ...    Should Be True    ${disabled_input_count} > 0
+    ...    msg=Expected at least one disabled numeric field in the Loan Details section but found none
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CLP_DISABLED_FIELDS} >> nth=0    visible
+    # Verify no validation errors are triggered for disabled fields
+    ${error_count}=    Get Element Count    ${FIELD_VALIDATION_ERROR}
+    Run Keyword And Continue On Failure
+    ...    Should Be Equal As Integers    ${error_count}    0
+    ...    msg=Disabled Loan Details fields should not trigger validation errors but found ${error_count}
+
+t5.3.33 Add Customer Input Field with All Mandatory Fields Blank (Loans)
+    [Documentation]    Verify that opening the 'Add customer input field' modal for Loans and
+    ...                leaving Field Name and Placeholder blank triggers validation errors and
+    ...                prevents the field from being added to the section.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for Loans.
+    ...                3. A custom section exists.
+    [Tags]    products    create    loans    validation
+    Navigate To Loans Customer Form    t5.3.33 Loans
+    Add Section To Customer Form    ${T53_LOANS_SECTION_NAME}
+    # Open Add customer input field modal
+    Click    css=[data-testid="page-products-create"] button:has-text("Add customer input field")
+    Wait For Elements State    ${CP_MODAL}    visible
+    # Verify Add field button is disabled when all mandatory fields are blank
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CP_ADD_FIELD_CONFIRM_BTN}    disabled
+    # Fill then clear Field Name and Placeholder to trigger validation errors
+    Fill Text    ${CP_FIELD_NAME_INPUT}    x
+    Fill Text    ${CP_FIELD_NAME_INPUT}    ${EMPTY}
+    Fill Text    ${CP_FIELD_PLACEHOLDER_INPUT}    x
+    Fill Text    ${CP_FIELD_PLACEHOLDER_INPUT}    ${EMPTY}
+    Click    css=.ant-modal-wrap:not([style*="display: none"]) .ant-modal-header
+    # Verify each modal field shows its required validation error
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"]) [data-field="label"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=.ant-modal-wrap:not([style*="display: none"]) [data-field="placeholder"] span.text-error-6:has-text("is required")    visible    timeout=5s
+    # Dismiss modal — field should NOT be added to the section
+    Click    ${CP_MODAL_BACK_BTN}
+    Wait For Elements State    ${CP_MODAL}    hidden    timeout=5s
+    ${field_visible}=    Run Keyword And Return Status
+    ...    Wait For Elements State    ${CREATE_PRODUCT_PAGE} >> text=${T53_LOANS_FIELD_NAME}    visible    timeout=3s
+    Run Keyword And Continue On Failure
+    ...    Should Not Be True    ${field_visible}
+    ...    msg=Field "${T53_LOANS_FIELD_NAME}" should not have been added when modal was dismissed without confirming
+
+t5.3.34 Add New Section Without Entering a Section Name (Loans)
+    [Documentation]    Verify that clicking 'Add new section' on the Loans Customer Form opens a
+    ...                modal where the 'Add section' button remains disabled until a section name
+    ...                is entered, preventing creation of a blank-named section.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for Loans.
+    [Tags]    products    create    loans    smoke    mvp
+    Navigate To Loans Customer Form    t5.3.34 Loans
+    # Open Add new section modal
+    Click    ${CP_ADD_SECTION_BTN}
+    Wait For Elements State    ${CP_MODAL}    visible
+    # Verify Section Name input is present and Add section button is disabled (name is blank)
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CP_SECTION_NAME_INPUT}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CP_ADD_SECTION_CONFIRM_BTN}    disabled
+    # Dismiss modal without creating a section
+    Click    ${CP_MODAL_BACK_BTN}
+    Wait For Elements State    ${CP_MODAL}    hidden    timeout=5s
+
+t5.3.35 Continue Button Disabled When Loans Custom Section Has No Fields
+    [Documentation]    Verify that when a custom section exists in the Loans Customer Form but
+    ...                contains no fields, the Continue button remains disabled and the user
+    ...                cannot proceed to Step 3.
+    ...
+    ...                Preconditions:
+    ...                1. Teller is logged in.
+    ...                2. User is on Step 2 – Customer Form for Loans.
+    ...                3. A custom section exists but has no fields.
+    [Tags]    products    create    loans    smoke    mvp
+    Navigate To Loans Customer Form    t5.3.35 Loans
+    # Add a custom section without adding any fields
+    Add Section To Customer Form    ${T53_LOANS_SECTION_NAME}
+    # Verify Continue remains disabled when the custom section is empty
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CREATE_PRODUCT_CONTINUE_BTN}    disabled

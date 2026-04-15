@@ -172,6 +172,10 @@ ${CLP_PROCESSING_FEE_TYPE_SELECT}       css=[data-field="pricingFees.processingF
 ${CLP_PENALTY_RATE_INPUT}               css=[data-field="pricingFees.penaltyInterestRate"] input
 ${CLP_PENALTY_CONDITIONS_TEXTAREA}      css=[data-field="pricingFees.penaltyConditions"] textarea
 
+# Validation Error Messages
+${FIELD_VALIDATION_ERROR}               css=span.text-error-6
+
 # Create Loans Product — Step 2: Pre-built Loan Details Section
 ${CLP_LOAN_DETAILS_SECTION_HEADER}      ${CREATE_PRODUCT_PAGE} >> text=Loan Details
 ${CLP_DISABLED_FIELDS}                  css=[data-testid="page-products-create"] .ant-input-number-disabled
+${CLP_DISABLED_SELECT_FIELDS}           css=[data-testid="page-products-create"] .ant-select[aria-disabled="true"]

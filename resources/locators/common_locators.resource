@@ -103,6 +103,8 @@ ${LOGOUT_BUTTON}                    css=[data-testid="btn-sidebar-logout"]
 ${MODAL}                            css=.ant-modal-content
 ${MODAL_TITLE}                      css=.ant-modal-title
 ${MODAL_CONFIRM_BTN}                xpath=//button[.//span[text()='CONFIRM'] or text()='CONFIRM']
+${MODAL_OTP_ERROR}                  css=[data-testid="modal-otp-error"]
+${MODAL_OTP_ERROR_CONFIRM_BTN}      css=[data-testid="modal-otp-error-btn-ok"]
 ${MODAL_CANCEL_BTN}                 xpath=//button[.//span[text()='CANCEL'] or text()='CANCEL']
 ${MODAL_OK_BTN}                     css=.ant-modal-footer button.ant-btn-primary
 ${MODAL_CLOSE_BTN}                  css=.ant-modal-close
