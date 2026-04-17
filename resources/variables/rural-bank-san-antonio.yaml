@@ -229,3 +229,18 @@ T53_LOANS_PENALTY_CONDITIONS: "Applied after 30 days overdue"
 T53_LOANS_SECTION_NAME: "Employment Information"
 T53_LOANS_FIELD_NAME: "Employer Name"
 T53_LOANS_FIELD_PLACEHOLDER: "Enter employer name"
+
+
+# ---------------------------------------------------------------
+# t2.5 — Avail Savings Product
+# ---------------------------------------------------------------
+T25_CUSTOMER_ID: "f5e913c405554cd9bedd3045613a4567"
+T25_CUSTOMER_NAME: "Test Automation User"
+T25_SAVINGS_PRODUCT: "t5.3 Savings 0413093202"
+T25_CUSTOM_FULL_NAME: "Automation Test Applicant"
+T25_MODIFIED_FULL_NAME: "Automation Modified Name"
+T25_OPTIONAL_SAVINGS_PRODUCT: "Savings With All Optional Custom Fields"
+T25_NO_FIELDS_SAVINGS_PRODUCT: "Savings with no custom field"
+T25_VERSIONED_SAVINGS_PRODUCT: "Savings With All Optional Custom Fields"
+T25_UPDATED_DESCRIPTION: "Updated by test automation"
+T25_INVALID_STATUS_CUSTOMER: "Yuki Santos"    # Inactive customer ID: 1326171c8c5f410ebed36bf8c67740dd
