@@ -143,3 +143,17 @@ ${PRODUCT_DETAILS_CLOSE_BTN}        css=.ant-drawer-close
 ${TXN_DETAIL_MODAL}                 css=[data-testid="modal-customers-transaction-details"] .ant-modal
 ${TXN_DETAIL_CLOSE_BTN}             css=.ant-modal-close
 ${TXN_DETAIL_BACK_BTN}              css=[data-testid="modal-customers-transaction-details"] button:has-text("Back")
+
+
+# ============================================================
+# AVAIL PRODUCT FLOW
+# data-testid: customers.availProduct
+# ============================================================
+${AVAIL_PRODUCT_FULL_NAME_INPUT}    css=[data-testid="page-customers-avail-product"] input[placeholder="Enter full name"]
+${AVAIL_PRODUCT_SEE_DETAILS_BTN}    css=[data-testid="btn-avail-product-see-details"]
+${AVAIL_PRODUCT_CONTINUE_BTN}       css=[data-testid="btn-avail-product-continue"]
+${AVAIL_PRODUCT_BACK_BTN}           css=[data-testid="page-customers-avail-product"] button:has-text("Back")
+${AVAIL_PRODUCT_CONFIRM_BTN}        css=[data-testid="btn-avail-product-submit"]
+${AVAIL_PRODUCT_BACK_TO_PROFILE}    css=[data-testid="btn-avail-product-back-to-profile"]
+# Drawer opened from the avail product page (no data-testid on this context's drawer)
+${AVAIL_PRODUCT_DETAILS_DRAWER}     css=.ant-drawer-content
