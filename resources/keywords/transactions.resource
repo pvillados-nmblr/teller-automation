@@ -251,7 +251,7 @@ Navigate To Withdrawal Step
     [Documentation]    Navigates from the Transactions page through the New Transaction modal
     ...                all the way to the Withdrawal form (Transaction step with withdrawal fields visible).
     ...                Opens modal → searches by account number → selects account → clicks Withdraw.
-    [Arguments]        ${account_number}=${T42_ACCOUNT_NUMBER}
+    [Arguments]        ${account_number}
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${account_number}
     Select Account From Create Transaction Results    ${account_number}
