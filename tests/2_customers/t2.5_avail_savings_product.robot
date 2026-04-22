@@ -21,7 +21,7 @@ Open Customer Profile And Cache URL
     ...                so subsequent tests can navigate directly without re-searching.
     Login To Teller App
     Navigate To Customers
-    View Customer Profile    ${T25_CUSTOMER_NAME}
+    View Customer Profile    ${T25_CUSTOMER_ID}
     ${url}=    Get Url
     Set Suite Variable    ${CUSTOMER_PROFILE_URL}    ${url}
 
@@ -733,22 +733,25 @@ t2.5.17 Enter Invalid Data Format in Custom Fields – Savings Availment
     ...                Requires a Savings product with a numeric custom field.
     [Tags]             customers    products    validation
 
-    # This test targets a product with a numeric custom field — skip if no such product is available
-    Navigate To Avail Product Page
+    # This test targets a product with a numeric custom field (T25_SAVINGS_PRODUCT_2)
+    Avail Product By Name    ${T25_SAVINGS_PRODUCT_2}
 
-    # Attempt to type alphabetic characters into the Full Name field then proceed
-    # Note: if a numeric-type custom field exists, replace AVAIL_PRODUCT_FULL_NAME_INPUT
-    # with the appropriate numeric field locator
     ${numeric_input}=    Run Keyword And Return Status
     ...    Wait For Elements State
-    ...    css=[data-testid="page-customers-avail-product"] input[type="number"]    visible    timeout=3s
+    ...    css=[data-testid="page-customers-avail-product"] .ant-input-number-input    visible    timeout=3s
 
     IF    ${numeric_input}
+        # AntD InputNumber auto-deletes invalid characters — the value is never saved.
+        # Verify: invalid input is rejected (field stays empty) and Continue stays disabled.
         Fill Text
-        ...    css=[data-testid="page-customers-avail-product"] input[type="number"]    abcdef
+        ...    css=[data-testid="page-customers-avail-product"] .ant-input-number-input    abcdef
+        # Blur the field to trigger AntD's auto-deletion of invalid characters
         Click    ${AVAIL_PRODUCT_PAGE} >> text=Customer Details
+        ${field_value}=    Get Property
+        ...    css=[data-testid="page-customers-avail-product"] .ant-input-number-input    value
         Run Keyword And Continue On Failure
-        ...    Wait For Elements State    css=.ant-form-item-explain-error    visible    timeout=5s
+        ...    Should Be Empty    ${field_value}
+        ...    msg=Invalid characters were not rejected on blur — field contains: '${field_value}'
         Run Keyword And Continue On Failure
         ...    Wait For Elements State    ${AVAIL_PRODUCT_CONTINUE_BTN}    disabled
     ELSE

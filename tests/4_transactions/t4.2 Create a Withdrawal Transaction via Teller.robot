@@ -171,7 +171,7 @@ t4.2.6 Real-Time Summary Updates with Withdrawal Amount
     ...                - Entering an amount shows the withdrawal amount in the summary
     ...                - The summary displays New Balance = Current Balance – withdrawal amount (correct math)
     [Tags]             transactions    create    withdrawal    regression    mvp
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # Select withdrawal type
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -203,7 +203,7 @@ t4.2.7 Process Withdrawal and Review
     ...                - New Balance = Previous Balance − Withdrawal Amount (math validation)
     ...                - Print Receipt and New Transaction buttons
     [Tags]             transactions    create    withdrawal    smoke    mvp
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # Fill the withdrawal form
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -280,7 +280,7 @@ t4.2.8 Verify Newest Transaction Appears at the Top (Withdrawal)
     ...                Credit Account Number = N/A, and Status column visible.
     [Tags]             transactions    create    withdrawal    smoke    mvp
     # Complete the full withdrawal flow
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -315,7 +315,7 @@ t4.2.9 View Details of the Newest Transaction (Withdrawal)
     ...                - Created on and Updated on timestamps
     [Tags]             transactions    create    withdrawal    smoke    mvp
     # Complete the full withdrawal flow
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -548,7 +548,7 @@ t4.2.19 Validate Maximum Daily Withdrawal Limit (Allowed Amount)
     ...                (${T42_MAX_ALLOWED_AMOUNT}) is accepted: no error is shown, and the
     ...                Process Withdrawal button is enabled.
     [Tags]             transactions    withdrawal    validation    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -560,7 +560,7 @@ t4.2.19 Validate Maximum Daily Withdrawal Limit (Allowed Amount)
     ...    Wait For Elements State    ${CREATE_TXN_FORM_ERROR}    visible    timeout=2s
     Should Not Be True    ${has_error}
     ...    msg=No validation error should appear for the maximum allowed amount of ${T42_MAX_ALLOWED_AMOUNT}
-    Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
+    Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    enabled
 
 t4.2.20 Search with Invalid Account Number
     [Documentation]    Verify that searching by a non-existent account number in the Create
@@ -583,7 +583,7 @@ t4.2.22 Validate Withdrawal Type Required
     ...                Withdrawal Type is selected — even if an amount is entered.
     ...                The type dropdown is required and the button must not activate without it.
     [Tags]             transactions    withdrawal    validation    smoke
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # No type selected — button must be disabled immediately
     Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
     # Enter a valid amount without selecting a type — button must remain disabled
@@ -595,7 +595,7 @@ t4.2.23 Validate Withdrawal Amount Required
     [Documentation]    Verify that the Process Withdrawal button is disabled when the
     ...                Withdrawal Amount is blank, even after selecting a type.
     [Tags]             transactions    withdrawal    validation    smoke
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -608,7 +608,7 @@ t4.2.24 Withdrawal Amount Exceeds Balance
     [Documentation]    Verify that entering an amount greater than the account's current
     ...                balance shows an "Insufficient funds" error, preventing submission.
     [Tags]             transactions    withdrawal    validation    negative    smoke
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER_EXCEED_BALANCE}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -628,23 +628,26 @@ t4.2.25 OTC Withdrawal Exceeding Remaining Daily Limit
     ...                Pre-condition: Daily Limit Remaining = 450,000
     ...                (after two prior OTC withdrawals of 20,000 and 30,000).
     [Tags]             transactions    withdrawal    validation    negative    daily-limit    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_OTC_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
     ...    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden) .ant-select-item-option-content:has-text("${T42_WITHDRAWAL_TYPE}")
     Wait For Load Spinner To Disappear
     Fill Text                  ${CREATE_TXN_AMOUNT_INPUT}    ${T42_OVER_LIMIT_AMOUNT}
+    Click                      ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}
     Wait For Load Spinner To Disappear
-    # Verify Process Withdrawal button remains disabled when amount exceeds daily limit
-    Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
+
+    # Wait for the system to calculate the limit and show the error
+    Wait For Elements State    text=${T42_DAILY_LIMIT_ERROR}    visible    # Ensure the button is disabled so the teller CANNOT click it
+    Get Element States         ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    contains    disabled
 
 t4.2.26 Validate Minimum Withdrawal Amount
     [Documentation]    Verify that entering an amount less than 1 (e.g. 0.5) triggers a
     ...                validation error ("Amount must be greater than 1" or equivalent)
     ...                and the Process Withdrawal button remains disabled.
     [Tags]             transactions    withdrawal    validation    negative    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -660,7 +663,7 @@ t4.2.27 Validate Maximum Daily Withdrawal Limit Exceeded
     ...                (${T42_EXCEED_MAX_AMOUNT}) displays the error:
     ...                "Amount must be lesser than 500,000".
     [Tags]             transactions    withdrawal    validation    negative    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -675,7 +678,7 @@ t4.2.28 Validate Negative or Zero Withdrawal Amount
     [Documentation]    Verify that entering 0 (or a negative amount) triggers a validation
     ...                error and the Process Withdrawal button remains disabled.
     [Tags]             transactions    withdrawal    validation    negative    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -691,7 +694,7 @@ t4.2.29 Validate Non-Numeric Withdrawal Amount
     ...                field to reset to its initial state, and the Process Withdrawal button
     ...                remains disabled.
     [Tags]             transactions    withdrawal    validation    negative    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
     Click
@@ -712,7 +715,7 @@ t4.2.30 Validate Withdrawal Notes Character Limit
     ...                Attempting to enter 301 characters should result in the stored value
     ...                being at most 300 characters (field truncates or rejects excess input).
     [Tags]             transactions    withdrawal    validation    regression
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     ${long_text}=    Evaluate    'a' * 301
     Fill Text                  ${CREATE_TXN_NOTES_INPUT}    ${long_text}
     ${notes_value}=    Get Property    ${CREATE_TXN_NOTES_INPUT}    value
@@ -727,7 +730,7 @@ t4.2.31 Validate Process Withdrawal Button Activation
     ...                2. Still disabled after selecting type only (no amount).
     ...                3. Enabled only after both type and valid amount are provided.
     [Tags]             transactions    withdrawal    validation    smoke
-    Navigate To Withdrawal Step
+    Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # 1. No inputs — button must be disabled
     Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
     # 2. Type selected, amount still blank — button must remain disabled
