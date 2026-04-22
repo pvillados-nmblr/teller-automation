@@ -189,7 +189,7 @@ t2.2.12 Filter Account List by Status - Blocked
 t2.2.13 Filter Account List by Status - Suspended
     [Documentation]    Verify that filtering by Suspended status shows only Suspended accounts.
     ...                If no Suspended accounts exist, a "No Data" message is shown.
-    [Tags]             customers    accounts    regression    mvp
+    [Tags]             customers    accounts    regression    mvp    rerun
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_SUSPENDED}
     Click                      ${FILTER_APPLY_BTN}
@@ -199,7 +199,7 @@ t2.2.13 Filter Account List by Status - Suspended
 t2.2.14 Navigate Back to Customers List
     [Documentation]    Verify that clicking the 'Customers' breadcrumb link returns the user
     ...                to the main Customer List view with the customer table visible.
-    [Tags]             customers    accounts    regression    mvp
+    [Tags]             customers    accounts    regression    mvp    rerun
     Click                      ${CUSTOMERS_BREADCRUMB_LINK}
     Wait For Elements State    ${CUSTOMER_TABLE}          visible
     Wait For Elements State    ${CUSTOMER_SEARCH_FIELD}   visible

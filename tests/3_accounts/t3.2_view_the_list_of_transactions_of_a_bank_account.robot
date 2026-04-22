@@ -17,7 +17,7 @@ Test Teardown       Close Modal If Open
 Setup Account Transaction Page
     [Documentation]    Navigates to the Transaction History page for the target account
     ...                via the Accounts module and ensures a clean state.
-    Navigate To Account Transactions    ${VALID_ACCOUNT_NUMBER}
+    Navigate To Account Transactions    ${VALID_ACCOUNT_ID}
     Reload
     Wait For Load Spinner To Disappear
 
