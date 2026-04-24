@@ -15,27 +15,54 @@ Test Teardown       Close Modal If Open
 
 *** Keywords ***
 Navigate To Edit Savings Product
-    [Documentation]    Clicks the Edit action for the "Savings Edit 1" product row in the
-    ...                Active Products table and waits for the Edit Product page to load.
-    Wait For Elements State
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Savings Edit 1")
-    ...    visible
+    [Documentation]    Scans all pages of the Active Products table to find the product by name
+    ...                and clicks its Edit button. Fails if the product is not found.
+    [Arguments]        ${product_name}=${T51_SAVINGS_PRODUCT_NAME}
+    ${found}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_name}") >> nth=0
+        ...    visible    timeout=2s
+        IF    ${exists}
+            ${found}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Should Be True    ${found}    msg=Product "${product_name}" not found in the Active Products table
     Click
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Savings Edit 1") [data-testid="btn-products-edit"]
+    ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_name}") [data-testid="btn-products-edit"] >> nth=0
     Wait For Load Spinner To Disappear
     Wait For Elements State    ${EDIT_PRODUCT_PAGE}    visible
 
 Navigate To Edit Loans Product
-    [Documentation]    Clicks the Edit action for the "Loans Edit 1" product row in the
-    ...                Active Products table and waits for the Edit Product page to load.
-    ...                Skips if no "Loans Edit 1" product is available.
-    ${loan_exists}=    Run Keyword And Return Status
-    ...    Wait For Elements State
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Loans Edit 1")
-    ...    visible    timeout=5s
-    Skip If    not ${loan_exists}    No "Loans Edit 1" product available in this environment
+    [Documentation]    Scans all pages of the Active Products table to find the loans product by name
+    ...                and clicks its Edit button. Skips if the product is not found.
+    [Arguments]        ${product_name}=${T51_LOANS_PRODUCT_NAME}
+    ${found}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_name}") >> nth=0
+        ...    visible    timeout=2s
+        IF    ${exists}
+            ${found}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Skip If    not ${found}    No "${product_name}" product available in this environment
     Click
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Loans Edit 1") [data-testid="btn-products-edit"]
+    ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_name}") [data-testid="btn-products-edit"] >> nth=0
     Wait For Load Spinner To Disappear
     Wait For Elements State    ${EDIT_PRODUCT_PAGE}    visible
 
@@ -51,23 +78,23 @@ t5.1.1 Initial Load and Active Products View
     Wait For Elements State    ${PRODUCTS_LIST_PAGE}        visible
     Wait For Elements State    ${ACTIVE_PRODUCTS_TAB}       visible
     Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE}     visible
-    # Verify all expected column headers are present
+# Verify all expected column headers are present using specific TH selectors
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> text=Product ID          visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:has-text("Product ID")          visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> text=Product Name        visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:has-text("Product Name")        visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> text=Product Category    visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:has-text("Product Category")    visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> text=Created by          visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:has-text("Created by")          visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> text=Created on          visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:has-text("Created on")          visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:text-is("Updated by")    visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:text-is("Updated by")           visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:text-is("Updated on")    visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:text-is("Updated on")           visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> text=Action              visible
+    ...    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE} >> th:has-text("Action")              visible
     # Verify at least one row shows N/A in Updated by (default when no update has been made)
     Run Keyword And Continue On Failure
     ...    Wait For Elements State
@@ -83,7 +110,7 @@ t5.1.1 Initial Load and Active Products View
 
 t5.1.2 Active Products Tab Number
     [Documentation]    Verify that the count shown in the Active Products tab badge matches
-    ...                the actual total number of active product rows across all table pages.
+    ...                the total product count displayed in the table pagination summary.
     [Tags]             products    active    smoke    mvp
     Wait For Elements State    ${ACTIVE_PRODUCTS_TAB}    visible
     # Read the count badge from the tab label
@@ -251,7 +278,7 @@ t5.1.5 Edit Active Savings Product – Display Prepopulated Form
     [Documentation]    Verify that clicking Edit on a Savings product opens the Edit Product
     ...                Form page with all existing product fields pre-populated and editable.
     [Tags]             products    active    edit    smoke    mvp
-    Navigate To Edit Savings Product
+    Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
     # Verify the Edit Product page is displayed
     Wait For Elements State    ${EDIT_PRODUCT_PAGE}    visible
     # Verify product name field is pre-populated (not empty)
@@ -265,38 +292,75 @@ t5.1.5 Edit Active Savings Product – Display Prepopulated Form
 
 t5.1.6 Save Updated Savings Product – Record New Values
     [Documentation]    Verify that modifying a field on a Savings product and clicking
-    ...                Save Changes persists the update successfully. The Product ID's
-    ...                version suffix increments (e.g. _001 → _002) to indicate a new version.
+    ...                Save Changes persists the update successfully.
     [Tags]             products    active    edit    smoke    mvp
-    # Read the current Product ID and extract version before editing
+    
+    # 1. Paginate to find the product row and read its current Product ID version
+    ${found}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${T51_SAVINGS_PRODUCT_NAME}") >> nth=0
+        ...    visible    timeout=2s
+        IF    ${exists}
+            ${found}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Should Be True    ${found}    msg=Product "${T51_SAVINGS_PRODUCT_NAME}" not found in the Active Products table
+
+    # 2. Extract current version from the product row
     ${prod_id_text}=    Get Text
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Savings Edit 1") td >> nth=0
+    ...    css=[data-testid="table-products-active"] tbody tr:has-text("${T51_SAVINGS_PRODUCT_NAME}") td >> nth=0
     ${prod_id_clean}=    Evaluate    '${prod_id_text}'.replace('\\n', '').replace(' ', '')
     ${current_version}=    Evaluate    int('${prod_id_clean}'.split('_')[-1])
     ${expected_version}=   Evaluate    str(${current_version} + 1).zfill(3)
-    Log    Current version: ${current_version} → expected after save: _${expected_version}
-    # Navigate to edit and make a change
-    Navigate To Edit Savings Product
-    # Update description field with timestamp to ensure change is detected
+    Log    Target: ${T51_SAVINGS_PRODUCT_NAME} | Version: ${current_version} → Next: _${expected_version}
+
+    # 3. Navigate to the Edit page
+    Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
+
+    # 4. Update description
     ${timestamp}=    Evaluate    __import__('datetime').datetime.now().strftime('%H%M%S')
     ${new_desc}=     Set Variable    Updated by automation at ${timestamp}
     Fill Text        css=[data-testid="page-products-edit"] textarea >> nth=0    ${new_desc}
-    Wait For Load Spinner To Disappear
-    # Save the changes
+    
+    # 5. Save
     Wait For Elements State    ${EDIT_PRODUCT_SAVE_BTN}    enabled
     Click                      ${EDIT_PRODUCT_SAVE_BTN}
     Wait For Load Spinner To Disappear
-    # Verify save succeeded — either a success toast appears or page redirects to the list
+
+    # 6. Return to list and Verify Version Increment
     ${redirected}=    Run Keyword And Return Status
     ...    Wait For Elements State    ${PRODUCTS_LIST_PAGE}    visible    timeout=5s
     IF    not ${redirected}
         Navigate To Products
     END
-    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE}    visible
-    # Verify the product now shows the incremented version in its Product ID
-    Wait For Elements State
-    ...    css=[data-testid="table-products-active"] tbody tr td:has-text("_${expected_version}") >> nth=0
-    ...    visible
+    
+    # Paginate to find the updated row and verify the new version number
+    ${ver_found}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${ver_exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${T51_SAVINGS_PRODUCT_NAME}") td:has-text("_${expected_version}")
+        ...    visible    timeout=2s
+        IF    ${ver_exists}
+            ${ver_found}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Should Be True    ${ver_found}
+    ...    msg=Expected Product ID version "_${expected_version}" not found for "${T51_SAVINGS_PRODUCT_NAME}" after save
 
 t5.1.7 Edit Active Loans Product – Display Prepopulated Form
     [Documentation]    Verify that clicking Edit on a Loans product opens the Edit Product
@@ -319,21 +383,33 @@ t5.1.8 Save Updated Loans Product – Record New Values
     ...                Save Changes persists the update successfully. The Product ID's
     ...                version suffix increments (e.g. _000 → _001) to indicate a new version.
     [Tags]             products    active    edit    smoke    mvp
-    # Check if "Loans Edit 1" product exists - skip if not
-    ${loan_exists}=    Run Keyword And Return Status
-    ...    Wait For Elements State
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Loans Edit 1")
-    ...    visible    timeout=5s
-    Skip If    not ${loan_exists}    No "Loans Edit 1" product available in this environment
+    # Paginate to find the loans product — skip if not present in this environment
+    ${found}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${T51_LOANS_PRODUCT_NAME}") >> nth=0
+        ...    visible    timeout=2s
+        IF    ${exists}
+            ${found}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Skip If    not ${found}    No "${T51_LOANS_PRODUCT_NAME}" product available in this environment
     # Read the current Product ID and extract version before editing
     ${prod_id_text}=    Get Text
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("Loans Edit 1") td >> nth=0
+    ...    css=[data-testid="table-products-active"] tbody tr:has-text("${T51_LOANS_PRODUCT_NAME}") td >> nth=0
     ${prod_id_clean}=    Evaluate    '${prod_id_text}'.replace('\\n', '').replace(' ', '')
     ${current_version}=    Evaluate    int('${prod_id_clean}'.split('_')[-1])
     ${expected_version}=   Evaluate    str(${current_version} + 1).zfill(3)
     Log    Current version: ${current_version} → expected after save: _${expected_version}
     # Navigate to edit and make a change
-    Navigate To Edit Loans Product
+    Navigate To Edit Loans Product    ${T51_LOANS_PRODUCT_NAME}
     ${timestamp}=    Evaluate    __import__('datetime').datetime.now().strftime('%H%M%S')
     ${new_desc}=     Set Variable    Updated by automation at ${timestamp}
     Fill Text        css=[data-testid="page-products-edit"] textarea >> nth=0    ${new_desc}
@@ -342,17 +418,32 @@ t5.1.8 Save Updated Loans Product – Record New Values
     Wait For Elements State    ${EDIT_PRODUCT_SAVE_BTN}    enabled
     Click                      ${EDIT_PRODUCT_SAVE_BTN}
     Wait For Load Spinner To Disappear
-    # Verify save succeeded — either a success toast appears or page redirects to the list
+    # Return to list
     ${redirected}=    Run Keyword And Return Status
     ...    Wait For Elements State    ${PRODUCTS_LIST_PAGE}    visible    timeout=5s
     IF    not ${redirected}
         Navigate To Products
     END
     Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE}    visible
-    # Verify the product now shows the incremented version in its Product ID
-    Wait For Elements State
-    ...    css=[data-testid="table-products-active"] tbody tr td:has-text("_${expected_version}") >> nth=0
-    ...    visible
+    # Paginate to find the updated row and verify the new version number
+    ${ver_found}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${ver_exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${T51_LOANS_PRODUCT_NAME}") td:has-text("_${expected_version}")
+        ...    visible    timeout=2s
+        IF    ${ver_exists}
+            ${ver_found}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Should Be True    ${ver_found}
+    ...    msg=Expected Product ID version "_${expected_version}" not found for "${T51_LOANS_PRODUCT_NAME}" after save
 
 
 # ====================================================================
@@ -364,7 +455,7 @@ t5.1.9 Edit Product – Required Field Validation
     ...                Product Form triggers a validation error and the Save Changes button
     ...                is disabled, preventing the record from being saved.
     [Tags]             products    edit    validation    smoke
-    Navigate To Edit Savings Product
+    Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
     # Clear the product name field (required)
     ${name_input}=    Set Variable
     ...    css=[data-testid="page-products-edit"] input[type="text"] >> nth=0
@@ -380,7 +471,7 @@ t5.1.10 Edit Product – Invalid Input Validation
     ...                on the Edit Product Form triggers validation error messages and
     ...                the Save Changes button is disabled/blocked.
     [Tags]             products    edit    validation    regression
-    Navigate To Edit Savings Product
+    Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
     # Enter letters into the first numeric input field (e.g. interest rate)
     ${numeric_input}=    Set Variable
     ...    css=[data-testid="page-products-edit"] .ant-input-number-input >> nth=0
@@ -396,7 +487,7 @@ t5.1.11 Edit Product – No Changes Made
     [Documentation]    Verify that the Save Changes button is disabled when no modifications
     ...                have been made on the Edit Product Form, preventing unnecessary saves.
     [Tags]             products    edit    validation    smoke
-    Navigate To Edit Savings Product
+    Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
     # No edits made — Save Changes button must be disabled
     Wait For Elements State    ${EDIT_PRODUCT_SAVE_BTN}    disabled    timeout=10s
 
@@ -405,7 +496,7 @@ t5.1.12 Edit Product – Cancel Edit Without Saving
     ...                dialog warning the teller that unsaved changes will be lost. Confirming
     ...                discards changes and returns the teller to the previous page.
     [Tags]             products    edit    validation    smoke
-    Navigate To Edit Savings Product
+    Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
     # Make a change to trigger the unsaved-changes guard
     Fill Text    css=[data-testid="page-products-edit"] textarea >> nth=0    unsaved change test
     Wait For Load Spinner To Disappear
@@ -494,11 +585,11 @@ t5.1.14 Action: Archive Product – Confirm Archive
         Wait For Load Spinner To Disappear
     END
     Skip If    not ${found}    No product created in Nov 2025 found in the Active Products table
-    # Capture the product name before archiving (second column) - get first line only
-    ${product_name_raw}=    Get Text
-    ...    css=[data-testid="table-products-active"] tbody tr:has(td:nth-child(5):has-text("Nov 2025")) >> nth=0 >> td >> nth=1
-    ${product_name}=    Evaluate    '''${product_name_raw}'''.split('\\n')[0].strip()
-    Log    Archiving product: ${product_name}
+    # Capture the Product ID (first column) before archiving
+    ${product_id_raw}=    Get Text
+    ...    css=[data-testid="table-products-active"] tbody tr:has(td:nth-child(5):has-text("Nov 2025")) >> nth=0 >> td >> nth=0
+    ${product_id}=    Evaluate    '''${product_id_raw}'''.split('\\n')[0].strip()
+    Log    Archiving product ID: ${product_id}
     # Click the Archive button for the first Nov 2025 product
     Click
     ...    css=[data-testid="table-products-active"] tbody tr:has(td:nth-child(5):has-text("Nov 2025")) [data-testid="btn-products-archive"] >> nth=0
@@ -507,18 +598,44 @@ t5.1.14 Action: Archive Product – Confirm Archive
     # Confirm the archive
     Click    ${ARCHIVE_PRODUCT_CONFIRM_BTN}
     Wait For Load Spinner To Disappear
-    # Verify the product is no longer in the Active Products table
     Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE}    visible
-    ${still_active}=    Run Keyword And Return Status
-    ...    Wait For Elements State
-    ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_name}") >> nth=0
-    ...    visible    timeout=5s
-    Should Not Be True    ${still_active}
-    ...    msg=Product "${product_name}" should have been removed from the Active Products table after archiving
-    # Verify the product now appears in the Archived Products tab
+    # Verify the Product ID is no longer in the Active Products table (check first page only — archived rows move to Archived tab immediately)
+    Wait For Elements State
+    ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_id}") >> nth=0
+    ...    hidden    timeout=10s
+    # Switch to Archived tab and verify the product appears as the first row
+    Reload
+    Wait For Load Spinner To Disappear
     Click    ${ARCHIVED_PRODUCTS_TAB}
     Wait For Load Spinner To Disappear
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE}    visible
     Wait For Elements State
-    ...    css=[data-testid="table-products-archived"] tbody tr:has-text("${product_name}") >> nth=0
+    ...    css=[data-testid="table-products-archived"] tbody tr:not([aria-hidden="true"]) >> nth=0
     ...    visible
+    ${first_row_id}=    Get Text
+    ...    css=[data-testid="table-products-archived"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> td >> nth=0
+    ${first_row_id_clean}=    Evaluate    '''${first_row_id}'''.split('\\n')[0].strip()
+    Should Be Equal    ${first_row_id_clean}    ${product_id}
+    ...    msg=Expected recently archived product "${product_id}" to be the first row in the Archived Products table, but found "${first_row_id_clean}"
+    # Switch back to Active tab and verify the product ID is no longer present on any page
+    Click    ${ACTIVE_PRODUCTS_TAB}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE}    visible
+    ${still_active}=    Set Variable    ${FALSE}
+    WHILE    True
+        ${exists}=    Run Keyword And Return Status
+        ...    Wait For Elements State
+        ...    css=[data-testid="table-products-active"] tbody tr:has-text("${product_id}") >> nth=0
+        ...    visible    timeout=2s
+        IF    ${exists}
+            ${still_active}=    Set Variable    ${TRUE}
+            BREAK
+        END
+        ${next_disabled}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+        IF    ${next_disabled}    BREAK
+        Click    ${PRODUCTS_PAGINATION_NEXT}
+        Wait For Load Spinner To Disappear
+    END
+    Should Not Be True    ${still_active}
+    ...    msg=Product "${product_id}" should not be in the Active Products table after archiving

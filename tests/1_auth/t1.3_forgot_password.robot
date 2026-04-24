@@ -18,7 +18,7 @@ ${FP_WRONG_CONFIRM_PASSWORD}        WrongPassword999!
 ${ERR_UNREGISTERED_EMAIL}           Email address is invalid, please try again.
 ${ERR_EMAIL_REQUIRED}               Email is required.
 ${ERR_INVALID_EMAIL_FORMAT}         Invalid email format.
-${ERR_PASSWORD_MISMATCH}            Passwords do not match
+${ERR_PASSWORD_MISMATCH}            Passwords do not match.
 ${OTP}                              123456
 
 # --- Hardcoded OTP Test Values ---
@@ -295,33 +295,27 @@ t1.3.14 Reset Password – Leave OTP Blank
     Wait For Elements State     ${FP_CONTINUE_BTN}            disabled
     Wait For Elements State     ${FP_OTP_INPUT}               visible
 
-t1.3.15 Reset Password – Cooldown Prevents Immediate Resend
-    [Documentation]    Verify the "Request a new OTP" link is hidden/disabled during the 1-minute cooldown.
-    [Tags]             forgot-password    negative    otp    mvp
+t1.3.15-16 Reset Password – Cooldown Prevents Immediate Resend, Then Allows Resend After 60s
+    [Documentation]    Verify the resend link is hidden immediately after OTP is sent (cooldown active),
+    ...                then becomes available after the 60-second cooldown expires and a new OTP can be requested.
+    ...                Note: This test will take > 60 seconds to execute.
+    [Tags]             forgot-password    otp    slow    mvp
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
     Click                       ${FP_SEND_CODE_BTN}
-    
+
+    # Resend must be hidden during active cooldown
     Wait For Elements State     ${FP_RESEND_BTN}              hidden
 
-t1.3.16 Reset Password – Request New OTP After Cooldown
-    [Documentation]    Verify the user can request a new OTP after the 60-second cooldown expires.
-    ...                Note: This test will take > 60 seconds to execute.
-    [Tags]             forgot-password    positive    otp    slow    mvp
-
-    Navigate To Forgot Password Page
-    Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
-    Click                       ${FP_SEND_CODE_BTN}
-    
     # Wait for the 60-second cooldown timer to finish
     Sleep                       61s
     Wait For Elements State     ${FP_RESEND_BTN}              enabled
     Click                       ${FP_RESEND_BTN}
-    
-    # Verify system confirms a new code was sent
-    # Note: Replace this assertion if a specific Toast/Message appears
-    Wait For Elements State     ${FP_CONTINUE_BTN}            disabled 
+
+    # Verify a new code was sent (continue button resets to disabled while new OTP is pending)
+    Wait For Elements State     ${FP_CONTINUE_BTN}            disabled
+    Wait For Elements State     ${FP_OTP_INPUT}               visible
 
 t1.3.17 Reset Password – Old OTP Invalidated After Resend
     [Documentation]    Verify the first OTP becomes invalid if a second one is requested.

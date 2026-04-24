@@ -74,6 +74,8 @@ trap cleanup EXIT
 
 info "Setting up gh-pages worktree..."
 git fetch origin gh-pages
+# Update local gh-pages to match remote before adding worktree
+git branch -f gh-pages origin/gh-pages 2>/dev/null || true
 git worktree add "$WORKTREE_PATH" gh-pages 2>/dev/null \
   || git worktree add "$WORKTREE_PATH" --track -b gh-pages origin/gh-pages 2>/dev/null \
   || { cleanup; git worktree add "$WORKTREE_PATH" gh-pages; }
