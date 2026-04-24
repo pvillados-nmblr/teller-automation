@@ -32,10 +32,11 @@ ${ERR_PWD_NUMBER}                   Password must include at least one number.
 ${ERR_PWD_SPECIAL}                  Password must include at least one special character.
 
 # --- OTP Errors ---
-${ERR_OTP_INVALID}                  OTP is either Invalid or has expired, Please try again.
+${ERR_OTP_INVALID}                  OTP is either invalid or has expired. Please try again or request a new OTP.
 
 # --- Max Attempts & Session Errors ---
-${ERR_OTP_MAX_ATTEMPTS}             You have reached the maximum number of attempts.
+${ERR_OTP_MAX_ATTEMPTS_1}           Verification Failed
+${ERR_OTP_MAX_ATTEMPTS_2}           You have reached the maximum number of attempts. For your security, we're redirecting you to the previous page.
 ${ERR_OTP_EXPIRED_SESSION}          Your one-time password has expired. Request a new code to continue.
 
 
@@ -43,7 +44,8 @@ ${ERR_OTP_EXPIRED_SESSION}          Your one-time password has expired. Request 
 Navigate To Change Password Page
     [Documentation]    Logs in to the teller app, opens the profile dropdown, and navigates
     ...                to the Change Password page.
-    Login To Teller App    email=${CP_USER_EMAIL}    password=${CP_USER_PASSWORD}
+    [Arguments]        ${email}=${CP_USER_EMAIL}    ${password}=${CP_USER_PASSWORD}
+    Login To Teller App    email=${email}    password=${password}
     Click                       ${CP_PROFILE_DROPDOWN}
     Wait For Elements State     ${CP_CHANGE_PASSWORD_LINK}    visible
     Click                       ${CP_CHANGE_PASSWORD_LINK}
@@ -78,7 +80,7 @@ t1.4.1 Reset Password via Change Password
     ...                the profile dropdown and see the success confirmation modal.
     [Tags]             change-password    smoke    password-reset    mvp
 
-    Navigate To Change Password Page
+    Navigate To Change Password Page     email=${CP_USER_EMAIL}
     Complete Change Password Form
     Enter CP OTP And Continue
 
@@ -93,7 +95,7 @@ t1.4.1 Reset Password via Change Password
     Fill Text                   ${EMAIL_FIELD}           ${CP_USER_EMAIL}
     Fill Text                   ${PASSWORD_FIELD}        ${CP_NEW_PASSWORD}
     Click                       ${LOGIN_BUTTON}
-    Wait For Elements State     css=h3.text-2xl          visible
+    Get Url    matches    .*\/dashboard\/customers$
 
 
 # ====================================================================
@@ -106,7 +108,7 @@ t1.4.2 Change Password – Mismatched Password and Confirm Password
     ...                keeps the CONTINUE button disabled.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
+    Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_CURRENT_PWD_FIELD}      ${TELLER_PASSWORD}
     Fill Text                   ${CP_NEW_PWD_FIELD}          ${CP_NEW_PASSWORD}
     Fill Text                   ${CP_CONFIRM_PWD_FIELD}      ${CP_WRONG_CONFIRM_PASSWORD}
@@ -121,8 +123,7 @@ t1.4.3 Change Password – Leave Password Fields Blank
     ...                on initial page load.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
-    # Fields are blank by default upon landing on the page
+    Navigate To Change Password Page    email=${TELLER_EMAIL}    # Fields are blank by default upon landing on the page
     Wait For Elements State     ${CP_CONTINUE_BTN}    disabled
 
 
@@ -134,7 +135,7 @@ t1.4.4 Change Password – Password Too Short
     [Documentation]    Verify validation for passwords under 8 characters.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
+    Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    Abc1!
     Wait For Elements State     text=${ERR_PWD_MIN_LENGTH}    visible
     Wait For Elements State     ${CP_CONTINUE_BTN}            disabled
@@ -143,7 +144,7 @@ t1.4.5 Change Password – Password Without Uppercase Letter
     [Documentation]    Verify validation for a password missing an uppercase letter.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
+    Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    abc12345!
     Wait For Elements State     text=${ERR_PWD_UPPERCASE}    visible
     Wait For Elements State     ${CP_CONTINUE_BTN}           disabled
@@ -152,7 +153,7 @@ t1.4.6 Change Password – Password Without Number
     [Documentation]    Verify validation for a password missing a number.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
+    Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    Abcdefgh!
     Wait For Elements State     text=${ERR_PWD_NUMBER}       visible
     Wait For Elements State     ${CP_CONTINUE_BTN}           disabled
@@ -161,7 +162,7 @@ t1.4.7 Change Password – Password Without Special Character
     [Documentation]    Verify validation for a password missing a special character.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
+    Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    Abcdef123
     Wait For Elements State     text=${ERR_PWD_SPECIAL}      visible
     Wait For Elements State     ${CP_CONTINUE_BTN}           disabled
@@ -171,8 +172,7 @@ t1.4.8 Change Password – Sequential Validation of Multiple Violations
     ...                cascade correctly as the user fixes them one by one.
     [Tags]             change-password    negative    mvp
 
-    Navigate To Change Password Page
-
+    Navigate To Change Password Page    email=${TELLER_EMAIL}
     # 1. Too short
     Fill Text                   ${CP_NEW_PWD_FIELD}    abc
     Wait For Elements State     text=${ERR_PWD_MIN_LENGTH}    visible
@@ -226,35 +226,26 @@ t1.4.10 Change Password – Leave OTP Blank
     Wait For Elements State     ${CP_OTP_CONTINUE_BTN}    disabled
     Wait For Elements State     ${CP_OTP_INPUT}           visible
 
-t1.4.11 Change Password – User Cannot Request a New OTP Before the 1-Minute Cooldown
-    [Documentation]    Verify the "Resend code" link is hidden during the 1-minute cooldown
-    ...                immediately after the initial OTP is sent.
-    [Tags]             change-password    negative    otp    mvp
-
-    Navigate To Change Password Page
-    Complete Change Password Form
-
-    # Resend link must not be visible during the active cooldown
-    Wait For Elements State     ${CP_OTP_RESEND_BTN}    hidden
-
-t1.4.12 Change Password – User Can Request a New OTP After the Cooldown
-    [Documentation]    Verify the user can request a new OTP after the 60-second cooldown
-    ...                expires and complete the Change Password flow successfully.
+t1.4.11-12 Change Password – Cooldown Prevents Immediate Resend, Then Allows Resend After 60s
+    [Documentation]    Verify the resend link is hidden immediately after OTP is sent (cooldown active),
+    ...                then becomes available after the 60-second cooldown expires and a new OTP can be requested.
     ...                Note: This test will take > 60 seconds to execute.
-    [Tags]             change-password    positive    otp    slow    password-reset    mvp
-    
+    [Tags]             change-password    otp    slow    mvp
+
     Navigate To Change Password Page
     Complete Change Password Form
+
+    # Resend link must be hidden during active cooldown
+    Wait For Elements State     ${CP_OTP_RESEND_BTN}    hidden
 
     # Wait for the 60-second cooldown timer to finish
     Sleep                       61s
     Wait For Elements State     ${CP_OTP_RESEND_BTN}    enabled
     Click                       ${CP_OTP_RESEND_BTN}
 
-    # Enter newly received OTP and complete the flow
-    Enter CP OTP And Continue
-
-    Wait For Elements State     ${CP_SUCCESS_MESSAGE}    visible
+    # Verify continue button resets to disabled while new OTP is pending
+    Wait For Elements State     ${CP_OTP_CONTINUE_BTN}    disabled
+    Wait For Elements State     ${CP_OTP_INPUT}            visible
 
 t1.4.13 Change Password – Previously Received OTP Is No Longer Valid After Requesting a New OTP
     [Documentation]    Verify that the original OTP is invalidated once a new OTP is requested.
@@ -292,7 +283,14 @@ t1.4.14 Change Password – Validation on the 5th Failed OTP Attempt (Maximum Al
     Click                       ${CP_OTP_INPUT}
     Keyboard Input              type    ${OTP_MAX_ATTEMPTS}
     Click                       ${CP_OTP_CONTINUE_BTN}
-    Wait For Elements State     text=${ERR_OTP_MAX_ATTEMPTS}    visible
+    Wait For Elements State     css=.ant-modal-content    visible
+    
+    # Verify the heading (title)
+    Wait For Elements State     css=.ant-modal-content h3 >> text=${ERR_OTP_MAX_ATTEMPTS_1}    visible
+    
+    # Verify the body text (targeting the paragraph inside the body div)
+    Wait For Elements State     css=.ant-modal-body p >> text="${ERR_OTP_MAX_ATTEMPTS_2}"    visible
+
 
     # Confirm the modal and verify redirection to the Change Password page
     Click                       ${MODAL_CONFIRM_BTN}

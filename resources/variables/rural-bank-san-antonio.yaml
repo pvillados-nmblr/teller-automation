@@ -197,6 +197,10 @@ T43_HIGH_DEPOSIT_AMOUNT_1: "500000"
 T43_HIGH_DEPOSIT_AMOUNT_2: "500001"
 T43_HIGH_DEPOSIT_AMOUNT_3: "1000000"
 
+# T5.1
+T51_SAVINGS_PRODUCT_NAME: "Savings With All Optional"
+T51_LOANS_PRODUCT_NAME: "Loans Edit 1"
+
 # ---------------------------------------------------------------
 # t5.3 — Create New Savings Product
 # ---------------------------------------------------------------

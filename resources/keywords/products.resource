@@ -32,11 +32,12 @@ Count All Active Product Rows
     ...                Returns to page 1 after counting.
     ${total}=    Set Variable    ${0}
     WHILE    True
+        Wait For Elements State    ${ACTIVE_PRODUCTS_TABLE_ROWS} >> nth=0    visible    timeout=10s
         ${page_count}=    Get Element Count    ${ACTIVE_PRODUCTS_TABLE_ROWS}
         ${total}=         Evaluate    ${total} + ${page_count}
-        ${next_disabled}=    Run Keyword And Return Status
-        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
-        IF    ${next_disabled}    BREAK
+        ${on_last_page}=    Run Keyword And Return Status
+        ...    Wait For Elements State    ${PRODUCTS_PAGINATION_NEXT_DISABLED}    visible    timeout=2s
+        IF    ${on_last_page}    BREAK
         Click    ${PRODUCTS_PAGINATION_NEXT}
         Wait For Load Spinner To Disappear
     END

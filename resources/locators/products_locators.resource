@@ -31,23 +31,23 @@ ${EDIT_PRODUCT_BTN}                 css=[data-testid="btn-products-edit"]
 ${ARCHIVE_PRODUCT_BTN}              css=[data-testid="btn-products-archive"]
 ${RESTORE_PRODUCT_BTN}              css=[data-testid="btn-products-restore"]
 
-# Pagination - General (visible on current tab)
-${PRODUCTS_PAGINATION_NEXT}             css=.ant-pagination-next:visible button
-${PRODUCTS_PAGINATION_NEXT_DISABLED}    css=.ant-pagination-next.ant-pagination-disabled:visible
-${PRODUCTS_PAGINATION_PREV}             css=.ant-pagination-prev:visible button
-${PRODUCTS_PAGINATION_PREV_DISABLED}    css=.ant-pagination-prev.ant-pagination-disabled:visible
-${PRODUCTS_PAGINATION_FIRST}            css=.ant-pagination-item-1:visible
-${PRODUCTS_PAGINATION_PAGE_2}           css=.ant-pagination-item-2:visible
-${PRODUCTS_PAGINATION_PAGE_3}           css=.ant-pagination-item-3:visible
+# Pagination - Active Products (scoped to table data-testid to avoid cross-tab matches)
+${PRODUCTS_PAGINATION_NEXT}             css=[data-testid="table-products-active"] .ant-pagination-next button
+${PRODUCTS_PAGINATION_NEXT_DISABLED}    css=[data-testid="table-products-active"] .ant-pagination-next.ant-pagination-disabled
+${PRODUCTS_PAGINATION_PREV}             css=[data-testid="table-products-active"] .ant-pagination-prev button
+${PRODUCTS_PAGINATION_PREV_DISABLED}    css=[data-testid="table-products-active"] .ant-pagination-prev.ant-pagination-disabled
+${PRODUCTS_PAGINATION_FIRST}            css=[data-testid="table-products-active"] .ant-pagination-item-1
+${PRODUCTS_PAGINATION_PAGE_2}           css=[data-testid="table-products-active"] .ant-pagination-item-2
+${PRODUCTS_PAGINATION_PAGE_3}           css=[data-testid="table-products-active"] .ant-pagination-item-3
 
-# Pagination - Archived Products (alias to general pagination since only one is visible at a time)
-${ARCHIVED_PAGINATION_NEXT}             css=.ant-pagination-next:visible button
-${ARCHIVED_PAGINATION_NEXT_DISABLED}    css=.ant-pagination-next.ant-pagination-disabled:visible
-${ARCHIVED_PAGINATION_PREV}             css=.ant-pagination-prev:visible button
-${ARCHIVED_PAGINATION_PREV_DISABLED}    css=.ant-pagination-prev.ant-pagination-disabled:visible
-${ARCHIVED_PAGINATION_FIRST}            css=.ant-pagination-item-1:visible
-${ARCHIVED_PAGINATION_PAGE_2}           css=.ant-pagination-item-2:visible
-${ARCHIVED_PAGINATION_PAGE_3}           css=.ant-pagination-item-3:visible
+# Pagination - Archived Products (scoped to table data-testid to avoid cross-tab matches)
+${ARCHIVED_PAGINATION_NEXT}             css=[data-testid="table-products-archived"] .ant-pagination-next button
+${ARCHIVED_PAGINATION_NEXT_DISABLED}    css=[data-testid="table-products-archived"] .ant-pagination-next.ant-pagination-disabled
+${ARCHIVED_PAGINATION_PREV}             css=[data-testid="table-products-archived"] .ant-pagination-prev button
+${ARCHIVED_PAGINATION_PREV_DISABLED}    css=[data-testid="table-products-archived"] .ant-pagination-prev.ant-pagination-disabled
+${ARCHIVED_PAGINATION_FIRST}            css=[data-testid="table-products-archived"] .ant-pagination-item-1
+${ARCHIVED_PAGINATION_PAGE_2}           css=[data-testid="table-products-archived"] .ant-pagination-item-2
+${ARCHIVED_PAGINATION_PAGE_3}           css=[data-testid="table-products-archived"] .ant-pagination-item-3
 
 # Create Product Page
 ${CREATE_PRODUCT_PAGE}              css=[data-testid="page-products-create"]

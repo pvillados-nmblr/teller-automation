@@ -27,12 +27,27 @@ Count All Archived Product Rows
     ...                the total number of visible rows across all pages.
     ...                Returns to page 1 after counting.
     ${total}=    Set Variable    ${0}
+    # SPA preserves pagination state across navigation — always reset to page 1 before counting
+    ${has_page_1}=    Run Keyword And Return Status
+    ...    Wait For Elements State    ${ARCHIVED_PAGINATION_FIRST}    visible    timeout=2s
+    IF    ${has_page_1}
+        Click    ${ARCHIVED_PAGINATION_FIRST}
+        Wait For Load Spinner To Disappear
+    END
     WHILE    True
+        Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE_ROWS} >> nth=0    visible    timeout=10s
+        # AntD transiently adds ant-pagination-disabled during page transitions — poll until stable
+        FOR    ${_}    IN RANGE    10
+            ${state_a}=    Run Keyword And Return Status
+            ...    Wait For Elements State    ${ARCHIVED_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+            Sleep    1s
+            ${state_b}=    Run Keyword And Return Status
+            ...    Wait For Elements State    ${ARCHIVED_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
+            IF    $state_a == $state_b    BREAK
+        END
         ${page_count}=    Get Element Count    ${ARCHIVED_PRODUCTS_TABLE_ROWS}
         ${total}=         Evaluate    ${total} + ${page_count}
-        ${next_disabled}=    Run Keyword And Return Status
-        ...    Wait For Elements State    ${ARCHIVED_PAGINATION_NEXT_DISABLED}    visible    timeout=1s
-        IF    ${next_disabled}    BREAK
+        IF    ${state_b}    BREAK
         Click    ${ARCHIVED_PAGINATION_NEXT}
         Wait For Load Spinner To Disappear
     END
@@ -86,7 +101,7 @@ t5.2.2 Pagination: Archived Products Tab
     ...                with no duplication or missing records. The current page is clearly
     ...                indicated in the UI.
     [Tags]             products    archived    pagination    smoke    mvp
-    [Setup]            Skip    Skipped: pagination bug pending fix (not a test script issue)
+
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE}    visible
     # Step 1: Click Next — expect to land on page 2
     ${next_disabled}=    Run Keyword And Return Status
@@ -139,9 +154,9 @@ t5.2.2 Pagination: Archived Products Tab
 
 t5.2.3 Archived Products Tab Number
     [Documentation]    Verify that the count badge shown in the Archived Products tab matches
-    ...                the actual total number of archived product rows across all table pages.
+    ...                the total product count displayed in the table pagination summary.
     [Tags]             products    archived    smoke    mvp
-    [Setup]            Skip    Skipped: depends on pagination — pending fix (not a test script issue)
+
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TAB_BTN}    visible
     # Read the count badge from the tab label
     ${tab_text}=    Get Text    ${ARCHIVED_PRODUCTS_TAB_BTN}
@@ -183,6 +198,10 @@ t5.2.4 Restore Product
     ...    visible
     # Confirm the restore
     Click    ${RESTORE_PRODUCT_CONFIRM_BTN}
+    Wait For Load Spinner To Disappear
+    Reload
+    Wait For Load Spinner To Disappear
+    Click    ${ARCHIVED_PRODUCTS_TAB}
     Wait For Load Spinner To Disappear
     # Verify the product is no longer in the Archived Products table
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE}    visible
