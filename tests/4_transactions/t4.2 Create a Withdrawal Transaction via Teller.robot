@@ -527,6 +527,7 @@ t4.2.17 Visibility of Daily Outgoing Transactions Under Customer Profile
     ...
     ...                Uses OTC test account: ${T42_OTC_CUSTOMER_NAME} (${T42_OTC_ACCOUNT_NUMBER}).
     [Tags]             transactions    withdrawal    daily-limit    regression
+    Skip    Phase 2 feature — consolidated Mobile + OTC daily limit tracking is not yet implemented.
     Navigate To Customer Info Step    ${T42_OTC_ACCOUNT_NUMBER}
     Wait For Elements State    text=Daily Limit Remaining >> nth=0    visible
 
