@@ -50,7 +50,7 @@ class CsvVerifier:
     # External is included ONLY when the transaction status is Success —
     # Failed External transactions are excluded per spec but cannot be
     # identified from the CSV alone (no Status column).
-    BALANCE_INCLUDED_TYPES = {"Deposit", "Withdraw", "External"}
+    BALANCE_INCLUDED_TYPES = {"Cash Deposit", "Cash Withdrawal", "External Transfer"}
 
     # ------------------------------------------------------------------ #
     #  Internal parser — handles the 3-row prefix                         #
@@ -225,7 +225,7 @@ class CsvVerifier:
         """
         _, _, data_rows = self._parse_csv(filepath)
         found = any(
-            row.get("Transaction Type", "").strip() == "Internal"
+            row.get("Transaction Type", "").strip() == "Internal Transfer"
             for row in data_rows
         )
         if not found:

@@ -23,12 +23,12 @@ TIMEOUT: "30s"
 # Auth — Reset Password via Temp Password (t1.1)
 # ============================================================
 
-RTP_NEW_USER_EMAIL: "pvillados+apr21@agsx.net" #needs to be changed every run
-RTP_TEMP_PASSWORD: "G0nqgCNNPrvr" #needs to be changed every run
+RTP_NEW_USER_EMAIL: "pvillados+429@nmblr.ai" #needs to be changed every run
+RTP_TEMP_PASSWORD: "HoV1yiQR1KSf" #needs to be changed every run
 RTP_NEW_USER_EMAIL_2: "pvillados+apr24@agsx.net" #needs to be changed every run
 RTP_TEMP_PASSWORD_2: "EBj8wXGKj9yq" #needs to be changed every run
-RTP_MIXED_CASE_EMAIL: "Pvillados+ApR21@Agsx.Net" #needs to be changed every run
-RTP_MIXED_CASE_EMAIL_PASSWORD: "G0nqgCNNPrvr" #needs to be changed every run
+RTP_MIXED_CASE_EMAIL: "Pvillados+429@NmBlR.aI" #needs to be changed every run
+RTP_MIXED_CASE_EMAIL_PASSWORD: "HoV1yiQR1KSf" #needs to be changed every run
 RTP_EXPIRED_USER_EMAIL: "pvillados+feb3@agsx.net"
 EXPIRED_TEMP_PASSWORD: "g9EUrGq0ttVQ"
 RTP_WRONG_CONFIRM_PASSWORD: "Password1234!"
