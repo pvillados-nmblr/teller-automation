@@ -64,7 +64,7 @@ Complete OTP Verification
 t1.3.1 Reset Password via Forgot Password
     [Documentation]    Verify that a registered teller can successfully reset their password
     ...                via the Forgot Password flow and see the success confirmation screen.
-    [Tags]             forgot-password    smoke    password-reset    mvp
+    [Tags]             forgot-password    smoke    password-reset    mvp    type1
     # Requires a live OTP — manual testing needed
 
     Navigate To Forgot Password Page
@@ -94,7 +94,7 @@ t1.3.1 Reset Password via Forgot Password
 t1.3.2 Verify System Treats Email as Case-Insensitive During Forgot Password
     [Documentation]    Verify that the system recognises a mixed-case email address during the
     ...                Forgot Password flow and sends the OTP successfully.
-    [Tags]             forgot-password    smoke    password-reset    mvp
+    [Tags]             forgot-password    smoke    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification    email=${FP_MIXED_CASE_EMAIL}
@@ -123,7 +123,7 @@ t1.3.2 Verify System Treats Email as Case-Insensitive During Forgot Password
 t1.3.3 Forgot Password with Unregistered Email
     [Documentation]    Verify that entering an unregistered email on the Reset your password
     ...                screen shows an error and does not send an OTP.
-    [Tags]             forgot-password    negative    mvp
+    [Tags]             forgot-password    negative    mvp    type1
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${INVALID_EMAIL}
@@ -135,7 +135,7 @@ t1.3.3 Forgot Password with Unregistered Email
 t1.3.4 Forgot Password – Blank Email Field
     [Documentation]    Verify that the Send Verification Code button remains disabled
     ...                when the email field is empty.
-    [Tags]             forgot-password    negative    mvp
+    [Tags]             forgot-password    negative    mvp    type1
 
     Navigate To Forgot Password Page
     # Button should be disabled on initial load (empty email)
@@ -148,7 +148,7 @@ t1.3.4 Forgot Password – Blank Email Field
 t1.3.5 Forgot Password – Invalid Email Format
     [Documentation]    Verify that typing an email with an invalid format triggers the
     ...                "Invalid email format." inline validation error and disables the button.
-    [Tags]             forgot-password    negative    mvp
+    [Tags]             forgot-password    negative    mvp    type1
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${FP_INVALID_FORMAT_EMAIL}
@@ -160,7 +160,7 @@ t1.3.6 Forgot Password – Mismatched Password and Confirm Password
     [Documentation]    Verify that entering non-matching values in the New password and
     ...                Confirm new password fields shows "Passwords do not match." and
     ...                keeps the RESET PASSWORD button disabled.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -181,7 +181,7 @@ t1.3.6 Forgot Password – Mismatched Password and Confirm Password
 
 t1.3.7 Reset Password – Leave Required Fields Blank
     [Documentation]    Verify the RESET PASSWORD button is disabled when fields are blank.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -191,7 +191,7 @@ t1.3.7 Reset Password – Leave Required Fields Blank
 
 t1.3.8 Reset Password – Password Too Short
     [Documentation]    Verify validation for passwords under 8 characters.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -202,7 +202,7 @@ t1.3.8 Reset Password – Password Too Short
 
 t1.3.9 Reset Password – Password Without Uppercase Letter
     [Documentation]    Verify validation for missing uppercase letter.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -213,7 +213,7 @@ t1.3.9 Reset Password – Password Without Uppercase Letter
 
 t1.3.10 Reset Password – Password Without Number
     [Documentation]    Verify validation for missing number.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -224,7 +224,7 @@ t1.3.10 Reset Password – Password Without Number
 
 t1.3.11 Reset Password – Password Without Special Character
     [Documentation]    Verify validation for missing special character.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -235,7 +235,7 @@ t1.3.11 Reset Password – Password Without Special Character
 
 t1.3.12 Reset Password – Sequential Validation of Multiple Violations
     [Documentation]    Verify errors cascade correctly as the user fixes them one by one.
-    [Tags]             forgot-password    negative    password-reset    mvp
+    [Tags]             forgot-password    negative    password-reset    mvp    type1
 
     Navigate To Forgot Password Page
     Complete OTP Verification
@@ -269,7 +269,7 @@ t1.3.13 Reset Password – Invalid OTP
     [Documentation]    Verify error message when an incorrect OTP is entered.
     ...                Uses the magic value "${OTP_INVALID}" which the backend always rejects
     ...                as invalid/expired.
-    [Tags]             forgot-password    negative    otp    requires-otp-validation    mvp
+    [Tags]             forgot-password    negative    otp    requires-otp-validation    mvp    type1
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -285,7 +285,7 @@ t1.3.13 Reset Password – Invalid OTP
 
 t1.3.14 Reset Password – Leave OTP Blank
     [Documentation]    Verify CONTINUE button is disabled if OTP is blank.
-    [Tags]             forgot-password    negative    otp    mvp
+    [Tags]             forgot-password    negative    otp    mvp    type1
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -299,7 +299,7 @@ t1.3.15-16 Reset Password – Cooldown Prevents Immediate Resend, Then Allows Re
     [Documentation]    Verify the resend link is hidden immediately after OTP is sent (cooldown active),
     ...                then becomes available after the 60-second cooldown expires and a new OTP can be requested.
     ...                Note: This test will take > 60 seconds to execute.
-    [Tags]             forgot-password    otp    slow    mvp
+    [Tags]             forgot-password    otp    slow    mvp    type1
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -319,7 +319,7 @@ t1.3.15-16 Reset Password – Cooldown Prevents Immediate Resend, Then Allows Re
 
 t1.3.17 Reset Password – Old OTP Invalidated After Resend
     [Documentation]    Verify the first OTP becomes invalid if a second one is requested.
-    [Tags]             forgot-password    negative    otp    slow    requires-otp-validation    mvp
+    [Tags]             forgot-password    negative    otp    slow    requires-otp-validation    mvp    type1
     skip    This test requires a live OTP and will take > 60 seconds. Run manually with: --variable OTP:<code>
 
     Navigate To Forgot Password Page
@@ -346,7 +346,7 @@ t1.3.18 Reset Password – Validation on the 5th failed OTP attempt (maximum all
     ...                of OTP attempts.
     ...                Uses the magic value "${OTP_MAX_ATTEMPTS}" which the backend treats as
     ...                immediately triggering the max-attempts lockout in a single attempt.
-    [Tags]             forgot-password    negative    otp    security    requires-otp-validation    mvp
+    [Tags]             forgot-password    negative    otp    security    requires-otp-validation    mvp    type1
 
     Navigate To Forgot Password Page
     Fill Text                   ${FP_EMAIL_FIELD}    ${TELLER_EMAIL}
@@ -365,7 +365,7 @@ t1.3.18 Reset Password – Validation on the 5th failed OTP attempt (maximum all
 
 t1.3.19 Reset Password – Validation on 5th OTP attempt across multiple resend requests
     [Documentation]    Verify the 5-attempt limit is strictly enforced across multiple OTP resends.
-    [Tags]             forgot-password    negative    otp    security    slow    requires-otp-validation    mvp
+    [Tags]             forgot-password    negative    otp    security    slow    requires-otp-validation    mvp    type1
     skip    This test requires a live OTP and will take > 5 minutes due to multiple cooldowns. Run manually with: --variable OTP:<code>
 
     Navigate To Forgot Password Page
@@ -411,7 +411,7 @@ t1.3.19 Reset Password – Validation on 5th OTP attempt across multiple resend 
 
 t1.3.20 Reset Password – Behavior when OTP session expires before reaching max attempts
     [Documentation]    Verify system behavior when a user attempts to input an OTP after the 5-minute session expires.
-    [Tags]             forgot-password    negative    otp    security    slow    requires-otp-validation    mvp
+    [Tags]             forgot-password    negative    otp    security    slow    requires-otp-validation    mvp    type1
     skip    This test requires a live OTP and will take > 5 minutes due to session expiry. Run manually with: --variable OTP:<code>
 
     Navigate To Forgot Password Page

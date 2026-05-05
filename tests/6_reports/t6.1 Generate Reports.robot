@@ -15,7 +15,7 @@ Test Setup          Setup Reports Page
 t6.1.1 Verify Reports Module Loads Successfully
     [Documentation]    Verify that clicking the Reports sidebar option navigates to the Reports page
     ...                and both report type buttons are visible and clickable.
-    [Tags]             reports    smoke    mvp
+    [Tags]             reports    smoke    mvp    type1
     Get Url                    contains    /reports
     # Verify all fields — continue on failure so ALL mismatches are reported
     Run Keyword And Continue On Failure
@@ -42,7 +42,7 @@ t6.1.2 Generate End of Day Report (Valid Closing Date)
     ...                  (amounts are pre-signed: Withdraw is negative in CSV)
     ...                NOTE: Failed external transactions cannot be identified without
     ...                a Status column — that rule requires manual verification.
-    [Tags]             reports    smoke    mvp
+    [Tags]             reports    smoke    mvp    type1
     Click                      ${EOD_BALANCE_BTN}
     Wait For Elements State    ${CLOSING_DATE_INPUT}    visible
     Select Closing Date From AntD Picker    ${VALID_CLOSING_DATE}
@@ -80,7 +80,7 @@ t6.1.3 Generate Total Balance Report (Valid Date Range)
     ...                  (amounts are pre-signed: Withdraw is negative in CSV)
     ...                NOTE: Failed external transactions cannot be identified without
     ...                a Status column — that rule requires manual verification.
-    [Tags]             reports    smoke    mvp
+    [Tags]             reports    smoke    mvp    type1
     Click                      ${TOTAL_BALANCE_BTN}
     Wait For Elements State    ${DATE_RANGE_START_INPUT}    visible
     Select Report Date Range From AntD Picker    ${VALID_DATE_FROM}    ${VALID_DATE_TO}
@@ -107,7 +107,7 @@ t6.1.4 Verify Future Date Selection Is Blocked for Reports
     [Documentation]    Verify that future dates are disabled in both the End of Day closing date picker
     ...                and the Total Balance date range picker. The Download CSV button must remain
     ...                disabled when no valid date has been selected.
-    [Tags]             reports    regression    mvp
+    [Tags]             reports    regression    mvp    type1
     # --- End of Day Balance ---
     Click                      ${EOD_BALANCE_BTN}
     Wait For Elements State    ${CLOSING_DATE_INPUT}    visible

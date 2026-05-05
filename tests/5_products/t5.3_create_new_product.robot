@@ -202,7 +202,7 @@ t5.3.1 Create New Savings Product – Happy Path
     ...                1. Teller is logged in.
     ...                2. User has permissions to Create Products.
     ...                3. User is on the Products Module page.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     # Click Create Product dropdown trigger — verify category selector appears
     Click    ${CREATE_PRODUCT_DROPDOWN_TRIGGER}
     Wait For Elements State    css=.ant-dropdown:not(.ant-dropdown-hidden)    visible
@@ -280,7 +280,7 @@ t5.3.2 Add New Section to Savings Customer Form
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for a Savings product.
     ...                3. Product Configuration is completed.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Navigate To Savings Customer Form    t5.3.2 Savings
     # Click Add new section — verify modal appears
     Click    ${CP_ADD_SECTION_BTN}
@@ -324,7 +324,7 @@ t5.3.3 Add Customer Input Field to Savings Section
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for Savings.
     ...                3. At least one section exists.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Navigate To Savings Customer Form    t5.3.3 Savings
     Add Section To Customer Form
     # Click Add customer input field — verify modal appears
@@ -403,7 +403,7 @@ t5.3.4 Delete Custom Field from Savings Section
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. A custom field exists inside a section in the Savings Customer Form.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Navigate To Savings Customer Form    t5.3.4 Savings
     Add Section To Customer Form
     Add Text Input Field To Section
@@ -432,7 +432,7 @@ t5.3.5 Review and Confirm Savings Product Creation
     ...                1. Teller is logged in.
     ...                2. Product Configuration (Step 1) is completed.
     ...                3. Customer Form (Step 2) has at least one section with at least one field.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     # Generate unique product name with timestamp and store as suite variable for t5.3.6/7/8
     ${timestamp}=    Evaluate    __import__('datetime').datetime.now().strftime('%m%d%H%M%S')
     ${product_name}=    Set Variable    t5.3 Savings ${timestamp}
@@ -489,7 +489,7 @@ t5.3.6 Verify New Savings Product Position and Status in Product List
     ...                Preconditions:
     ...                1. A new Savings product has just been created (t5.3.5 must have run first).
     ...                2. User is on the Products Module dashboard.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Skip If    '${T53_PRODUCT_NAME}' == '${EMPTY}'
     ...    msg=t5.3.5 must run first to set the created product name
     # Reload to refresh the Active Products table with the latest data
@@ -510,7 +510,7 @@ t5.3.7 View Details of a Newly Created Savings Product
     ...                Preconditions:
     ...                1. Teller is on the Products Module – Active Products tab.
     ...                2. A Savings product created by t5.3.5 exists in the list.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Skip If    '${T53_PRODUCT_NAME}' == '${EMPTY}'
     ...    msg=t5.3.5 must run first to set the created product name
     # Reload to refresh the Active Products table with the latest data
@@ -582,7 +582,7 @@ t5.3.8 New Savings Product Visibility in Customer Eligible Products Tab
     ...                1. Teller is logged in.
     ...                2. A new Savings product has just been created (t5.3.5 must have run first).
     ...                3. An existing customer (${T24_CUSTOMER_NAME}) is eligible for the new product.
-    [Tags]    products    create    savings    regression    mvp
+    [Tags]    products    create    savings    regression    mvp    type1
     [Setup]    Navigate To Customers
     Skip If    '${T53_PRODUCT_NAME}' == '${EMPTY}'
     ...    msg=t5.3.5 must run first to set the created product name
@@ -677,7 +677,7 @@ t5.3.9 Create New Loans Product – Happy Path
     ...                1. Teller is logged in.
     ...                2. User has permissions to Create Products.
     ...                3. User is on the Products Module page.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     # Click Create Product dropdown trigger — verify category selector appears
     Click    ${CREATE_PRODUCT_DROPDOWN_TRIGGER}
     Wait For Elements State    css=.ant-dropdown:not(.ant-dropdown-hidden)    visible
@@ -751,7 +751,7 @@ t5.3.10 Add New Section to Loans Customer Form
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for a Loans product.
     ...                3. Product Definition is completed.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.10 Loans
     # Click Add new section — verify modal appears
     Click    ${CP_ADD_SECTION_BTN}
@@ -794,7 +794,7 @@ t5.3.11 Add Customer Input Field to Loans Section
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for Loans.
     ...                3. At least one custom section exists.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.11 Loans
     Add Section To Customer Form    ${T53_LOANS_SECTION_NAME}
     # Click Add customer input field — verify modal appears
@@ -865,7 +865,7 @@ t5.3.12 Delete Custom Field from Loans Section
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. A custom field exists inside a section in the Loans Customer Form.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.12 Loans
     Add Section To Customer Form    ${T53_LOANS_SECTION_NAME}
     Add Text Input Field To Section    ${T53_LOANS_FIELD_NAME}    ${T53_LOANS_FIELD_PLACEHOLDER}
@@ -892,7 +892,7 @@ t5.3.13 Loans Customer Form Has Pre-built Loan Details Section
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for a Loans product.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.13 Loans
     # Verify the pre-built Loan Details section header is visible
     Run Keyword And Continue On Failure
@@ -915,7 +915,7 @@ t5.3.14 Review and Confirm Loans Product Creation
     ...                1. Teller is logged in.
     ...                2. Product Definition (Step 1) is completed.
     ...                3. Customer Form (Step 2) has at least one section with at least one field.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     # Generate unique product name with timestamp and store as suite variable for t5.3.15/16/17
     ${timestamp}=    Evaluate    __import__('datetime').datetime.now().strftime('%m%d%H%M%S')
     ${product_name}=    Set Variable    t5.3 Loans ${timestamp}
@@ -972,7 +972,7 @@ t5.3.15 Verify New Loans Product Position and Status in Product List
     ...                Preconditions:
     ...                1. A new Loans product has just been created (t5.3.14 must have run first).
     ...                2. User is on the Products Module dashboard.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Skip If    '${T53_LOANS_PRODUCT_NAME}' == '${EMPTY}'
     ...    msg=t5.3.14 must run first to set the created loans product name
     # Reload to refresh the Active Products table with the latest data
@@ -993,7 +993,7 @@ t5.3.16 View Details of a Newly Created Loans Product
     ...                Preconditions:
     ...                1. Teller is on the Products Module – Active Products tab.
     ...                2. A Loans product created by t5.3.14 exists in the list.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Skip If    '${T53_LOANS_PRODUCT_NAME}' == '${EMPTY}'
     ...    msg=t5.3.14 must run first to set the created loans product name
     # Reload to refresh the Active Products table with the latest data
@@ -1059,7 +1059,7 @@ t5.3.17 New Loans Product Visibility in Customer Eligible Products Tab
     ...                1. Teller is logged in.
     ...                2. A new Loans product has just been created (t5.3.14 must have run first).
     ...                3. An existing customer (${T24_CUSTOMER_NAME}) is eligible for the new product.
-    [Tags]    products    create    loans    regression    mvp
+    [Tags]    products    create    loans    regression    mvp    type1
     [Setup]    Navigate To Customers
     Skip If    '${T53_LOANS_PRODUCT_NAME}' == '${EMPTY}'
     ...    msg=t5.3.14 must run first to set the created loans product name
@@ -1139,7 +1139,7 @@ t5.3.18 Cancel Product Creation – Discard Unsaved Data
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. User is on Create Product page (Savings) with fields partially filled.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Navigate To Create Savings Product
     # Partially fill Product Name to simulate unsaved in-progress data
     Fill Text    ${CP_PRODUCT_NAME_INPUT}    t5.3.18 Partial Savings
@@ -1177,7 +1177,7 @@ t5.3.20 Back Navigation from Review Step Preserves All Entered Data
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. User is on Step 3 – Review Product for a Savings product.
-    [Tags]    products    create    savings    regression    mvp
+    [Tags]    products    create    savings    regression    mvp    type1
     ${timestamp}=    Evaluate    __import__('datetime').datetime.now().strftime('%m%d%H%M%S')
     ${product_name}=    Set Variable    t5.3.20 Savings ${timestamp}
     # Navigate through full flow: Step 1 → Step 2 with a section and field
@@ -1290,7 +1290,7 @@ t5.3.24 Add New Section Without Entering a Section Name (Savings)
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for Savings.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Navigate To Savings Customer Form    t5.3.24 Savings
     # Open Add new section modal
     Click    ${CP_ADD_SECTION_BTN}
@@ -1351,7 +1351,7 @@ t5.3.26 Continue Button Disabled When Section Has No Fields (Savings)
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for Savings.
     ...                3. A section exists but contains zero custom fields.
-    [Tags]    products    create    savings    smoke    mvp
+    [Tags]    products    create    savings    smoke    mvp    type1
     Navigate To Savings Customer Form    t5.3.26 Savings
     # Add a section without adding any fields
     Add Section To Customer Form    ${T53_SECTION_NAME}
@@ -1503,7 +1503,7 @@ t5.3.32 Loan Details Fields Are Disabled and Non-Editable During Product Creatio
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for a Loans product.
     ...                3. The pre-built Loan Details section is visible.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.32 Loans
     # Verify the pre-built Loan Details section header is visible
     Run Keyword And Continue On Failure
@@ -1567,7 +1567,7 @@ t5.3.34 Add New Section Without Entering a Section Name (Loans)
     ...                Preconditions:
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for Loans.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.34 Loans
     # Open Add new section modal
     Click    ${CP_ADD_SECTION_BTN}
@@ -1590,7 +1590,7 @@ t5.3.35 Continue Button Disabled When Loans Custom Section Has No Fields
     ...                1. Teller is logged in.
     ...                2. User is on Step 2 – Customer Form for Loans.
     ...                3. A custom section exists but has no fields.
-    [Tags]    products    create    loans    smoke    mvp
+    [Tags]    products    create    loans    smoke    mvp    type1
     Navigate To Loans Customer Form    t5.3.35 Loans
     # Add a custom section without adding any fields
     Add Section To Customer Form    ${T53_LOANS_SECTION_NAME}
