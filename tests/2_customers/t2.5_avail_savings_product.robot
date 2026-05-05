@@ -135,7 +135,7 @@ t2.5.1 Avail Savings Product – Customer Information Step
     [Documentation]    Verify that clicking Avail Product navigates to the Customer Information
     ...                step with Customer Details, Product Details, and custom fields displayed.
     ...                Continue button is disabled until required fields are filled.
-    [Tags]             customers    products    smoke    mvp
+    [Tags]             customers    products    smoke    mvp    type2
 
     Navigate To Avail Product Page
     ${url}=    Get Url
@@ -175,7 +175,7 @@ t2.5.2 See Details of Savings Product During Availment (Customer Information Ste
     [Documentation]    Verify that clicking See Details on the Product Details section opens a
     ...                side panel with complete Savings product information, closes cleanly,
     ...                and leaves the user on the Customer Information step.
-    [Tags]             customers    products    smoke    mvp
+    [Tags]             customers    products    smoke    mvp    type2
 
     Go To    ${AVAIL_PAGE_URL}
     Wait For Load Spinner To Disappear
@@ -245,7 +245,7 @@ t2.5.3 Fill Custom Fields for Savings Product and Continue
     [Documentation]    Verify that filling required custom fields enables the Continue button,
     ...                entered values are retained, and the user proceeds to the Review step
     ...                with an accurate summary.
-    [Tags]             customers    products    smoke    mvp
+    [Tags]             customers    products    smoke    mvp    type2
 
     Go To    ${AVAIL_PAGE_URL}
     Wait For Load Spinner To Disappear
@@ -285,7 +285,7 @@ t2.5.4 Review and Confirm Savings Product Availment
     [Documentation]    Verify that the Review Application step shows accurate data, Confirm and
     ...                Avail processes the request, and the success page is displayed with the
     ...                correct product name and a Back to Customer Profile button.
-    [Tags]             customers    products    smoke    mvp
+    [Tags]             customers    products    smoke    mvp    type2
 
     # Navigate to avail page and complete step 1 to reach the review step
     Go To    ${AVAIL_PAGE_URL}
@@ -321,7 +321,7 @@ t2.5.5 View Newly Availed Savings Product in Customer Profile
     [Documentation]    Verify that after availment the new Savings product appears in the
     ...                Products Availed tab, and its See Details side panel shows the product
     ...                configuration and the submitted custom field value.
-    [Tags]             customers    products    regression    mvp
+    [Tags]             customers    products    regression    mvp    type2
 
     # Complete the full avail flow to reach the success page
     # (Success state is React in-memory — the URL cannot be navigated to directly)
@@ -369,7 +369,7 @@ t2.5.6 Verify New Account Number Generated After Savings Availment
     ...                Savings product availment. Snapshots all account numbers across all
     ...                pages before availment, performs the availment, then asserts the
     ...                total count increased by at least 1.
-    [Tags]             customers    accounts    regression    mvp
+    [Tags]             customers    accounts    regression    mvp    type2
 
     # Step 1: Snapshot all account numbers before availment (across all pages)
     Navigate To Customers
@@ -405,7 +405,7 @@ t2.5.7 Modify Custom Field Inputs on Review Step and Re-Confirm (Savings)
     [Documentation]    Verify that clicking Back from the Review step returns to Customer Information
     ...                with the form still filled, modified values are reflected in the review summary,
     ...                and the product is successfully availed with the updated data.
-    [Tags]             customers    products    regression    mvp
+    [Tags]             customers    products    regression    mvp    type2
 
     Navigate To Avail Product Page
     Fill Customer Information Form
@@ -441,7 +441,7 @@ t2.5.8 Avail Savings Product with Optional Custom Fields Left Empty
     ...                no validation errors appear for empty optional fields, Continue is enabled,
     ...                and the empty optional fields are recorded as N/A after availment.
     ...                Requires a Savings product with both required and optional custom fields.
-    [Tags]             customers    products    regression    mvp
+    [Tags]             customers    products    regression    mvp    type2
 
     # Navigate to avail page for a product with both required and optional fields
     # (T25_SAVINGS_PRODUCT has a required Full Name field; optional fields are left empty)
@@ -474,7 +474,7 @@ t2.5.9 Avail Savings Product with No Custom Fields
     [Documentation]    Verify that a Savings product with no custom fields shows the correct
     ...                empty-state messages on both steps, Continue is enabled by default,
     ...                and the availment completes successfully.
-    [Tags]             customers    products    smoke    mvp
+    [Tags]             customers    products    smoke    mvp    type2
 
     Avail Product By Name        ${T25_NO_FIELDS_SAVINGS_PRODUCT}
 
@@ -513,7 +513,7 @@ t2.5.9 Avail Savings Product with No Custom Fields
 t2.5.10 Avail Multiple Different Savings Products Sequentially
     [Documentation]    Verify that a customer can successfully avail two different Savings
     ...                products in sequence, and both appear in the Products Availed tab.
-    [Tags]             customers    products    regression    mvp
+    [Tags]             customers    products    regression    mvp    type2
 
     # Avail first product (has required custom fields)
     Navigate To Avail Product Page
@@ -546,7 +546,7 @@ t2.5.10 Avail Multiple Different Savings Products Sequentially
 t2.5.11 Avail Recently Updated Savings Product – Uses Latest Version
     [Documentation]    Verify that after updating a product's configuration, the availment flow
     ...                reflects the latest version of the product details.
-    [Tags]             customers    products    regression
+    [Tags]             customers    products    regression    type2
 
     # Edit the product description first
     Edit Product Description    ${T25_VERSIONED_SAVINGS_PRODUCT}    ${T25_UPDATED_DESCRIPTION}
@@ -581,7 +581,7 @@ t2.5.11 Avail Recently Updated Savings Product – Uses Latest Version
 t2.5.12 Re-Avail Edited Savings Product – Multiple Versions on Same Customer
     [Documentation]    Verify that a customer can re-avail an updated version of a Savings product
     ...                they have already availed, resulting in two separate availed instances.
-    [Tags]             customers    products    regression
+    [Tags]             customers    products    regression    type2
 
     # Edit the product to a new description (creates a new version)
     ${second_description}=    Set Variable    ${T25_UPDATED_DESCRIPTION} v2
@@ -610,7 +610,7 @@ t2.5.12 Re-Avail Edited Savings Product – Multiple Versions on Same Customer
 t2.5.13 Avail Savings Product with Only Optional Custom Fields
     [Documentation]    Verify that a Savings product with only optional custom fields allows
     ...                the user to proceed without filling anything. No validation errors.
-    [Tags]             customers    products    smoke    mvp
+    [Tags]             customers    products    smoke    mvp    type2
 
     Avail Product By Name        ${T25_OPTIONAL_SAVINGS_PRODUCT}
 
@@ -639,7 +639,7 @@ t2.5.13 Avail Savings Product with Only Optional Custom Fields
 t2.5.14 Avail the Same Savings Product Multiple Times
     [Documentation]    Verify that availing the same Savings product twice creates two separate
     ...                records in the customer's Products Availed tab.
-    [Tags]             customers    products    regression    mvp
+    [Tags]             customers    products    regression    mvp    type2
 
     # First availment
     Navigate To Avail Product Page
@@ -679,7 +679,7 @@ t2.5.15 Attempt to Avail Savings Product for Customer with Invalid Status
     ...                and reach the Review step, but clicking Confirm and Avail surfaces an error:
     ...                "The customer is in an invalid state and cannot proceed."
     ...                Requires T25_INVALID_STATUS_CUSTOMER to be set to an inactive/closed customer.
-    [Tags]             customers    products    regression    validation
+    [Tags]             customers    products    regression    validation    type2
 
     Skip If    '${T25_INVALID_STATUS_CUSTOMER}' == ''
     ...    T25_INVALID_STATUS_CUSTOMER not configured — set to an inactive/closed customer name
@@ -710,7 +710,7 @@ t2.5.15 Attempt to Avail Savings Product for Customer with Invalid Status
 t2.5.16 Leave Required Custom Fields Empty – Savings Availment
     [Documentation]    Verify that leaving required custom fields empty triggers a validation
     ...                error per field and keeps the Continue button disabled.
-    [Tags]             customers    products    validation
+    [Tags]             customers    products    validation    type2
 
     Navigate To Avail Product Page
 
@@ -731,7 +731,7 @@ t2.5.17 Enter Invalid Data Format in Custom Fields – Savings Availment
     [Documentation]    Verify that entering invalid data (alphabetic characters into a numeric
     ...                field) is either rejected outright or shows a format validation error.
     ...                Requires a Savings product with a numeric custom field.
-    [Tags]             customers    products    validation
+    [Tags]             customers    products    validation    type2
 
     # This test targets a product with a numeric custom field (T25_SAVINGS_PRODUCT_2)
     Avail Product By Name    ${T25_SAVINGS_PRODUCT_2}
@@ -763,7 +763,7 @@ t2.5.18 Exit Savings Availment Flow Mid-Process – Confirm Discard
     ...                breadcrumb View Profile link prompts a discard confirmation. After
     ...                confirming, the user returns to the customer profile, and restarting
     ...                the avail flow presents a clean empty form.
-    [Tags]             customers    products    regression    mvp
+    [Tags]             customers    products    regression    mvp    type2
 
     Navigate To Avail Product Page
 
@@ -795,7 +795,7 @@ t2.5.19 Session Timeout During Savings Availment Flow
     ...                user to the Login page with a session-expired modal, and discards the
     ...                in-progress availment data.
     ...                SKIPPED — requires 5+ minutes of idle time which exceeds automated test limits.
-    [Tags]             customers    products    skip
+    [Tags]             customers    products    skip    type2
 
     Skip    Requires 5+ minutes idle time — cannot be automated without browser session control
 
@@ -803,7 +803,7 @@ t2.5.20 Use Browser Back Button During Savings Availment Flow
     [Documentation]    Verify that pressing the browser Back button from the Review step is
     ...                handled gracefully: the app either preserves state or re-validates, with
     ...                no data corruption or duplicate submission.
-    [Tags]             customers    products    regression
+    [Tags]             customers    products    regression    type2
 
     Navigate To Avail Product Page
     Fill Customer Information Form

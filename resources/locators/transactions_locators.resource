@@ -30,10 +30,13 @@ ${NEW_TXN_BTN}                      css=[data-testid="btn-transactions-new"]
 
 # Transaction Type Filter (column header filter icon)
 ${TXN_TYPE_FILTER}                  css=th:has-text("Transaction Type") .ant-table-filter-trigger
-${TXN_FILTER_EXTERNAL}              css=[data-menu-id$="-external"]
-${TXN_FILTER_INTERNAL}              css=[data-menu-id$="-internal"]
-${TXN_FILTER_DEPOSIT}               css=[data-menu-id$="-deposit"]
-${TXN_FILTER_WITHDRAWAL}            css=[data-menu-id$="-withdrawal"]
+${TXN_FILTER_EXTERNAL}              css=[data-menu-id$="-fund_transfer_external"]
+${TXN_FILTER_INTERNAL}              css=[data-menu-id$="-fund_transfer_internal"]
+${TXN_FILTER_WITHDRAWAL}            css=[data-menu-id$="-cash_withdrawal"]
+${TXN_FILTER_DEPOSIT}               css=[data-menu-id$="-cash_deposit"]
+${TXN_FILTER_INTEREST_CREDITING}    css=[data-menu-id$="-interest_credit"]
+${TXN_FILTER_LOAN_DISBURSEMENT}     css=[data-menu-id$="-loan_disbursement"]
+${TXN_FILTER_LOAN_PAYMENT}          css=[data-menu-id$="-loan_payment"]
 
 # Date & Time Filter (column header filter icon)
 ${TXN_DATE_TIME_FILTER}             css=th:has-text("Date & Time") .ant-table-filter-trigger

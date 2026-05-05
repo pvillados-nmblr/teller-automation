@@ -78,7 +78,7 @@ Enter CP OTP And Continue
 t1.4.1 Reset Password via Change Password
     [Documentation]    Verify a logged-in teller can successfully change their password via
     ...                the profile dropdown and see the success confirmation modal.
-    [Tags]             change-password    smoke    password-reset    mvp
+    [Tags]             change-password    smoke    password-reset    mvp    type1
 
     Navigate To Change Password Page     email=${CP_USER_EMAIL}
     Complete Change Password Form
@@ -106,7 +106,7 @@ t1.4.2 Change Password – Mismatched Password and Confirm Password
     [Documentation]    Verify that entering non-matching values in the New Password and
     ...                Confirm Password fields shows "Passwords do not match." and
     ...                keeps the CONTINUE button disabled.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_CURRENT_PWD_FIELD}      ${TELLER_PASSWORD}
@@ -121,7 +121,7 @@ t1.4.2 Change Password – Mismatched Password and Confirm Password
 t1.4.3 Change Password – Leave Password Fields Blank
     [Documentation]    Verify the CONTINUE button is disabled when required fields are blank
     ...                on initial page load.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}    # Fields are blank by default upon landing on the page
     Wait For Elements State     ${CP_CONTINUE_BTN}    disabled
@@ -133,7 +133,7 @@ t1.4.3 Change Password – Leave Password Fields Blank
 
 t1.4.4 Change Password – Password Too Short
     [Documentation]    Verify validation for passwords under 8 characters.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    Abc1!
@@ -142,7 +142,7 @@ t1.4.4 Change Password – Password Too Short
 
 t1.4.5 Change Password – Password Without Uppercase Letter
     [Documentation]    Verify validation for a password missing an uppercase letter.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    abc12345!
@@ -151,7 +151,7 @@ t1.4.5 Change Password – Password Without Uppercase Letter
 
 t1.4.6 Change Password – Password Without Number
     [Documentation]    Verify validation for a password missing a number.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    Abcdefgh!
@@ -160,7 +160,7 @@ t1.4.6 Change Password – Password Without Number
 
 t1.4.7 Change Password – Password Without Special Character
     [Documentation]    Verify validation for a password missing a special character.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}
     Fill Text                   ${CP_NEW_PWD_FIELD}    Abcdef123
@@ -170,7 +170,7 @@ t1.4.7 Change Password – Password Without Special Character
 t1.4.8 Change Password – Sequential Validation of Multiple Violations
     [Documentation]    Verify that only one validation error is shown at a time and errors
     ...                cascade correctly as the user fixes them one by one.
-    [Tags]             change-password    negative    mvp
+    [Tags]             change-password    negative    mvp    type1
 
     Navigate To Change Password Page    email=${TELLER_EMAIL}
     # 1. Too short
@@ -203,7 +203,7 @@ t1.4.9 Change Password – Invalid OTP
     ...                the OTP verification screen.
     ...                Uses the magic value "${OTP_INVALID}" which the backend always rejects
     ...                as invalid/expired.
-    [Tags]             change-password    negative    otp    mvp
+    [Tags]             change-password    negative    otp    mvp    type1
 
     Navigate To Change Password Page
     Complete Change Password Form
@@ -217,7 +217,7 @@ t1.4.9 Change Password – Invalid OTP
 
 t1.4.10 Change Password – Leave OTP Blank
     [Documentation]    Verify the CONTINUE button is disabled when the OTP field is blank.
-    [Tags]             change-password    negative    otp    mvp
+    [Tags]             change-password    negative    otp    mvp    type1
 
     Navigate To Change Password Page
     Complete Change Password Form
@@ -230,7 +230,7 @@ t1.4.11-12 Change Password – Cooldown Prevents Immediate Resend, Then Allows R
     [Documentation]    Verify the resend link is hidden immediately after OTP is sent (cooldown active),
     ...                then becomes available after the 60-second cooldown expires and a new OTP can be requested.
     ...                Note: This test will take > 60 seconds to execute.
-    [Tags]             change-password    otp    slow    mvp
+    [Tags]             change-password    otp    slow    mvp    type1
 
     Navigate To Change Password Page
     Complete Change Password Form
@@ -249,7 +249,7 @@ t1.4.11-12 Change Password – Cooldown Prevents Immediate Resend, Then Allows R
 
 t1.4.13 Change Password – Previously Received OTP Is No Longer Valid After Requesting a New OTP
     [Documentation]    Verify that the original OTP is invalidated once a new OTP is requested.
-    [Tags]             change-password    negative    otp    slow    password-reset    mvp
+    [Tags]             change-password    negative    otp    slow    password-reset    mvp    type1
     skip    This test requires a live OTP and will take > 60 seconds due to cooldown. Run manually with: --variable OTP:<code>
 
     Navigate To Change Password Page
@@ -273,7 +273,7 @@ t1.4.14 Change Password – Validation on the 5th Failed OTP Attempt (Maximum Al
     ...                reaching the maximum number of OTP attempts.
     ...                Uses the magic value "${OTP_MAX_ATTEMPTS}" which the backend treats as
     ...                immediately triggering the max-attempts lockout in a single attempt.
-    [Tags]             change-password    negative    otp    security    mvp
+    [Tags]             change-password    negative    otp    security    mvp    type1
 
     Navigate To Change Password Page
     Complete Change Password Form
@@ -298,7 +298,7 @@ t1.4.14 Change Password – Validation on the 5th Failed OTP Attempt (Maximum Al
 
 t1.4.15 Change Password – Validation on 5th OTP Attempt Across Multiple Resend Requests
     [Documentation]    Verify the 5-attempt limit is strictly enforced across multiple OTP resends.
-    [Tags]             change-password    negative    otp    security    slow    mvp
+    [Tags]             change-password    negative    otp    security    slow    mvp    type1
     skip    This test requires a live OTP and will take > 5 minutes due to multiple cooldowns. Run manually with: --variable OTP:<code>
 
     Navigate To Change Password Page
@@ -346,7 +346,7 @@ t1.4.15 Change Password – Validation on 5th OTP Attempt Across Multiple Resend
 t1.4.16 Change Password – Behavior When OTP Session Expires Before Reaching Max Attempts
     [Documentation]    Verify system behavior when a user's OTP session expires before they
     ...                reach the maximum number of failed attempts.
-    [Tags]             change-password    negative    otp    security    slow    mvp
+    [Tags]             change-password    negative    otp    security    slow    mvp    type1
     skip    This test requires a live OTP and will take > 5 minutes due to session expiry. Run manually with: --variable OTP:<code>
 
     Navigate To Change Password Page

@@ -35,7 +35,7 @@ t4.2.1 Open New Transaction Modal
     [Documentation]    Verify that clicking the New Transaction button opens the Create Transaction
     ...                modal with the Customer Information step visible, and the account search
     ...                field and Search button are present and enabled.
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     Wait For Elements State    ${NEW_TXN_BTN}                    visible
     Click                      ${NEW_TXN_BTN}
     Wait For Elements State    ${CREATE_TXN_MODAL}               visible
@@ -48,7 +48,7 @@ t4.2.2 Search by Account Number
     ...                a result list where each entry displays:
     ...                Account Name, Account Number, account type (e.g. Savings),
     ...                Balance, and Account Status.
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T42_ACCOUNT_NUMBER}
     # Verify the matching result card is visible
@@ -70,7 +70,7 @@ t4.2.3 Search by Account Name
     [Documentation]    Verify that entering a valid account holder name returns one or more
     ...                matching results. Each result entry displays Account Name, Account Number,
     ...                account type (e.g. Savings), Balance, and Account Status.
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T42_CUSTOMER_NAME}
     # Verify at least one result card containing the searched name is visible
@@ -90,7 +90,7 @@ t4.2.4 Select Account and Verify Customer Information
     ...                Customer Information step, which displays: Customer Name, Account Number,
     ...                Account Type, Status, Current Balance, Daily Limit Remaining,
     ...                and Contact Information (Mobile Number and Email).
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T42_ACCOUNT_NUMBER}
     Select Account From Create Transaction Results    ${T42_ACCOUNT_NUMBER}
@@ -133,7 +133,7 @@ t4.2.5 Navigate to Transaction Type – Withdraw
     ...                  (with account type e.g. Savings), and Current Balance
     ...                - Withdrawal Type dropdown, Withdrawal Amount input, Transaction Notes field
     ...                - Cancel and Process Withdrawal buttons
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T42_ACCOUNT_NUMBER}
     Select Account From Create Transaction Results    ${T42_ACCOUNT_NUMBER}
@@ -170,7 +170,7 @@ t4.2.6 Real-Time Summary Updates with Withdrawal Amount
     ...                user fills in the withdrawal form:
     ...                - Entering an amount shows the withdrawal amount in the summary
     ...                - The summary displays New Balance = Current Balance – withdrawal amount (correct math)
-    [Tags]             transactions    create    withdrawal    regression    mvp
+    [Tags]             transactions    create    withdrawal    regression    mvp    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # Select withdrawal type
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -202,7 +202,7 @@ t4.2.7 Process Withdrawal and Review
     ...                - Correct Customer Name, Account Number, Transaction Type, Amount (exact match)
     ...                - New Balance = Previous Balance − Withdrawal Amount (math validation)
     ...                - Print Receipt and New Transaction buttons
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # Fill the withdrawal form
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -278,7 +278,7 @@ t4.2.8 Verify Newest Transaction Appears at the Top (Withdrawal)
     ...                in the Transactions list, showing:
     ...                Transaction Type = Withdrawal, Debit Account Number = customer account,
     ...                Credit Account Number = N/A, and Status column visible.
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     # Complete the full withdrawal flow
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -313,7 +313,7 @@ t4.2.9 View Details of the Newest Transaction (Withdrawal)
     ...                - Credit Account Name = N/A
     ...                - Credit Account Number = N/A
     ...                - Created on and Updated on timestamps
-    [Tags]             transactions    create    withdrawal    smoke    mvp
+    [Tags]             transactions    create    withdrawal    smoke    mvp    type2
     # Complete the full withdrawal flow
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -368,7 +368,7 @@ t4.2.10 Initialize Daily OTC Withdrawal Limit
     ...
     ...                Uses OTC test account: ${T42_OTC_CUSTOMER_NAME} (${T42_OTC_ACCOUNT_NUMBER}).
     ...                Pre-condition: No OTC withdrawals have been made today for this account.
-    [Tags]             transactions    withdrawal    daily-limit    regression
+    [Tags]             transactions    withdrawal    daily-limit    regression    type2
     Navigate To Customer Info Step    ${T42_OTC_ACCOUNT_NUMBER}
     Wait For Elements State    text=Daily Limit Remaining >> nth=0          visible
     Wait For Elements State    text=${T42_DAILY_LIMIT_INITIAL} >> nth=0     visible
@@ -384,7 +384,7 @@ t4.2.11 Non-OTC Transaction Does Not Affect Daily OTC Limit
     ...
     ...                Skipped: Send Money is performed manually via the mobile app — no API
     ...                automation available yet to set up the pre-condition programmatically.
-    [Tags]             transactions    withdrawal    daily-limit    manual
+    [Tags]             transactions    withdrawal    daily-limit    manual    type2
     Skip    Send Money pre-condition must be triggered manually via mobile app — re-enable once Send Money is available via API.
 
 t4.2.12 OTC Withdrawal Reduces Daily Limit
@@ -393,7 +393,7 @@ t4.2.12 OTC Withdrawal Reduces Daily Limit
     ...                to ${T42_DAILY_LIMIT_AFTER_FIRST_OTC}.
     ...
     ...                Uses OTC test account: ${T42_OTC_CUSTOMER_NAME} (${T42_OTC_ACCOUNT_NUMBER}).
-    [Tags]             transactions    withdrawal    daily-limit    regression
+    [Tags]             transactions    withdrawal    daily-limit    regression    type2
     # Step 1: Verify starting Daily Limit Remaining (pre-check)
     Navigate To Customer Info Step    ${T42_OTC_ACCOUNT_NUMBER}
     Wait For Elements State    text=${T42_DAILY_LIMIT_INITIAL} >> nth=0    visible
@@ -423,7 +423,7 @@ t4.2.13 Multiple OTC Withdrawals Accumulate Against Daily Limit
     ...                Uses OTC test account: ${T42_OTC_CUSTOMER_NAME} (${T42_OTC_ACCOUNT_NUMBER}).
     ...                Pre-condition: t4.2.12 has already run — one OTC withdrawal of
     ...                ${T42_FIRST_OTC_AMOUNT} has been made today.
-    [Tags]             transactions    withdrawal    daily-limit    regression
+    [Tags]             transactions    withdrawal    daily-limit    regression    type2
     # Step 1: Verify starting Daily Limit Remaining reflects first withdrawal (pre-check)
     Navigate To Customer Info Step    ${T42_OTC_ACCOUNT_NUMBER}
     Wait For Elements State    text=${T42_DAILY_LIMIT_AFTER_FIRST_OTC} >> nth=0    visible
@@ -452,7 +452,7 @@ t4.2.14 Daily OTC Limit Resets on the Next Day
     ...                Pre-condition: OTC withdrawals were made on the previous day.
     ...                Cannot be automated — requires a system date change.
     ...                Verify manually: advance system date and confirm limit resets.
-    [Tags]             transactions    withdrawal    daily-limit    manual
+    [Tags]             transactions    withdrawal    daily-limit    manual    type2
     Skip    Requires system date change — verify manually that Daily Limit Remaining resets to ${T42_DAILY_LIMIT_INITIAL} on a new business day.
 
 t4.2.15 Display of OTC-Only Transactions for Daily Limit Tracking
@@ -467,7 +467,7 @@ t4.2.15 Display of OTC-Only Transactions for Daily Limit Tracking
     ...                Uses OTC test account: ${T42_OTC_CUSTOMER_NAME} (${T42_OTC_ACCOUNT_NUMBER}).
     ...                Pre-condition: t4.2.12 and t4.2.13 have already run — two OTC withdrawals
     ...                (${T42_FIRST_OTC_AMOUNT} and ${T42_SECOND_OTC_AMOUNT}) exist today.
-    [Tags]             transactions    withdrawal    daily-limit    regression
+    [Tags]             transactions    withdrawal    daily-limit    regression    type2
     # Step 1: Get today's date for date range filter
     ${today}=    Evaluate    __import__('datetime').date.today().strftime('%Y-%m-%d')
     # Step 2: Navigate to the OTC account's transaction history
@@ -517,7 +517,7 @@ t4.2.16 Consolidated Daily Limit Tracking for Mobile and OTC Transactions
     ...                covers both Mobile and OTC transactions when Phase 2 is enabled.
     ...
     ...                Phase 2 feature — not yet implemented.
-    [Tags]             transactions    withdrawal    daily-limit    phase2
+    [Tags]             transactions    withdrawal    daily-limit    phase2    type2
     Skip    Phase 2 feature — consolidated Mobile + OTC daily limit tracking is not yet implemented.
 
 t4.2.17 Visibility of Daily Outgoing Transactions Under Customer Profile
@@ -526,7 +526,7 @@ t4.2.17 Visibility of Daily Outgoing Transactions Under Customer Profile
     ...                daily OTC limit has been consumed.
     ...
     ...                Uses OTC test account: ${T42_OTC_CUSTOMER_NAME} (${T42_OTC_ACCOUNT_NUMBER}).
-    [Tags]             transactions    withdrawal    daily-limit    regression
+    [Tags]             transactions    withdrawal    daily-limit    regression    type2
     Skip    Phase 2 feature — consolidated Mobile + OTC daily limit tracking is not yet implemented.
     Navigate To Customer Info Step    ${T42_OTC_ACCOUNT_NUMBER}
     Wait For Elements State    text=Daily Limit Remaining >> nth=0    visible
@@ -536,7 +536,7 @@ t4.2.18 Daily Limit Reset for Consolidated Transactions
     ...                transactions resets on the next business day (Phase 2 feature).
     ...
     ...                Phase 2 feature — not yet implemented.
-    [Tags]             transactions    withdrawal    daily-limit    phase2
+    [Tags]             transactions    withdrawal    daily-limit    phase2    type2
     Skip    Phase 2 feature — consolidated daily limit reset is not yet implemented.
 
 
@@ -548,7 +548,7 @@ t4.2.19 Validate Maximum Daily Withdrawal Limit (Allowed Amount)
     [Documentation]    Verify that entering an amount equal to the configured daily max
     ...                (${T42_MAX_ALLOWED_AMOUNT}) is accepted: no error is shown, and the
     ...                Process Withdrawal button is enabled.
-    [Tags]             transactions    withdrawal    validation    regression
+    [Tags]             transactions    withdrawal    validation    regression    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -566,7 +566,7 @@ t4.2.19 Validate Maximum Daily Withdrawal Limit (Allowed Amount)
 t4.2.20 Search with Invalid Account Number
     [Documentation]    Verify that searching by a non-existent account number in the Create
     ...                Transaction modal shows an empty-state / "No accounts found" message.
-    [Tags]             transactions    create    withdrawal    negative    smoke
+    [Tags]             transactions    create    withdrawal    negative    smoke    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T42_INVALID_ACCOUNT_NUMBER}
     Wait For Elements State    ${CREATE_TXN_NO_RESULTS_MSG}    visible
@@ -574,7 +574,7 @@ t4.2.20 Search with Invalid Account Number
 t4.2.21 Search with Invalid Account Name
     [Documentation]    Verify that searching by a non-existent account name in the Create
     ...                Transaction modal shows an empty-state / "No accounts found" message.
-    [Tags]             transactions    create    withdrawal    negative    smoke
+    [Tags]             transactions    create    withdrawal    negative    smoke    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T42_INVALID_ACCOUNT_NAME}
     Wait For Elements State    ${CREATE_TXN_NO_RESULTS_MSG}    visible
@@ -583,7 +583,7 @@ t4.2.22 Validate Withdrawal Type Required
     [Documentation]    Verify that the Process Withdrawal button is disabled when no
     ...                Withdrawal Type is selected — even if an amount is entered.
     ...                The type dropdown is required and the button must not activate without it.
-    [Tags]             transactions    withdrawal    validation    smoke
+    [Tags]             transactions    withdrawal    validation    smoke    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # No type selected — button must be disabled immediately
     Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled
@@ -595,7 +595,7 @@ t4.2.22 Validate Withdrawal Type Required
 t4.2.23 Validate Withdrawal Amount Required
     [Documentation]    Verify that the Process Withdrawal button is disabled when the
     ...                Withdrawal Amount is blank, even after selecting a type.
-    [Tags]             transactions    withdrawal    validation    smoke
+    [Tags]             transactions    withdrawal    validation    smoke    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -608,7 +608,7 @@ t4.2.23 Validate Withdrawal Amount Required
 t4.2.24 Withdrawal Amount Exceeds Balance
     [Documentation]    Verify that entering an amount greater than the account's current
     ...                balance shows an "Insufficient funds" error, preventing submission.
-    [Tags]             transactions    withdrawal    validation    negative    smoke
+    [Tags]             transactions    withdrawal    validation    negative    smoke    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER_EXCEED_BALANCE}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -628,7 +628,7 @@ t4.2.25 OTC Withdrawal Exceeding Remaining Daily Limit
     ...
     ...                Pre-condition: Daily Limit Remaining = 450,000
     ...                (after two prior OTC withdrawals of 20,000 and 30,000).
-    [Tags]             transactions    withdrawal    validation    negative    daily-limit    regression
+    [Tags]             transactions    withdrawal    validation    negative    daily-limit    regression    type2
     Navigate To Withdrawal Step    ${T42_OTC_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -647,7 +647,7 @@ t4.2.26 Validate Minimum Withdrawal Amount
     [Documentation]    Verify that entering an amount less than 1 (e.g. 0.5) triggers a
     ...                validation error ("Amount must be greater than 1" or equivalent)
     ...                and the Process Withdrawal button remains disabled.
-    [Tags]             transactions    withdrawal    validation    negative    regression
+    [Tags]             transactions    withdrawal    validation    negative    regression    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -663,7 +663,7 @@ t4.2.27 Validate Maximum Daily Withdrawal Limit Exceeded
     [Documentation]    Verify that entering an amount above the daily maximum
     ...                (${T42_EXCEED_MAX_AMOUNT}) displays the error:
     ...                "Amount must be lesser than 500,000".
-    [Tags]             transactions    withdrawal    validation    negative    regression
+    [Tags]             transactions    withdrawal    validation    negative    regression    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -678,7 +678,7 @@ t4.2.27 Validate Maximum Daily Withdrawal Limit Exceeded
 t4.2.28 Validate Negative or Zero Withdrawal Amount
     [Documentation]    Verify that entering 0 (or a negative amount) triggers a validation
     ...                error and the Process Withdrawal button remains disabled.
-    [Tags]             transactions    withdrawal    validation    negative    regression
+    [Tags]             transactions    withdrawal    validation    negative    regression    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -694,7 +694,7 @@ t4.2.29 Validate Non-Numeric Withdrawal Amount
     [Documentation]    Verify that entering non-numeric input in the Amount field causes the
     ...                field to reset to its initial state, and the Process Withdrawal button
     ...                remains disabled.
-    [Tags]             transactions    withdrawal    validation    negative    regression
+    [Tags]             transactions    withdrawal    validation    negative    regression    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -715,7 +715,7 @@ t4.2.30 Validate Withdrawal Notes Character Limit
     [Documentation]    Verify that the Transaction Notes field enforces a 300-character maximum.
     ...                Attempting to enter 301 characters should result in the stored value
     ...                being at most 300 characters (field truncates or rejects excess input).
-    [Tags]             transactions    withdrawal    validation    regression
+    [Tags]             transactions    withdrawal    validation    regression    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     ${long_text}=    Evaluate    'a' * 301
     Fill Text                  ${CREATE_TXN_NOTES_INPUT}    ${long_text}
@@ -730,7 +730,7 @@ t4.2.31 Validate Process Withdrawal Button Activation
     ...                1. Initially disabled (no type, no amount).
     ...                2. Still disabled after selecting type only (no amount).
     ...                3. Enabled only after both type and valid amount are provided.
-    [Tags]             transactions    withdrawal    validation    smoke
+    [Tags]             transactions    withdrawal    validation    smoke    type2
     Navigate To Withdrawal Step    ${T42_ACCOUNT_NUMBER}
     # 1. No inputs — button must be disabled
     Wait For Elements State    ${CREATE_TXN_PROCESS_WITHDRAWAL_BTN}    disabled

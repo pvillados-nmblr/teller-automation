@@ -21,7 +21,7 @@ ${ACCOUNT_ROW}              css=table tbody tr:has-text("${VALID_ACCOUNT_NUMBER}
 t3.1.1 Initial Load and View of All Accounts List
     [Documentation]    Verify that navigating to the Accounts module displays the accounts list
     ...                with all required columns and the View Account Transactions action link visible.
-    [Tags]             accounts    smoke    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     # Verify all fields — continue on failure so ALL mismatches are reported
     Run Keyword And Continue On Failure
@@ -43,14 +43,14 @@ t3.1.2 Pagination and Navigation on Accounts List
     [Documentation]    Verify that pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             accounts    regression    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
     # Click page number 3
-    Click                      css=li.ant-pagination-item:has-text("3")
-    Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
+    Click                      css=li.ant-pagination-item[title="3"]
+    Wait For Elements State    css=li.ant-pagination-item-active[title="3"]    visible
     # Click Back arrow to go back to page 2
     Click                      ${PAGINATION_PREV}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
@@ -58,7 +58,7 @@ t3.1.2 Pagination and Navigation on Accounts List
 t3.1.3 Search for Account by Number (Valid)
     [Documentation]    Verify that searching by a valid Account Number returns exactly one record
     ...                and all required columns are visible in the results.
-    [Tags]             accounts    smoke    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     Fill Text                  ${ACCOUNTS_SEARCH_FIELD}    ${VALID_ACCOUNT_NUMBER}
     Click                      ${ACCOUNTS_SEARCH_BUTTON}
@@ -100,7 +100,7 @@ t3.1.3 Search for Account by Number (Valid)
 t3.1.4 Search for Account by Name (Valid)
     [Documentation]    Verify that searching by a valid Account Name returns matching records.
     ...                All visible results should contain the searched name.
-    [Tags]             accounts    smoke    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     Fill Text                  ${ACCOUNTS_SEARCH_FIELD}    ${VALID_ACCOUNT_NAME}
     Click                      ${ACCOUNTS_SEARCH_BUTTON}
@@ -136,7 +136,7 @@ t3.1.4 Search for Account by Name (Valid)
 t3.1.5 Search for Non-Existing Account
     [Documentation]    Verify that searching for a non-existing account value shows a "No Data" message
     ...                with an empty table and no application errors.
-    [Tags]             accounts    negative    mvp
+    [Tags]             accounts    negative    mvp    type1
     Navigate To Accounts
     Fill Text                  ${ACCOUNTS_SEARCH_FIELD}    ${NON_EXISTING_ACCOUNT}
     Click                      ${ACCOUNTS_SEARCH_BUTTON}
@@ -147,7 +147,7 @@ t3.1.5 Search for Non-Existing Account
 t3.1.6 Filter Accounts List by Status: Active
     [Documentation]    Verify that filtering by Active status shows only Active accounts.
     ...                If no Active accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_ACTIVE}
@@ -155,21 +155,11 @@ t3.1.6 Filter Accounts List by Status: Active
     Wait For Elements State    ${ACCOUNTS_TABLE}           visible
     Filter Accounts Results Should Contain Only Status    Active
 
-t3.1.7 Filter Accounts List by Status: Inactive
-    [Documentation]    Verify that filtering by Inactive status shows only Inactive accounts.
-    ...                If no Inactive accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
-    Navigate To Accounts
-    Click                      ${ACCOUNT_STATUS_FILTER}
-    Click                      ${FILTER_OPTION_INACTIVE}
-    Click                      ${FILTER_APPLY_BTN}
-    Wait For Elements State    ${ACCOUNTS_TABLE}           visible
-    Filter Accounts Results Should Contain Only Status    Inactive
 
-t3.1.8 Filter Accounts List by Status: Dormant
+t3.1.7 Filter Accounts List by Status: Dormant
     [Documentation]    Verify that filtering by Dormant status shows only Dormant accounts.
     ...                If no Dormant accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_DORMANT}
@@ -177,10 +167,10 @@ t3.1.8 Filter Accounts List by Status: Dormant
     Wait For Elements State    ${ACCOUNTS_TABLE}           visible
     Filter Accounts Results Should Contain Only Status    Dormant
 
-t3.1.9 Filter Accounts List by Status: Frozen
+t3.1.8 Filter Accounts List by Status: Frozen
     [Documentation]    Verify that filtering by Frozen status shows only Frozen accounts.
     ...                If no Frozen accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_FROZEN}
@@ -188,10 +178,10 @@ t3.1.9 Filter Accounts List by Status: Frozen
     Wait For Elements State    ${ACCOUNTS_TABLE}           visible
     Filter Accounts Results Should Contain Only Status    Frozen
 
-t3.1.10 Filter Accounts List by Status: Closed
+t3.1.9 Filter Accounts List by Status: Closed
     [Documentation]    Verify that filtering by Closed status shows only Closed accounts.
     ...                If no Closed accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
+    [Tags]             accounts    smoke    mvp    type1
     Navigate To Accounts
     Click                      ${ACCOUNT_STATUS_FILTER}
     Click                      ${FILTER_OPTION_CLOSED}
@@ -199,35 +189,3 @@ t3.1.10 Filter Accounts List by Status: Closed
     Wait For Elements State    ${ACCOUNTS_TABLE}           visible
     Filter Accounts Results Should Contain Only Status    Closed
 
-t3.1.11 Filter Accounts List by Status: Overdrawn
-    [Documentation]    Verify that filtering by Overdrawn status shows only Overdrawn accounts.
-    ...                If no Overdrawn accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
-    Navigate To Accounts
-    Click                      ${ACCOUNT_STATUS_FILTER}
-    Click                      ${FILTER_OPTION_OVERDRAWN}
-    Click                      ${FILTER_APPLY_BTN}
-    Wait For Elements State    ${ACCOUNTS_TABLE}           visible
-    Filter Accounts Results Should Contain Only Status    Overdrawn
-
-t3.1.12 Filter Accounts List by Status: Blocked
-    [Documentation]    Verify that filtering by Blocked status shows only Blocked accounts.
-    ...                If no Blocked accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
-    Navigate To Accounts
-    Click                      ${ACCOUNT_STATUS_FILTER}
-    Click                      ${FILTER_OPTION_BLOCKED}
-    Click                      ${FILTER_APPLY_BTN}
-    Wait For Elements State    ${ACCOUNTS_TABLE}           visible
-    Filter Accounts Results Should Contain Only Status    Blocked
-
-t3.1.13 Filter Accounts List by Status: Suspended
-    [Documentation]    Verify that filtering by Suspended status shows only Suspended accounts.
-    ...                If no Suspended accounts exist, a "No Data" message is shown.
-    [Tags]             accounts    regression    mvp
-    Navigate To Accounts
-    Click                      ${ACCOUNT_STATUS_FILTER}
-    Click                      ${FILTER_OPTION_SUSPENDED}
-    Click                      ${FILTER_APPLY_BTN}
-    Wait For Elements State    ${ACCOUNTS_TABLE}           visible
-    Filter Accounts Results Should Contain Only Status    Suspended

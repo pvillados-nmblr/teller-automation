@@ -21,7 +21,7 @@ ${CUSTOMER_ROW}             css=table tbody tr:has-text("${VALID_CUSTOMER_ID}")
 t2.1.1 Initial Load and View of Customer List
     [Documentation]    Verify that navigating to the Customers module displays the customer list
     ...                with all required columns and action buttons visible.
-    [Tags]             customers    smoke    mvp
+    [Tags]             customers    smoke    mvp    type1
     Navigate To Customers
     # Verify all fields — continue on failure so ALL mismatches are reported
     Run Keyword And Continue On Failure
@@ -47,14 +47,14 @@ t2.1.2 Pagination and Navigation
     [Documentation]    Verify that pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    smoke    mvp    type1
     Navigate To Customers
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
     # Click page number 3
-    Click                      css=li.ant-pagination-item:has-text("3")
-    Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
+    Click                      css=li.ant-pagination-item[title="3"]
+    Wait For Elements State    css=li.ant-pagination-item-active[title="3"]    visible
     # Click Back arrow to go back to page 2
     Click                      ${PAGINATION_PREV}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
@@ -62,7 +62,7 @@ t2.1.2 Pagination and Navigation
 t2.1.3 Search for Valid Customer ID
     [Documentation]    Verify that searching by a valid Customer ID returns exactly one record
     ...                and all required columns are visible in the results.
-    [Tags]             customers    smoke    mvp
+    [Tags]             customers    smoke    mvp    type1
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${VALID_CUSTOMER_ID}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -99,7 +99,7 @@ t2.1.4 Search for Valid Customer Name
     ...                Multiple customers may match - verify a specific row contains all expected
     ...                column values: Customer ID, Name, Date of Birth, Created on, Last Updated,
     ...                Customer Status, and Action links.
-    [Tags]             customers    smoke    mvp
+    [Tags]             customers    smoke    mvp    type1
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${VALID_CUSTOMER_NAME}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -145,7 +145,7 @@ t2.1.4 Search for Valid Customer Name
 t2.1.5 Search for Non-Existing Customer
     [Documentation]    Verify that searching for a non-existing customer shows a "No Data" message
     ...                with an empty table and no application errors.
-    [Tags]             customers    negative    mvp
+    [Tags]             customers    negative    mvp    type1
     Navigate To Customers
     Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${NON_EXISTING_CUSTOMER}
     Click                      ${CUSTOMER_SEARCH_BUTTON}
@@ -155,7 +155,7 @@ t2.1.5 Search for Non-Existing Customer
 t2.1.6 Filter Customer List by Status - Active
     [Documentation]    Verify that filtering by Active status shows only Active customers.
     ...                If no Active customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    regression    mvp    type1
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_ACTIVE}
@@ -166,7 +166,7 @@ t2.1.6 Filter Customer List by Status - Active
 t2.1.7 Filter Customer List by Status - Inactive
     [Documentation]    Verify that filtering by Inactive status shows only Inactive customers.
     ...                If no Inactive customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    regression    mvp    type1
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_INACTIVE}
@@ -177,7 +177,7 @@ t2.1.7 Filter Customer List by Status - Inactive
 t2.1.8 Filter Customer List by Status - Dormant
     [Documentation]    Verify that filtering by Dormant status shows only Dormant customers.
     ...                If no Dormant customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    regression    mvp    guardrails    type1
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_DORMANT}
@@ -188,7 +188,7 @@ t2.1.8 Filter Customer List by Status - Dormant
 t2.1.9 Filter Customer List by Status - Closed
     [Documentation]    Verify that filtering by Closed status shows only Closed customers.
     ...                If no Closed customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    regression    mvp    guardrails    type1
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_CLOSED}
@@ -199,7 +199,7 @@ t2.1.9 Filter Customer List by Status - Closed
 t2.1.10 Filter Customer List by Status - Blocked
     [Documentation]    Verify that filtering by Blocked status shows only Blocked customers.
     ...                If no Blocked customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    regression    mvp    guardrails    type1
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_BLOCKED}
@@ -210,7 +210,7 @@ t2.1.10 Filter Customer List by Status - Blocked
 t2.1.11 Filter Customer List by Status - Suspended
     [Documentation]    Verify that filtering by Suspended status shows only Suspended customers.
     ...                If no Suspended customers exist, a "No Data" message is shown.
-    [Tags]             customers    regression    mvp
+    [Tags]             customers    regression    mvp    guardrails    type1
     Navigate To Customers
     Click                      ${CUSTOMER_STATUS_FILTER}
     Click                      ${FILTER_OPTION_SUSPENDED}
@@ -221,7 +221,7 @@ t2.1.11 Filter Customer List by Status - Suspended
 t2.1.12 Customer Profile View - Details Verification
     [Documentation]    Verify that clicking View Profile displays the customer's full profile
     ...                with all required section headers and fields correctly visible.
-    [Tags]             customers    smoke    mvp
+    [Tags]             customers    smoke    mvp    type1
     Navigate To Customers
     View Customer Profile      ${VALID_CUSTOMER_NAME}
     # Verify all fields — continue on failure so ALL mismatches are reported
@@ -294,3 +294,105 @@ t2.1.12 Customer Profile View - Details Verification
     ...    Wait For Elements State    text=ID (Front)                       visible
     Run Keyword And Continue On Failure
     ...    Wait For Elements State    text=ID (Back)                        visible
+
+t2.1.13 Change Customer Status from Active to Inactive
+    [Documentation]    Verify that a teller can change a customer's status from Active to Inactive.
+    ...                Steps: search for the test customer filtered by Active status, capture the
+    ...                first row's Customer ID, click the status badge, select Inactive from the
+    ...                dropdown, fill in remarks, confirm — then search by the captured ID and
+    ...                verify the status is now Inactive.
+    [Tags]             customers    status-change    smoke    mvp    type1
+    Navigate To Customers
+    # Filter by Active to ensure we find an active customer
+    Click                      ${CUSTOMER_STATUS_FILTER}
+    Wait For Elements State    ${FILTER_OPTION_ACTIVE}    visible
+    Click                      ${FILTER_OPTION_ACTIVE}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    ${CUSTOMER_TABLE}    visible
+    # Search for the status-change test customer
+    Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${T21_STATUS_CHANGE_CUSTOMER_NAME}
+    Click                      ${CUSTOMER_SEARCH_BUTTON}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0    visible
+    # Capture Customer ID from the first row (column 0)
+    ${customer_id_raw}=    Get Text
+    ...    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> css=td >> nth=0
+    ${customer_id}=    Evaluate    '''${customer_id_raw}'''.split('\\n')[0].strip()
+    Log    Status change target Customer ID: ${customer_id}
+    # Click the status badge in the first row to open the dropdown
+    Click    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> css=[data-testid="field-status-badge"]
+    Wait For Elements State    ${CUSTOMER_STATUS_DROPDOWN_INACTIVE}    visible
+    Click    ${CUSTOMER_STATUS_DROPDOWN_INACTIVE}
+    # Fill in remarks and confirm
+    Wait For Elements State    ${CUSTOMER_STATUS_CHANGE_MODAL}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_STATUS_CHANGE_MODAL} >> text=Tag user as inactive?    visible
+    Fill Text    ${CUSTOMER_STATUS_REMARKS_INPUT}    ${T21_STATUS_CHANGE_REMARKS}
+    Wait For Elements State    ${CUSTOMER_STATUS_CONFIRM_BTN}    enabled
+    Click    ${CUSTOMER_STATUS_CONFIRM_BTN}
+    Wait For Elements State    text=Customer status updated successfully.    visible
+    Wait For Load Spinner To Disappear
+    # Clear Active filter so the now-inactive customer is visible in search results
+    Click                      ${CUSTOMER_STATUS_FILTER}
+    Wait For Elements State    ${FILTER_RESET_BTN}    visible
+    Click                      ${FILTER_RESET_BTN}
+    Wait For Load Spinner To Disappear
+    # Verify the customer now appears as Inactive — search by Customer ID
+    Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${customer_id}
+    Click                      ${CUSTOMER_SEARCH_BUTTON}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State
+    ...    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> css=[data-testid="field-status-badge"]:has-text("Inactive")
+    ...    visible
+
+t2.1.14 Change Customer Status from Inactive to Active
+    [Documentation]    Verify that a teller can restore a customer's status from Inactive back to Active.
+    ...                Steps: search for the test customer filtered by Inactive status, capture the
+    ...                first row's Customer ID, click the status badge, select Active from the
+    ...                dropdown, fill in remarks, confirm — then search by the captured ID and
+    ...                verify the status is now Active.
+    [Tags]             customers    status-change    smoke    mvp    type1
+    Navigate To Customers
+    # Filter by Inactive to find the customer set inactive in t2.1.13
+    Click                      ${CUSTOMER_STATUS_FILTER}
+    Wait For Elements State    ${FILTER_OPTION_INACTIVE}    visible
+    Click                      ${FILTER_OPTION_INACTIVE}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    ${CUSTOMER_TABLE}    visible
+    # Search for the status-change test customer
+    Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${T21_STATUS_CHANGE_CUSTOMER_NAME}
+    Click                      ${CUSTOMER_SEARCH_BUTTON}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0    visible
+    # Capture Customer ID from the first row
+    ${customer_id_raw}=    Get Text
+    ...    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> css=td >> nth=0
+    ${customer_id}=    Evaluate    '''${customer_id_raw}'''.split('\\n')[0].strip()
+    Log    Restoring Customer ID: ${customer_id}
+    # Click the status badge to open the dropdown
+    Click    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> css=[data-testid="field-status-badge"]
+    Wait For Elements State    ${CUSTOMER_STATUS_DROPDOWN_ACTIVE}    visible
+    Click    ${CUSTOMER_STATUS_DROPDOWN_ACTIVE}
+    # Fill in remarks and confirm
+    Wait For Elements State    ${CUSTOMER_STATUS_CHANGE_MODAL}    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    ${CUSTOMER_STATUS_CHANGE_MODAL} >> text=Tag user as active?    visible
+    Fill Text    ${CUSTOMER_STATUS_REMARKS_INPUT}    ${T21_STATUS_CHANGE_REMARKS}
+    Wait For Elements State    ${CUSTOMER_STATUS_CONFIRM_BTN}    enabled
+    Click    ${CUSTOMER_STATUS_CONFIRM_BTN}
+    Wait For Elements State    text=Customer status updated successfully.    visible
+    Wait For Load Spinner To Disappear
+    # Clear Inactive filter so the now-active customer is visible in search results
+    Click                      ${CUSTOMER_STATUS_FILTER}
+    Wait For Elements State    ${FILTER_RESET_BTN}    visible
+    Click                      ${FILTER_RESET_BTN}
+    Wait For Load Spinner To Disappear
+    # Verify the customer now appears as Active — search by Customer ID
+    Fill Text                  ${CUSTOMER_SEARCH_FIELD}    ${customer_id}
+    Click                      ${CUSTOMER_SEARCH_BUTTON}
+    Wait For Load Spinner To Disappear
+    Wait For Elements State
+    ...    css=[data-testid="table-customers"] tbody tr:not([aria-hidden="true"]) >> nth=0 >> css=[data-testid="field-status-badge"]:has-text("Active")
+    ...    visible

@@ -80,7 +80,7 @@ Enter RTP OTP And Continue
 t1.1.3 Verify System Treats Email as Case-Insensitive During Reset Password
     [Documentation]    Verify the system accepts a mixed-case email when logging in with a
     ...                temporary password and allows the user to complete the Reset Password flow.
-    [Tags]             reset-password    smoke    password-reset    temp-password    mvp
+    [Tags]             reset-password    smoke    password-reset    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_MIXED_CASE_EMAIL}
     Complete Reset Password Form
@@ -92,7 +92,7 @@ t1.1.3 Verify System Treats Email as Case-Insensitive During Reset Password
 t1.1.2 Reset Password via Logging in Using Temporary Password
     [Documentation]    Verify a new user can log in with their temporary password, complete the
     ...                Reset Password form, verify their OTP, and see the success confirmation modal.
-    [Tags]             reset-password    smoke    password-reset    temp-password    mvp
+    [Tags]             reset-password    smoke    password-reset    temp-password    mvp    type1
 
     Navigate To Reset Password Page
     Complete Reset Password Form
@@ -113,7 +113,7 @@ t1.1.4 Login Using Expired Temporary Password
     ...                with an expired temporary password.
     ...                Uses the magic value "${RTP_EXPIRED_MAGIC_PWD}" which the backend
     ...                always treats as an expired temporary password for any valid email.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Open Teller App
     Fill Text                   ${EMAIL_FIELD}       ${RTP_EXPIRED_USER_EMAIL}
@@ -124,7 +124,7 @@ t1.1.4 Login Using Expired Temporary Password
 t1.1.5 Verify That a User With an Expired Temporary Password Can Finalize Account Setup via Forgot Password
     [Documentation]    Verify that a user whose temporary password has expired can still
     ...                complete account setup by using the Forgot Password flow.
-    [Tags]             reset-password    smoke    password-reset    mvp
+    [Tags]             reset-password    smoke    password-reset    mvp    type1
 
     Open Teller App
     Click                       ${FORGOT_PASSWORD_LINK}
@@ -159,7 +159,7 @@ t1.1.6 Reset Password – Mismatched New Password and Confirm Password
     [Documentation]    Verify that entering non-matching values in the New Password and
     ...                Confirm Password fields shows "Passwords do not match." and
     ...                keeps the RESET PASSWORD button disabled.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Fill Text                   ${RTP_TEMP_PASSWORD_FIELD}       ${RTP_TEMP_PASSWORD_2}
@@ -174,7 +174,7 @@ t1.1.6 Reset Password – Mismatched New Password and Confirm Password
 t1.1.7 Reset Password – Leave Required Fields Blank
     [Documentation]    Verify the RESET PASSWORD button is disabled when all fields are blank
     ...                on initial page load.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     # Fields are blank by default upon landing on the page
@@ -187,7 +187,7 @@ t1.1.7 Reset Password – Leave Required Fields Blank
 
 t1.1.8 Reset Password – Password Too Short
     [Documentation]    Verify validation for passwords under 8 characters.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Fill Text                   ${RTP_NEW_PASSWORD_FIELD}    Abc1!
@@ -196,7 +196,7 @@ t1.1.8 Reset Password – Password Too Short
 
 t1.1.9 Reset Password – Password Without Uppercase Letter
     [Documentation]    Verify validation for a password missing an uppercase letter.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Fill Text                   ${RTP_NEW_PASSWORD_FIELD}    abc12345!
@@ -205,7 +205,7 @@ t1.1.9 Reset Password – Password Without Uppercase Letter
 
 t1.1.10 Reset Password – Password Without Number
     [Documentation]    Verify validation for a password missing a number.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Fill Text                   ${RTP_NEW_PASSWORD_FIELD}    Abcdefgh!
@@ -214,7 +214,7 @@ t1.1.10 Reset Password – Password Without Number
 
 t1.1.11 Reset Password – Password Without Special Character
     [Documentation]    Verify validation for a password missing a special character.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Fill Text                   ${RTP_NEW_PASSWORD_FIELD}    Abcdef123
@@ -224,7 +224,7 @@ t1.1.11 Reset Password – Password Without Special Character
 t1.1.12 Reset Password – Sequential Validation of Multiple Violations
     [Documentation]    Verify that only one validation error is shown at a time and errors
     ...                cascade correctly as the user fixes them one by one.
-    [Tags]             reset-password    negative    temp-password    mvp
+    [Tags]             reset-password    negative    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
 
@@ -258,7 +258,7 @@ t1.1.13 Reset Password – Invalid OTP
     ...                the OTP verification screen.
     ...                Uses the magic value "${OTP_INVALID}" which the backend always rejects
     ...                as invalid/expired.
-    [Tags]             reset-password    negative    otp    temp-password    mvp
+    [Tags]             reset-password    negative    otp    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Complete Reset Password Form
@@ -272,7 +272,7 @@ t1.1.13 Reset Password – Invalid OTP
 
 t1.1.14 Reset Password – Leave OTP Blank
     [Documentation]    Verify the CONTINUE button is disabled when the OTP field is blank.
-    [Tags]             reset-password    negative    otp    temp-password    mvp
+    [Tags]             reset-password    negative    otp    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Complete Reset Password Form
@@ -284,7 +284,7 @@ t1.1.14 Reset Password – Leave OTP Blank
 t1.1.15 Reset Password – User Cannot Request a New OTP Before the 1-Minute Cooldown
     [Documentation]    Verify the "Request a new OTP" link is hidden during the 1-minute
     ...                cooldown immediately after the initial OTP is sent.
-    [Tags]             reset-password    negative    otp    temp-password    mvp
+    [Tags]             reset-password    negative    otp    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Complete Reset Password Form
@@ -296,7 +296,7 @@ t1.1.16 Reset Password – User Can Request a New OTP After the Cooldown
     [Documentation]    Verify the user can request a new OTP after the 60-second cooldown
     ...                expires and complete the Reset Password flow successfully.
     ...                Note: This test will take > 60 seconds to execute.
-    [Tags]             reset-password    positive    otp    slow    password-reset    temp-password    mvp
+    [Tags]             reset-password    positive    otp    slow    password-reset    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL}    temp_password=${RTP_TEMP_PASSWORD}
     Complete Reset Password Form     temp_password=${RTP_TEMP_PASSWORD}
@@ -314,7 +314,7 @@ t1.1.16 Reset Password – User Can Request a New OTP After the Cooldown
 
 t1.1.17 Reset Password – Previously Received OTP Is No Longer Valid After Requesting a New OTP
     [Documentation]    Verify that the original OTP is invalidated once a new OTP is requested.
-    [Tags]             reset-password    negative    otp    slow    password-reset    temp-password    mvp
+    [Tags]             reset-password    negative    otp    slow    password-reset    temp-password    mvp    type1
     skip    This test requires a live OTP and will take > 60 seconds due to cooldown. Run manually with: --variable OTP:<code>
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
@@ -338,7 +338,7 @@ t1.1.18 Reset Password – Validation on the 5th Failed OTP Attempt (Maximum All
     ...                reaching the maximum number of OTP attempts.
     ...                Uses the magic value "${OTP_MAX_ATTEMPTS}" which the backend treats as
     ...                immediately triggering the max-attempts lockout in a single attempt.
-    [Tags]             reset-password    negative    otp    security    temp-password    mvp
+    [Tags]             reset-password    negative    otp    security    temp-password    mvp    type1
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
     Complete Reset Password Form
@@ -357,7 +357,7 @@ t1.1.18 Reset Password – Validation on the 5th Failed OTP Attempt (Maximum All
 
 t1.1.19 Reset Password – Validation on 5th OTP Attempt Across Multiple Resend Requests
     [Documentation]    Verify the 5-attempt limit is strictly enforced across multiple OTP resends.
-    [Tags]             reset-password    negative    otp    security    slow    temp-password    mvp
+    [Tags]             reset-password    negative    otp    security    slow    temp-password    mvp    type1
     skip    This test requires a live OTP and will take > 5 minutes due to multiple cooldowns. Run manually with: --variable OTP:<code>
 
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}
@@ -405,7 +405,7 @@ t1.1.19 Reset Password – Validation on 5th OTP Attempt Across Multiple Resend 
 t1.1.20 Reset Password – Behavior When OTP Session Expires Before Reaching Max Attempts
     [Documentation]    Verify system behavior when a user's OTP session expires before they
     ...                reach the maximum number of failed attempts.
-    [Tags]             reset-password    negative    otp    security    slow    temp-password    mvp
+    [Tags]             reset-password    negative    otp    security    slow    temp-password    mvp    type1
     skip    This test requires a live OTP and will take > 5 minutes due to session expiry. Run manually with: --variable OTP:<code>
     
     Navigate To Reset Password Page    email=${RTP_NEW_USER_EMAIL_2}    temp_password=${RTP_TEMP_PASSWORD_2}

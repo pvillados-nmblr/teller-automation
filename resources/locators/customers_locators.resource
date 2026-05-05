@@ -61,6 +61,26 @@ ${ACCOUNT_TABLE_VISIBLE_ROWS}       css=[data-testid="table-customers-accounts"]
 # Account Status Filter — AntD column filter dropdown (accounts page)
 ${ACCOUNT_STATUS_FILTER}            css=th:has-text("Account Status") span.ant-table-filter-trigger
 
+# Customer Status Change (inline status badge dropdown + confirmation modal)
+${CUSTOMER_STATUS_BADGE}                css=[data-testid="field-status-badge"]
+${CUSTOMER_STATUS_DROPDOWN_INACTIVE}    css=.ant-select-dropdown .ant-select-item:not(.ant-select-item-option-selected) [data-testid="field-status-badge"]:has-text("Inactive")
+${CUSTOMER_STATUS_DROPDOWN_ACTIVE}      css=.ant-select-dropdown .ant-select-item:not(.ant-select-item-option-selected) [data-testid="field-status-badge"]:has-text("Active")
+${CUSTOMER_STATUS_CHANGE_MODAL}         css=.ant-modal-content:has([data-testid="modal-customer-status-change-btn-ok"])
+${CUSTOMER_STATUS_REMARKS_INPUT}        css=[data-testid="input-customer-status-change-remarks"]
+${CUSTOMER_STATUS_CONFIRM_BTN}          css=[data-testid="modal-customer-status-change-btn-ok"]
+${CUSTOMER_STATUS_CANCEL_BTN}           css=[data-testid="modal-customer-status-change-btn-cancel"]
+
+# Account Status Change (inline status badge dropdown + confirmation modal)
+${ACCOUNT_STATUS_BADGE}                css=[data-testid="field-status-badge"]
+${ACCOUNT_STATUS_DROPDOWN_DORMANT}     css=.ant-select-dropdown .ant-select-item[aria-selected="false"] [data-testid="field-status-badge"]:has-text("Dormant")
+${ACCOUNT_STATUS_DROPDOWN_FROZEN}      css=.ant-select-dropdown .ant-select-item[aria-selected="false"] [data-testid="field-status-badge"]:has-text("Frozen")
+${ACCOUNT_STATUS_DROPDOWN_CLOSED}      css=.ant-select-dropdown .ant-select-item[aria-selected="false"] [data-testid="field-status-badge"]:has-text("Closed")
+${ACCOUNT_STATUS_DROPDOWN_ACTIVE}      css=.ant-select-dropdown .ant-select-item[aria-selected="false"] [data-testid="field-status-badge"]:has-text("Active")
+${ACCOUNT_STATUS_CHANGE_MODAL}         css=.ant-modal-content:has([data-testid="modal-customer-status-change-btn-ok"])
+${ACCOUNT_STATUS_REMARKS_INPUT}        css=[data-testid="input-customer-status-change-remarks"]
+${ACCOUNT_STATUS_CONFIRM_BTN}          css=[data-testid="modal-customer-status-change-btn-ok"]
+${ACCOUNT_STATUS_CANCEL_BTN}           css=[data-testid="modal-customer-status-change-btn-cancel"]
+
 # Breadcrumb Navigation
 ${CUSTOMERS_BREADCRUMB_LINK}        css=a[href$="/dashboard/customers"]
 ${VIEW_ACCOUNTS_BREADCRUMB_LINK}    css=a:has-text("View Accounts")
@@ -86,8 +106,13 @@ ${DOWNLOAD_TXN_BTN}                 css=[data-testid="btn-customers-transaction-
 # Transaction Type Filter — AntD column filter dropdown
 ${TXN_TYPE_FILTER}                  css=th:has-text("Transaction Type") span.ant-table-filter-trigger
 ${TXN_TYPE_SEND_MONEY}              css=[data-menu-id$="-fund_transfer_external"]
-${TXN_TYPE_CASH_IN}                 css=[data-menu-id$="-cash_in_external"]
+${TXN_TYPE_RECEIVE_MONEY}           css=[data-menu-id$="-cash_in_external"]
 ${TXN_TYPE_FUND_TRANSFER}           css=[data-menu-id$="-fund_transfer_internal"]
+${TXN_TYPE_CASH_WITHDRAWAL}         css=[data-menu-id$="-cash_withdrawal"]
+${TXN_TYPE_CASH_DEPOSIT}            css=[data-menu-id$="-cash_deposit"]
+${TXN_TYPE_SAVINGS_INTEREST}        css=[data-menu-id$="-interest_credit"]
+${TXN_TYPE_LOAN_DISBURSEMENT}       css=[data-menu-id$="-loan_disbursement"]
+${TXN_TYPE_LOAN_PAYMENT}            css=[data-menu-id$="-loan_payment"]
 
 # Date & Time Column Filter — AntD custom date range filter
 ${DATE_TIME_FILTER}                 css=th:has-text("Date & Time") span.ant-table-filter-trigger

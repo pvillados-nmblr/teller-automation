@@ -73,7 +73,7 @@ t5.1.1 Initial Load and Active Products View
     ...                defaults to the Active Products tab, displays all expected table columns,
     ...                shows "N/A" for rows with no Updated by entry, and shows the correct
     ...                action buttons (View, Edit, Archive) per product row.
-    [Tags]             products    active    smoke    mvp
+    [Tags]             products    active    smoke    mvp    type1
     # Verify Products page and Active tab load by default
     Wait For Elements State    ${PRODUCTS_LIST_PAGE}        visible
     Wait For Elements State    ${ACTIVE_PRODUCTS_TAB}       visible
@@ -111,7 +111,7 @@ t5.1.1 Initial Load and Active Products View
 t5.1.2 Active Products Tab Number
     [Documentation]    Verify that the count shown in the Active Products tab badge matches
     ...                the total product count displayed in the table pagination summary.
-    [Tags]             products    active    smoke    mvp
+    [Tags]             products    active    smoke    mvp    type1
     Wait For Elements State    ${ACTIVE_PRODUCTS_TAB}    visible
     # Read the count badge from the tab label
     ${tab_text}=    Get Text    ${ACTIVE_PRODUCTS_TAB_BTN}
@@ -129,7 +129,7 @@ t5.1.3 Action: View Details of Savings Product
     ...                sections in the Product Configurations column:
     ...                Product Details, Eligibility, Account Configuration,
     ...                Interest Configuration, and Fees & Charges.
-    [Tags]             products    active    smoke    mvp
+    [Tags]             products    active    smoke    mvp    type1
     # Verify a Savings product row exists in the table
     Wait For Elements State
     ...    css=[data-testid="table-products-active"] tbody tr:has-text("Savings") >> nth=0
@@ -196,7 +196,7 @@ t5.1.4 Action: View Details of Loans Product
     ...                sections in the Product Configurations column:
     ...                Product Definition, Product Details, Loan Features, Eligibility Criteria,
     ...                Pricing & Fees, and Loan Details.
-    [Tags]             products    active    smoke    mvp
+    [Tags]             products    active    smoke    mvp    type1
     # Verify a Loan product row exists in the table - skip if not
     ${loan_exists}=    Run Keyword And Return Status
     ...    Wait For Elements State
@@ -277,7 +277,7 @@ t5.1.4 Action: View Details of Loans Product
 t5.1.5 Edit Active Savings Product – Display Prepopulated Form
     [Documentation]    Verify that clicking Edit on a Savings product opens the Edit Product
     ...                Form page with all existing product fields pre-populated and editable.
-    [Tags]             products    active    edit    smoke    mvp
+    [Tags]             products    active    edit    smoke    mvp    type1
     Navigate To Edit Savings Product    ${T51_SAVINGS_PRODUCT_NAME}
     # Verify the Edit Product page is displayed
     Wait For Elements State    ${EDIT_PRODUCT_PAGE}    visible
@@ -293,7 +293,7 @@ t5.1.5 Edit Active Savings Product – Display Prepopulated Form
 t5.1.6 Save Updated Savings Product – Record New Values
     [Documentation]    Verify that modifying a field on a Savings product and clicking
     ...                Save Changes persists the update successfully.
-    [Tags]             products    active    edit    smoke    mvp
+    [Tags]             products    active    edit    smoke    mvp    type1
     
     # 1. Paginate to find the product row and read its current Product ID version
     ${found}=    Set Variable    ${FALSE}
@@ -365,7 +365,7 @@ t5.1.6 Save Updated Savings Product – Record New Values
 t5.1.7 Edit Active Loans Product – Display Prepopulated Form
     [Documentation]    Verify that clicking Edit on a Loans product opens the Edit Product
     ...                Form page with all existing product fields pre-populated and editable.
-    [Tags]             products    active    edit    smoke    mvp
+    [Tags]             products    active    edit    smoke    mvp    type1
     Navigate To Edit Loans Product
     # Verify the Edit Product page is displayed
     Wait For Elements State    ${EDIT_PRODUCT_PAGE}    visible
@@ -382,7 +382,7 @@ t5.1.8 Save Updated Loans Product – Record New Values
     [Documentation]    Verify that modifying a field on a Loans product and clicking
     ...                Save Changes persists the update successfully. The Product ID's
     ...                version suffix increments (e.g. _000 → _001) to indicate a new version.
-    [Tags]             products    active    edit    smoke    mvp
+    [Tags]             products    active    edit    smoke    mvp    type1
     # Paginate to find the loans product — skip if not present in this environment
     ${found}=    Set Variable    ${FALSE}
     WHILE    True
@@ -525,7 +525,7 @@ t5.1.13 Action: Archive Product – Confirmation Modal Appears
     ...                and body message ("Are you sure you want to archive this product?
     ...                It will be moved to the archived tab.").
     ...                The modal must clearly identify the action before the teller confirms.
-    [Tags]             products    active    archive    smoke    mvp
+    [Tags]             products    active    archive    smoke    mvp    type1
     # Navigate through pages to find a product created in Nov 2025
     ${found}=    Set Variable    ${FALSE}
     WHILE    True
@@ -566,7 +566,7 @@ t5.1.14 Action: Archive Product – Confirm Archive
     [Documentation]    Verify that confirming the Archive action on a product created in Nov 2025
     ...                removes it from the Active Products table and moves it to the
     ...                Archived Products tab.
-    [Tags]             products    active    archive    smoke    mvp
+    [Tags]             products    active    archive    smoke    mvp    type1
     # Navigate through pages to find a product created in Nov 2025
     ${found}=    Set Variable    ${FALSE}
     WHILE    True
