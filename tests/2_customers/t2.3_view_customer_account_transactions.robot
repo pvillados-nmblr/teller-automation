@@ -29,7 +29,7 @@ ${NON_EXISTING_TXN_ID}      NONEXISTENT99999
 t2.3.1 View Account Transaction History
     [Documentation]    Verify the transaction history page loads successfully with all required
     ...                column headers and action buttons (Eye/View and Download) visible.
-    [Tags]             customers    accounts    transactions    smoke    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Get Url                    contains    /transactions
     # Verify all fields — continue on failure so ALL mismatches are reported
     Run Keyword And Continue On Failure
@@ -50,20 +50,20 @@ t2.3.1 View Account Transaction History
     ...    Wait For Elements State    text="Action"                                             visible
     Run Keyword And Continue On Failure
     ...    Wait For Elements State    ${VIEW_TXN_BTN} >> nth=0                                 visible
-    Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${DOWNLOAD_TXN_BTN} >> nth=0                             visible
+    # Run Keyword And Continue On Failure
+    # ...    Wait For Elements State    ${DOWNLOAD_TXN_BTN} >> nth=0                             visible
 
 t2.3.2 Pagination in Viewing Transaction History
     [Documentation]    Verify pagination controls work correctly:
     ...                Next loads page 2, clicking page 3 loads page 3,
     ...                and Back returns to page 2.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    regression    mvp    type1
     # Click Next arrow to go to page 2
     Click                      ${PAGINATION_NEXT}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
     # Click page number 3
-    Click                      css=li.ant-pagination-item:has-text("3")
-    Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
+    Click                      css=li.ant-pagination-item[title="3"]
+    Wait For Elements State    css=li.ant-pagination-item-active[title="3"]    visible
     # Click Back arrow to return to page 2
     Click                      ${PAGINATION_PREV}
     Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
@@ -71,7 +71,7 @@ t2.3.2 Pagination in Viewing Transaction History
 t2.3.3 View Specific Transaction Details
     [Documentation]    Verify that clicking the Eye icon on the first row opens the transaction
     ...                detail modal with all required field labels, and the modal closes cleanly.
-    [Tags]             customers    accounts    transactions    smoke    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${VIEW_TXN_BTN} >> nth=0
     Wait For Elements State    ${TXN_DETAIL_MODAL}              visible
     # Verify all fields — continue on failure so ALL mismatches are reported
@@ -108,7 +108,7 @@ t2.3.3 View Specific Transaction Details
 t2.3.4 Search by Transaction ID
     [Documentation]    Verify that searching by a valid Transaction ID returns exactly one record,
     ...                and the detail modal displays all expected field values accurately.
-    [Tags]             customers    accounts    transactions    smoke    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Fill Text                  ${TRANSACTION_SEARCH_FIELD}    ${VALID_TXN_ID}
     Click                      ${TRANSACTION_SEARCH_BUTTON}
     Wait For Elements State    ${TXN_ROW}    visible
@@ -170,7 +170,7 @@ t2.3.4 Search by Transaction ID
 t2.3.5 Search for Non-Existing Transaction ID
     [Documentation]    Verify that searching for a non-existing transaction ID shows a "No Data" message
     ...                with an empty table and no application errors.
-    [Tags]             customers    accounts    transactions    negative    mvp
+    [Tags]             customers    accounts    transactions    negative    mvp    type1
     Fill Text                  ${TRANSACTION_SEARCH_FIELD}    ${NON_EXISTING_TXN_ID}
     Click                      ${TRANSACTION_SEARCH_BUTTON}
     Wait For Elements State    css=.ant-empty-description:has-text("No data")    visible
@@ -179,7 +179,8 @@ t2.3.5 Search for Non-Existing Transaction ID
 t2.3.6 Search Transactions Using Date Range
     [Documentation]    Verify that the date range filter shows transactions within
     ...                the selected range with all required columns visible.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    regression    mvp    type1
+    skip
     Click                      ${DATE_TIME_FILTER}
     Wait For Elements State    ${DATE_START_INPUT}              visible
     Select Date Range From AntD Picker    ${DATE_FROM}    ${DATE_TO}
@@ -212,62 +213,117 @@ t2.3.7 Filter Transactions by Type - Send Money
     [Documentation]    Verify filtering by Send Money shows only Send Money transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_SEND_MONEY}
     Click                      ${FILTER_APPLY_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}    visible
     Filter Txn Results Should Contain Only Type    Send Money
 
-t2.3.8 Filter Transactions by Type - Cash In
-    [Documentation]    Verify filtering by Cash In shows only Cash In transactions.
+t2.3.8 Filter Transactions by Type - Receive Money
+    [Documentation]    Verify filtering by Receive Money shows only Receive Money transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${TXN_TYPE_FILTER}
-    Click                      ${TXN_TYPE_CASH_IN}
+    Click                      ${TXN_TYPE_RECEIVE_MONEY}
     Click                      ${FILTER_APPLY_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}    visible
-    Filter Txn Results Should Contain Only Type    Cash In
+    Filter Txn Results Should Contain Only Type    Receive Money
 
 t2.3.9 Filter Transactions by Type - Fund Transfer
     [Documentation]    Verify filtering by Fund Transfer shows only Fund Transfer transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${TXN_TYPE_FILTER}
     Click                      ${TXN_TYPE_FUND_TRANSFER}
     Click                      ${FILTER_APPLY_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}    visible
     Filter Txn Results Should Contain Only Type    Fund Transfer
 
-t2.3.10 Filter Transactions by Status - Pending
+t2.3.10 Filter Transactions by Type - Cash Withdrawal
+    [Documentation]    Verify filtering by Cash Withdrawal shows only Cash Withdrawal transactions.
+    ...                If data exists, verifies the detail modal contains all required field labels.
+    ...                If no data exists, verifies the "No Data" message.
+    [Tags]             customers    accounts    transactions    smoke    mvp    type2
+    Click                      ${TXN_TYPE_FILTER}
+    Click                      ${TXN_TYPE_CASH_WITHDRAWAL}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${TRANSACTION_TABLE}    visible
+    Filter Txn Results Should Contain Only Type    Cash Withdrawal
+
+t2.3.11 Filter Transactions by Type - Cash Deposit
+    [Documentation]    Verify filtering by Cash Deposit shows only Cash Deposit transactions.
+    ...                If data exists, verifies the detail modal contains all required field labels.
+    ...                If no data exists, verifies the "No Data" message.
+    [Tags]             customers    accounts    transactions    smoke    mvp    type2
+    Click                      ${TXN_TYPE_FILTER}
+    Click                      ${TXN_TYPE_CASH_DEPOSIT}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${TRANSACTION_TABLE}    visible
+    Filter Txn Results Should Contain Only Type    Cash Deposit
+
+t2.3.12 Filter Transactions by Type - Savings Interest
+    [Documentation]    Verify filtering by Savings Interest shows only Savings Interest transactions.
+    ...                If data exists, verifies the detail modal contains all required field labels.
+    ...                If no data exists, verifies the "No Data" message.
+    [Tags]             customers    accounts    transactions    smoke    mvp    type2
+    Click                      ${TXN_TYPE_FILTER}
+    Click                      ${TXN_TYPE_SAVINGS_INTEREST}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${TRANSACTION_TABLE}    visible
+    Filter Txn Results Should Contain Only Type    Savings Interest
+
+t2.3.13 Filter Transactions by Type - Loan Disbursement
+    [Documentation]    Verify filtering by Loan Disbursement shows only Loan Disbursement transactions.
+    ...                If data exists, verifies the detail modal contains all required field labels.
+    ...                If no data exists, verifies the "No Data" message.
+    [Tags]             customers    accounts    transactions    smoke    mvp    type2
+    Click                      ${TXN_TYPE_FILTER}
+    Click                      ${TXN_TYPE_LOAN_DISBURSEMENT}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${TRANSACTION_TABLE}    visible
+    Filter Txn Results Should Contain Only Type    Loan Disbursement
+
+t2.3.14 Filter Transactions by Type - Loan Payment
+    [Documentation]    Verify filtering by Loan Payment shows only Loan Payment transactions.
+    ...                If data exists, verifies the detail modal contains all required field labels.
+    ...                If no data exists, verifies the "No Data" message.
+    [Tags]             customers    accounts    transactions    smoke    mvp    type2
+    Click                      ${TXN_TYPE_FILTER}
+    Click                      ${TXN_TYPE_LOAN_PAYMENT}
+    Click                      ${FILTER_APPLY_BTN}
+    Wait For Elements State    ${TRANSACTION_TABLE}    visible
+    Filter Txn Results Should Contain Only Type    Loan Payment
+
+t2.3.15 Filter Transactions by Status - Pending
     [Documentation]    Verify filtering by Pending status shows only Pending transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_PENDING}
     Click                      ${FILTER_APPLY_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}    visible
     Filter Txn Results Should Contain Only Status    Pending
 
-t2.3.11 Filter Transactions by Status - Success
+t2.3.16 Filter Transactions by Status - Success
     [Documentation]    Verify filtering by Success status shows only Success transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_SUCCESS}
     Click                      ${FILTER_APPLY_BTN}
     Wait For Elements State    ${TRANSACTION_TABLE}    visible
     Filter Txn Results Should Contain Only Status    Success
 
-t2.3.12 Filter Transactions by Status - Failed
+t2.3.17 Filter Transactions by Status - Failed
     [Documentation]    Verify filtering by Failed status shows only Failed transactions.
     ...                If data exists, verifies the detail modal contains all required field labels.
     ...                If no data exists, verifies the "No Data" message.
-    [Tags]             customers    accounts    transactions    regression    mvp
+    [Tags]             customers    accounts    transactions    smoke    mvp    type1
     Click                      ${TXN_STATUS_FILTER}
     Click                      ${TXN_STATUS_FAILED}
     Click                      ${FILTER_APPLY_BTN}

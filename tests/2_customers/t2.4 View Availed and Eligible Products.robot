@@ -50,7 +50,7 @@ t2.4.1 View Products Availed of Existing Customer
     [Documentation]    Verify that the Products Availed tab on a customer profile displays
     ...                a table with the correct columns: Product Name, Product Category, and
     ...                Action; and that a See Details button is visible per row.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${PRODUCTS_AVAILED_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}                    visible
@@ -68,7 +68,7 @@ t2.4.2 Pagination and Navigation of Products Availed
     [Documentation]    Verify that pagination controls on the Products Availed tab work correctly:
     ...                Next loads page 2, clicking a page number loads that page directly, and
     ...                Back returns to the prior page. Skips if only one page of data exists.
-    [Tags]             customers    products    regression
+    [Tags]             customers    products    regression    type2
 
     Click                       ${PRODUCTS_AVAILED_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
@@ -81,12 +81,12 @@ t2.4.2 Pagination and Navigation of Products Availed
         Wait For Load Spinner To Disappear
         Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
         ${page3_exists}=    Run Keyword And Return Status
-        ...    Wait For Elements State    css=li.ant-pagination-item:has-text("3")    visible    timeout=2s
+        ...    Wait For Elements State    css=li.ant-pagination-item[title="3"]    visible    timeout=2s
         IF    ${page3_exists}
             Wait For Load Spinner To Disappear
-            Click                      css=li.ant-pagination-item:has-text("3")
+            Click                      css=li.ant-pagination-item[title="3"]
             Wait For Load Spinner To Disappear
-            Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible
+            Wait For Elements State    css=li.ant-pagination-item-active[title="3"]    visible
             Wait For Load Spinner To Disappear
             Click                      ${PAGINATION_PREV}
             Wait For Load Spinner To Disappear
@@ -113,7 +113,7 @@ t2.4.3 See Specific Details of an Availed Savings Product
     ...                - The customer must already be onboarded within the Higala environment.
     ...                - The customer must have at least one availed savings product.
     ...                - The user must have permission to view customer profiles and product details.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${PRODUCTS_AVAILED_TAB}
     Wait For Elements State     ${PRODUCTS_AVAILED_TABLE}    visible
@@ -187,7 +187,7 @@ t2.4.4 See Specific Details of an Availed Loans Product
     ...                side panel containing Product ID, Product Definition, Product Details,
     ...                Loan Features, Eligibility Criteria, Pricing & Fees, and Loan Details
     ...                (values entered during availment). The panel closes without errors.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${PRODUCTS_AVAILED_TAB}
     Wait For Elements State     css=.ant-table-body tr:has-text("${T24_AVAILED_LOAN_PRODUCT}") >> nth=0    visible
@@ -280,7 +280,7 @@ t2.4.5 View Eligible Products for Existing Customer
     [Documentation]    Verify that the Eligible Products tab displays a table with the correct
     ...                columns: Product Name, Product Category, and Action; and that each row
     ...                has both See Details and Avail Product buttons.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}                    visible
@@ -300,7 +300,7 @@ t2.4.6 Search Eligible Products
     [Documentation]    Verify that searching by a valid active product name filters the
     ...                Eligible Products table to show only matching results, and clearing
     ...                the search restores the full eligible products list.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
@@ -321,7 +321,7 @@ t2.4.7 Search Archived Products in Eligible Products
     [Documentation]    Verify that searching for an archived product in the Eligible Products
     ...                tab returns no results, confirming archived products are excluded from
     ...                the eligible list. Clearing the search restores the full list.
-    [Tags]             customers    products    negative
+    [Tags]             customers    products    negative    type2
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
@@ -342,7 +342,7 @@ t2.4.8 Pagination and Navigation of Eligible Products
     ...                correctly: Next loads page 2, clicking a page number loads that page
     ...                directly, and Back returns to the prior page.
     ...                Skips if only one page of data exists.
-    [Tags]             customers    products    regression
+    [Tags]             customers    products    regression    type2
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     ${PRODUCT_TABLE}    visible
@@ -355,13 +355,13 @@ t2.4.8 Pagination and Navigation of Eligible Products
         Wait For Load Spinner To Disappear
         Wait For Elements State    css=li.ant-pagination-item-active:has-text("2")    visible
         ${page3_exists}=    Run Keyword And Return Status
-        ...    Wait For Elements State    css=li.ant-pagination-item:has-text("3")    visible    timeout=2s
+        ...    Wait For Elements State    css=li.ant-pagination-item[title="3"]    visible    timeout=2s
         IF    ${page3_exists}
             Wait For Load Spinner To Disappear
-            Click                      css=li.ant-pagination-item:has-text("3")
+            Click                      css=li.ant-pagination-item[title="3"]
             Wait For Load Spinner To Disappear
             ${page3_loaded}=    Run Keyword And Return Status
-            ...    Wait For Elements State    css=li.ant-pagination-item-active:has-text("3")    visible    timeout=5s
+            ...    Wait For Elements State    css=li.ant-pagination-item-active[title="3"]    visible    timeout=5s
             IF    ${page3_loaded}
                 Wait For Load Spinner To Disappear
                 Click                      ${PAGINATION_PREV}
@@ -390,7 +390,7 @@ t2.4.9 See Specific Details of an Eligible Savings Product
     ...                a side panel containing Product Details, Eligibility for Customer Type,
     ...                Account Configuration, Interest Configuration, and Fees & Charges.
     ...                The panel layout is consistent and closes without errors.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     css=.ant-table-body tr:has-text("Savings") >> nth=0    visible
@@ -461,7 +461,7 @@ t2.4.10 See Specific Details of an Eligible Loans Product
     ...                side panel containing Product Definition, Product Details, Loan Features,
     ...                Eligibility Criteria, Pricing & Fees, and read-only Loan Details reference
     ...                values. The panel layout is consistent and closes without errors.
-    [Tags]             customers    products    smoke
+    [Tags]             customers    products    smoke    type2
 
     Click                       ${ELIGIBLE_PRODUCTS_TAB}
     Wait For Elements State     css=.ant-table-body tr:has-text("Loan") >> nth=0    visible

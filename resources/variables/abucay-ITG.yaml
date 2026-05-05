@@ -1,12 +1,12 @@
 # ============================================================
-# Environment Configuration — Rural Bank of San Antonio
+# Environment Configuration — Banco Abucay
 # ============================================================
 
-BANK_NAME: "Rural Bank of San Antonio"
-BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/rural-bank-san-antonio/login"
+BANK_NAME: "Banco Abucay"
+BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/banco-abucay/login"
 
 # Teller Credentials
-TELLER_EMAIL: "pvillados@agsx.net"
+TELLER_EMAIL: "pvillados+abucayop1@agsx.net"
 TELLER_PASSWORD: "Password123!"
 
 # Invalid Credentials (for negative test cases)
@@ -38,75 +38,69 @@ RTP_WRONG_CONFIRM_PASSWORD: "Password1234!"
 # Auth — Test Suite Specific (t1.2, t1.3, t1.4)
 # ============================================================
 
-MIXED_CASE_EMAIL: "Pvillados@Agsx.Net"
-FP_MIXED_CASE_EMAIL: "Pvillados+U1@Agsx.Net"
-CP_USER_EMAIL: "pvillados+dfspop2@nmblr.ai"
+MIXED_CASE_EMAIL: "Pvillados+aBuCaYoP1@Agsx.Net"
+FP_MIXED_CASE_EMAIL: "Pvillados+oPeRaToR76@NmBlR.aI"
+CP_USER_EMAIL: "pvillados+u1@agsx.net"
 CP_USER_PASSWORD: "Password123!"
 
 
 # ============================================================
-# Customer Data (t2.1, t2.2, t2.3)
+# Customer Data (t2.1, t2.2, t2.3) 
 # ============================================================
 
-VALID_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-VALID_CUSTOMER_NAME: "Peach Villados"
-CUSTOMER_DATE_OF_BIRTH: "01 Dec 1999"
-T21_STATUS_CHANGE_CUSTOMER_NAME: "Test Automation User"
-T21_STATUS_CHANGE_REMARKS: "Automated test — status change verification"
-T22_STATUS_CHANGE_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-T22_STATUS_CHANGE_ACCOUNT_NO: "7710378114398002"
-T22_STATUS_CHANGE_REMARKS: "Automated test — account status change verification"
-CUSTOMER_CREATED_ON: "25 Jun 2025"
+VALID_CUSTOMER_ID: "5e09e2b83c364a12987cf05b02eb5d7c"
+VALID_CUSTOMER_NAME: "Alexandra Leclerc"
+CUSTOMER_DATE_OF_BIRTH: "13 Oct 2000"
+CUSTOMER_CREATED_ON: "13 Oct 2025"
 
 # Aliases used in t2.2 and t2.3
-CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-CUSTOMER_NAME: "Peach Villados"
+CUSTOMER_ID: "5e09e2b83c364a12987cf05b02eb5d7c"
+CUSTOMER_NAME: "Alexandra Leclerc"
 
 
 # ============================================================
 # Account Data (t2.2, t3.1)
 # ============================================================
 
-VALID_ACCOUNT_ID: "7710458152114857"
-VALID_ACCOUNT_NAME: "Peach Villados"
-ACCOUNT_CREATED_ON: "03 Jul 2025"
+VALID_ACCOUNT_ID: "7710527851369522"
+VALID_ACCOUNT_NAME: "Alexandra Leclerc"
+ACCOUNT_CREATED_ON: "13 Oct 2025"
 
-VALID_ACCOUNT_NUMBER: "7710499872382741"
-EXPECTED_ACCOUNT_NAME: "Darrel Mendoza"
-EXPECTED_BALANCE: "₱221,037.00"
-EXPECTED_CREATED_ON: "07 Jul 2025"
+VALID_ACCOUNT_NUMBER: "7710501120611581"
+EXPECTED_ACCOUNT_NAME: "Carlos Sainz"
+EXPECTED_BALANCE: "₱4,900.00"
+EXPECTED_CREATED_ON: "25 Feb 2026"
 
 
 # ============================================================
 # Transaction Data — Customers & Accounts modules (t2.3, t3.2)
 # ============================================================
 
-VALID_TXN_ID: "0fbb394edde64d9d83bf945291919df0"
+VALID_TXN_ID: "22557a68f82e4091abaa9ca743c66a0a"
 TXN_TYPE: "Fund Transfer"
-TXN_AMOUNT: "50,000.00"
+TXN_AMOUNT: "100.00"
 TXN_SERVICE_FEE: "0.00"
 TXN_REMARKS: "N/A"
 TXN_STATUS: "Success"
-TXN_DEBIT_ACCT_NAME: "Chai Villados"
-TXN_CREDIT_ACCT_NAME: "Peach Villados"
-TXN_DEBIT_ACCT_NO: "7710455410784261"
-TXN_CREDIT_ACCT_NO: "7710458152114857"
-TXN_CREATED_ON: "01 Oct 2025 15:06:28"
-TXN_UPDATED_ON: "01 Oct 2025 15:06:28"
-DATE_FROM: "2026-04-23"
-DATE_TO: "2026-04-24"
-
+TXN_DEBIT_ACCT_NAME: "Carlos Sainz"
+TXN_CREDIT_ACCT_NAME: "Alexandra Leclerc"
+TXN_DEBIT_ACCT_NO: "7710501120611581"
+TXN_CREDIT_ACCT_NO: "7710527851369522"
+TXN_CREATED_ON: "26 Feb 2026 18:34:33"
+TXN_UPDATED_ON: "26 Feb 2026 18:34:33"
+DATE_FROM: "2026-05-01"
+DATE_TO: "2026-05-04"
 
 # ============================================================
 # Transaction Data — Transactions module (t4.1)
 # Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
 # ============================================================
 
-T4_VALID_TXN_ID: "20327d2dec2046b1bf2c3353c94c0fcf"
+T4_VALID_TXN_ID: "e998dabcb0554c31ba7782178ff9e271"
 T4_TXN_TYPE: "External Transfer"
 T4_TXN_AMOUNT: "10.00"
-T4_TXN_SERVICE_FEE: "15.00"
-T4_TXN_REMARKS: "N/A"
+T4_TXN_SERVICE_FEE: "0.00"
+T4_TXN_REMARKS: "Online Transfer"
 T4_TXN_STATUS: "Success"
 T4_TXN_INSTAPAY_REF: "880199"
 T4_TXN_DEBIT_ACCT_NAME: "Peach Villados"
@@ -114,8 +108,8 @@ T4_TXN_CREDIT_ACCT_NAME: "Alexandra Leclerc"
 T4_TXN_DEBIT_ACCT_NO: "7710374359311354"
 T4_TXN_CREDIT_ACCT_NO: "7710527851369522"
 T4_TXN_DEBIT_BANK_CODE: "RCBCPHMMXXX"
-T4_TXN_DEBIT_BANK_NAME: "Banco Abucay"
-T4_TXN_CREATED_ON: "22 Apr 2026 16:46:11"
+T4_TXN_DEBIT_BANK_NAME: "Rural Bank San Antonio, Inc."
+T4_TXN_CREATED_ON: "22 Apr 2026 16:46:24"
 T4_DATE_FROM: "2026-04-23"
 T4_DATE_TO: "2026-04-24"
 
@@ -136,9 +130,9 @@ T24_ARCHIVED_PRODUCT: "Loan 13C"
 # Reports Data (t6.1)
 # ============================================================
 
-VALID_CLOSING_DATE: "2026-04-23"
-VALID_DATE_FROM: "2026-04-23"
-VALID_DATE_TO: "2026-04-24"
+VALID_CLOSING_DATE: "2026-05-04"
+VALID_DATE_FROM: "2026-04-30"
+VALID_DATE_TO: "2026-05-04"
 
 
 # ============================================================

@@ -39,7 +39,7 @@ t4.3.1 Open New Transaction Modal
     [Documentation]    Verify that clicking the New Transaction button opens the Create Transaction
     ...                modal with the Customer Information step visible, and the account search
     ...                field and Search button are present and enabled.
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     Wait For Elements State    ${NEW_TXN_BTN}                    visible
     Click                      ${NEW_TXN_BTN}
     Wait For Elements State    ${CREATE_TXN_MODAL}               visible
@@ -52,7 +52,7 @@ t4.3.2 Search by Account Number
     ...                a result list where each entry displays:
     ...                Account Name, Account Number, account type (e.g. Savings),
     ...                Balance, and Account Status.
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T43_ACCOUNT_NUMBER}
     # Verify the matching result card is visible
@@ -74,7 +74,7 @@ t4.3.3 Search by Account Name
     [Documentation]    Verify that entering a valid account holder name returns one or more
     ...                matching results. Each result entry displays Account Name, Account Number,
     ...                account type (e.g. Savings), Balance, and Account Status.
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T43_CUSTOMER_NAME}
     # Verify at least one result card containing the searched name is visible
@@ -94,7 +94,7 @@ t4.3.4 Select Account and Verify Customer Information
     ...                Customer Information step, which displays: Customer Name, Account Number,
     ...                Account Type, Status, Current Balance, Daily Limit Remaining,
     ...                and Contact Information (Mobile Number and Email).
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T43_ACCOUNT_NUMBER}
     Select Account From Create Transaction Results    ${T43_ACCOUNT_NUMBER}
@@ -137,7 +137,7 @@ t4.3.5 Navigate to Transaction Type – Deposit
     ...                  (with account type e.g. Savings), and Current Balance
     ...                - Deposit Type dropdown, Deposit Amount input, Transaction Notes field
     ...                - Cancel and Process Deposit buttons
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T43_ACCOUNT_NUMBER}
     Select Account From Create Transaction Results    ${T43_ACCOUNT_NUMBER}
@@ -174,7 +174,7 @@ t4.3.6 Real-Time Summary Updates with Deposit Amount
     ...                user fills in the deposit form:
     ...                - Entering an amount shows the deposit amount in the summary
     ...                - The summary displays New Balance = Current Balance + deposit amount (correct math)
-    [Tags]             transactions    create    deposit    regression    mvp
+    [Tags]             transactions    create    deposit    regression    mvp    type2
     Navigate To Deposit Step
     # Select deposit type
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -206,7 +206,7 @@ t4.3.7 Process Deposit and Review
     ...                - Correct Customer Name, Account Number, Transaction Type, Amount (exact match)
     ...                - New Balance = Previous Balance + Deposit Amount (math validation)
     ...                - Print Receipt and New Transaction buttons
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     Navigate To Deposit Step
     # Fill the deposit form
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -282,7 +282,7 @@ t4.3.8 Verify Newest Transaction Appears at the Top (Deposit)
     ...                in the Transactions list, showing:
     ...                Transaction Type = Deposit, Credit Account Number = customer account,
     ...                Debit Account Number = N/A, and Status column visible.
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     # Complete the full deposit flow
     Navigate To Deposit Step
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -317,7 +317,7 @@ t4.3.9 View Details of the Newest Transaction (Deposit)
     ...                - Debit Account Name = N/A
     ...                - Debit Account Number = N/A
     ...                - Created on and Updated on timestamps
-    [Tags]             transactions    create    deposit    smoke    mvp
+    [Tags]             transactions    create    deposit    smoke    mvp    type2
     # Complete the full deposit flow
     Navigate To Deposit Step
     Click                      ${CREATE_TXN_TYPE_SELECT}
@@ -370,7 +370,7 @@ t4.3.10 Validate High Deposit Amount (No Maximum Limit)
     ...                500,000 / 500,001 / 1,000,000 are each processed successfully.
     ...                No error message related to a maximum amount is shown, and each
     ...                deposit advances to the Deposit Successful confirmation screen.
-    [Tags]             transactions    create    deposit    validation    regression
+    [Tags]             transactions    create    deposit    validation    regression    type2
     FOR    ${amount}    IN
     ...    ${T43_HIGH_DEPOSIT_AMOUNT_1}
     ...    ${T43_HIGH_DEPOSIT_AMOUNT_2}
@@ -400,7 +400,7 @@ t4.3.10 Validate High Deposit Amount (No Maximum Limit)
 t4.3.11 Search with Invalid Account Number
     [Documentation]    Verify that searching by a non-existent account number in the Create
     ...                Transaction modal shows an empty-state / "No accounts found" message.
-    [Tags]             transactions    create    deposit    negative    smoke
+    [Tags]             transactions    create    deposit    negative    smoke    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T43_INVALID_ACCOUNT_NUMBER}
     Wait For Elements State    ${CREATE_TXN_NO_RESULTS_MSG}    visible
@@ -408,7 +408,7 @@ t4.3.11 Search with Invalid Account Number
 t4.3.12 Search with Invalid Account Name
     [Documentation]    Verify that searching by a non-existent account name in the Create
     ...                Transaction modal shows an empty-state / "No accounts found" message.
-    [Tags]             transactions    create    deposit    negative    smoke
+    [Tags]             transactions    create    deposit    negative    smoke    type2
     Open New Transaction Modal
     Search Account In Create Transaction Modal    ${T43_INVALID_ACCOUNT_NAME}
     Wait For Elements State    ${CREATE_TXN_NO_RESULTS_MSG}    visible
@@ -417,7 +417,7 @@ t4.3.13 Validate Deposit Type Required
     [Documentation]    Verify that the Process Deposit button is disabled when no
     ...                Deposit Type is selected — even if an amount is entered.
     ...                The type dropdown is required and the button must not activate without it.
-    [Tags]             transactions    deposit    validation    smoke
+    [Tags]             transactions    deposit    validation    smoke    type2
     Navigate To Deposit Step
     # No type selected — button must be disabled immediately
     Wait For Elements State    ${CREATE_TXN_PROCESS_DEPOSIT_BTN}    disabled
@@ -429,7 +429,7 @@ t4.3.13 Validate Deposit Type Required
 t4.3.14 Validate Deposit Amount Required
     [Documentation]    Verify that the Process Deposit button is disabled when the
     ...                Deposit Amount is blank, even after selecting a type.
-    [Tags]             transactions    deposit    validation    smoke
+    [Tags]             transactions    deposit    validation    smoke    type2
     Navigate To Deposit Step
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -443,7 +443,7 @@ t4.3.15 Validate Deposit Amount Format
     [Documentation]    Verify that non-numeric characters cannot be entered in the Deposit Amount
     ...                field. Attempting to type "abc" or a malformed number causes the field to
     ...                reset, and the Process Deposit button remains disabled.
-    [Tags]             transactions    deposit    validation    negative    regression
+    [Tags]             transactions    deposit    validation    negative    regression    type2
     Navigate To Deposit Step
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -464,7 +464,7 @@ t4.3.16 Validate Deposit Amount Negative or Zero
     [Documentation]    Verify that entering 0 triggers a validation error and the Process Deposit
     ...                button remains disabled. Negative values cannot be entered in the
     ...                numeric amount field (input rejects them).
-    [Tags]             transactions    deposit    validation    negative    regression
+    [Tags]             transactions    deposit    validation    negative    regression    type2
     Navigate To Deposit Step
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -487,7 +487,7 @@ t4.3.17 Validate Minimum Deposit Amount
     [Documentation]    Verify that entering an amount less than 1 (e.g. 0.5) triggers a
     ...                validation error ("Amount must be greater than 1" or equivalent)
     ...                and the Process Deposit button remains disabled.
-    [Tags]             transactions    deposit    validation    negative    regression
+    [Tags]             transactions    deposit    validation    negative    regression    type2
     Navigate To Deposit Step
     Click                      ${CREATE_TXN_TYPE_SELECT}
     Wait For Elements State    css=.ant-select-dropdown:not(.ant-select-dropdown-hidden)    visible
@@ -506,7 +506,7 @@ t4.3.18 Validate Deposit Notes Max Length
     [Documentation]    Verify that the Transaction Notes field enforces a 300-character maximum.
     ...                Attempting to enter 301 characters should result in the stored value
     ...                being at most 300 characters (field truncates or rejects excess input).
-    [Tags]             transactions    deposit    validation    regression
+    [Tags]             transactions    deposit    validation    regression    type2
     Navigate To Deposit Step
     ${long_text}=    Evaluate    'a' * 301
     Fill Text                  ${CREATE_TXN_NOTES_INPUT}    ${long_text}
@@ -521,7 +521,7 @@ t4.3.19 Validate Process Deposit Button Activation
     ...                1. Initially disabled (no type, no amount).
     ...                2. Still disabled after selecting type only (no amount).
     ...                3. Enabled only after both type and valid amount are provided.
-    [Tags]             transactions    deposit    validation    smoke
+    [Tags]             transactions    deposit    validation    smoke    type2
     Navigate To Deposit Step
     # 1. No inputs — button must be disabled
     Wait For Elements State    ${CREATE_TXN_PROCESS_DEPOSIT_BTN}    disabled
