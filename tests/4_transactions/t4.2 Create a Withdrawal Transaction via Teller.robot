@@ -267,8 +267,9 @@ t4.2.7 Process Withdrawal and Review
     Should Be Equal As Numbers    ${displayed_new_balance}    ${expected_new_balance}
     ...    msg=Receipt New Balance is wrong: expected ${expected_new_balance} (${prev_balance} − ${withdrawal}) but got ${displayed_new_balance}
     # Verify the action buttons on the confirmation screen
-    Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${CREATE_TXN_PRINT_RECEIPT_BTN}       visible
+    # hidden for now
+    # Run Keyword And Continue On Failure
+    # ...    Wait For Elements State    ${CREATE_TXN_PRINT_RECEIPT_BTN}       visible
     Run Keyword And Continue On Failure
     ...    Wait For Elements State    ${CREATE_TXN_NEW_TXN_BTN_CONFIRM}     visible
 

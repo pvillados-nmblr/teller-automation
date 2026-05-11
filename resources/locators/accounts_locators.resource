@@ -68,8 +68,13 @@ ${DOWNLOAD_TXN_BTN}                 css=button:has([data-icon="download"])
 # Transaction Type Filter
 ${TXN_TYPE_FILTER}                  css=th:has-text("Transaction Type") span.ant-table-filter-trigger
 ${TXN_TYPE_SEND_MONEY}              css=[data-menu-id$="-fund_transfer_external"]
-${TXN_TYPE_CASH_IN}                 css=[data-menu-id$="-cash_in_external"]
+${TXN_TYPE_RECEIVE_MONEY}           css=[data-menu-id$="-cash_in_external"]
 ${TXN_TYPE_FUND_TRANSFER}           css=[data-menu-id$="-fund_transfer_internal"]
+${TXN_TYPE_CASH_WITHDRAWAL}         css=[data-menu-id$="-cash_withdrawal"]
+${TXN_TYPE_CASH_DEPOSIT}            css=[data-menu-id$="-cash_deposit"]
+${TXN_TYPE_SAVINGS_INTEREST}        css=[data-menu-id$="-interest_credit"]
+${TXN_TYPE_LOAN_DISBURSEMENT}       css=[data-menu-id$="-loan_disbursement"]
+${TXN_TYPE_LOAN_PAYMENT}            css=[data-menu-id$="-loan_payment"]
 
 # Transaction Status Filter
 ${TXN_STATUS_FILTER}                css=th:has-text("Status") span.ant-table-filter-trigger
