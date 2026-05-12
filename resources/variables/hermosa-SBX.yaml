@@ -1,9 +1,9 @@
 # ============================================================
-# Environment Configuration — Banco Abucay
+# Environment Configuration — Rural Bank of Hermosa
 # ============================================================
 
-BANK_NAME: "Banco Abucay"
-BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/banco-abucay/login"
+BANK_NAME: "Rural Bank of Hermosa"
+BASE_URL: "https://alegre-dashboard.pub.sbx.higala.ph/rural-bank-hermosa/login"
 
 # Teller Credentials
 TELLER_EMAIL: "pvillados+u1@agsx.net"
@@ -38,9 +38,9 @@ RTP_WRONG_CONFIRM_PASSWORD: "Password1234!"
 # Auth — Test Suite Specific (t1.2, t1.3, t1.4)
 # ============================================================
 
-MIXED_CASE_EMAIL: "Pvillados+aBuCaYoP1@Agsx.Net"
-FP_MIXED_CASE_EMAIL: "Pvillados+oPeRaToR76@NmBlR.aI"
-CP_USER_EMAIL: "pvillados+u1@agsx.net"
+MIXED_CASE_EMAIL: "Pvillados@Agsx.Net"
+FP_MIXED_CASE_EMAIL: "Pvillados+U1@Agsx.Net"
+CP_USER_EMAIL: "pvillados+u2@agsx.net"
 CP_USER_PASSWORD: "Password123!"
 
 
@@ -48,36 +48,36 @@ CP_USER_PASSWORD: "Password123!"
 # Customer Data (t2.1, t2.2, t2.3) 
 # ============================================================
 
-VALID_CUSTOMER_ID: "5e09e2b83c364a12987cf05b02eb5d7c"
-VALID_CUSTOMER_NAME: "Alexandra Leclerc"
-CUSTOMER_DATE_OF_BIRTH: "13 Oct 2000"
-CUSTOMER_CREATED_ON: "13 Oct 2025"
-T21_STATUS_CHANGE_CUSTOMER_NAME: "Warren Test Abucay"
+VALID_CUSTOMER_ID: "dee40251c8664cd3b11c85aa82084b78"
+VALID_CUSTOMER_NAME: "Lena Moretti"
+CUSTOMER_DATE_OF_BIRTH: "17 Sep 1998"
+CUSTOMER_CREATED_ON: "17 Sep 2025"
+T21_STATUS_CHANGE_CUSTOMER_NAME: "Warren Test Hermosa"
 T21_STATUS_CHANGE_REMARKS: "Automated test — status change verification"
-T22_STATUS_CHANGE_CUSTOMER_ID: "03314d6e8cab45bd8a9a910cd3b813e5"
-T22_STATUS_CHANGE_ACCOUNT_NO: "7710599885444182"
+T22_STATUS_CHANGE_CUSTOMER_ID: "0ee1fda5eee949ce9fd108cb6a54c6a9"
+T22_STATUS_CHANGE_ACCOUNT_NO: "7710749138876922"
 T22_STATUS_CHANGE_REMARKS: "Automated test — account status change verification"
 
 
 # Aliases used in t2.2 and t2.3
-CUSTOMER_ID: "5e09e2b83c364a12987cf05b02eb5d7c"
-CUSTOMER_NAME: "Alexandra Leclerc"
+CUSTOMER_ID: "dee40251c8664cd3b11c85aa82084b78"
+CUSTOMER_NAME: "Lena Moretti"
 
 
 # ============================================================
 # Account Data (t2.2, t3.1)
 # ============================================================
 
-VALID_ACCOUNT_ID: "7710527851369522"
-VALID_ACCOUNT_NAME: "Alexandra Leclerc"
-ACCOUNT_CREATED_ON: "13 Oct 2025"
+VALID_ACCOUNT_ID: "7710744278473292"
+VALID_ACCOUNT_NAME: "Lena Moretti"
+ACCOUNT_CREATED_ON: "17 Sep 2025"
 
-VALID_ACCOUNT_NUMBER: "7710501120611581"
-EXPECTED_ACCOUNT_NAME: "Carlos Sainz"
-EXPECTED_BALANCE: "₱4,900.00"
-EXPECTED_CREATED_ON: "25 Feb 2026"
+VALID_ACCOUNT_NUMBER: "7710749138876922"
+EXPECTED_ACCOUNT_NAME: "Warren Test Hermosa"
+EXPECTED_BALANCE: "₱0.00"
+EXPECTED_CREATED_ON: "19 Dec 2025"
 
-
+# to edit
 # ============================================================
 # Transaction Data — Customers & Accounts modules (t2.3, t3.2)
 # ============================================================
@@ -97,9 +97,11 @@ TXN_UPDATED_ON: "26 Feb 2026 18:34:33"
 DATE_FROM: "2026-05-01"
 DATE_TO: "2026-05-04"
 
+#to edit
 # ============================================================
-# Transaction Data — Transactions module (t4.1)
+# Transaction Data — Transactions module (t4.1) 
 # Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
+# Use RB to RB transaction data
 # ============================================================
 
 T4_VALID_TXN_ID: "e998dabcb0554c31ba7782178ff9e271"
@@ -136,9 +138,9 @@ T4_DATE_TO: "2026-04-24"
 # Reports Data (t6.1)
 # ============================================================
 
-VALID_CLOSING_DATE: "2026-05-04"
-VALID_DATE_FROM: "2026-04-30"
-VALID_DATE_TO: "2026-05-04"
+VALID_CLOSING_DATE: "2026-05-12"
+VALID_DATE_FROM: "2026-05-12"
+VALID_DATE_TO: "2026-05-13"
 
 
 # # ============================================================

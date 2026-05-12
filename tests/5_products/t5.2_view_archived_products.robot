@@ -68,7 +68,7 @@ t5.2.1 View Archived Products List
     ...                are present and visible: Product ID, Product Name, Product Category,
     ...                Originally Created by, Created at, Deleted by, Deleted on, and Action.
     ...                Also verifies that the Restore action button is visible per row.
-    [Tags]             products    archived    smoke    mvp    type1
+    [Tags]             products    archived    smoke    mvp    type2
     # Verify Archived Products table is loaded
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE}    visible
     # Verify all expected column headers are present
@@ -100,7 +100,7 @@ t5.2.2 Pagination: Archived Products Tab
     ...                and Back returns to page 2. Data integrity is maintained across pages
     ...                with no duplication or missing records. The current page is clearly
     ...                indicated in the UI.
-    [Tags]             products    archived    pagination    smoke    mvp    type1
+    [Tags]             products    archived    pagination    smoke    mvp    type2
 
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE}    visible
     # Step 1: Click Next — expect to land on page 2
@@ -155,7 +155,7 @@ t5.2.2 Pagination: Archived Products Tab
 t5.2.3 Archived Products Tab Number
     [Documentation]    Verify that the count badge shown in the Archived Products tab matches
     ...                the total product count displayed in the table pagination summary.
-    [Tags]             products    archived    smoke    mvp    type1
+    [Tags]             products    archived    smoke    mvp    type2
 
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TAB_BTN}    visible
     # Read the count badge from the tab label
@@ -172,7 +172,7 @@ t5.2.4 Restore Product
     [Documentation]    Verify that clicking Restore on an archived product opens a confirmation
     ...                modal ("Restore Product?"), confirming removes it from the Archived Products
     ...                list, and it reappears under the Active Products tab.
-    [Tags]             products    archived    restore    smoke    mvp    type1
+    [Tags]             products    archived    restore    smoke    mvp    type2
     Wait For Elements State    ${ARCHIVED_PRODUCTS_TABLE}    visible
     # Verify at least one archived product is available to restore
     ${has_rows}=    Run Keyword And Return Status

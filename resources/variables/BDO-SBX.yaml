@@ -48,59 +48,60 @@ CP_USER_PASSWORD: "Password123!"
 # Customer Data (t2.1, t2.2, t2.3)
 # ============================================================
 
-VALID_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-VALID_CUSTOMER_NAME: "Peach Villados"
-CUSTOMER_DATE_OF_BIRTH: "01 Dec 1999"
-CUSTOMER_CREATED_ON: "25 Jun 2025"
-T21_STATUS_CHANGE_CUSTOMER_NAME: "Test Automation User"
+VALID_CUSTOMER_ID: "93c8543edcde4ec69a62cae19ceaebee"
+VALID_CUSTOMER_NAME: "Juliet Romeo"
+CUSTOMER_DATE_OF_BIRTH: "20 Nov 2003"
+CUSTOMER_CREATED_ON: "20 Nov 2025"
+T21_STATUS_CHANGE_CUSTOMER_NAME: "Warren Test Bdo"
 T21_STATUS_CHANGE_REMARKS: "Automated test — status change verification"
-T22_STATUS_CHANGE_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-T22_STATUS_CHANGE_ACCOUNT_NO: "7710378114398002"
+T22_STATUS_CHANGE_CUSTOMER_ID: "07245acd0279491981d727fe840e148d"
+T22_STATUS_CHANGE_ACCOUNT_NO: "7710830345889111"
 T22_STATUS_CHANGE_REMARKS: "Automated test — account status change verification"
 
 
 # Aliases used in t2.2 and t2.3
-CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-CUSTOMER_NAME: "Peach Villados"
+CUSTOMER_ID: "93c8543edcde4ec69a62cae19ceaebee"
+CUSTOMER_NAME: "Juliet Romeo"
 
 
 # ============================================================
 # Account Data (t2.2, t3.1)
 # ============================================================
 
-VALID_ACCOUNT_ID: "7710458152114857"
-VALID_ACCOUNT_NAME: "Peach Villados"
-ACCOUNT_CREATED_ON: "03 Jul 2025"
+VALID_ACCOUNT_ID: "7710859829361330"
+VALID_ACCOUNT_NAME: "Juliet Romeo"
+ACCOUNT_CREATED_ON: "20 Nov 2025"
 
-VALID_ACCOUNT_NUMBER: "7710499872382741"
-EXPECTED_ACCOUNT_NAME: "Darrel Mendoza"
-EXPECTED_BALANCE: "₱221,337.00"
-EXPECTED_CREATED_ON: "07 Jul 2025"
+VALID_ACCOUNT_NUMBER: "7710830345889111"
+EXPECTED_ACCOUNT_NAME: "Warren Test Bdo"
+EXPECTED_BALANCE: "₱0.00"
+EXPECTED_CREATED_ON: "19 Dec 2025"
 
 
 # ============================================================
 # Transaction Data — Customers & Accounts modules (t2.3, t3.2)
 # ============================================================
 
-VALID_TXN_ID: "0fbb394edde64d9d83bf945291919df0"
+VALID_TXN_ID: "2874463f82284c8bb9a25e1fb35dd81f"
 TXN_TYPE: "Fund Transfer"
-TXN_AMOUNT: "50,000.00"
+TXN_AMOUNT: "1,000.00"
 TXN_SERVICE_FEE: "0.00"
 TXN_REMARKS: "N/A"
 TXN_STATUS: "Success"
-TXN_DEBIT_ACCT_NAME: "Chai Villados"
-TXN_CREDIT_ACCT_NAME: "Peach Villados"
-TXN_DEBIT_ACCT_NO: "7710455410784261"
-TXN_CREDIT_ACCT_NO: "7710458152114857"
-TXN_CREATED_ON: "01 Oct 2025 15:06:28"
-TXN_UPDATED_ON: "01 Oct 2025 15:06:28"
-DATE_FROM: "2026-04-23"
-DATE_TO: "2026-04-24"
+TXN_DEBIT_ACCT_NAME: "Vexana CHU Bangbang"
+TXN_CREDIT_ACCT_NAME: "Rhiza Talavera"
+TXN_DEBIT_ACCT_NO: "7710855503378863"
+TXN_CREDIT_ACCT_NO: "7710887845208108"
+TXN_CREATED_ON: "30 Jan 2026 09:20:41"
+TXN_UPDATED_ON: "30 Jan 2026 09:20:41"
+DATE_FROM: "2026-05-12"
+DATE_TO: "2026-05-13"
 
-
+#to edit
 # ============================================================
-# Transaction Data — Transactions module (t4.1)
+# Transaction Data — Transactions module (t4.1) 
 # Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
+# Use RB to RB transaction data
 # ============================================================
 
 T4_VALID_TXN_ID: "20327d2dec2046b1bf2c3353c94c0fcf"
@@ -137,9 +138,9 @@ T24_ARCHIVED_PRODUCT: "Loan 13C"
 # Reports Data (t6.1)
 # ============================================================
 
-VALID_CLOSING_DATE: "2026-04-23"
-VALID_DATE_FROM: "2026-04-23"
-VALID_DATE_TO: "2026-04-24"
+VALID_CLOSING_DATE: "2026-05-12"
+VALID_DATE_FROM: "2026-05-12"
+VALID_DATE_TO: "2026-05-13"
 
 
 # ============================================================

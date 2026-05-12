@@ -48,22 +48,22 @@ CP_USER_PASSWORD: "Password123!"
 # Customer Data (t2.1, t2.2, t2.3)
 # ============================================================
 
-VALID_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-VALID_CUSTOMER_NAME: "Peach Villados"
-CUSTOMER_DATE_OF_BIRTH: "01 Dec 1999"
-CUSTOMER_CREATED_ON: "25 Jun 2025"
-T21_STATUS_CHANGE_CUSTOMER_NAME: "Test Automation User"
+VALID_CUSTOMER_ID: "208469c006674f7592ff567f8c703466"
+VALID_CUSTOMER_NAME: "Pearl Cruz"
+CUSTOMER_DATE_OF_BIRTH: "20 Apr 2007"
+CUSTOMER_CREATED_ON: "20 Apr 2026"
+T21_STATUS_CHANGE_CUSTOMER_NAME: "Warren Test Usb"
 T21_STATUS_CHANGE_REMARKS: "Automated test — status change verification"
-T22_STATUS_CHANGE_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-T22_STATUS_CHANGE_ACCOUNT_NO: "7710378114398002"
+T22_STATUS_CHANGE_CUSTOMER_ID: "632d9862a66949e6bd4c57c3f9ce9cbc"
+T22_STATUS_CHANGE_ACCOUNT_NO: "7711196817693743"
 T22_STATUS_CHANGE_REMARKS: "Automated test — account status change verification"
 
 
 # Aliases used in t2.2 and t2.3
-CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-CUSTOMER_NAME: "Peach Villados"
+CUSTOMER_ID: "208469c006674f7592ff567f8c703466"
+CUSTOMER_NAME: "Pearl Cruz"
 
-
+# to edit
 # ============================================================
 # Account Data (t2.2, t3.1)
 # ============================================================
@@ -98,9 +98,11 @@ DATE_FROM: "2026-04-23"
 DATE_TO: "2026-04-24"
 
 
+#to edit
 # ============================================================
-# Transaction Data — Transactions module (t4.1)
+# Transaction Data — Transactions module (t4.1) 
 # Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
+# Use RB to RB transaction data
 # ============================================================
 
 T4_VALID_TXN_ID: "20327d2dec2046b1bf2c3353c94c0fcf"
@@ -137,9 +139,9 @@ T24_ARCHIVED_PRODUCT: "Loan 13C"
 # Reports Data (t6.1)
 # ============================================================
 
-VALID_CLOSING_DATE: "2026-04-23"
-VALID_DATE_FROM: "2026-04-23"
-VALID_DATE_TO: "2026-04-24"
+VALID_CLOSING_DATE: "2026-05-12"
+VALID_DATE_FROM: "2026-05-12"
+VALID_DATE_TO: "2026-05-13"
 
 
 # ============================================================
