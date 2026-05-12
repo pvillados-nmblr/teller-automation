@@ -129,7 +129,7 @@ t2.1.4 Search for Valid Customer Name
     Run Keyword And Continue On Failure
     ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_DATE_OF_BIRTH}     visible
     Run Keyword And Continue On Failure
-    ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_CREATED_ON}        visible
+    ...    Wait For Elements State    ${CUSTOMER_ROW} >> css=td:text-is("${CUSTOMER_CREATED_ON}") >> nth=0    visible
     Run Keyword And Continue On Failure
     ...    Wait For Elements State    ${CUSTOMER_ROW} >> text=${CUSTOMER_STATUS}            visible
     # Verify Action links in the matching row
@@ -222,6 +222,78 @@ t2.1.12 Customer Profile View - Details Verification
     [Documentation]    Verify that clicking View Profile displays the customer's full profile
     ...                with all required section headers and fields correctly visible.
     [Tags]             customers    smoke    mvp    type1
+    Navigate To Customers
+    View Customer Profile      ${VALID_CUSTOMER_NAME}
+    # Verify all fields — continue on failure so ALL mismatches are reported
+    # Verify page header shows correct customer name
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    css=h3:has-text("${VALID_CUSTOMER_NAME}")    visible
+    # Verify section headers
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Banking Details                  visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer Details                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Identification                   visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Employment History               visible
+    # Verify Banking Details fields
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=DFSP Institution ID              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Customer ID                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    p:has-text("Identity")               visible
+    # Verify Customer Details fields
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Email Address                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Gender                           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Date of Birth                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Nationality                      visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Complete Address                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Mobile Number                    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Civil Status                     visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Country of Birth                 visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=TIN                              visible
+    # Verify Identification fields
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID Type                          visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID Number                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Expiry Date                      visible
+    # Verify Employment History fields
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Employer"                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text="Employer Industry"              visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Job Title                        visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Monthly Income                   visible
+    # Scroll down and verify Identity Verification Details section
+    Scroll To Element          text=Identity Verification Details
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Identity Verification Details    visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=Selfie                           visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID (Front)                       visible
+    Run Keyword And Continue On Failure
+    ...    Wait For Elements State    text=ID (Back)                        visible
+
+t2.1.12 Customer Profile View - Details Verification
+    [Documentation]    Verify that clicking View Profile displays the customer's full profile
+    ...                with all required section headers and fields correctly visible.
+    [Tags]             customers    smoke    mvp    type2
     Navigate To Customers
     View Customer Profile      ${VALID_CUSTOMER_NAME}
     # Verify all fields — continue on failure so ALL mismatches are reported

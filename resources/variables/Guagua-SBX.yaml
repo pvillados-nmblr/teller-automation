@@ -48,20 +48,20 @@ CP_USER_PASSWORD: "Password123!"
 # Customer Data (t2.1, t2.2, t2.3)
 # ============================================================
 
-VALID_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-VALID_CUSTOMER_NAME: "Peach Villados"
-CUSTOMER_DATE_OF_BIRTH: "01 Dec 1999"
-CUSTOMER_CREATED_ON: "25 Jun 2025"
-T21_STATUS_CHANGE_CUSTOMER_NAME: "Test Automation User"
+VALID_CUSTOMER_ID: "6176dc74e8fa46fa9fb67c11b2bd679c"
+VALID_CUSTOMER_NAME: "Peach Marie Villados"
+CUSTOMER_DATE_OF_BIRTH: "02 Sep 2003"
+CUSTOMER_CREATED_ON: "02 Sep 2025"
+T21_STATUS_CHANGE_CUSTOMER_NAME: "Warren Santosidad Giltendez"
 T21_STATUS_CHANGE_REMARKS: "Automated test — status change verification"
-T22_STATUS_CHANGE_CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-T22_STATUS_CHANGE_ACCOUNT_NO: "7710378114398002"
+T22_STATUS_CHANGE_CUSTOMER_ID: "5ea5ca80c5194919afbd9ee470734e45"
+T22_STATUS_CHANGE_ACCOUNT_NO: "7710520772775364"
 T22_STATUS_CHANGE_REMARKS: "Automated test — account status change verification"
 
 
 # Aliases used in t2.2 and t2.3
-CUSTOMER_ID: "89055149d8e64865958c489651b59015"
-CUSTOMER_NAME: "Peach Villados"
+CUSTOMER_ID: "6176dc74e8fa46fa9fb67c11b2bd679c"
+CUSTOMER_NAME: "Peach Marie Villados"
 
 
 # ============================================================
@@ -72,48 +72,50 @@ VALID_ACCOUNT_ID: "7710458152114857"
 VALID_ACCOUNT_NAME: "Peach Villados"
 ACCOUNT_CREATED_ON: "03 Jul 2025"
 
-VALID_ACCOUNT_NUMBER: "7710499872382741"
-EXPECTED_ACCOUNT_NAME: "Darrel Mendoza"
-EXPECTED_BALANCE: "₱221,337.00"
-EXPECTED_CREATED_ON: "07 Jul 2025"
+VALID_ACCOUNT_NUMBER: "7710520772775364"
+EXPECTED_ACCOUNT_NAME: "Warren Santosidad Giltendez"
+EXPECTED_BALANCE: "₱0.00"
+EXPECTED_CREATED_ON: "13 Mar 2026"
 
 
 # ============================================================
 # Transaction Data — Customers & Accounts modules (t2.3, t3.2)
 # ============================================================
 
-VALID_TXN_ID: "0fbb394edde64d9d83bf945291919df0"
+VALID_TXN_ID: "2504dda272e34dc4bf908f02a01b6198"
 TXN_TYPE: "Fund Transfer"
-TXN_AMOUNT: "50,000.00"
+TXN_AMOUNT: "1.00"
 TXN_SERVICE_FEE: "0.00"
-TXN_REMARKS: "N/A"
+TXN_REMARKS: "DFSP sanity test transfer"
 TXN_STATUS: "Success"
-TXN_DEBIT_ACCT_NAME: "Chai Villados"
-TXN_CREDIT_ACCT_NAME: "Peach Villados"
-TXN_DEBIT_ACCT_NO: "7710455410784261"
-TXN_CREDIT_ACCT_NO: "7710458152114857"
-TXN_CREATED_ON: "01 Oct 2025 15:06:28"
-TXN_UPDATED_ON: "01 Oct 2025 15:06:28"
-DATE_FROM: "2026-04-23"
-DATE_TO: "2026-04-24"
+TXN_DEBIT_ACCT_NAME: "Maria Dela Cruz Tanggol"
+TXN_CREDIT_ACCT_NAME: "Peach Marie Villados"
+TXN_DEBIT_ACCT_NO: "7710576005902459"
+TXN_CREDIT_ACCT_NO: "7710589946921181"
+TXN_CREATED_ON: "11 May 2026 16:23:10"
+TXN_UPDATED_ON: "11 May 2026 16:23:10"
+DATE_FROM: "2026-05-11"
+DATE_TO: "2026-05-12"
 
 
+#to edit
 # ============================================================
-# Transaction Data — Transactions module (t4.1)
+# Transaction Data — Transactions module (t4.1) 
 # Prefixed T4_ to avoid conflicts with t2.3/t3.2 txn variables
+# Use RB to RB transaction data
 # ============================================================
 
-T4_VALID_TXN_ID: "20327d2dec2046b1bf2c3353c94c0fcf"
+T4_VALID_TXN_ID: "5cc4f8f5ab50454fa4e2b5be3e48a3fc"
 T4_TXN_TYPE: "External Transfer"
-T4_TXN_AMOUNT: "10.00"
+T4_TXN_AMOUNT: "1.00"
 T4_TXN_SERVICE_FEE: "15.00"
-T4_TXN_REMARKS: "N/A"
+T4_TXN_REMARKS: "DFSP sanity test transfer"
 T4_TXN_STATUS: "Success"
-T4_TXN_INSTAPAY_REF: "880199"
-T4_TXN_DEBIT_ACCT_NAME: "Peach Villados"
-T4_TXN_CREDIT_ACCT_NAME: "Alexandra Leclerc"
-T4_TXN_DEBIT_ACCT_NO: "7710374359311354"
-T4_TXN_CREDIT_ACCT_NO: "7710527851369522"
+T4_TXN_INSTAPAY_REF: "816134"
+T4_TXN_DEBIT_ACCT_NAME: "Maria Dela Cruz Tanggol"
+T4_TXN_CREDIT_ACCT_NAME: "Paulo Navarro"
+T4_TXN_DEBIT_ACCT_NO: "7710576005902459"
+T4_TXN_CREDIT_ACCT_NO: "7710737754140432"
 T4_TXN_DEBIT_BANK_CODE: "RCBCPHMMXXX"
 T4_TXN_DEBIT_BANK_NAME: "Banco Abucay"
 T4_TXN_CREATED_ON: "22 Apr 2026 16:46:11"
@@ -137,9 +139,9 @@ T24_ARCHIVED_PRODUCT: "Loan 13C"
 # Reports Data (t6.1)
 # ============================================================
 
-VALID_CLOSING_DATE: "2026-04-23"
-VALID_DATE_FROM: "2026-04-23"
-VALID_DATE_TO: "2026-04-24"
+VALID_CLOSING_DATE: "2026-05-12"
+VALID_DATE_FROM: "2026-05-12"
+VALID_DATE_TO: "2026-05-13"
 
 
 # ============================================================

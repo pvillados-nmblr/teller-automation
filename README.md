@@ -1,6 +1,6 @@
 # Teller Automation
 
-End-to-end test automation framework for the **Higala Alegre** teller application. Covers all four rural bank partners — one shared test suite runs against each bank by simply swapping the environment config at runtime.
+End-to-end test automation framework for the **Higala Alegre** teller application. Covers all six rural bank partners — one shared test suite runs against each bank by simply swapping the environment config at runtime.
 
 ---
 
@@ -53,13 +53,23 @@ All tests are bank-agnostic — the same suite is reused across all four banks. 
 
 ## Supported Banks
 
-| Bank | URL Slug | Config File |
-|---|---|---|
-| Rural Bank of San Antonio | `/rural-bank-san-antonio` | `resources/variables/rural-bank-san-antonio.yaml` |
-| Banco Abucay (ITG) | `/banco-abucay` | `resources/variables/abucay-ITG.yaml` |
-| Banco Abucay | `/banco-abucay` | `resources/variables/banco-abucay.yaml` |
-| Rural Bank of Hermosa | `/rural-bank-hermosa` | `resources/variables/rural-bank-hermosa.yaml` |
-| Alegre | `/alegre` | `resources/variables/alegre.yaml` |
+### SBX (Sandbox)
+
+| Bank | Config File |
+|---|---|
+| Banco Abucay | `resources/variables/abucay-SBX.yaml` |
+| Rural Bank of Hermosa | `resources/variables/hermosa-SBX.yaml` |
+| BDO Rural Bank | `resources/variables/BDO-SBX.yaml` |
+| Guagua Rural Bank | `resources/variables/Guagua-SBX.yaml` |
+| Rural Bank of San Narciso | `resources/variables/SNR-SBX.yaml` |
+| University Savings Rural Bank | `resources/variables/USB-SBX.yaml` |
+
+### ITG (Integration)
+
+| Bank | Config File |
+|---|---|
+| Banco Abucay | `resources/variables/abucay-ITG.yaml` |
+| Rural Bank of San Antonio | `resources/variables/rural-bank-san-antonio.yaml` |
 
 ---
 
@@ -99,7 +109,6 @@ teller-automation/
 │       ├── rural-bank-hermosa.yaml
 │       └── alegre.yaml
 ├── results/                   # Auto-generated test reports (gitignored)
-├── run_all.sh                 # Script to run tests for all banks
 └── .venv/                     # Python virtual environment (gitignored)
 ```
 
@@ -162,65 +171,115 @@ Update `TELLER_EMAIL` and `TELLER_PASSWORD` in each file with the actual credent
 
 ## Running Tests
 
-### Run tests for a single bank
+> **Rate limit warning:** Running the full test suite in one command can trigger a 60-requests/minute API rate limit that blocks the user for 60 minutes. Always run tests **per suite file** with a brief pause between suites to stay within limits.
 
-```bash
-# Rural Bank of San Antonio — all smoke tests
-robot --variablefile resources/variables/rural-bank-san-antonio.yaml \
-      --include smoke \
-      --outputdir results/rural-bank-san-antonio \
-      tests/
+### Run a specific test case
 
-# Banco Abucay ITG — smoke tests, skip type2
-robot --variablefile resources/variables/abucay-ITG.yaml \
-      --include smoke --exclude type2 \
-      --outputdir results/abucay-ITG \
-      tests/
-```
-
-### Run a specific module for a bank
-
-```bash
-robot --variablefile resources/variables/rural-bank-san-antonio.yaml \
-      --include smoke \
-      --outputdir results/rural-bank-san-antonio/customers \
-      tests/2_customers/
-
-robot --variablefile resources/variables/rural-bank-san-antonio.yaml \
-      --include smoke \
-      --outputdir results/rural-bank-san-antonio/transactions \
-      tests/4_transactions/
-```
-
-### Run a specific test suite file
+Use `--test` with the exact test case name:
 
 ```bash
 source .venv/bin/activate && robot \
-  --variablefile resources/variables/rural-bank-san-antonio.yaml \
-  --include smoke \
-  --outputdir results/rural-bank-san-antonio/reports \
-  tests/6_reports/
+  --variablefile resources/variables/abucay-ITG.yaml \
+  --test "t3.2.2 Pagination in Viewing Transaction History" \
+  --outputdir results/abucay-ITG/t3.2.2-debug \
+  "tests/3_accounts/t3.2_view_the_list_of_transactions_of_a_bank_account.robot" 2>&1
 ```
 
-### Run all banks at once
+The `--outputdir` name can be anything — use a descriptive suffix (e.g. `t3.2.2-debug`, `t3.2.2-may11`) to keep reruns isolated.
 
-Use the included `run_all.sh` script:
+### Teller types
+
+| Type | Features | When to use `--exclude` |
+|---|---|---|
+| **Type 1** | Core modules only (no Products or Loans) | Add `--exclude type2` |
+| **Type 2** | All modules including Products and Loans | No exclusion needed |
+
+Tests are tagged `type1` or `type2` accordingly. When running against a Type 1 bank, add `--exclude type2` so Products and Loans tests are automatically skipped.
+
+### Recommended run order
+
+Run suites in this order to stay within the rate limit. Auth is always last because it has the most API-intensive tests (OTP flows, password resets).
+
+**Reports → Transactions → Accounts → Customers → Products → Loans → Auth**
+
+For Auth: run smoke first, then wait **15 minutes** before running negative/slow regression tests to avoid the 60-request/minute IP block.
+
+#### Type 2 bank (e.g. Rural Bank of San Antonio)
 
 ```bash
-# Smoke tests for all banks
-bash run_all.sh --tag smoke
+source .venv/bin/activate
 
-# One bank only
-bash run_all.sh --bank rural-bank-san-antonio --tag smoke
+# 6 — Reports
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t6.1-smoke "tests/6_reports/t6.1 Generate Reports.robot"
 
-# One module only
-bash run_all.sh --module reports --tag smoke
+# 4 — Transactions
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t4.1-smoke "tests/4_transactions/t4.1 View all list of Transactions.robot"
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t4.2-smoke "tests/4_transactions/t4.2 Create a Withdrawal Transaction via Teller.robot"
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t4.3-smoke "tests/4_transactions/t4.3 Create a Deposit Transaction via Teller.robot"
 
-# Smoke tests, skip a specific tag
-bash run_all.sh --tag smoke --exclude reset-password
+# 3 — Accounts
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t3.1-smoke tests/3_accounts/t3.1_view_the_list_of_accounts.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t3.2-smoke tests/3_accounts/t3.2_view_the_list_of_transactions_of_a_bank_account.robot
+
+# 2 — Customers
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t2.1-smoke tests/2_customers/t2.1_view_customer_list.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t2.2-smoke tests/2_customers/t2.2_view_customer_accounts.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t2.3-smoke tests/2_customers/t2.3_view_customer_account_transactions.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t2.4-smoke "tests/2_customers/t2.4 View Availed and Eligible Products.robot"
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t2.5-smoke tests/2_customers/t2.5_avail_savings_product.robot
+
+# 5 — Products
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t5.1-smoke tests/5_products/t5.1_view_active_products.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t5.2-smoke tests/5_products/t5.2_view_archived_products.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --outputdir results/rural-bank-san-antonio/t5.3-smoke tests/5_products/t5.3_create_new_product.robot
+
+# 1 — Auth smoke (run per suite; exclude slow to avoid rate limit)
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --exclude slow --outputdir results/rural-bank-san-antonio/t1.1-auth-smoke tests/1_auth/t1.1_reset_password.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --exclude slow --outputdir results/rural-bank-san-antonio/t1.2-auth-smoke tests/1_auth/t1.2_login.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --exclude slow --outputdir results/rural-bank-san-antonio/t1.3-auth-smoke tests/1_auth/t1.3_forgot_password.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include smoke --exclude slow --outputdir results/rural-bank-san-antonio/t1.4-auth-smoke tests/1_auth/t1.4_change_password.robot
+# ⏳ Wait 15 minutes before running regression
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include regression --outputdir results/rural-bank-san-antonio/t1.1-auth-regression tests/1_auth/t1.1_reset_password.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include regression --outputdir results/rural-bank-san-antonio/t1.2-auth-regression tests/1_auth/t1.2_login.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include regression --outputdir results/rural-bank-san-antonio/t1.3-auth-regression tests/1_auth/t1.3_forgot_password.robot
+robot --variablefile resources/variables/rural-bank-san-antonio.yaml --include regression --outputdir results/rural-bank-san-antonio/t1.4-auth-regression tests/1_auth/t1.4_change_password.robot
 ```
 
-Results are saved under `results/<bank-name>/` so each run is isolated.
+#### Type 1 bank (e.g. Banco Abucay ITG) — add `--exclude type2`
+
+```bash
+source .venv/bin/activate
+
+# 6 — Reports
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t6.1-smoke "tests/6_reports/t6.1 Generate Reports.robot"
+
+# 4 — Transactions
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t4.1-smoke "tests/4_transactions/t4.1 View all list of Transactions.robot"
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t4.2-smoke "tests/4_transactions/t4.2 Create a Withdrawal Transaction via Teller.robot"
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t4.3-smoke "tests/4_transactions/t4.3 Create a Deposit Transaction via Teller.robot"
+
+# 3 — Accounts
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t3.1-smoke tests/3_accounts/t3.1_view_the_list_of_accounts.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t3.2-smoke tests/3_accounts/t3.2_view_the_list_of_transactions_of_a_bank_account.robot
+
+# 2 — Customers
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t2.1-smoke tests/2_customers/t2.1_view_customer_list.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t2.2-smoke tests/2_customers/t2.2_view_customer_accounts.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude type2 --outputdir results/abucay-ITG/t2.3-smoke tests/2_customers/t2.3_view_customer_account_transactions.robot
+
+# 1 — Auth smoke (run per suite; exclude slow to avoid rate limit)
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude slow --exclude type2 --outputdir results/abucay-ITG/t1.1-auth-smoke tests/1_auth/t1.1_reset_password.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude slow --exclude type2 --outputdir results/abucay-ITG/t1.2-auth-smoke tests/1_auth/t1.2_login.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude slow --exclude type2 --outputdir results/abucay-ITG/t1.3-auth-smoke tests/1_auth/t1.3_forgot_password.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include smoke --exclude slow --exclude type2 --outputdir results/abucay-ITG/t1.4-auth-smoke tests/1_auth/t1.4_change_password.robot
+# ⏳ Wait 15 minutes before running regression
+robot --variablefile resources/variables/abucay-ITG.yaml --include regression --exclude type2 --outputdir results/abucay-ITG/t1.1-auth-regression tests/1_auth/t1.1_reset_password.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include regression --exclude type2 --outputdir results/abucay-ITG/t1.2-auth-regression tests/1_auth/t1.2_login.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include regression --exclude type2 --outputdir results/abucay-ITG/t1.3-auth-regression tests/1_auth/t1.3_forgot_password.robot
+robot --variablefile resources/variables/abucay-ITG.yaml --include regression --exclude type2 --outputdir results/abucay-ITG/t1.4-auth-regression tests/1_auth/t1.4_change_password.robot
+```
+
+Results are saved per suite under `results/<bank-name>/<suite>/` so each run is isolated and never overwrites previous results.
 
 ---
 
@@ -234,8 +293,8 @@ Every test case carries a combination of the following tags:
 | `regression` | Extended tests; run for deeper coverage |
 | `negative` | Invalid input / error-state tests |
 | `mvp` | Tests covering MVP-scoped functionality |
-| `type1` | Standard tests that run across all banks |
-| `type2` | Tests involving newer transaction types (Cash Withdrawal, Cash Deposit, Savings Interest, Loan Disbursement, Loan Payment) or bank-specific features; use `--exclude type2` to skip on banks where these types are not yet available |
+| `type1` | Core tests available on all teller types (Type 1 and Type 2 banks) |
+| `type2` | Tests for Type 2 teller features: Products module, Loans module, and newer transaction types (Cash Withdrawal, Cash Deposit, Savings Interest, Loan Disbursement, Loan Payment). Add `--exclude type2` when running against Type 1 banks. |
 | `status-change` | Tests that mutate account or customer status (t2.1, t2.2) |
 | `daily-limit` | OTC withdrawal daily limit tests (t4.2) |
 | `phase2` | Tests for features not yet implemented; skipped by default |
@@ -243,17 +302,20 @@ Every test case carries a combination of the following tags:
 ### Common tag combinations
 
 ```bash
-# Core smoke only (no type2)
+# Smoke only — Type 1 bank
 --include smoke --exclude type2
 
-# All smoke including type2
+# Smoke only — Type 2 bank
 --include smoke
 
-# Regression only
---include regression --exclude type2
+# Auth smoke only (run first, before negative tests)
+--include smoke --exclude slow
 
-# Auth tests with rate-limit protection
---include smoke --module auth
+# Auth regression / negative tests (run after 15-min cooldown)
+--include regression
+
+# Regression only — Type 1 bank
+--include regression --exclude type2
 ```
 
 ---
