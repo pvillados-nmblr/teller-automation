@@ -1,115 +1,785 @@
-{"level":30,"time":"2026-05-12T02:29:00.567Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Listening on 127.0.0.1:59219"}
-{"level":30,"time":"2026-05-12T02:29:01.668Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method newBrowser"}
-{"level":30,"time":"2026-05-12T02:29:03.009Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Adding browser to stack: chromium, version: 141.0.7390.37"}
-{"level":30,"time":"2026-05-12T02:29:03.010Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Adding 0 contexts to browser"}
-{"level":30,"time":"2026-05-12T02:29:03.010Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method newBrowser"}
-{"level":30,"time":"2026-05-12T02:29:03.017Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method newContext"}
-{"level":30,"time":"2026-05-12T02:29:03.018Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Creating new context with options: {\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"height\":830,\"width\":1643}}"}
-{"level":30,"time":"2026-05-12T02:29:03.018Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@0612fdc8b4a6d7ad083ce40ba530252b\"},\"headless\":false,\"_contextStack\":[],\"id\":\"browser=452f1fb8-1cae-4eba-8059-646286c18732\"}"}
-{"level":30,"time":"2026-05-12T02:29:03.018Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Trace file: "}
-{"level":30,"time":"2026-05-12T02:29:03.046Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Setting default timeout for context context=388bacc8-b226-4067-b507-efe9d47f7369 to 10000"}
-{"level":30,"time":"2026-05-12T02:29:03.046Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Changed active context: context=388bacc8-b226-4067-b507-efe9d47f7369"}
-{"level":30,"time":"2026-05-12T02:29:03.046Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method newContext"}
-{"level":30,"time":"2026-05-12T02:29:03.050Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method newPage"}
-{"level":30,"time":"2026-05-12T02:29:03.051Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@0612fdc8b4a6d7ad083ce40ba530252b\"},\"headless\":false,\"_contextStack\":[{\"id\":\"context=388bacc8-b226-4067-b507-efe9d47f7369\",\"c\":{\"_type\":\"BrowserContext\",\"_guid\":\"browser-context@af5f2fbdc38380fcb693247ab68ee023\"},\"pageStack\":[],\"options\":{\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"height\":830,\"width\":1643}},\"traceFile\":\"\"}],\"id\":\"browser=452f1fb8-1cae-4eba-8059-646286c18732\"}"}
-{"level":30,"time":"2026-05-12T02:29:03.672Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Video path: undefined"}
-{"level":30,"time":"2026-05-12T02:29:03.672Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Changed active page"}
-{"level":30,"time":"2026-05-12T02:29:07.400Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method newPage"}
-{"level":30,"time":"2026-05-12T02:29:07.411Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
-{"level":30,"time":"2026-05-12T02:29:07.411Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"input-login-email\"] in page."}
-{"level":30,"time":"2026-05-12T02:29:07.490Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
-{"level":30,"time":"2026-05-12T02:29:07.492Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
-{"level":30,"time":"2026-05-12T02:29:07.492Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"input-login-password\"] in page."}
-{"level":30,"time":"2026-05-12T02:29:07.508Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
-{"level":30,"time":"2026-05-12T02:29:07.510Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
-{"level":30,"time":"2026-05-12T02:29:07.510Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"btn-login-submit\"] in page."}
-{"level":30,"time":"2026-05-12T02:29:07.554Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
-{"level":30,"time":"2026-05-12T02:29:07.555Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:07.555Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=h3.text-2xl in page."}
-{"level":30,"time":"2026-05-12T02:29:08.342Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:08.346Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2026-05-12T02:29:08.348Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
-{"level":30,"time":"2026-05-12T02:29:08.351Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
-{"level":30,"time":"2026-05-12T02:29:08.351Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"nav-sidebar-accounts\"] in page."}
-{"level":30,"time":"2026-05-12T02:29:08.442Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
-{"level":30,"time":"2026-05-12T02:29:08.444Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:08.444Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-accounts\"] input in page."}
-{"level":30,"time":"2026-05-12T02:29:08.447Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:08.452Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Reload page with options: {\"waitUntil\": \"load\"}"}
-{"level":30,"time":"2026-05-12T02:29:08.884Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:08.884Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-accounts\"] input in page."}
-{"level":30,"time":"2026-05-12T02:29:08.961Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:08.963Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
-{"level":30,"time":"2026-05-12T02:29:08.963Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-accounts\"] input in page."}
-{"level":30,"time":"2026-05-12T02:29:08.970Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
-{"level":30,"time":"2026-05-12T02:29:08.971Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
-{"level":30,"time":"2026-05-12T02:29:08.971Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-accounts\"] button in page."}
-{"level":30,"time":"2026-05-12T02:29:09.012Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
-{"level":30,"time":"2026-05-12T02:29:09.015Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.015Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
-{"level":30,"time":"2026-05-12T02:29:09.018Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.020Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.020Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
-{"level":30,"time":"2026-05-12T02:29:09.804Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.807Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
-{"level":30,"time":"2026-05-12T02:29:09.807Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=tr:has-text(\"7710527851369522\") >> css=[data-testid=\"btn-accounts-view-transactions\"] in page."}
-{"level":30,"time":"2026-05-12T02:29:09.857Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
-{"level":30,"time":"2026-05-12T02:29:09.860Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.860Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
-{"level":30,"time":"2026-05-12T02:29:09.906Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.908Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:09.908Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
-{"level":30,"time":"2026-05-12T02:29:10.693Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:10.697Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:10.697Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=input[placeholder=\"Search transactions...\"] in page."}
-{"level":30,"time":"2026-05-12T02:29:10.701Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:10.703Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Reload page with options: {\"waitUntil\": \"load\"}"}
-{"level":30,"time":"2026-05-12T02:29:11.238Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:11.238Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
-{"level":30,"time":"2026-05-12T02:29:11.327Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:11.330Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:11.330Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
-{"level":30,"time":"2026-05-12T02:29:12.117Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:12.121Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:12.121Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-pagination-next:not(.ant-pagination-disabled) in page."}
-{"level":30,"time":"2026-05-12T02:29:15.127Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:19.617Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Listening on 127.0.0.1:49593"}
+{"level":30,"time":"2026-05-06T00:44:20.714Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2026-05-06T00:44:22.153Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Adding browser to stack: chromium, version: 141.0.7390.37"}
+{"level":30,"time":"2026-05-06T00:44:22.153Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2026-05-06T00:44:22.153Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method newBrowser"}
+{"level":30,"time":"2026-05-06T00:44:22.163Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method newContext"}
+{"level":30,"time":"2026-05-06T00:44:22.163Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Creating new context with options: {\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"height\":830,\"width\":1643}}"}
+{"level":30,"time":"2026-05-06T00:44:22.163Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@bdadd7f6a290031dfd39f4efc699e5b8\"},\"headless\":false,\"_contextStack\":[],\"id\":\"browser=d0a53c88-f0e5-4f4a-bcd6-8aceb88fc2f6\"}"}
+{"level":30,"time":"2026-05-06T00:44:22.163Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Trace file: "}
+{"level":30,"time":"2026-05-06T00:44:22.177Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Setting default timeout for context context=d2f7a972-2308-4e1b-a8e8-fd32a8855f7a to 10000"}
+{"level":30,"time":"2026-05-06T00:44:22.177Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Changed active context: context=d2f7a972-2308-4e1b-a8e8-fd32a8855f7a"}
+{"level":30,"time":"2026-05-06T00:44:22.177Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method newContext"}
+{"level":30,"time":"2026-05-06T00:44:22.181Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method newPage"}
+{"level":30,"time":"2026-05-06T00:44:22.181Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@bdadd7f6a290031dfd39f4efc699e5b8\"},\"headless\":false,\"_contextStack\":[{\"id\":\"context=d2f7a972-2308-4e1b-a8e8-fd32a8855f7a\",\"c\":{\"_type\":\"BrowserContext\",\"_guid\":\"browser-context@71d2c98cbcac159506201a75de770c57\"},\"pageStack\":[],\"options\":{\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"height\":830,\"width\":1643}},\"traceFile\":\"\"}],\"id\":\"browser=d0a53c88-f0e5-4f4a-bcd6-8aceb88fc2f6\"}"}
+{"level":30,"time":"2026-05-06T00:44:22.858Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Video path: undefined"}
+{"level":30,"time":"2026-05-06T00:44:22.858Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Changed active page"}
+{"level":30,"time":"2026-05-06T00:44:27.108Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method newPage"}
+{"level":30,"time":"2026-05-06T00:44:27.113Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:27.114Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"input-login-email\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:27.198Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:27.200Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:27.200Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"input-login-password\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:27.214Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:27.215Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:27.216Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"btn-login-submit\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:27.258Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:27.259Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:27.259Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=h3.text-2xl in page."}
+{"level":30,"time":"2026-05-06T00:44:28.047Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.050Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:28.050Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"nav-sidebar-customers\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:28.130Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:28.132Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.132Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers\"] input in page."}
+{"level":30,"time":"2026-05-06T00:44:28.133Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.137Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Reload page with options: {\"waitUntil\": \"load\"}"}
+{"level":30,"time":"2026-05-06T00:44:28.508Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.508Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers\"] input in page."}
+{"level":30,"time":"2026-05-06T00:44:28.619Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.622Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:28.622Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers\"] input in page."}
+{"level":30,"time":"2026-05-06T00:44:28.626Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:28.628Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:28.628Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers\"] button in page."}
+{"level":30,"time":"2026-05-06T00:44:28.664Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:28.667Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.667Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:28.668Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.670Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:28.670Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:29.461Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:29.464Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:29.464Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"table-customers\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:29.467Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:29.470Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:29.470Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=tr:has-text(\"Mariah Ave\") >> css=[data-testid=\"btn-customers-view-profile\"] >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:29.512Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:29.514Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:29.514Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=Banking Details in page."}
+{"level":30,"time":"2026-05-06T00:44:29.558Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:29.571Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:29.572Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:29.574Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:30.021Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:30.024Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:30.024Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:32.029Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
 ================= Original suppressed error =================
-locator.waitFor: Timeout 3000ms exceeded.
+locator.waitFor: Timeout 2000ms exceeded.
 Call log:
-[2m  - waiting for locator('.ant-pagination-next:not(.ant-pagination-disabled)') to be visible[22m
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
 
     at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
     at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
   name: 'TimeoutError'
 }
 =============================================================
-{"level":30,"time":"2026-05-12T02:29:15.149Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
-{"level":30,"time":"2026-05-12T02:29:15.149Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/abucay-ITG/t3.2.2-may11/browser/screenshot/fail-screenshot-1.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
-{"level":30,"time":"2026-05-12T02:29:15.228Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
-{"level":30,"time":"2026-05-12T02:29:15.237Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:15.237Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-pagination-next.ant-pagination-disabled in page."}
-{"level":30,"time":"2026-05-12T02:29:15.239Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:15.240Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
-{"level":30,"time":"2026-05-12T02:29:15.240Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-modal-wrap:not([style*=\"display: none\"]) in page."}
-{"level":30,"time":"2026-05-12T02:29:16.243Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.059Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:32.059Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-1.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:32.137Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:32.151Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:32.151Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Products Availed\") in page."}
+{"level":30,"time":"2026-05-06T00:44:32.232Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:32.234Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.234Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body table in page."}
+{"level":30,"time":"2026-05-06T00:44:32.238Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.239Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.239Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=Product Name in page."}
+{"level":30,"time":"2026-05-06T00:44:32.241Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.243Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.243Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=Product Category in page."}
+{"level":30,"time":"2026-05-06T00:44:32.244Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.246Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.246Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=\"Action\" in page."}
+{"level":30,"time":"2026-05-06T00:44:32.247Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.249Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.249Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"btn-customers-profile-see-details\"] >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:32.250Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.252Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:32.252Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:33.254Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
 ================= Original suppressed error =================
 locator.waitFor: Timeout 1000ms exceeded.
 Call log:
-[2m  - waiting for locator('.ant-modal-wrap:not([style*="display: none"])') to be visible[22m
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
 
     at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
     at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
   name: 'TimeoutError'
 }
 =============================================================
-{"level":30,"time":"2026-05-12T02:29:16.251Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
-{"level":30,"time":"2026-05-12T02:29:16.251Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/abucay-ITG/t3.2.2-may11/browser/screenshot/fail-screenshot-2.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
-{"level":30,"time":"2026-05-12T02:29:16.328Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
-{"level":30,"time":"2026-05-12T02:29:16.333Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2026-05-12T02:29:16.334Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
-{"level":30,"time":"2026-05-12T02:29:16.336Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method closeBrowser"}
-{"level":30,"time":"2026-05-12T02:29:16.348Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Removed page=a942fdb6-b28a-441d-8d0c-b60a83980d83 from context=388bacc8-b226-4067-b507-efe9d47f7369 page stack"}
-{"level":30,"time":"2026-05-12T02:29:16.711Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method closeBrowser"}
+{"level":30,"time":"2026-05-06T00:44:33.272Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:33.272Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-2.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:33.335Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:33.340Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:33.340Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:33.342Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:33.343Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:33.344Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:33.435Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:33.438Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:33.438Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:35.441Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:35.458Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:35.458Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-3.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:35.531Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:35.534Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:35.534Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Products Availed\") in page."}
+{"level":30,"time":"2026-05-06T00:44:35.589Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:35.591Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.591Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"table-customers-availed-products\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:35.593Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.595Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:35.595Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"table-customers-availed-products\"] >> css=[data-testid=\"btn-customers-profile-see-details\"] >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:35.649Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:35.650Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.650Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:35.653Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.655Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.655Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-drawer-title in page."}
+{"level":30,"time":"2026-05-06T00:44:35.658Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.659Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:35.659Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Product name in page."}
+{"level":30,"time":"2026-05-06T00:44:36.453Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.457Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.457Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Product type in page."}
+{"level":30,"time":"2026-05-06T00:44:36.461Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.465Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.465Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Description in page."}
+{"level":30,"time":"2026-05-06T00:44:36.469Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.473Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.473Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Status in page."}
+{"level":30,"time":"2026-05-06T00:44:36.476Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.478Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.478Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:44:36.521Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.523Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.523Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:44:36.525Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.528Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.528Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Required Documents in page."}
+{"level":30,"time":"2026-05-06T00:44:36.531Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.533Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.533Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Average daily balance in page."}
+{"level":30,"time":"2026-05-06T00:44:36.553Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.556Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.556Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Average daily balance in page."}
+{"level":30,"time":"2026-05-06T00:44:36.558Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.560Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.560Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Initial deposit in page."}
+{"level":30,"time":"2026-05-06T00:44:36.562Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.563Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.563Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Overdrafts in page."}
+{"level":30,"time":"2026-05-06T00:44:36.565Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.567Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.567Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Withdrawal limit frequency in page."}
+{"level":30,"time":"2026-05-06T00:44:36.568Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.570Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.570Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Withdrawal limit amount in page."}
+{"level":30,"time":"2026-05-06T00:44:36.572Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.575Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.575Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=\"Interest rate(%)\" in page."}
+{"level":30,"time":"2026-05-06T00:44:36.586Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.588Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.588Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=\"Interest rate(%)\" in page."}
+{"level":30,"time":"2026-05-06T00:44:36.590Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.592Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.592Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Interest type in page."}
+{"level":30,"time":"2026-05-06T00:44:36.593Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.595Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.595Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Interest time period in page."}
+{"level":30,"time":"2026-05-06T00:44:36.596Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.598Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.598Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Interest rate structure in page."}
+{"level":30,"time":"2026-05-06T00:44:36.599Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.600Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.600Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Excess withdrawal fee in page."}
+{"level":30,"time":"2026-05-06T00:44:36.637Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:36.638Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.638Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Excess withdrawal fee in page."}
+{"level":30,"time":"2026-05-06T00:44:36.640Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.642Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.642Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Dormancy fee in page."}
+{"level":30,"time":"2026-05-06T00:44:36.644Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.646Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.646Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Account closure fee in page."}
+{"level":30,"time":"2026-05-06T00:44:36.648Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.650Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.650Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Tax rate type in page."}
+{"level":30,"time":"2026-05-06T00:44:36.652Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.654Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.654Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Tax rate value in page."}
+{"level":30,"time":"2026-05-06T00:44:36.656Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.658Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:36.658Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-drawer-close in page."}
+{"level":30,"time":"2026-05-06T00:44:36.715Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:36.716Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:36.716Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:37.504Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:37.510Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:37.510Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:38.513Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 1000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:38.530Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:38.530Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-4.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:38.627Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:38.632Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:38.633Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:38.634Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:38.635Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:38.637Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:38.729Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:38.731Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:38.731Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:40.731Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:40.742Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:40.742Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-5.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:40.807Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:40.810Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:40.810Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Products Availed\") in page."}
+{"level":30,"time":"2026-05-06T00:44:40.879Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:40.880Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.880Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body tr:has-text(\"Regular Home Loan\") >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:40.882Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.883Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:40.883Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body tr:has-text(\"Regular Home Loan\") >> nth=0 >> css=[data-testid=\"btn-customers-profile-see-details\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:40.933Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:40.935Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.935Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:40.939Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.941Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.941Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-drawer-title in page."}
+{"level":30,"time":"2026-05-06T00:44:40.944Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.946Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:40.946Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Loan type in page."}
+{"level":30,"time":"2026-05-06T00:44:41.737Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.742Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.742Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Preferred customers in page."}
+{"level":30,"time":"2026-05-06T00:44:41.747Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.752Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.752Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Loan purpose in page."}
+{"level":30,"time":"2026-05-06T00:44:41.757Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.762Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.762Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Product name in page."}
+{"level":30,"time":"2026-05-06T00:44:41.765Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.769Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.769Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Product type in page."}
+{"level":30,"time":"2026-05-06T00:44:41.772Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.775Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.775Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Description in page."}
+{"level":30,"time":"2026-05-06T00:44:41.778Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.781Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:41.781Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum loan amount in page."}
+{"level":30,"time":"2026-05-06T00:44:41.803Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:41.806Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.806Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum loan amount in page."}
+{"level":30,"time":"2026-05-06T00:44:41.809Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.813Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.813Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Maximum loan amount in page."}
+{"level":30,"time":"2026-05-06T00:44:41.816Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.818Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.818Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Loan term length >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:41.820Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.822Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.822Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Loan term unit >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:41.824Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.826Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.826Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Interest rate type in page."}
+{"level":30,"time":"2026-05-06T00:44:41.828Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.829Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.829Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Repayment method in page."}
+{"level":30,"time":"2026-05-06T00:44:41.831Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.832Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:41.832Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:44:41.870Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:41.872Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.872Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:44:41.874Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.876Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.876Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Maximum age in page."}
+{"level":30,"time":"2026-05-06T00:44:41.877Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.879Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.879Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Minimum income level in page."}
+{"level":30,"time":"2026-05-06T00:44:41.881Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.882Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.882Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Credit score in page."}
+{"level":30,"time":"2026-05-06T00:44:41.884Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.886Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.886Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Employment type in page."}
+{"level":30,"time":"2026-05-06T00:44:41.889Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.891Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.891Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Required documents in page."}
+{"level":30,"time":"2026-05-06T00:44:41.893Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.894Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:41.894Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Processing fee type in page."}
+{"level":30,"time":"2026-05-06T00:44:41.920Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:41.922Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.922Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=\"Interest rate (%)\" >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:41.924Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.926Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.926Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Interest rate structure in page."}
+{"level":30,"time":"2026-05-06T00:44:41.927Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.929Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.929Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=\"Processing fee\" in page."}
+{"level":30,"time":"2026-05-06T00:44:41.930Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.932Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.932Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Processing fee type in page."}
+{"level":30,"time":"2026-05-06T00:44:41.933Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.935Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.935Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Penalty interest rate in page."}
+{"level":30,"time":"2026-05-06T00:44:41.937Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.939Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.939Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] >> text=Penalty conditions in page."}
+{"level":30,"time":"2026-05-06T00:44:41.941Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:41.943Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:41.943Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-drawer-close in page."}
+{"level":30,"time":"2026-05-06T00:44:42.006Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:42.008Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:42.008Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:42.800Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:42.807Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:42.807Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:43.810Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 1000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:43.826Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:43.826Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-6.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:43.899Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:43.902Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:43.903Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:43.904Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:43.904Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:43.905Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:43.989Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:43.991Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:43.991Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:45.994Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:46.010Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:46.010Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-7.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:46.098Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:46.101Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:46.101Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Eligible Products\") in page."}
+{"level":30,"time":"2026-05-06T00:44:46.183Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:46.185Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.185Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body table in page."}
+{"level":30,"time":"2026-05-06T00:44:46.188Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.191Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.191Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=Product Name in page."}
+{"level":30,"time":"2026-05-06T00:44:46.196Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.197Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.197Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=Product Category in page."}
+{"level":30,"time":"2026-05-06T00:44:46.199Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.200Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.200Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with text=\"Action\" in page."}
+{"level":30,"time":"2026-05-06T00:44:46.203Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.207Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.207Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"btn-customers-profile-see-details\"] >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:46.208Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.211Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.211Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"btn-customers-profile-avail-product\"] >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:46.213Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.215Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:46.215Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:47.218Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 1000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:47.235Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:47.235Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-8.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:47.320Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:47.324Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:47.325Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:47.326Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:47.327Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:47.328Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:47.354Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:47.356Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:47.356Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:49.359Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:49.378Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:49.378Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-9.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:49.491Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:49.495Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:49.495Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Eligible Products\") in page."}
+{"level":30,"time":"2026-05-06T00:44:49.570Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:49.572Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:49.572Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body table in page."}
+{"level":30,"time":"2026-05-06T00:44:49.574Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:49.575Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:49.575Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers-eligible-products\"] input in page."}
+{"level":30,"time":"2026-05-06T00:44:49.579Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:49.580Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:49.580Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers-eligible-products\"] button in page."}
+{"level":30,"time":"2026-05-06T00:44:49.617Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:49.619Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:49.619Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body table in page."}
+{"level":30,"time":"2026-05-06T00:44:49.621Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:49.623Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:49.623Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body table tbody tr:has-text(\"Education Loan 101\") in page."}
+{"level":30,"time":"2026-05-06T00:44:50.418Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:50.424Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:50.425Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers-eligible-products\"] input in page."}
+{"level":30,"time":"2026-05-06T00:44:50.473Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method fillText"}
+{"level":30,"time":"2026-05-06T00:44:50.476Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:50.476Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"search-customers-eligible-products\"] button in page."}
+{"level":30,"time":"2026-05-06T00:44:50.517Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:50.519Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:50.519Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body table in page."}
+{"level":30,"time":"2026-05-06T00:44:50.522Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:50.524Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:50.524Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"btn-customers-profile-see-details\"] >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:50.525Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:50.528Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:50.528Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:51.531Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 1000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:51.548Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:51.548Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-10.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:51.635Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:51.639Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:51.640Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:51.641Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:51.642Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:51.643Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:51.679Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:51.682Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:51.682Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:53.684Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:53.703Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:53.703Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-11.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:53.778Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:53.781Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:53.781Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Eligible Products\") in page."}
+{"level":30,"time":"2026-05-06T00:44:53.850Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:53.852Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:53.853Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body tr:has-text(\"Savings\") >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:53.856Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:53.857Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:53.857Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body tr:has-text(\"Savings\") >> nth=0 >> css=[data-testid=\"btn-customers-profile-see-details\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:53.919Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:53.921Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:53.921Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:53.926Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:53.928Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:53.928Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Product name in page."}
+{"level":30,"time":"2026-05-06T00:44:54.721Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.726Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.726Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Product type in page."}
+{"level":30,"time":"2026-05-06T00:44:54.730Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.734Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.734Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Description in page."}
+{"level":30,"time":"2026-05-06T00:44:54.739Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.742Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.742Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Status in page."}
+{"level":30,"time":"2026-05-06T00:44:54.746Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.748Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.748Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:44:54.787Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.790Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.790Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:44:54.793Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.795Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.795Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Required Documents in page."}
+{"level":30,"time":"2026-05-06T00:44:54.798Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.800Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.800Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Average daily balance in page."}
+{"level":30,"time":"2026-05-06T00:44:54.820Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.823Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.823Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Average daily balance in page."}
+{"level":30,"time":"2026-05-06T00:44:54.825Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.829Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.830Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Initial deposit in page."}
+{"level":30,"time":"2026-05-06T00:44:54.832Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.834Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.834Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Overdrafts in page."}
+{"level":30,"time":"2026-05-06T00:44:54.836Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.838Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.838Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Withdrawal limit frequency in page."}
+{"level":30,"time":"2026-05-06T00:44:54.840Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.842Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.842Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Withdrawal limit amount in page."}
+{"level":30,"time":"2026-05-06T00:44:54.844Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.845Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.845Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=\"Interest rate(%)\" in page."}
+{"level":30,"time":"2026-05-06T00:44:54.853Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.855Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.855Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=\"Interest rate(%)\" in page."}
+{"level":30,"time":"2026-05-06T00:44:54.858Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.859Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.859Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Interest type in page."}
+{"level":30,"time":"2026-05-06T00:44:54.861Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.862Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.862Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Interest time period in page."}
+{"level":30,"time":"2026-05-06T00:44:54.864Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.865Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.865Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Interest rate structure in page."}
+{"level":30,"time":"2026-05-06T00:44:54.867Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.868Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.868Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Excess withdrawal fee in page."}
+{"level":30,"time":"2026-05-06T00:44:54.904Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:44:54.906Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.906Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Excess withdrawal fee in page."}
+{"level":30,"time":"2026-05-06T00:44:54.908Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.909Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.909Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Dormancy fee in page."}
+{"level":30,"time":"2026-05-06T00:44:54.911Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.913Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.913Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Account closure fee in page."}
+{"level":30,"time":"2026-05-06T00:44:54.914Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.916Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.916Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Tax rate type in page."}
+{"level":30,"time":"2026-05-06T00:44:54.917Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.919Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.919Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Tax rate value in page."}
+{"level":30,"time":"2026-05-06T00:44:54.921Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.923Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:54.923Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-drawer-close in page."}
+{"level":30,"time":"2026-05-06T00:44:54.982Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:54.984Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:54.984Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:55.772Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:55.777Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:55.777Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:56.778Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 1000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:56.796Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:56.796Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-12.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:56.882Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:56.885Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:56.886Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:56.887Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:56.888Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:44:56.889Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:56.973Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method goTo"}
+{"level":30,"time":"2026-05-06T00:44:56.975Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:56.975Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-spin-spinning in page."}
+{"level":30,"time":"2026-05-06T00:44:58.978Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.ant-spin-spinning') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:44:58.995Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:58.995Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-13.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:44:59.083Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:44:59.086Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:59.086Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=button:has-text(\"Eligible Products\") in page."}
+{"level":30,"time":"2026-05-06T00:44:59.169Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:59.174Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:59.175Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body tr:has-text(\"Loan\") >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:44:59.178Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:59.180Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:44:59.180Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-table-body tr:has-text(\"Loan\") >> nth=0 >> css=[data-testid=\"btn-customers-profile-see-details\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:59.234Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:44:59.236Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:59.236Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:44:59.240Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:59.243Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:44:59.243Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Loan type in page."}
+{"level":30,"time":"2026-05-06T00:45:00.035Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.039Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.039Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Preferred customers in page."}
+{"level":30,"time":"2026-05-06T00:45:00.043Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.046Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.046Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Loan purpose in page."}
+{"level":30,"time":"2026-05-06T00:45:00.049Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.053Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.053Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Product name in page."}
+{"level":30,"time":"2026-05-06T00:45:00.056Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.059Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.059Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Product type in page."}
+{"level":30,"time":"2026-05-06T00:45:00.061Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.063Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.063Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Description in page."}
+{"level":30,"time":"2026-05-06T00:45:00.066Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.068Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:45:00.068Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum loan amount in page."}
+{"level":30,"time":"2026-05-06T00:45:00.104Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:45:00.106Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.106Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum loan amount in page."}
+{"level":30,"time":"2026-05-06T00:45:00.108Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.110Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.110Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Maximum loan amount in page."}
+{"level":30,"time":"2026-05-06T00:45:00.111Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.113Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.113Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Loan term length >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:45:00.115Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.116Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.116Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Loan term unit >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:45:00.118Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.119Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.119Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Interest rate type in page."}
+{"level":30,"time":"2026-05-06T00:45:00.121Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.124Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.124Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Repayment method in page."}
+{"level":30,"time":"2026-05-06T00:45:00.126Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.127Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:45:00.127Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:45:00.137Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:45:00.139Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.140Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum age in page."}
+{"level":30,"time":"2026-05-06T00:45:00.141Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.144Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.144Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Maximum age in page."}
+{"level":30,"time":"2026-05-06T00:45:00.146Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.148Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.148Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Minimum income level in page."}
+{"level":30,"time":"2026-05-06T00:45:00.150Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.152Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.152Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Credit score in page."}
+{"level":30,"time":"2026-05-06T00:45:00.156Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.158Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.158Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Employment type in page."}
+{"level":30,"time":"2026-05-06T00:45:00.160Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.161Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.161Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Required documents in page."}
+{"level":30,"time":"2026-05-06T00:45:00.163Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.165Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:45:00.165Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Processing fee type in page."}
+{"level":30,"time":"2026-05-06T00:45:00.187Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method scrollToElement"}
+{"level":30,"time":"2026-05-06T00:45:00.189Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.189Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=\"Interest rate (%)\" >> nth=0 in page."}
+{"level":30,"time":"2026-05-06T00:45:00.192Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.193Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.193Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Interest rate structure in page."}
+{"level":30,"time":"2026-05-06T00:45:00.195Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.197Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.197Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=\"Processing fee\" in page."}
+{"level":30,"time":"2026-05-06T00:45:00.198Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.200Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.200Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Processing fee type in page."}
+{"level":30,"time":"2026-05-06T00:45:00.202Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.204Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.204Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Penalty interest rate in page."}
+{"level":30,"time":"2026-05-06T00:45:00.206Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.208Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.208Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] >> text=Penalty conditions in page."}
+{"level":30,"time":"2026-05-06T00:45:00.210Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.211Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method click"}
+{"level":30,"time":"2026-05-06T00:45:00.211Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=.ant-drawer-close in page."}
+{"level":30,"time":"2026-05-06T00:45:00.274Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method click"}
+{"level":30,"time":"2026-05-06T00:45:00.276Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:00.276Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-eligible-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:45:01.069Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:01.078Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2026-05-06T00:45:01.078Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Strict mode is enabled, find Locator with css=[data-testid=\"drawer-customers-availed-product\"] in page."}
+{"level":30,"time":"2026-05-06T00:45:02.081Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Error of node method  waitForElementState"}
+================= Original suppressed error =================
+locator.waitFor: Timeout 1000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-testid="drawer-customers-availed-product"]') to be visible[22m
+
+    at waitForElementState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:11604:19)
+    at async PlaywrightServer.waitForElementsState (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:13510:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2026-05-06T00:45:02.099Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:45:02.099Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","Take screenshot with options: ":{"path":"/Users/peachvillados/teller-automation/results/rural-bank-san-antonio/t2.4-smoke/browser/screenshot/fail-screenshot-14.png","fileType":"png","fullPage":false,"timeout":30000,"omitBackground":false}}
+{"level":30,"time":"2026-05-06T00:45:02.183Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2026-05-06T00:45:02.189Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:45:02.190Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:45:02.192Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2026-05-06T00:45:02.208Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Removed page=fea20242-341e-4ac5-8fd6-a6e189efa776 from context=d2f7a972-2308-4e1b-a8e8-fd32a8855f7a page stack"}
+{"level":30,"time":"2026-05-06T00:45:02.973Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method closeBrowser"}
 ================= Original suppressed error =================
 Error: Browser has been closed.
     at PlaywrightState.getActiveBrowser (/Users/peachvillados/teller-automation/.venv/lib/python3.14/site-packages/Browser/wrapper/index.js:12547:15)
@@ -123,7 +793,7 @@ Error: Browser has been closed.
     at endReadableNT (node:internal/streams/readable:1729:12)
     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
 =============================================================
-{"level":30,"time":"2026-05-12T02:29:16.713Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2026-05-12T02:29:16.713Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
-{"level":30,"time":"2026-05-12T02:29:16.736Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method closeAllBrowsers"}
-{"level":30,"time":"2026-05-12T02:29:16.736Z","pid":30964,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method closeAllBrowsers"}
+{"level":30,"time":"2026-05-06T00:45:02.976Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:45:02.976Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2026-05-06T00:45:03.048Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2026-05-06T00:45:03.048Z","pid":62314,"hostname":"Amihans-MacBook-Air-2.local","msg":"End of node method closeAllBrowsers"}
