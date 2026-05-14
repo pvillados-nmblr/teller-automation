@@ -1,9 +1,0 @@
-Closing balance for 12 May 2026,"-₱100.00"
-
-"Transaction ID","Transaction Type","Date & Time","Debit Account Name","Debit Account Number","Credit Account Name","Credit Account Number","Transaction Amount","Service Fee Amount","Total Amount"
-"txn_6c06ef415de5496794e73bb327daaf95","External Transfer","2026/05/12 17:06:39","Maria Tanggol","=""7710576005902459""","Jocelyn Javier Amban","=""7710935377438751""","3.00","0.00","3.00"
-"txn_d906798b847948bb9c8a58b7e9de4057","External Transfer","2026/05/12 11:32:24","Jocelyn Javier Amban","=""7710935377438751""","China Bank","=""101400001643""","-1.00","15.00","-16.00"
-"txn_90dcab6aa2df45fca59f822fe18fb6bf","External Transfer","2026/05/12 11:31:54","Jocelyn Javier Amban","=""7710935377438751""","China Bank","=""101400001643""","-1.00","15.00","-16.00"
-"txn_a4748df9410843ab837d02377a67520a","External Transfer","2026/05/12 11:31:30","Jocelyn Javier Amban","=""7710935377438751""","BDO Unibank ","=""013450161525""","-1.00","15.00","-16.00"
-"txn_3cd19a7bf7714c77b39d07dc12228c9f","External Transfer","2026/05/12 11:30:44","Jocelyn Javier Amban","=""7710935377438751""","Jocelyn Amban","=""7711031228974342""","-100.00","15.00","-115.00"
-"txn_9e9f9b8ddc9e4974bb6669bae8b15fbc","External Transfer","2026/05/12 10:56:25","Jocelyn Javier Amban","=""7710935377438751""","Jocelyn Amban","=""7711031228974342""","-1.00","15.00","-16.00"
