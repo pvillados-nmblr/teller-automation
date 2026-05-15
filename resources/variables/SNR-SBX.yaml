@@ -3,7 +3,7 @@
 # ============================================================
 
 BANK_NAME: "Rural Bank of San Antonio"
-BASE_URL: "https://alegre-dashboard.int.itg.higala.ph/rural-bank-san-antonio/login"
+BASE_URL: "https://alegre-dashboard.pub.sbx.higala.ph/rural-bank-san-narciso/login"
 
 # Teller Credentials
 TELLER_EMAIL: "pvillados@agsx.net"
@@ -23,12 +23,12 @@ TIMEOUT: "30s"
 # Auth — Reset Password via Temp Password (t1.1)
 # ============================================================
 
-RTP_NEW_USER_EMAIL: "pvillados+429@nmblr.ai" #needs to be changed every run
-RTP_TEMP_PASSWORD: "HoV1yiQR1KSf" #needs to be changed every run
-RTP_NEW_USER_EMAIL_2: "pvillados+apr24@agsx.net" #needs to be changed every run
-RTP_TEMP_PASSWORD_2: "EBj8wXGKj9yq" #needs to be changed every run
-RTP_MIXED_CASE_EMAIL: "Pvillados+429@NmBlR.aI" #needs to be changed every run
-RTP_MIXED_CASE_EMAIL_PASSWORD: "HoV1yiQR1KSf" #needs to be changed every run
+RTP_NEW_USER_EMAIL: "pvillados+430@agsx.net" #needs to be changed every run
+RTP_TEMP_PASSWORD: "Oka6NH6ZyVpW" #needs to be changed every run
+RTP_NEW_USER_EMAIL_2: "pvillados+431@agsx.net" #needs to be changed every run
+RTP_TEMP_PASSWORD_2: "fscWKUtIjoRu" #needs to be changed every run
+RTP_MIXED_CASE_EMAIL: "PvIlLaDoS+430@AgSx.NeT" #needs to be changed every run
+RTP_MIXED_CASE_EMAIL_PASSWORD: "Oka6NH6ZyVpW" #needs to be changed every run
 RTP_EXPIRED_USER_EMAIL: "pvillados+feb3@agsx.net"
 EXPIRED_TEMP_PASSWORD: "g9EUrGq0ttVQ"
 RTP_WRONG_CONFIRM_PASSWORD: "Password1234!"
@@ -105,22 +105,22 @@ DATE_TO: "2026-04-24"
 # Use RB to RB transaction data
 # ============================================================
 
-T4_VALID_TXN_ID: "20327d2dec2046b1bf2c3353c94c0fcf"
+T4_VALID_TXN_ID: "a4748df9410843ab837d02377a67520a"
 T4_TXN_TYPE: "External Transfer"
-T4_TXN_AMOUNT: "10.00"
+T4_TXN_AMOUNT: "1.00"
 T4_TXN_SERVICE_FEE: "15.00"
 T4_TXN_REMARKS: "N/A"
 T4_TXN_STATUS: "Success"
-T4_TXN_INSTAPAY_REF: "880199"
-T4_TXN_DEBIT_ACCT_NAME: "Peach Villados"
-T4_TXN_CREDIT_ACCT_NAME: "Alexandra Leclerc"
-T4_TXN_DEBIT_ACCT_NO: "7710374359311354"
-T4_TXN_CREDIT_ACCT_NO: "7710527851369522"
-T4_TXN_DEBIT_BANK_CODE: "RCBCPHMMXXX"
-T4_TXN_DEBIT_BANK_NAME: "Banco Abucay"
-T4_TXN_CREATED_ON: "22 Apr 2026 16:46:11"
-T4_DATE_FROM: "2026-04-23"
-T4_DATE_TO: "2026-04-24"
+T4_TXN_INSTAPAY_REF: "887586"
+T4_TXN_DEBIT_ACCT_NAME: "Jocelyn Javier Amban"
+T4_TXN_CREDIT_ACCT_NAME: "BDO Unibank"
+T4_TXN_DEBIT_ACCT_NO: "7710935377438751"
+T4_TXN_CREDIT_ACCT_NO: "013450161525"
+T4_TXN_CREDIT_BANK_CODE: "BNORPHMMXXX"
+T4_TXN_CREDIT_BANK_NAME: "BDO Unibank, Inc."
+T4_TXN_CREATED_ON: "12 May 2026 11:31:30"
+T4_DATE_FROM: "2026-05-12"
+T4_DATE_TO: "2026-05-13"
 
 
 # ============================================================
@@ -139,9 +139,9 @@ T24_ARCHIVED_PRODUCT: "Loan 13C"
 # Reports Data (t6.1)
 # ============================================================
 
-VALID_CLOSING_DATE: "2026-05-12"
-VALID_DATE_FROM: "2026-05-12"
-VALID_DATE_TO: "2026-05-13"
+VALID_CLOSING_DATE: "2026-05-13"
+VALID_DATE_FROM: "2026-05-13"
+VALID_DATE_TO: "2026-05-14"
 
 
 # ============================================================
