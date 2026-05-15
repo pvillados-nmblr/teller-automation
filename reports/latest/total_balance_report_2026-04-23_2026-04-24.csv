@@ -1,0 +1,10 @@
+Closing balance for 23 Apr 2026 to 24 Apr 2026,"₱15,000.00"
+
+"Transaction ID","Transaction Type","Date & Time","Debit Account Name","Debit Account Number","Credit Account Name","Credit Account Number","Transaction Amount","Service Fee Amount","Total Amount"
+"txn_0f6c49fa1692456d9fd353ded678a67d","Internal Transfer","2026/04/24 12:45:31","University Savings Bank Incorporation","=""7711186543582960""","Leightton Reforsado Obedoza","=""7711104652690354""","500.00","0.00","500.00"
+"txn_ecf0047743274bd3ae367b5d846ff05f","Internal Transfer","2026/04/23 11:27:26","University Savings Bank Incorporation","=""7711186543582960""","Leightton Reforsado Obedoza","=""7711104652690354""","500.00","0.00","500.00"
+"txn_530b35c27f4744319477972bc8cb773d","Internal Transfer","2026/04/23 11:07:43","Leightton Reforsado Obedoza","=""7711104652690354""","University Savings Bank Incorporation","=""7711186543582960""","1,000.00","0.00","1,000.00"
+"txn_2371337da8074528b4c2f1c14b238e7d","Cash Deposit","2026/04/23 10:55:51","N/A","N/A","Leightton Reforsado Obedoza","=""7711104652690354""","5,000.00","0.00","5,000.00"
+"txn_bc6a50c41cc3451c86c2d0be1e9cdba3","Internal Transfer","2026/04/23 10:52:48","Maricel Mariano Legaspi","=""7711176495171860""","University Savings Bank Incorporation","=""7711186543582960""","1,000.00","0.00","1,000.00"
+"txn_2ca9ea430d4a405ba335829b5e0d9c70","Cash Deposit","2026/04/23 10:36:11","N/A","N/A","University Savings Bank Incorporation","=""7711186543582960""","5,000.00","0.00","5,000.00"
+"txn_cc3ce1ab577e4fa3b911871819b6f6c9","Cash Deposit","2026/04/23 10:36:07","N/A","N/A","Maricel Mariano Legaspi","=""7711176495171860""","5,000.00","0.00","5,000.00"
